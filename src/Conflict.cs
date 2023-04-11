@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Schluesselzahlen
 {
-    public class Konflikt
+    public class Conflict
     {
         public Team[] t;
-        public int[] zahl = new int[3];
-        public int wunsch;
+        public int[] number = new int[3];
+        public int wish;
     }
 }

@@ -12,10 +12,10 @@ namespace Schluesselzahlen
     public partial class Partner : Form
     {
         Schluesselzahlen caller;
-        Verein v;
-        Partnerschaft p_akt;
+        Club v;
+        Partnership p_akt;
 
-        public Partner(Schluesselzahlen caller, Verein v)
+        public Partner(Schluesselzahlen caller, Club v)
         {
             InitializeComponent();
             this.caller = caller;
@@ -37,7 +37,7 @@ namespace Schluesselzahlen
 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dataGridView1.Rows.Clear();
-            foreach (Partnerschaft p in Data.partnerschaft)
+            foreach (Partnership p in Data.partnership)
                 if (p.a.index == v.index || p.b.index == v.index)
                 {
                     p_akt = p;
@@ -65,9 +65,9 @@ namespace Schluesselzahlen
             if (!dataGridView1.Rows[e.RowIndex].IsNewRow)
             {
                 if (p_akt.a.index == v.index)
-                    woche = p_akt.woche_a;
+                    woche = p_akt.week_a;
                 else
-                    woche = p_akt.woche_b;
+                    woche = p_akt.week_b;
                 switch (woche)
                 {
                     case 'A': dgvcbc.Value = dgvcbc.Items[0]; break;
@@ -84,8 +84,8 @@ namespace Schluesselzahlen
             // Partnerverein
             dgvcbc = new DataGridViewComboBoxCell();
             dgvcbc.FlatStyle = FlatStyle.Flat;
-            for (int i = 0; i < Data.verein.Length; i++)
-                dgvcbc.Items.Add(Data.verein[i].name);
+            for (int i = 0; i < Data.club.Length; i++)
+                dgvcbc.Items.Add(Data.club[i].name);
             if (!dataGridView1.Rows[e.RowIndex].IsNewRow)
                 if (p_akt.a.index == v.index)
                     dgvcbc.Value = dgvcbc.Items[p_akt.b.index];
@@ -103,9 +103,9 @@ namespace Schluesselzahlen
             if (!dataGridView1.Rows[e.RowIndex].IsNewRow)
             {
                 if (p_akt.a.index == v.index)
-                    woche = p_akt.woche_b;
+                    woche = p_akt.week_b;
                 else
-                    woche = p_akt.woche_a;
+                    woche = p_akt.week_a;
                 switch (woche)
                 {
                     case 'A': dgvcbc.Value = dgvcbc.Items[0]; break;
@@ -126,16 +126,16 @@ namespace Schluesselzahlen
             {
                 case DialogResult.Yes:
                     this.Visible = false;
-                    List<Partnerschaft> p_remove = new List<Partnerschaft>();
-                    foreach (Partnerschaft p in Data.partnerschaft)
+                    List<Partnership> p_remove = new List<Partnership>();
+                    foreach (Partnership p in Data.partnership)
                         if (p.a.index == v.index || p.b.index == v.index)
                             p_remove.Add(p);
-                    foreach (Partnerschaft p in p_remove)
-                        Data.partnerschaft.Remove(p);
+                    foreach (Partnership p in p_remove)
+                        Data.partnership.Remove(p);
                     for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         if (dataGridView1.Rows[i].Cells[1].Value != null && dataGridView1.Rows[i].Cells[3].Value != null && dataGridView1.Rows[i].Cells[4].Value != null)
-                            Data.partnerschaft.Add(new Partnerschaft(v, (string)dataGridView1.Rows[i].Cells[1].Value, (string)dataGridView1.Rows[i].Cells[3].Value,
-                                                  (string)dataGridView1.Rows[i].Cells[4].Value, Data.verein));
+                            Data.partnership.Add(new Partnership(v, (string)dataGridView1.Rows[i].Cells[1].Value, (string)dataGridView1.Rows[i].Cells[3].Value,
+                                                  (string)dataGridView1.Rows[i].Cells[4].Value, Data.club));
                             
                     caller.Enabled = true;
                     caller.Focus();

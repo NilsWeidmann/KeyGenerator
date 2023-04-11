@@ -1,6 +1,6 @@
 ﻿namespace Schluesselzahlen
 {
-    partial class Zusatz
+    partial class Additional
     {
         /// <summary>
         /// Required designer variable.

@@ -1,4 +1,4 @@
-﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -6,8 +6,9 @@
     <OutputType>WinExe</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
     <AssemblyName>WindowsApplication</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -19,6 +20,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +30,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <RootNamespace>Schluesselzahlen</RootNamespace>
@@ -46,30 +49,30 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alternativen.cs">
+    <Compile Include="Alternatives.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Alternativen.Designer.cs">
-      <DependentUpon>Alternativen.cs</DependentUpon>
+    <Compile Include="Alternatives.Designer.cs">
+      <DependentUpon>Alternatives.cs</DependentUpon>
     </Compile>
-    <Compile Include="BitteWarten.cs">
+    <Compile Include="PleaseWait.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BitteWarten.Designer.cs">
-      <DependentUpon>BitteWarten.cs</DependentUpon>
+    <Compile Include="PleaseWait.Designer.cs">
+      <DependentUpon>PleaseWait.cs</DependentUpon>
     </Compile>
-    <Compile Include="click_tt.cs">
+    <Compile Include="ClickTT.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="click_tt.designer.cs">
-      <DependentUpon>click_tt.cs</DependentUpon>
+    <Compile Include="ClickTT.designer.cs">
+      <DependentUpon>ClickTT.cs</DependentUpon>
     </Compile>
     <Compile Include="Data.cs" />
-    <Compile Include="Dateninput.cs">
+    <Compile Include="DataInput.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dateninput.Designer.cs">
-      <DependentUpon>Dateninput.cs</DependentUpon>
+    <Compile Include="DataInput.Designer.cs">
+      <DependentUpon>DataInput.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -77,14 +80,14 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Initialisieren.cs">
+    <Compile Include="Initialize.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Initialisieren.Designer.cs">
-      <DependentUpon>Initialisieren.cs</DependentUpon>
+    <Compile Include="Initialize.Designer.cs">
+      <DependentUpon>Initialize.cs</DependentUpon>
     </Compile>
-    <Compile Include="Konflikt.cs" />
-    <Compile Include="Liga.cs" />
+    <Compile Include="Conflict.cs" />
+    <Compile Include="League.cs" />
     <Compile Include="NumberMapper.cs" />
     <Compile Include="Partner.cs">
       <SubType>Form</SubType>
@@ -92,7 +95,9 @@
     <Compile Include="Partner.Designer.cs">
       <DependentUpon>Partner.cs</DependentUpon>
     </Compile>
-    <Compile Include="Partnerschaft.cs" />
+    <Compile Include="Partnership.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Staffel.cs">
       <SubType>Form</SubType>
@@ -101,35 +106,35 @@
       <DependentUpon>Staffel.cs</DependentUpon>
     </Compile>
     <Compile Include="Team.cs" />
-    <Compile Include="Textdatei.cs" />
+    <Compile Include="TextFile.cs" />
     <Compile Include="UnitTests.cs" />
-    <Compile Include="Util.cs" />
-    <Compile Include="Verein.cs" />
-    <Compile Include="Zusatz.cs">
+    <Compile Include="Club.cs" />
+    <Compile Include="Additional.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Zusatz.Designer.cs">
-      <DependentUpon>Zusatz.cs</DependentUpon>
+    <Compile Include="Additional.Designer.cs">
+      <DependentUpon>Additional.cs</DependentUpon>
     </Compile>
+    <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Alternativen.resx">
-      <DependentUpon>Alternativen.cs</DependentUpon>
+    <EmbeddedResource Include="Alternatives.resx">
+      <DependentUpon>Alternatives.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BitteWarten.resx">
-      <DependentUpon>BitteWarten.cs</DependentUpon>
+    <EmbeddedResource Include="PleaseWait.resx">
+      <DependentUpon>PleaseWait.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="click_tt.resx">
-      <DependentUpon>click_tt.cs</DependentUpon>
+    <EmbeddedResource Include="ClickTT.resx">
+      <DependentUpon>ClickTT.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dateninput.resx">
-      <DependentUpon>Dateninput.cs</DependentUpon>
+    <EmbeddedResource Include="DataInput.resx">
+      <DependentUpon>DataInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Initialisieren.resx">
-      <DependentUpon>Initialisieren.cs</DependentUpon>
+    <EmbeddedResource Include="Initialize.resx">
+      <DependentUpon>Initialize.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Partner.resx">
       <DependentUpon>Partner.cs</DependentUpon>
@@ -137,12 +142,13 @@
     <EmbeddedResource Include="Staffel.resx">
       <DependentUpon>Staffel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Zusatz.resx">
-      <DependentUpon>Zusatz.cs</DependentUpon>
+    <EmbeddedResource Include="Additional.resx">
+      <DependentUpon>Additional.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include=".vs\Schluesselzahlen\v16\.suo" />
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Schluesselzahlen_TemporaryKey.pfx" />
   </ItemGroup>

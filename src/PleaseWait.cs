@@ -9,13 +9,13 @@ using System.Windows.Forms;
 
 namespace Schluesselzahlen
 {
-    public partial class BitteWarten : Form
+    public partial class PleaseWait : Form
     {
         Schluesselzahlen caller;
-        Liga[] best_l;
-        Verein[] best_v;
+        League[] best_l;
+        Club[] best_v;
 
-        public BitteWarten(Schluesselzahlen caller)
+        public PleaseWait(Schluesselzahlen caller)
         {
             this.caller = caller;
             caller.Enabled = false;
@@ -40,24 +40,24 @@ namespace Schluesselzahlen
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             int[] konflikte = { 0, -1 };
-            best_l = new Liga[Data.liga.Length];
-            best_v = new Verein[Data.verein.Length];
-            Data.speichern(Data.liga, Data.verein, Data.partnerschaft, Data.vereine_b, Data.staffeln_b, Data.beziehungen_b);
-            if (Data.meldung.Count > 0)
+            best_l = new League[Data.league.Length];
+            best_v = new Club[Data.club.Length];
+            Data.save(Data.league, Data.club, Data.partnership, Data.clubs_b, Data.group_b, Data.relations_b);
+            if (Data.notification.Count > 0)
             {
-                MessageBox.Show(Data.meldung[0]);
+                MessageBox.Show(Data.notification[0]);
                 return;
             }
             Data.setOptions();
             Data.setWeeks();
             Data.copyKeys();
             Data.createPriority();
-            Data.copy(Data.liga, best_l, Data.verein, best_v, Data.partnerschaft, Data.partnerschaft);
-            Data.checkPlausibility(Data.liga, this, Data.meldung);
-            Data.checkFatal(Data.liga, Data.meldung);
-            if (Data.meldung.Count > 0)
+            Data.copy(Data.league, best_l, Data.club, best_v, Data.partnership, Data.partnership);
+            Data.checkPlausibility(Data.league, this, Data.notification);
+            Data.checkFatal(Data.league, Data.notification);
+            if (Data.notification.Count > 0)
             {
-                MessageBox.Show(Data.meldung[0]);
+                MessageBox.Show(Data.notification[0]);
                 return;
             }
             //Data.ht.Clear();
@@ -66,9 +66,9 @@ namespace Schluesselzahlen
             DateTime report = DateTime.Now;
             TimeSpan span = end - start;
             TimeSpan repspan = end -report;
-            int[] schluessel = new int[Data.verein.Length * 2];
-            backgroundWorker1.ReportProgress((int)(span.TotalSeconds * 100 / Data.laufzeit));
-            while (span.TotalSeconds < Data.laufzeit && !Data.ht.Contains("") && konflikte[1] != 0)
+            int[] schluessel = new int[Data.club.Length * 2];
+            backgroundWorker1.ReportProgress((int)(span.TotalSeconds * 100 / Data.runtime));
+            while (span.TotalSeconds < Data.runtime && !Data.ht.Contains("") && konflikte[1] != 0)
             {
                 if (backgroundWorker1.CancellationPending)
                 {
@@ -78,23 +78,23 @@ namespace Schluesselzahlen
                 if (repspan.TotalSeconds >= 1)
                 {
                     report = DateTime.Now;
-                    backgroundWorker1.ReportProgress((int)(span.TotalSeconds * 100 / Data.laufzeit));
+                    backgroundWorker1.ReportProgress((int)(span.TotalSeconds * 100 / Data.runtime));
                 }
-                Data.findSolution(0, Data.liga, best_l, Data.verein, best_v, konflikte, schluessel);
+                Data.findSolution(0, Data.league, best_l, Data.club, best_v, konflikte, schluessel);
                 end = DateTime.Now;
                 span = end - start;
                 repspan = end - report;
             }
             backgroundWorker1.ReportProgress(0);
             if (konflikte[1] == -1)
-                Data.meldung.Add("Es konnten keine Schlüsselzahlen ermittelt werden!");
+                Data.notification.Add("Es konnten keine Schlüsselzahlen ermittelt werden!");
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage * 10;
-            int seconds = Data.laufzeit * (100 - e.ProgressPercentage) / 100 % 60;
-            int minutes = Data.laufzeit * (100 - e.ProgressPercentage) / 6000;
+            int seconds = Data.runtime * (100 - e.ProgressPercentage) / 100 % 60;
+            int minutes = Data.runtime * (100 - e.ProgressPercentage) / 6000;
             label2.Text = "";
             if (minutes < 10)
                 label2.Text += "0" + minutes;

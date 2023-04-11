@@ -1,6 +1,6 @@
 ﻿namespace Schluesselzahlen
 {
-    partial class Dateninput
+    partial class DataInput
     {
         /// <summary>
         /// Required designer variable.

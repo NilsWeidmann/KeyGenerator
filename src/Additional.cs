@@ -9,20 +9,20 @@ using System.Windows.Forms;
 
 namespace Schluesselzahlen
 {
-    public partial class Zusatz : Form
+    public partial class Additional : Form
     {
         ComboBox[] cb = new ComboBox[13];
         Team t;
         Schluesselzahlen caller;
 
-        public Zusatz(Team t, Schluesselzahlen caller)
+        public Additional(Team t, Schluesselzahlen caller)
         {
             InitializeComponent();
             this.t = t;
             this.caller = caller;
 
             textBox1.Text = t.name;
-            textBox2.Text = t.liga.name;
+            textBox2.Text = t.league.name;
 
             cb[0] = comboBox1;
             cb[1] = comboBox2;
@@ -46,10 +46,10 @@ namespace Schluesselzahlen
                 cb[i].Items.Add("Auswärtsspiel");
             }
 
-            for (int i = 0; i < (t.liga.feld == 6 ? 10 : t.liga.feld - 1); i++)
+            for (int i = 0; i < (t.league.field == 6 ? 10 : t.league.field - 1); i++)
             {
                 cb[i].Enabled = true;
-                switch (t.spieltag[i])
+                switch (t.day[i])
                 {
                     case '-': cb[i].SelectedIndex = 0; break;
                     case 'H': cb[i].SelectedIndex = 1; break;
@@ -57,7 +57,7 @@ namespace Schluesselzahlen
                     default: cb[i].SelectedIndex = 0; break;
                 }
             }
-            for (int i = (t.liga.feld == 6 ? 10 : t.liga.feld - 1); i < 13; i++)
+            for (int i = (t.league.field == 6 ? 10 : t.league.field - 1); i < 13; i++)
                 cb[i].Enabled = false;
 
             comboBox14.Items.Clear();
@@ -66,7 +66,7 @@ namespace Schluesselzahlen
             comboBox14.Items.Add("B");
             comboBox14.Items.Add("X");
             comboBox14.Items.Add("Y");
-            switch (t.woche)
+            switch (t.week)
             {
                 case '-': comboBox14.SelectedIndex = 0; break;
                 case 'A': comboBox14.SelectedIndex = 1; break;
@@ -78,20 +78,20 @@ namespace Schluesselzahlen
 
         private void button1_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < t.liga.feld - 1; i++)
+            for (int i = 0; i < t.league.field - 1; i++)
                 switch (cb[i].SelectedIndex)
                 {
-                    case 0: t.spieltag[i] = '-'; break;
-                    case 1: t.spieltag[i] = 'H'; break;
-                    case 2: t.spieltag[i] = 'A'; break;
+                    case 0: t.day[i] = '-'; break;
+                    case 1: t.day[i] = 'H'; break;
+                    case 2: t.day[i] = 'A'; break;
                 }
             switch (comboBox14.SelectedIndex)
             {
-                case 0: t.woche = '-'; break;
-                case 1: t.woche = 'A'; break;
-                case 2: t.woche = 'B'; break;
-                case 3: t.woche = 'X'; break;
-                case 4: t.woche = 'Y'; break;
+                case 0: t.week = '-'; break;
+                case 1: t.week = 'A'; break;
+                case 2: t.week = 'B'; break;
+                case 3: t.week = 'X'; break;
+                case 4: t.week = 'Y'; break;
             }
             this.Visible = false;
             if (caller.radioButton2.Checked)

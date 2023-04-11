@@ -6,15 +6,15 @@ using System.IO;
 
 namespace Schluesselzahlen
 {
-    public class Textdatei
+    public class TextFile
     {
         public string sFilename;
-        private String fehler;
+        private String error;
 
-        public Textdatei(string x)
+        public TextFile(string x)
         {
             sFilename = x;
-            fehler = "Fehler beim Lesen der Datei " + sFilename + "!";
+            error = "Fehler beim Lesen der Datei " + sFilename + "!";
         }
 
         public string ReadFile(bool mustExist, List<string> m) /// Liefert den Inhalt der Datei zurück.
@@ -40,7 +40,7 @@ namespace Schluesselzahlen
             }
             catch (Exception e)
             {
-                m.Add(fehler);
+                m.Add(error);
             }
             return sContent;
         }
@@ -55,7 +55,7 @@ namespace Schluesselzahlen
             }
             catch (Exception e)
             {
-                m.Add(fehler);
+                m.Add(error);
             }
         }
 
@@ -69,7 +69,7 @@ namespace Schluesselzahlen
             }
             catch (Exception e)
             {
-                m.Add(fehler);
+                m.Add(error);
             }
         }
 
@@ -100,7 +100,7 @@ namespace Schluesselzahlen
             }
             catch (Exception e)
             {
-                m.Add(fehler);
+                m.Add(error);
             }
             return sContent;
         }
@@ -142,7 +142,7 @@ namespace Schluesselzahlen
             }
             catch (Exception e)
             {
-                m.Add(fehler);
+                m.Add(error);
             }
         }
     }

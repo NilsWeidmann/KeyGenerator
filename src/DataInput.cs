@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Schluesselzahlen
 {
-    public partial class Dateninput : Form
+    public partial class DataInput : Form
     {
         int team_max;
         bool automatic;
@@ -17,12 +17,12 @@ namespace Schluesselzahlen
         TextBox[] team_name;
         TextBox[] team_ident;
         Button[] reset;
-        public List<Verein> verein;
-        public List<Liga> liga;
-        public List<Partnerschaft> partnerschaft;
+        public List<Club> club;
+        public List<League> league;
+        public List<Partnership> partnership;
         Schluesselzahlen caller;
 
-        public Dateninput(Schluesselzahlen caller)
+        public DataInput(Schluesselzahlen caller)
         {
             InitializeComponent();
             this.caller = caller;
@@ -57,28 +57,28 @@ namespace Schluesselzahlen
         {
             button18.Enabled = false;
             String[] values = new String[6];
-            partnerschaft = new List<Partnerschaft>();
-            Verein[] verein_array = Data.getVereine(Data.vereine, partnerschaft);
+            partnership = new List<Partnership>();
+            Club[] verein_array = Data.getClubs(Data.clubs, partnership);
             initGrid();
             for (int i = 0; i < verein_array.Length; i++)
             {
-                Verein v = verein_array[i];
+                Club v = verein_array[i];
                 values[0] = v.name;
 
                 int[] intValues = { v.a, v.b, v.x, v.y };
                 for (int j = 1; j < 5; j++)
                     values[j] = intValues[j - 1].ToString() == "0" ? "" : intValues[j - 1].ToString();
 
-                values[5] = v.kapazitaet ? "X" : "";
+                values[5] = v.capacity ? "X" : "";
                 dataGridView1.Rows.Add(values);
             }
 
-            Liga[] liga_array = Data.getStaffeln(verein_array, Data.staffeln);
-            Data.getBeziehungen(liga_array, Data.beziehungen);
+            League[] liga_array = Data.getGroups(verein_array, Data.group);
+            Data.getRelations(liga_array, Data.relations);
             Data.allocateTeams(verein_array, liga_array);
 
-            verein = verein_array.ToList<Verein>();
-            liga = liga_array.ToList<Liga>();
+            club = verein_array.ToList<Club>();
+            league = liga_array.ToList<League>();
             comboBox1.Items.Clear();
             for (int i = 0; i < liga_array.Length; i++)
                 comboBox1.Items.Add(liga_array[i].name);
@@ -95,8 +95,8 @@ namespace Schluesselzahlen
                     caller.Focus();
                     break;
                 case DialogResult.Yes:
-                    Data.speichern(liga.ToArray(), verein.ToArray(), partnerschaft, Data.vereine, Data.staffeln, Data.beziehungen);
-                    caller.loadFromFile(Data.vereine, Data.staffeln, Data.beziehungen);
+                    Data.save(league.ToArray(), club.ToArray(), partnership, Data.clubs, Data.group, Data.relations);
+                    caller.loadFromFile(Data.clubs, Data.group, Data.relations);
                     caller.Enabled = true;
                     caller.Focus();
                     break;
@@ -113,8 +113,8 @@ namespace Schluesselzahlen
 
         private void button18_Click(object sender, EventArgs e)
         {
-            Data.speichern(liga.ToArray(), verein.ToArray(), partnerschaft, Data.vereine, Data.staffeln, Data.beziehungen);
-            caller.loadFromFile(Data.vereine, Data.staffeln, Data.beziehungen);
+            Data.save(league.ToArray(), club.ToArray(), partnership, Data.clubs, Data.group, Data.relations);
+            caller.loadFromFile(Data.clubs, Data.group, Data.relations);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -138,13 +138,13 @@ namespace Schluesselzahlen
                 }
             else
             {
-                for (int i = 0; i < liga.ElementAt(comboBox1.SelectedIndex).anzahl_teams; i++)
+                for (int i = 0; i < league.ElementAt(comboBox1.SelectedIndex).nr_of_teams; i++)
                 {
                     external[i].Enabled = false;
                     team_ident[i].Enabled = true;
                     reset[i].Enabled = true;
                     
-                    if (verein.Contains(liga.ElementAt(comboBox1.SelectedIndex).team[i].verein))
+                    if (club.Contains(league.ElementAt(comboBox1.SelectedIndex).team[i].club))
                     {
                         external[i].Checked = false;
                         team_name[i].Enabled = false;
@@ -155,11 +155,11 @@ namespace Schluesselzahlen
                         team_name[i].Enabled = true;
                     }
 
-                    team_name[i].Text = liga.ElementAt(comboBox1.SelectedIndex).team[i].verein.name;
-                    team_ident[i].Text = liga.ElementAt(comboBox1.SelectedIndex).team[i].team;
+                    team_name[i].Text = league.ElementAt(comboBox1.SelectedIndex).team[i].club.name;
+                    team_ident[i].Text = league.ElementAt(comboBox1.SelectedIndex).team[i].team;
 
                 }
-                for (int i = liga.ElementAt(comboBox1.SelectedIndex).anzahl_teams; i < team_max; i++)
+                for (int i = league.ElementAt(comboBox1.SelectedIndex).nr_of_teams; i < team_max; i++)
                 {
                     external[i].Enabled = false;
                     external[i].Checked = false;
@@ -169,32 +169,32 @@ namespace Schluesselzahlen
                     team_ident[i].Text = "";
                     reset[i].Enabled = false;
                 }
-                if (liga.ElementAt(comboBox1.SelectedIndex).anzahl_teams < liga.ElementAt(comboBox1.SelectedIndex).feld)
-                    external[liga.ElementAt(comboBox1.SelectedIndex).anzahl_teams].Enabled = true; ;
+                if (league.ElementAt(comboBox1.SelectedIndex).nr_of_teams < league.ElementAt(comboBox1.SelectedIndex).field)
+                    external[league.ElementAt(comboBox1.SelectedIndex).nr_of_teams].Enabled = true; ;
             }
             automatic = false;
         }
 
-        private void deleteTeam(Liga l, int t)
+        private void deleteTeam(League l, int t)
         {
-            l.anzahl_teams--;
-            for (int i = t; i < l.anzahl_teams; i++)
+            l.nr_of_teams--;
+            for (int i = t; i < l.nr_of_teams; i++)
                 l.team[i] = l.team[i + 1];
-            l.team[l.anzahl_teams] = null;
+            l.team[l.nr_of_teams] = null;
             enableGUIElements();
         }
 
-        private void createExternal(Liga l, int t)
+        private void createExternal(League l, int t)
         {
-            if (l.anzahl_teams == t)
-                l.anzahl_teams++;
+            if (l.nr_of_teams == t)
+                l.nr_of_teams++;
             l.team[t] = new Team();
             l.team[t].index = t;
-            l.team[t].liga = l;
-            l.team[t].woche = '-';
-            l.team[t].zahl = 0;
-            l.team[t].verein = new Verein();
-            l.team[t].verein.index = -1;
+            l.team[t].league = l;
+            l.team[t].week = '-';
+            l.team[t].number = 0;
+            l.team[t].club = new Club();
+            l.team[t].club.index = -1;
             enableGUIElements();
         }
 
@@ -202,18 +202,18 @@ namespace Schluesselzahlen
         {
             if (comboBox1.SelectedIndex == -1)
                 return;
-            Liga l = liga.ElementAt(comboBox1.SelectedIndex);
-            if (e.ColumnIndex == 0 && l.anzahl_teams < l.feld)
+            League l = league.ElementAt(comboBox1.SelectedIndex);
+            if (e.ColumnIndex == 0 && l.nr_of_teams < l.field)
             {
-                l.team[l.anzahl_teams] = new Team();
-                l.team[l.anzahl_teams].index = l.anzahl_teams;
-                l.team[l.anzahl_teams].name = verein.ElementAt(e.RowIndex).name;
-                l.team[l.anzahl_teams].team = "";
-                l.team[l.anzahl_teams].liga = l;
-                l.team[l.anzahl_teams].verein = verein.ElementAt(e.RowIndex);
-                l.team[l.anzahl_teams].woche = '-';
-                l.team[l.anzahl_teams].zahl = 0;
-                l.anzahl_teams++;
+                l.team[l.nr_of_teams] = new Team();
+                l.team[l.nr_of_teams].index = l.nr_of_teams;
+                l.team[l.nr_of_teams].name = club.ElementAt(e.RowIndex).name;
+                l.team[l.nr_of_teams].team = "";
+                l.team[l.nr_of_teams].league = l;
+                l.team[l.nr_of_teams].club = club.ElementAt(e.RowIndex);
+                l.team[l.nr_of_teams].week = '-';
+                l.team[l.nr_of_teams].number = 0;
+                l.nr_of_teams++;
                 enableGUIElements();
             }
         }
@@ -222,7 +222,7 @@ namespace Schluesselzahlen
         {
             for (int i = 0; i < team_max; i++)
                 if (sender.Equals(reset[i]))
-                    deleteTeam(liga.ElementAt(comboBox1.SelectedIndex), i);
+                    deleteTeam(league.ElementAt(comboBox1.SelectedIndex), i);
         }
 
         private void checkBoxI_CheckedChanged(object sender, EventArgs e)
@@ -232,9 +232,9 @@ namespace Schluesselzahlen
                     if (sender.Equals(external[i]))
                     {
                         if (external[i].Checked)
-                            createExternal(liga.ElementAt(comboBox1.SelectedIndex), i);
+                            createExternal(league.ElementAt(comboBox1.SelectedIndex), i);
                         else
-                            deleteTeam(liga.ElementAt(comboBox1.SelectedIndex), i);
+                            deleteTeam(league.ElementAt(comboBox1.SelectedIndex), i);
                     }
         }
 
@@ -245,9 +245,9 @@ namespace Schluesselzahlen
                 {
                     team_name[i].Text = Data.clear(team_name[i].Text);
                     team_ident[i].Text = Data.clear(team_ident[i].Text);
-                    liga.ElementAt(comboBox1.SelectedIndex).team[i].name = team_name[i].Text + " " + team_ident[i].Text;
-                    liga.ElementAt(comboBox1.SelectedIndex).team[i].team = team_ident[i].Text;
-                    liga.ElementAt(comboBox1.SelectedIndex).team[i].verein.name = team_name[i].Text;
+                    league.ElementAt(comboBox1.SelectedIndex).team[i].name = team_name[i].Text + " " + team_ident[i].Text;
+                    league.ElementAt(comboBox1.SelectedIndex).team[i].team = team_ident[i].Text;
+                    league.ElementAt(comboBox1.SelectedIndex).team[i].club.name = team_name[i].Text;
                 }
         }
 
@@ -262,116 +262,116 @@ namespace Schluesselzahlen
                 case 0:
                     if (value.Equals(""))
                         break;
-                    verein.ElementAt(e.RowIndex).name = Data.clear(value);
-                    dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = verein.ElementAt(e.RowIndex).name;
+                    club.ElementAt(e.RowIndex).name = Data.clear(value);
+                    dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = club.ElementAt(e.RowIndex).name;
                     break;
                 case 1:
-                    if (zahl > 0 && zahl <= Data.feld[0])
+                    if (zahl > 0 && zahl <= Data.field[0])
                     {
-                        verein.ElementAt(e.RowIndex).a = zahl;
-                        verein.ElementAt(e.RowIndex).b = Data.nm.getGegenlaeufig(Data.feld[0], Data.feld[0], zahl);
+                        club.ElementAt(e.RowIndex).a = zahl;
+                        club.ElementAt(e.RowIndex).b = Data.nm.getGegenlaeufig(Data.field[0], Data.field[0], zahl);
                     }
                     else
                     {
-                        verein.ElementAt(e.RowIndex).a = 0;
-                        verein.ElementAt(e.RowIndex).b = 0;
+                        club.ElementAt(e.RowIndex).a = 0;
+                        club.ElementAt(e.RowIndex).b = 0;
                     }
-                    if (verein.ElementAt(e.RowIndex).a == 0)
+                    if (club.ElementAt(e.RowIndex).a == 0)
                         dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
                     else
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = verein.ElementAt(e.RowIndex).a.ToString();
-                    if (verein.ElementAt(e.RowIndex).b == 0)
+                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = club.ElementAt(e.RowIndex).a.ToString();
+                    if (club.ElementAt(e.RowIndex).b == 0)
                         dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value = "";
                     else
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value = verein.ElementAt(e.RowIndex).b.ToString();
+                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value = club.ElementAt(e.RowIndex).b.ToString();
                     break;
                 case 2:
-                    if (zahl > 0 && zahl <= Data.feld[0])
+                    if (zahl > 0 && zahl <= Data.field[0])
                     {
-                        verein.ElementAt(e.RowIndex).b = zahl;
-                        verein.ElementAt(e.RowIndex).a = Data.nm.getGegenlaeufig(Data.feld[0], Data.feld[0], zahl);
+                        club.ElementAt(e.RowIndex).b = zahl;
+                        club.ElementAt(e.RowIndex).a = Data.nm.getGegenlaeufig(Data.field[0], Data.field[0], zahl);
                     }
                     else
                     {
-                        verein.ElementAt(e.RowIndex).a = 0;
-                        verein.ElementAt(e.RowIndex).b = 0;
+                        club.ElementAt(e.RowIndex).a = 0;
+                        club.ElementAt(e.RowIndex).b = 0;
                     }
-                    if (verein.ElementAt(e.RowIndex).a == 0)
+                    if (club.ElementAt(e.RowIndex).a == 0)
                         dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value = "";
                     else
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value = verein.ElementAt(e.RowIndex).a.ToString();
-                    if (verein.ElementAt(e.RowIndex).b == 0)
+                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value = club.ElementAt(e.RowIndex).a.ToString();
+                    if (club.ElementAt(e.RowIndex).b == 0)
                         dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
                     else
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = verein.ElementAt(e.RowIndex).b.ToString();
+                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = club.ElementAt(e.RowIndex).b.ToString();
                     break;
                 case 3:
-                    if (zahl > 0 && zahl <= Data.feld[1])
+                    if (zahl > 0 && zahl <= Data.field[1])
                     {
-                        verein.ElementAt(e.RowIndex).x = zahl;
-                        verein.ElementAt(e.RowIndex).y = Data.nm.getGegenlaeufig(Data.feld[1], Data.feld[1], zahl);
+                        club.ElementAt(e.RowIndex).x = zahl;
+                        club.ElementAt(e.RowIndex).y = Data.nm.getGegenlaeufig(Data.field[1], Data.field[1], zahl);
                     }
                     else
                     {
-                        verein.ElementAt(e.RowIndex).x = 0;
-                        verein.ElementAt(e.RowIndex).y = 0;
+                        club.ElementAt(e.RowIndex).x = 0;
+                        club.ElementAt(e.RowIndex).y = 0;
                     }
-                    if (verein.ElementAt(e.RowIndex).x == 0)
+                    if (club.ElementAt(e.RowIndex).x == 0)
                         dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
                     else
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = verein.ElementAt(e.RowIndex).x.ToString();
-                    if (verein.ElementAt(e.RowIndex).y == 0)
+                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = club.ElementAt(e.RowIndex).x.ToString();
+                    if (club.ElementAt(e.RowIndex).y == 0)
                         dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value = "";
                     else
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value = verein.ElementAt(e.RowIndex).y.ToString();
+                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value = club.ElementAt(e.RowIndex).y.ToString();
                     break;
                 case 4:
-                    if (zahl > 0 && zahl <= Data.feld[1])
+                    if (zahl > 0 && zahl <= Data.field[1])
                     {
-                        verein.ElementAt(e.RowIndex).y = zahl;
-                        verein.ElementAt(e.RowIndex).x = Data.nm.getGegenlaeufig(Data.feld[1], Data.feld[1], zahl);
+                        club.ElementAt(e.RowIndex).y = zahl;
+                        club.ElementAt(e.RowIndex).x = Data.nm.getGegenlaeufig(Data.field[1], Data.field[1], zahl);
                     }
                     else
                     {
-                        verein.ElementAt(e.RowIndex).y = 0;
-                        verein.ElementAt(e.RowIndex).x = 0;
+                        club.ElementAt(e.RowIndex).y = 0;
+                        club.ElementAt(e.RowIndex).x = 0;
                     }
-                    if (verein.ElementAt(e.RowIndex).x == 0)
+                    if (club.ElementAt(e.RowIndex).x == 0)
                         dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value = "";
                     else
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value = verein.ElementAt(e.RowIndex).x.ToString();
-                    if (verein.ElementAt(e.RowIndex).y == 0)
+                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value = club.ElementAt(e.RowIndex).x.ToString();
+                    if (club.ElementAt(e.RowIndex).y == 0)
                         dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
                     else
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = verein.ElementAt(e.RowIndex).y.ToString();
+                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = club.ElementAt(e.RowIndex).y.ToString();
                     break;
                 case 5:
                     if (value.Equals(""))
-                        verein.ElementAt(e.RowIndex).kapazitaet = false;
+                        club.ElementAt(e.RowIndex).capacity = false;
                     else
-                        verein.ElementAt(e.RowIndex).kapazitaet = true;
-                    dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = verein.ElementAt(e.RowIndex).kapazitaet ? "X" : "";
+                        club.ElementAt(e.RowIndex).capacity = true;
+                    dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = club.ElementAt(e.RowIndex).capacity ? "X" : "";
                     break;
             }
         }
 
         private void dataGridView1_UserAddedRow(object sender, DataGridViewRowEventArgs e)
         {
-            Verein v = new Verein();
+            Club v = new Club();
             v.index = e.Row.Index - 1;
-            for (int i = e.Row.Index - 1; i < verein.Count; i++)
-                verein.ElementAt(i).index++;
-            verein.Insert(e.Row.Index - 1, v);
+            for (int i = e.Row.Index - 1; i < club.Count; i++)
+                club.ElementAt(i).index++;
+            club.Insert(e.Row.Index - 1, v);
         }
 
         private void dataGridView1_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
-            foreach (Partnerschaft p in partnerschaft)
+            foreach (Partnership p in partnership)
                 if (p.a.index == e.Row.Index - 1 || p.b.index == e.Row.Index - 1)
-                    partnerschaft.Remove(p);
-            verein.RemoveAt(e.Row.Index - 1);
-            for (int i = e.Row.Index - 1; i < verein.Count; i++)
-                verein.ElementAt(i).index--;
+                    partnership.Remove(p);
+            club.RemoveAt(e.Row.Index - 1);
+            for (int i = e.Row.Index - 1; i < club.Count; i++)
+                club.ElementAt(i).index--;
             
         }
 
@@ -403,7 +403,7 @@ namespace Schluesselzahlen
 
         private void button15_Click(object sender, EventArgs e)
         {
-            Liga l = new Liga();
+            League l = new League();
             Staffel s = new Staffel(l, true, this);
             s.Visible = true;
             this.Enabled = false;
@@ -414,7 +414,7 @@ namespace Schluesselzahlen
             Staffel s;
             if (comboBox1.SelectedIndex != -1)
             {
-                s = new Staffel(liga[comboBox1.SelectedIndex], false, this);
+                s = new Staffel(league[comboBox1.SelectedIndex], false, this);
                 s.Visible = true;
                 this.Enabled = false;
             }
@@ -423,14 +423,14 @@ namespace Schluesselzahlen
         private void button17_Click(object sender, EventArgs e)
         {
             if (comboBox1.SelectedIndex != -1)
-                switch (MessageBox.Show("Wollen Sie die " + liga[comboBox1.SelectedIndex].name + " löschen?", "Liga löschen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
+                switch (MessageBox.Show("Wollen Sie die " + league[comboBox1.SelectedIndex].name + " löschen?", "Liga löschen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
                 {
                     case DialogResult.No:
                         break;
                     case DialogResult.Yes:
-                        liga.RemoveAt(comboBox1.SelectedIndex);
-                        for (int i = comboBox1.SelectedIndex; i < liga.Count; i++)
-                            liga[i].index--;
+                        league.RemoveAt(comboBox1.SelectedIndex);
+                        for (int i = comboBox1.SelectedIndex; i < league.Count; i++)
+                            league[i].index--;
                         comboBox1.Items.RemoveAt(comboBox1.SelectedIndex);
                         enableGUIElements();
                         this.Enabled = true;

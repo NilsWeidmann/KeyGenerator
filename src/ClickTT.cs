@@ -11,23 +11,23 @@ using HtmlAgilityPack;
 
 namespace Schluesselzahlen
 {
-    public partial class click_tt : Form
+    public partial class ClickTT : Form
     {
-        List<Liga> ll;
-        List<Verein> lv;
-        List<Partnerschaft> lp;
+        List<League> ll;
+        List<Club> lv;
+        List<Partnership> lp;
         Schluesselzahlen caller;
         
-        public click_tt(Liga[] l, Verein[] v, List<Partnerschaft> p, Schluesselzahlen caller)
+        public ClickTT(League[] l, Club[] v, List<Partnership> p, Schluesselzahlen caller)
         {
             InitializeComponent();
             this.caller = caller;
             init();
             ll = l.ToList();
-            foreach (Liga liga in ll)
+            foreach (League liga in ll)
                 dataGridView1.Rows.Add(liga.name);
             lv = v.ToList();
-            foreach (Verein verein in lv)
+            foreach (Club verein in lv)
                 dataGridView2.Rows.Add(verein.name);
             lp = p;
         }
@@ -83,7 +83,7 @@ namespace Schluesselzahlen
                     if (node_s.Name.Equals("a") && !node_s.ParentNode.GetAttributeValue("class", "").Equals("matrix-relegation-more"))
                     {
                         spielklasse = Data.clear(node_s.InnerText);
-                        Liga l = new Liga();
+                        League l = new League();
                         l.name = altersklasse + " " + spielklasse;
                         l.index = index_l++;
                         index_t = 0;
@@ -114,26 +114,26 @@ namespace Schluesselzahlen
                                     t.name = t.name.TrimStart(trimChars);
                                     t.name = t.name.TrimEnd(trimChars);
                                     t.name = Data.clear(t.name);
-                                    t.liga = l;
-                                    l.anzahl_teams++;
-                                    t.woche = '-';
+                                    t.league = l;
+                                    l.nr_of_teams++;
+                                    t.week = '-';
                                     t.index = index_t++;
                                     for (int i = 0; i < lv.Count; i++)
                                         if (Data.checkVerein(t, lv.ElementAt(i)))
-                                            t.verein = lv.ElementAt(i);
-                                    if (t.verein == null)
+                                            t.club = lv.ElementAt(i);
+                                    if (t.club == null)
                                     {
-                                        t.verein = new Verein();
-                                        t.verein.name = t.name;
-                                        t.verein.index = -1;
-                                        t.woche = '-';
+                                        t.club = new Club();
+                                        t.club.name = t.name;
+                                        t.club.index = -1;
+                                        t.week = '-';
                                     }
                                     lt.Add(t);
                                 }
                         while (lt.Count < 14)
                             lt.Add(null);
                         l.team = lt.ToArray();
-                        l.feld = l.anzahl_teams + l.anzahl_teams % 2;
+                        l.field = l.nr_of_teams + l.nr_of_teams % 2;
                         ll.Add(l);
                         dataGridView1.Rows.Add(l.name);
                     }
@@ -171,7 +171,7 @@ namespace Schluesselzahlen
                 {
                     if (link.Name.Equals("a"))
                     {
-                        Verein verein = new Verein();
+                        Club verein = new Club();
                         verein.name = Data.clear(link.InnerText);
                         verein.index = index++;
                         lv.Add(verein);
@@ -188,8 +188,8 @@ namespace Schluesselzahlen
 
         private void button2_Click(object sender, EventArgs e)
         {
-            lv = new List<Verein>();
-            lp = new List<Partnerschaft>();
+            lv = new List<Club>();
+            lp = new List<Partnership>();
             dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridView2.Columns.Clear();
             dataGridView2.Columns.Add("Verein", "Verein");
@@ -199,7 +199,7 @@ namespace Schluesselzahlen
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ll = new List<Liga>();
+            ll = new List<League>();
             dataGridView1.Rows.Clear();
             dataGridView3.Rows.Clear();
             webImportStaffeln();
@@ -240,7 +240,7 @@ namespace Schluesselzahlen
             dataGridView3.Rows.Clear();
             if (ll != null && e.RowIndex < ll.Count)
             {
-                for (int i = 0; i < ll[e.RowIndex].anzahl_teams; i++)
+                for (int i = 0; i < ll[e.RowIndex].nr_of_teams; i++)
                     dataGridView3.Rows.Add(ll[e.RowIndex].team[i].name);
             }
         }
@@ -248,8 +248,8 @@ namespace Schluesselzahlen
         private void button3_Click(object sender, EventArgs e)
         {
             button3.Enabled = false;
-            Data.speichern(ll.ToArray(), lv.ToArray(), lp, Data.vereine, Data.staffeln, Data.beziehungen);
-            caller.loadFromFile(Data.vereine, Data.staffeln, Data.beziehungen);
+            Data.save(ll.ToArray(), lv.ToArray(), lp, Data.clubs, Data.group, Data.relations);
+            caller.loadFromFile(Data.clubs, Data.group, Data.relations);
             button3.Enabled = true;
         }
 
@@ -264,8 +264,8 @@ namespace Schluesselzahlen
                         caller.Focus();
                         break;
                     case DialogResult.Yes:
-                        Data.speichern(ll.ToArray(), lv.ToArray(), lp, Data.vereine, Data.staffeln, Data.beziehungen);
-                        caller.loadFromFile(Data.vereine, Data.staffeln, Data.beziehungen);
+                        Data.save(ll.ToArray(), lv.ToArray(), lp, Data.clubs, Data.group, Data.relations);
+                        caller.loadFromFile(Data.clubs, Data.group, Data.relations);
                         caller.Enabled = true;
                         caller.Focus();
                         break;

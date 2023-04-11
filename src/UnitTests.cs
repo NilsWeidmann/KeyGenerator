@@ -7,26 +7,26 @@ namespace Schluesselzahlen
 {
     class UnitTests
     {
-        public bool allTeamsHaveDifferentNumbers(Liga[] l)
+        public bool allTeamsHaveDifferentNumbers(League[] l)
         {
-            foreach (Liga league in l)
+            foreach (League league in l)
                 for (int i = 0; i < league.team.Length; i++)
                     for (int j = i + 1; j < league.team.Length; j++)
-                        if (league.team[i].zahl == league.team[j].zahl)
+                        if (league.team[i].number == league.team[j].number)
                             return false;
             return true;
         }
 
-        public bool allTeamsHaveValidNumbers(Liga[] l)
+        public bool allTeamsHaveValidNumbers(League[] l)
         {
-            foreach (Liga league in l)
+            foreach (League league in l)
                 for (int i = 0; i < league.team.Length; i++)
-                    if (league.team[i].zahl < 1 || league.team[i].zahl > league.feld)
+                    if (league.team[i].number < 1 || league.team[i].number > league.field)
                         return false;
             return true;
         }
 
-        public bool checkValidity(Verein[] v)
+        public bool checkValidity(Club[] v)
         {
             return true;
         }

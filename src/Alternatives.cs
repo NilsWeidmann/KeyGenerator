@@ -9,15 +9,15 @@ using System.Windows.Forms;
 
 namespace Schluesselzahlen
 {
-    public partial class Alternativen : Form
+    public partial class Alternatives : Form
     {
-        public Konflikt[] k;
-        public Liga[] l;
-        public Verein[] v;
+        public Conflict[] k;
+        public League[] l;
+        public Club[] v;
         public int i;
         public Schluesselzahlen caller;
 
-        public Alternativen(Konflikt[] k, Liga[] l, Verein[] v, Schluesselzahlen caller)
+        public Alternatives(Conflict[] k, League[] l, Club[] v, Schluesselzahlen caller)
         {
             InitializeComponent();
             this.k = k;
@@ -32,20 +32,20 @@ namespace Schluesselzahlen
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Liga[] best_l = new Liga[l.Length];
-            Verein[] best_v = new Verein[v.Length];
+            League[] best_l = new League[l.Length];
+            Club[] best_v = new Club[v.Length];
             int[] konflikte = new int[2];
             konflikte[0] = -1;
             konflikte[1] = -1;
-            int[] schluessel = new int[Data.verein.Length * 2];
+            int[] schluessel = new int[Data.club.Length * 2];
             for (int i=0; i<k.Length; i++)
                 for (int j=0; j<k[i].t.Length; j++)
                     for (int x=0; x<k.Length; x++)
                         for (int y=0; y<k[x].t.Length; y++)
-                            if (k[i].t[j].liga == k[x].t[y].liga && k[i].t[j].zahl == k[x].t[y].zahl)
+                            if (k[i].t[j].league == k[x].t[y].league && k[i].t[j].number == k[x].t[y].number)
                                 if (i != x)
                                 {
-                                    MessageBox.Show("Vergeben Sie die Zahl " + k[i].t[j].zahl + " in der " + k[i].t[j].liga.name + " nur einmal!");
+                                    MessageBox.Show("Vergeben Sie die Zahl " + k[i].t[j].number + " in der " + k[i].t[j].league.name + " nur einmal!");
                                     return;
                                 }
                                 else if (j != y)
@@ -56,9 +56,9 @@ namespace Schluesselzahlen
                                 }
             this.Visible = false;
             Data.createPriority();
-            Data.copy(l, best_l, v, best_v, Data.partnerschaft, Data.partnerschaft);
+            Data.copy(l, best_l, v, best_v, Data.partnership, Data.partnership);
             Data.findSolution(0, l, best_l, v, best_v, konflikte, schluessel);
-            Data.copy(best_l, l, best_v, v, Data.partnerschaft, Data.partnerschaft);
+            Data.copy(best_l, l, best_v, v, Data.partnership, Data.partnership);
             caller.solveConflicts(l, v);
             caller.Enabled = true;
         }
@@ -72,7 +72,7 @@ namespace Schluesselzahlen
                 textBox3.Text = k[i].t[2].name;
             else
                 textBox3.Text = "";
-            textBox7.Text = k[i].t[0].liga.name;
+            textBox7.Text = k[i].t[0].league.name;
 
             ComboBox[] combo = { comboBox2, comboBox3, comboBox4 };
             TextBox[] text = { textBox4, textBox5, textBox6 };
@@ -82,13 +82,13 @@ namespace Schluesselzahlen
                 if (box < k[i].t.Length)
                 {
                     combo[box].Items.Clear();
-                    combo[box].Text = k[i].t[box].zahl.ToString();
-                    text[box].Text = k[i].wunsch.ToString();
+                    combo[box].Text = k[i].t[box].number.ToString();
+                    text[box].Text = k[i].wish.ToString();
                     for (int j = 0; j < 3; j++)
-                        if (k[i].zahl[j] != 0)
+                        if (k[i].number[j] != 0)
                         {
-                            combo[box].Items.Add(k[i].zahl[j]);
-                            if (k[i].t[box].zahl == k[i].zahl[j])
+                            combo[box].Items.Add(k[i].number[j]);
+                            if (k[i].t[box].number == k[i].number[j])
                                 combo[box].SelectedIndex = j;
                         }
                     combo[box].Enabled = true;
@@ -128,7 +128,7 @@ namespace Schluesselzahlen
                 if (combo[box] != sender && sender.SelectedIndex == combo[box].SelectedIndex)
                     combo[box].SelectedIndex = -1;
                 if (combo[box] == sender && combo[box].SelectedIndex != -1)
-                    k[i].t[box].zahl = Util.toInt(combo[box].SelectedItem.ToString());
+                    k[i].t[box].number = int.Parse(combo[box].SelectedItem.ToString());
             }
         }
 
@@ -140,17 +140,17 @@ namespace Schluesselzahlen
                 case DialogResult.No:
                     try
                     {
-                        caller.loadFromFile(Data.vereine_b, Data.staffeln_b, Data.beziehungen_b);
+                        caller.loadFromFile(Data.clubs_b, Data.group_b, Data.relations_b);
                     }
                     catch (Exception ex)
                     {
-                        caller.loadFromFile(Data.vereine, Data.staffeln, Data.beziehungen);
+                        caller.loadFromFile(Data.clubs, Data.group, Data.relations);
                     }
                     prepareCaller();
                     break;
                 case DialogResult.Yes:
-                    Data.speichern(Data.liga, Data.verein, Data.partnerschaft, Data.vereine, Data.staffeln, Data.beziehungen);
-                    caller.loadFromFile(Data.vereine, Data.staffeln, Data.beziehungen);
+                    Data.save(Data.league, Data.club, Data.partnership, Data.clubs, Data.group, Data.relations);
+                    caller.loadFromFile(Data.clubs, Data.group, Data.relations);
                     prepareCaller();
                     break;
                 case DialogResult.Cancel:

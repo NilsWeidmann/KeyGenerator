@@ -9,11 +9,11 @@ using System.Windows.Forms;
 
 namespace Schluesselzahlen
 {
-    public partial class Initialisieren : Form
+    public partial class Initialize : Form
     {
         public Schluesselzahlen caller;
 
-        public Initialisieren(Schluesselzahlen caller)
+        public Initialize(Schluesselzahlen caller)
         {
             InitializeComponent();
             this.caller = caller;
@@ -24,12 +24,12 @@ namespace Schluesselzahlen
             this.Enabled = false;
             try
             {
-                caller.loadFromFile(Data.vereine_b, Data.staffeln_b, Data.beziehungen_b);
+                caller.loadFromFile(Data.clubs_b, Data.group_b, Data.relations_b);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Es ist kein Backup vorhanden!");
-                caller.loadFromFile(Data.vereine, Data.staffeln, Data.beziehungen);
+                caller.loadFromFile(Data.clubs, Data.group, Data.relations);
             }
             returnToCaller();
         }
@@ -48,17 +48,17 @@ namespace Schluesselzahlen
 
         private void loescheVereine()
         {
-            List<Verein> lv = Data.verein.ToList();
-            List<Verein> lv_d = new List<Verein>();
-            foreach (Verein v in lv)
+            List<Club> lv = Data.club.ToList();
+            List<Club> lv_d = new List<Club>();
+            foreach (Club v in lv)
                 if (v.team == null || v.team.Length == 0)
                     lv_d.Add(v);
-            foreach (Verein v in lv_d)
+            foreach (Club v in lv_d)
                 lv.Remove(v);
-            Data.verein = lv.ToArray();
+            Data.club = lv.ToArray();
             caller.comboBox3.Items.Clear();
-            for (int i = 0; i < Data.verein.Length; i++)
-                caller.comboBox3.Items.Add(Data.verein[i].name);
+            for (int i = 0; i < Data.club.Length; i++)
+                caller.comboBox3.Items.Add(Data.club[i].name);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -71,18 +71,18 @@ namespace Schluesselzahlen
         private void button5_Click(object sender, EventArgs e)
         {
             this.Enabled = false;
-            for (int i = 0; i < Data.liga.Length; i++)
-                for (int j = 0; j < Data.liga[i].anzahl_teams; j++)
-                    Data.liga[i].team[j].woche = '-';
+            for (int i = 0; i < Data.league.Length; i++)
+                for (int j = 0; j < Data.league[i].nr_of_teams; j++)
+                    Data.league[i].team[j].week = '-';
             returnToCaller();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             this.Enabled = false;
-            for (int i = 0; i < Data.liga.Length; i++)
-                for (int j = 0; j < Data.liga[i].anzahl_teams; j++)
-                    Data.liga[i].team[j].zahl = 0;
+            for (int i = 0; i < Data.league.Length; i++)
+                for (int j = 0; j < Data.league[i].nr_of_teams; j++)
+                    Data.league[i].team[j].number = 0;
             returnToCaller();
         }
 
@@ -90,18 +90,18 @@ namespace Schluesselzahlen
         {
             this.Enabled = false;
             this.Enabled = false;
-            for (int i = 0; i < Data.verein.Length; i++)
-                Data.verein[i].a = Data.verein[i].b = Data.verein[i].x = Data.verein[i].y = 0;
+            for (int i = 0; i < Data.club.Length; i++)
+                Data.club[i].a = Data.club[i].b = Data.club[i].x = Data.club[i].y = 0;
             returnToCaller();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             this.Enabled = false;
-            for (int i = 0; i < Data.liga.Length; i++)
-                for (int j = 0; j < Data.liga[i].anzahl_teams; j++)
+            for (int i = 0; i < Data.league.Length; i++)
+                for (int j = 0; j < Data.league[i].nr_of_teams; j++)
                     for (int k = 0; k < Data.team_max; k++)
-                        Data.liga[i].team[j].spieltag[k] = '-';
+                        Data.league[i].team[j].day[k] = '-';
             returnToCaller();
         }
 

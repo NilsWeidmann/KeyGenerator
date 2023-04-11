@@ -5,22 +5,22 @@ using System.Text;
 
 namespace Schluesselzahlen
 {
-    public class Liga
+    public class League
     {
         public String name;
         public Team[] team = new Team[Data.team_max];
         public int index;
-        public int anzahl_teams = 0;
-        public int feld = 0;
+        public int nr_of_teams = 0;
+        public int field = 0;
 
-        public void removeOptions(int zahl)
+        public void removeOptions(int number)
         {
-            for (int i = 0; i < anzahl_teams; i++)
-                if (team[i].zahl != zahl)
-                    team[i].option[zahl - 1] = false;
+            for (int i = 0; i < nr_of_teams; i++)
+                if (team[i].number != number)
+                    team[i].option[number - 1] = false;
                 else
                     for (int j = 0; j < Data.team_max; j++)
-                        if (j != zahl - 1)
+                        if (j != number - 1)
                             team[i].option[j] = false;
         }
 
@@ -30,7 +30,7 @@ namespace Schluesselzahlen
             for (int i = 0; i < Data.team_max; i++)
             {
                 t = -1;
-                for (int j = 0; j < anzahl_teams; j++)
+                for (int j = 0; j < nr_of_teams; j++)
                     if (team[j].option[i])
                         if (t == -1)
                             t = j;
@@ -39,23 +39,23 @@ namespace Schluesselzahlen
                             t = -1;
                             break;
                         }
-                if (t >= 0 && team[t].zahl == 0)
+                if (t >= 0 && team[t].number == 0)
                 {
-                    team[t].zahl = i + 1;
+                    team[t].number = i + 1;
                     removeOptions(i + 1);
                     checkOneOption();
                 }
             }
         }
 
-        public Liga clone()
+        public League clone()
         {
-            Liga l = new Liga();
-            l.anzahl_teams = anzahl_teams;
+            League l = new League();
+            l.nr_of_teams = nr_of_teams;
             l.index = index;
             l.name = name;
             l.team = new Team[Data.team_max];
-            l.feld = feld;
+            l.field = field;
             return l;
         }
     }  

@@ -1,6 +1,6 @@
 ﻿namespace Schluesselzahlen
 {
-    partial class Alternativen
+    partial class Alternatives
     {
         /// <summary>
         /// Required designer variable.

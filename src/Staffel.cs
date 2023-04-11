@@ -11,13 +11,13 @@ namespace Schluesselzahlen
 {
     public partial class Staffel : Form
     {
-        Dateninput caller;
+        DataInput caller;
         int min = 6;
         int max = 14;
-        Liga liga;
+        League liga;
         bool neu;
 
-        public Staffel(Liga l, bool neu, Dateninput caller)
+        public Staffel(League l, bool neu, DataInput caller)
         {
             InitializeComponent();
             this.neu = neu;
@@ -26,15 +26,15 @@ namespace Schluesselzahlen
 
             textBox1.Text = l.name;
             if (!neu)
-                if (min < l.anzahl_teams + l.anzahl_teams % 2)
-                    min = l.anzahl_teams + l.anzahl_teams % 2;
+                if (min < l.nr_of_teams + l.nr_of_teams % 2)
+                    min = l.nr_of_teams + l.nr_of_teams % 2;
             for (int i = min; i <= max; i += 2)
                 comboBox1.Items.Add(i);
             if (neu)
                 comboBox1.SelectedIndex = 0;
             else
                 for (int i = 0; i < comboBox1.Items.Count; i++)
-                    if (Util.toInt(comboBox1.Items[i].ToString()) == l.feld)
+                    if (Util.toInt(comboBox1.Items[i].ToString()) == l.field)
                         comboBox1.SelectedIndex = i;
         }
 
@@ -48,12 +48,12 @@ namespace Schluesselzahlen
         private void button2_Click(object sender, EventArgs e)
         {
             liga.name = Data.clear(textBox1.Text);
-            liga.feld = Util.toInt(comboBox1.SelectedItem.ToString());
+            liga.field = Util.toInt(comboBox1.SelectedItem.ToString());
             if (neu)
             {
                 liga.team = new Team[max];
-                liga.index = caller.liga.Count;
-                caller.liga.Add(liga);
+                liga.index = caller.league.Count;
+                caller.league.Add(liga);
                 caller.comboBox1.Items.Add(liga.name);
                 caller.comboBox1.SelectedIndex = liga.index;
             }

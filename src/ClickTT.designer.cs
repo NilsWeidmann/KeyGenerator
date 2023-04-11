@@ -1,6 +1,6 @@
 ﻿namespace Schluesselzahlen
 {
-    partial class click_tt
+    partial class ClickTT
     {
         /// <summary>
         /// Required designer variable.

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Schluesselzahlen
 {
-    public class Verein
+    public class Club
     {
         public String name;
         public int index;
@@ -15,32 +15,32 @@ namespace Schluesselzahlen
         public int y;
         public Team[] team;
         public int prio;
-        public bool kapazitaet;
+        public bool capacity;
 
-        public void setPrio(List<Partnerschaft> partnerschaft)
+        public void setPrio(List<Partnership> partnership)
         {
             prio = 0;
             for (int i = 0; i < team.Length; i++)
-                if (team[i].woche != '-' && team[i].zahl == 0)
+                if (team[i].week != '-' && team[i].number == 0)
                     prio++;
-            foreach (Partnerschaft p in partnerschaft)
+            foreach (Partnership p in partnership)
                 if (p.a.index == index)
                 {
                     for (int i = 0; i < p.b.team.Length; i++)
-                        if (p.b.team[i].woche != '-' && p.b.team[i].zahl == 0)
+                        if (p.b.team[i].week != '-' && p.b.team[i].number == 0)
                             prio++;
                 }
                 else if (p.b.index == index)
                 {
                     for (int j = 0; j < p.a.team.Length; j++)
-                        if (p.a.team[j].woche != '-' && p.a.team[j].zahl == 0)
+                        if (p.a.team[j].week != '-' && p.a.team[j].number == 0)
                             prio++;
                 }
         }
 
-        public Verein clone()
+        public Club clone()
         {
-            Verein v = new Verein();
+            Club v = new Club();
             v.name = name;
             v.index = index;
             v.a = a;
@@ -48,7 +48,7 @@ namespace Schluesselzahlen
             v.x = x;
             v.y = y;
             v.team = new Team[team.Length];
-            v.kapazitaet = kapazitaet;
+            v.capacity = capacity;
             return v;
         }
     }

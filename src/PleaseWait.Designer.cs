@@ -1,6 +1,6 @@
 ﻿namespace Schluesselzahlen
 {
-    partial class BitteWarten
+    partial class PleaseWait
     {
         /// <summary>
         /// Required designer variable.

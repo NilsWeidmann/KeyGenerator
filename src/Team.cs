@@ -9,59 +9,59 @@ namespace Schluesselzahlen
     public class Team
     {
         public String name;
-        public Liga liga;
-        public Verein verein;
+        public League league;
+        public Club club;
         public String team;
-        public int zahl = 0;
+        public int number = 0;
         public int index;
         public bool[] option;
-        public int anzahl_optionen;
-        public char woche = '-';
-        public char[] spieltag;
+        public int nrOfOptions;
+        public char week = '-';
+        public char[] day;
 
         public Team()
         {
             option = new bool[Data.team_max];
-            spieltag = new char[Data.team_max];
+            day = new char[Data.team_max];
             for (int i = 0; i < Data.team_max; i++)
-                spieltag[i] = '-';
+                day[i] = '-';
         }
 
-        public void setAnzahl_optionen()
+        public void setNrOfOptions()
         {
-            anzahl_optionen = 0;
+            nrOfOptions = 0;
             for (int k = 0; k < Data.team_max; k++)
                 if (option[k])
-                    anzahl_optionen++;
+                    nrOfOptions++;
         }
 
-        public void getZahl()
+        public void getNumber()
         {
-            int zahl = 0;
+            int number = 0;
             for (int i = 0; i < Data.team_max; i++)
                 if (option[i])
-                    if (zahl == 0)
-                        zahl = i + 1;
+                    if (number == 0)
+                        number = i + 1;
                     else
                         return;
-            this.zahl = zahl;
+            this.number = number;
         }
 
-        public bool zusatz()
+        public bool hasAdditional()
         {
-            for (int i = 0; i < spieltag.Length; i++)
-                if (spieltag[i] == 'H' || spieltag[i] == 'A')
+            for (int i = 0; i < day.Length; i++)
+                if (day[i] == 'H' || day[i] == 'A')
                     return true;
             return false;
         }
 
-        public bool zahlOK(int zahl)
+        public bool numberOK(int number)
         {
-            if (zahl == 0)
+            if (number == 0)
                 return true;
-            for (int i = 0; i < spieltag.Length; i++)
-                if (Data.spielplan_1[liga.feld - 1, zahl - 1, i] == 'H' && spieltag[i] == 'A'
-                ||  Data.spielplan_1[liga.feld - 1, zahl - 1, i] == 'A' && spieltag[i] == 'H')
+            for (int i = 0; i < day.Length; i++)
+                if (Data.schedule_1[league.field - 1, number - 1, i] == 'H' && day[i] == 'A'
+                ||  Data.schedule_1[league.field - 1, number - 1, i] == 'A' && day[i] == 'H')
                     return false;
             return true;
         }
@@ -70,16 +70,16 @@ namespace Schluesselzahlen
         {
             Team t = new Team();
             t.index = index;
-            t.liga = liga;
+            t.league = league;
             t.name = name;
             t.option = new bool[Data.team_max];
             for (int k = 0; k < Data.team_max; k++)
                 t.option[k] = option[k];
-            for (int k = 0; k < spieltag.Length; k++)
-                t.spieltag[k] = spieltag[k];
-            t.woche = woche;
+            for (int k = 0; k < day.Length; k++)
+                t.day[k] = day[k];
+            t.week = week;
             t.team = team;
-            t.zahl = zahl;
+            t.number = number;
             return t;
         }
     }
