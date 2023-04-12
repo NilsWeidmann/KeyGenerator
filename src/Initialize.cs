@@ -28,6 +28,7 @@ namespace Schluesselzahlen
             }
             catch (Exception ex)
             {
+                Data.notification.Append(ex.ToString());
                 MessageBox.Show("Es ist kein Backup vorhanden!");
                 caller.loadFromFile(Data.clubs, Data.group, Data.relations);
             }
@@ -51,7 +52,7 @@ namespace Schluesselzahlen
             List<Club> lv = Data.club.ToList();
             List<Club> lv_d = new List<Club>();
             foreach (Club v in lv)
-                if (v.team == null || v.team.Length == 0)
+                if (v.team == null || v.team.Count == 0)
                     lv_d.Add(v);
             foreach (Club v in lv_d)
                 lv.Remove(v);

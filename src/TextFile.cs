@@ -9,7 +9,7 @@ namespace Schluesselzahlen
     public class TextFile
     {
         public string sFilename;
-        private String error;
+        private readonly String error;
 
         public TextFile(string x)
         {
@@ -41,6 +41,7 @@ namespace Schluesselzahlen
             catch (Exception e)
             {
                 m.Add(error);
+                m.Add(e.ToString());
             }
             return sContent;
         }
@@ -56,6 +57,7 @@ namespace Schluesselzahlen
             catch (Exception e)
             {
                 m.Add(error);
+                m.Add(e.ToString());
             }
         }
 
@@ -70,6 +72,7 @@ namespace Schluesselzahlen
             catch (Exception e)
             {
                 m.Add(error);
+                m.Add(e.ToString());
             }
         }
 
@@ -101,6 +104,7 @@ namespace Schluesselzahlen
             catch (Exception e)
             {
                 m.Add(error);
+                m.Add(e.ToString());     
             }
             return sContent;
         }
@@ -143,6 +147,7 @@ namespace Schluesselzahlen
             catch (Exception e)
             {
                 m.Add(error);
+                m.Add(e.ToString());
             }
         }
     }

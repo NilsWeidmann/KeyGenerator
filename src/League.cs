@@ -5,13 +5,24 @@ using System.Text;
 
 namespace Schluesselzahlen
 {
-    public class League
+    public class League : IComparable
     {
         public String name;
         public Team[] team = new Team[Data.team_max];
         public int index;
         public int nr_of_teams = 0;
         public int field = 0;
+        public League() { 
+
+        }
+
+        public League(String name, int index) : this() 
+        {
+            this.name = name;
+            this.index = index;
+            nr_of_teams = Data.team_max;
+            field = Data.team_max;
+        }
 
         public void removeOptions(int number)
         {
@@ -57,6 +68,14 @@ namespace Schluesselzahlen
             l.team = new Team[Data.team_max];
             l.field = field;
             return l;
+        }
+
+        public int CompareTo(object obj)
+        {
+            if ((obj == null) || !obj.GetType().Equals(this.GetType()))
+                return 0;
+            else
+                return index - ((League)obj).index;
         }
     }  
 }

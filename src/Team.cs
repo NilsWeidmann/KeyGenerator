@@ -19,6 +19,13 @@ namespace Schluesselzahlen
         public char week = '-';
         public char[] day;
 
+        public Team(String name, Club club, String team) :this()
+        {
+            this.name = name;   
+            this.club = club;
+            this.team = team;   
+        }
+
         public Team()
         {
             option = new bool[Data.team_max];

@@ -144,6 +144,7 @@ namespace Schluesselzahlen
                     }
                     catch (Exception ex)
                     {
+                        Data.notification.Append(ex.ToString());
                         caller.loadFromFile(Data.clubs, Data.group, Data.relations);
                     }
                     prepareCaller();

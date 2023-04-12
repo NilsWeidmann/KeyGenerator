@@ -8,6 +8,11 @@ using System.Text;
 using System.Windows.Forms;
 using System.Collections;
 using System.Threading;
+using System.IO;
+using System.Xml;
+using HtmlAgilityPack;
+using System.Xml.Linq;
+using System.Text.RegularExpressions;
 
 namespace Schluesselzahlen
 {
@@ -98,8 +103,9 @@ namespace Schluesselzahlen
             comboBox1.SelectedIndex = -1;
             comboBox1.Text = "";
             comboBox1.Items.Clear();
-            for (int i = 0; i < Data.league.Length; i++)
-                comboBox1.Items.Add(Data.league[i].name);
+            if (Data.league != null)
+                for (int i = 0; i < Data.league.Length; i++)
+                    comboBox1.Items.Add(Data.league[i].name);
             comboBox2.Items.Clear();
             comboBox2.SelectedIndex = -1;
             comboBox2.Text = "";
@@ -107,8 +113,9 @@ namespace Schluesselzahlen
             comboBox3.SelectedIndex = -1;
             comboBox3.Text = "";
             comboBox3.Items.Clear();
-            for (int i = 0; i < Data.club.Length; i++)
-                comboBox3.Items.Add(Data.club[i].name);
+            if (Data.club != null)  
+                for (int i = 0; i < Data.club.Length; i++)
+                    comboBox3.Items.Add(Data.club[i].name);
             enableFields();
         }
 
@@ -119,7 +126,7 @@ namespace Schluesselzahlen
             Data.league = Data.getGroups(Data.club, sta);
             Data.getRelations(Data.league, bez);
             Data.allocateTeams(Data.club, Data.league);
-            Data.getSpielplan(Data.path);
+            Data.getSchedule(Data.path);
             if (Data.notification.Count > 0)
             {
                 button3.Enabled = false;
@@ -242,7 +249,7 @@ namespace Schluesselzahlen
                     comboBox7.SelectedIndex = verein.x;
                 if (comboBox8.Items.Count > verein.y)
                     comboBox8.SelectedIndex = verein.y;
-                for (int j = 0; j < verein.team.Length; j++)
+                for (int j = 0; j < verein.team.Count; j++)
                 {
                     String[] inhalt = new String[3];
                     inhalt[0] = verein.team[j].league.name;
@@ -416,7 +423,7 @@ namespace Schluesselzahlen
                 if (comboBox5.SelectedIndex == 0)
                     Data.club[comboBox3.SelectedIndex].b = 0;
                 else
-                    Data.club[comboBox3.SelectedIndex].b = Data.nm.getGegenlaeufig(Data.field[0], Data.field[0], comboBox5.SelectedIndex);
+                    Data.club[comboBox3.SelectedIndex].b = Data.nm.getOpposed(Data.field[0], Data.field[0], comboBox5.SelectedIndex);
                 comboBox6.SelectedIndex = Data.club[comboBox3.SelectedIndex].b;
             }
         }
@@ -429,7 +436,7 @@ namespace Schluesselzahlen
                 if (comboBox6.SelectedIndex == 0)
                     Data.club[comboBox3.SelectedIndex].a = 0;
                 else
-                    Data.club[comboBox3.SelectedIndex].a = Data.nm.getGegenlaeufig(Data.field[0], Data.field[0], comboBox6.SelectedIndex);
+                    Data.club[comboBox3.SelectedIndex].a = Data.nm.getOpposed(Data.field[0], Data.field[0], comboBox6.SelectedIndex);
                 comboBox5.SelectedIndex = Data.club[comboBox3.SelectedIndex].a;
             }
         }
@@ -442,7 +449,7 @@ namespace Schluesselzahlen
                 if (comboBox7.SelectedIndex == 0)
                     Data.club[comboBox3.SelectedIndex].y = 0;
                 else
-                    Data.club[comboBox3.SelectedIndex].y = Data.nm.getGegenlaeufig(Data.field[1], Data.field[1], comboBox7.SelectedIndex);
+                    Data.club[comboBox3.SelectedIndex].y = Data.nm.getOpposed(Data.field[1], Data.field[1], comboBox7.SelectedIndex);
                 comboBox8.SelectedIndex = Data.club[comboBox3.SelectedIndex].y;
             }
         }
@@ -455,7 +462,7 @@ namespace Schluesselzahlen
                 if (comboBox8.SelectedIndex == 0)
                     Data.club[comboBox3.SelectedIndex].x = 0;
                 else
-                    Data.club[comboBox3.SelectedIndex].x = Data.nm.getGegenlaeufig(Data.field[1], Data.field[1], comboBox8.SelectedIndex);
+                    Data.club[comboBox3.SelectedIndex].x = Data.nm.getOpposed(Data.field[1], Data.field[1], comboBox8.SelectedIndex);
                 comboBox7.SelectedIndex = Data.club[comboBox3.SelectedIndex].x;
             }
         }
@@ -546,7 +553,7 @@ namespace Schluesselzahlen
             }
             else
             {
-                Data.generiereSchluesselzahlen();
+                Data.generateKeys();
                 for (int i = 0; i < Data.notification.Count; i++)
                     MessageBox.Show(Data.notification[i]);
                 Data.notification.Clear();
@@ -584,8 +591,8 @@ namespace Schluesselzahlen
 
         private void button2_Click(object sender, EventArgs e)
         {
-            bool erfolg = loadFromFile(Data.clubs, Data.group, Data.relations);
-            if (erfolg)
+            bool success = loadFromFile(Data.clubs, Data.group, Data.relations);
+            if (success)
             {
                 this.Enabled = false;
                 DataInput d = new DataInput(this);
@@ -599,17 +606,17 @@ namespace Schluesselzahlen
             dataGridView1.Width = this.Width - 350;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+/*      private void button1_Click(object sender, EventArgs e)
         {
-            bool erfolg = loadFromFile(Data.clubs, Data.group, Data.relations);
-            if (erfolg)
+            bool success = loadFromFile(Data.clubs, Data.group, Data.relations);
+            if (success)
             {
                 this.Enabled = false;
                 ClickTT ctt = new ClickTT(Data.league, Data.club, Data.partnership, this);
                 ctt.Visible = true;
             }
         }
-
+*/
         private void Schluesselzahlen_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!(Data.club == null || Data.league == null))
@@ -631,7 +638,7 @@ namespace Schluesselzahlen
         {
             if (e.Button == MouseButtons.Left)
             {
-                if (radioButton2.Checked || comboBox3.SelectedIndex == -1 || e.RowIndex == -1 || e.RowIndex >= verein.team.Length)
+                if (radioButton2.Checked || comboBox3.SelectedIndex == -1 || e.RowIndex == -1 || e.RowIndex >= verein.team.Count)
                     return;
                 if (comboBox4.SelectedIndex >= 0)
                 {
@@ -678,6 +685,159 @@ namespace Schluesselzahlen
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private string replaceUmlauts(string input)
+        {
+            input = input.Replace("&#196;", "Ä");
+            input = input.Replace("&#228;", "ä");
+            input = input.Replace("&#214;", "Ö");
+            input = input.Replace("&#246;", "ö");
+            input = input.Replace("&#220;", "Ü");
+            input = input.Replace("&#252;", "ü");
+            input = input.Replace("&#223;", "ß");
+            return input;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Stream file = openFileDialog1.OpenFile();
+                HtmlAgilityPack.HtmlWeb web = new HtmlAgilityPack.HtmlWeb();
+                HtmlAgilityPack.HtmlDocument wishes = new HtmlAgilityPack.HtmlDocument();
+
+                Hashtable clubs = new Hashtable();
+                Hashtable leagues = new Hashtable();
+                bool isHeader = true;
+
+                try
+                {
+                    wishes.Load(file);
+                    // Regex clubNameAndID = new Regex("(\\w+\\s)+\\([0-9]{6}\\)");
+                    Regex clubIDPattern = new Regex(@"^[0-9]{6}$");
+                    HtmlNodeCollection divs = wishes.DocumentNode.SelectNodes("//div");
+                    
+                    Club currentClub = null;
+                    Team currentTeam = null;
+                    League currentLeague = null;
+
+                    foreach (HtmlNode div in divs)
+                    {
+                        IEnumerable<HtmlNode> ps = div.Descendants("p");
+                        isHeader = true;
+
+                        foreach (HtmlNode p in ps)
+                        {
+                            string[] lines = p.InnerHtml.Split(new string[] { "<br>", "<br/>", "<b>", "</b>" }, StringSplitOptions.RemoveEmptyEntries);
+
+                            foreach(string line in lines)
+                            {
+                                string parsedLine = replaceUmlauts(line);
+
+                                // Header vorbei?
+                                if (parsedLine.Equals("Terminwünsche"))
+                                    isHeader = false;
+
+                                if (isHeader)
+                                {
+                                    foreach (string ageGroup in Data.ageGroups)
+                                    {
+                                        if (parsedLine.StartsWith(ageGroup))
+                                        { 
+                                            string leagueName = parsedLine.TrimEnd(' ');
+                                            if (currentLeague != null && currentLeague.name.Equals(leagueName))
+                                                break;
+                                            else
+                                            {
+                                                currentLeague = new League(leagueName, leagues.Count);
+                                                leagues.Add(leagues.Count, currentLeague);
+                                                currentTeam = null;
+                                            }
+                                        }
+                                        
+                                    }
+                                    continue;
+                                }
+
+                                // Neuer Verein
+                                string[] clubNameAndID = parsedLine.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+                                if (clubNameAndID.Length == 2)
+                                {
+                                    if (clubIDPattern.IsMatch(clubNameAndID[1])) {
+
+                                        int clubID = Util.toInt(clubNameAndID[1]);
+                                        string clubName = clubNameAndID[0].TrimEnd(' ');
+
+                                        if (clubs.ContainsKey(clubID))
+                                            currentClub = (Club)clubs[clubID];
+                                        else
+                                        {
+                                            currentClub = new Club(clubName, clubID, clubs.Count);
+                                            clubs.Add(clubID, currentClub); 
+                                        }
+                                        currentTeam = null;
+                                    }
+                                }
+                                // Neue Mannschaft
+                                foreach (string ageGroup in Data.ageGroups)
+                                {
+                                    if (parsedLine.StartsWith(ageGroup))
+                                    {
+
+                                        string team = parsedLine.Replace(ageGroup, "").Split(new char[] { ' ' }, StringSplitOptions.None)[0];
+
+                                        if (!Util.isRomanNumber(team))
+                                            team = "I";
+                                        bool found = false;
+                                        foreach (Team t in currentClub.team)
+                                            if (t.name.Equals(ageGroup) && t.team.Equals(team)) {
+                                                currentTeam = t;
+                                                found = true;
+                                                break;
+                                            }
+
+                                        if (!found)
+                                        {
+                                            currentTeam = new Team(ageGroup, currentClub, team);
+                                            currentClub.team.Add(currentTeam);
+                                        }
+                                    }
+                                }
+                                if (parsedLine.StartsWith("Spielwoche"))
+                                {
+                                    currentTeam.week = parsedLine.ToCharArray()[11];
+                                }
+                            }
+                        }
+                    }
+
+                    List<Club> cl = new List<Club>();
+                    foreach (Club c in clubs.Values) {
+                        cl.Add(c);
+                    }
+                    cl.Sort();
+                    Data.club = cl.ToArray();
+
+                    List<League> ll = new List<League>();
+                    foreach (League l in leagues.Values)
+                    {
+                        ll.Add(l);
+                    }
+                    ll.Sort();
+                    Data.league = ll.ToArray();
+                    initUI();
+
+                }
+
+                catch (Exception ex)
+                {
+                    Data.notification.Append(ex.ToString());
+                    MessageBox.Show("Beim Dateninport ist ein Fehler aufgetreten. Bitte den Link überprüfen!");
+                    this.Enabled = true;
+                    return;
+                }
+            }
         }
     }
 }

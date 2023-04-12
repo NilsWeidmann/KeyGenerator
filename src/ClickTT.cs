@@ -16,7 +16,7 @@ namespace Schluesselzahlen
         List<League> ll;
         List<Club> lv;
         List<Partnership> lp;
-        Schluesselzahlen caller;
+        readonly Schluesselzahlen caller;
         
         public ClickTT(League[] l, Club[] v, List<Partnership> p, Schluesselzahlen caller)
         {
@@ -51,16 +51,16 @@ namespace Schluesselzahlen
             dataGridView3.Rows.Clear();
         }
 
-        private void webImportStaffeln()
+        private void webImportGroups()
         {
             this.Enabled = false;
             HtmlAgilityPack.HtmlWeb web = new HtmlAgilityPack.HtmlWeb();
-            HtmlAgilityPack.HtmlDocument staffeln = null;
-            HtmlAgilityPack.HtmlDocument teams = null;
-            string altersklasse = "";
-            string spielklasse = "";
+            HtmlAgilityPack.HtmlDocument groups;
+            HtmlAgilityPack.HtmlDocument teams;
+            string ageGroup = "";
+            string division;
             int index_l = ll.Count;
-            int index_t = 0;
+            int index_t;
 
             try
             {
@@ -68,24 +68,26 @@ namespace Schluesselzahlen
                 string protocol = textBox1.Text.Split(seperators, StringSplitOptions.RemoveEmptyEntries)[0];
                 string domain = textBox1.Text.Split(seperators, StringSplitOptions.RemoveEmptyEntries)[1];
                 HtmlNodeCollection tables = null;
-                HtmlNode staffel_table = null;
+                HtmlNode group_table = null;
                 HtmlNode team_table = null;
 
-                staffeln = web.Load(textBox1.Text);
-                tables = staffeln.DocumentNode.SelectNodes("//table");
+                groups = web.Load(textBox1.Text);
+                tables = groups.DocumentNode.SelectNodes("//table");
                 foreach (HtmlNode tab in tables)
                     if (tab.GetAttributeValue("class", "").Equals("matrix"))
-                        staffel_table = tab;
-                foreach (HtmlNode node_s in staffel_table.Descendants())
+                        group_table = tab;
+                foreach (HtmlNode node_s in group_table.Descendants())
                 {
                     if (node_s.Name.Equals("h2"))
-                        altersklasse = Data.clear(node_s.InnerText);
+                        ageGroup = Data.clear(node_s.InnerText);
                     if (node_s.Name.Equals("a") && !node_s.ParentNode.GetAttributeValue("class", "").Equals("matrix-relegation-more"))
                     {
-                        spielklasse = Data.clear(node_s.InnerText);
-                        League l = new League();
-                        l.name = altersklasse + " " + spielklasse;
-                        l.index = index_l++;
+                        division = Data.clear(node_s.InnerText);
+                        League l = new League
+                        {
+                            name = ageGroup + " " + division,
+                            index = index_l++
+                        };
                         index_t = 0;
                         List<Team> lt = new List<Team>();
 
@@ -119,13 +121,15 @@ namespace Schluesselzahlen
                                     t.week = '-';
                                     t.index = index_t++;
                                     for (int i = 0; i < lv.Count; i++)
-                                        if (Data.checkVerein(t, lv.ElementAt(i)))
+                                        if (Data.checkClub(t, lv.ElementAt(i)))
                                             t.club = lv.ElementAt(i);
                                     if (t.club == null)
                                     {
-                                        t.club = new Club();
-                                        t.club.name = t.name;
-                                        t.club.index = -1;
+                                        t.club = new Club
+                                        {
+                                            name = t.name,
+                                            index = -1
+                                        };
                                         t.week = '-';
                                     }
                                     lt.Add(t);
@@ -142,6 +146,7 @@ namespace Schluesselzahlen
             }
             catch (Exception ex)
             {
+                Data.notification.Append(ex.ToString());
                 MessageBox.Show("Beim Dateninport ist ein Fehler aufgetreten. Bitte den Link überprüfen!");
                 this.Enabled = true;
                 return;
@@ -151,18 +156,18 @@ namespace Schluesselzahlen
         private void webImportVereine()
         {
             HtmlAgilityPack.HtmlWeb web = new HtmlAgilityPack.HtmlWeb();
-            HtmlAgilityPack.HtmlDocument vereine = null;
+            HtmlAgilityPack.HtmlDocument clubs;
 
             try
             {
-                vereine = web.Load(textBox2.Text);
+                clubs = web.Load(textBox2.Text);
                 HtmlNode club_table = null;
 
                 string[] seperators = { "/" };
                 string domain = textBox2.Text.Split(seperators, StringSplitOptions.RemoveEmptyEntries)[1];
                 int index = lv.Count;
 
-                HtmlNodeCollection tables = vereine.DocumentNode.SelectNodes("//table");
+                HtmlNodeCollection tables = clubs.DocumentNode.SelectNodes("//table");
 
                 foreach (HtmlNode tab in tables)
                     if (tab.Attributes["class"].Value.ToString().Equals("result-set"))
@@ -171,9 +176,10 @@ namespace Schluesselzahlen
                 {
                     if (link.Name.Equals("a"))
                     {
-                        Club verein = new Club();
-                        verein.name = Data.clear(link.InnerText);
-                        verein.index = index++;
+                        Club verein = new Club {
+                            name = Data.clear(link.InnerText),
+                            index = index++
+                        };
                         lv.Add(verein);
                         dataGridView2.Rows.Add(verein.name);
                     }
@@ -181,6 +187,7 @@ namespace Schluesselzahlen
             }
             catch (Exception ex)
             {
+                Data.notification.Append(ex.ToString());
                 MessageBox.Show("Beim Dateninport ist ein Fehler aufgetreten. Bitte den Link überprüfen!");
                 return;
             }
@@ -202,7 +209,7 @@ namespace Schluesselzahlen
             ll = new List<League>();
             dataGridView1.Rows.Clear();
             dataGridView3.Rows.Clear();
-            webImportStaffeln();
+            webImportGroups();
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -284,7 +291,7 @@ namespace Schluesselzahlen
 
         private void button4_Click(object sender, EventArgs e)
         {
-            webImportStaffeln();
+            webImportGroups();
         }
 
         private void button5_Click(object sender, EventArgs e)

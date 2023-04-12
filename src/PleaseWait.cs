@@ -11,7 +11,7 @@ namespace Schluesselzahlen
 {
     public partial class PleaseWait : Form
     {
-        Schluesselzahlen caller;
+        readonly Schluesselzahlen caller;
         League[] best_l;
         Club[] best_v;
 
@@ -53,7 +53,7 @@ namespace Schluesselzahlen
             Data.copyKeys();
             Data.createPriority();
             Data.copy(Data.league, best_l, Data.club, best_v, Data.partnership, Data.partnership);
-            Data.checkPlausibility(Data.league, this, Data.notification);
+            Data.checkPlausibility(Data.league, Data.notification);
             Data.checkFatal(Data.league, Data.notification);
             if (Data.notification.Count > 0)
             {

@@ -72,12 +72,12 @@ namespace Schluesselzahlen
             return parallel_1[fieldFrom - 1, fieldTo - 1, numberFrom - 1];
         }
 
-        public int getGegenlaeufig(int fieldFrom, int fieldTo, int numberFrom)
+        public int getOpposed(int fieldFrom, int fieldTo, int numberFrom)
         {
             return opposed_1[fieldFrom - 1, fieldTo - 1, numberFrom - 1];
         }
 
-        public int[] getAehnlich(int field, int number)
+        public int[] getSimilar(int field, int number)
         {
             return new int[] { similar_1[field - 1, number - 1], similar_2[field - 1, number - 1] };
         }

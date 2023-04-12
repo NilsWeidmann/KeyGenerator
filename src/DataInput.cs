@@ -269,7 +269,7 @@ namespace Schluesselzahlen
                     if (zahl > 0 && zahl <= Data.field[0])
                     {
                         club.ElementAt(e.RowIndex).a = zahl;
-                        club.ElementAt(e.RowIndex).b = Data.nm.getGegenlaeufig(Data.field[0], Data.field[0], zahl);
+                        club.ElementAt(e.RowIndex).b = Data.nm.getOpposed(Data.field[0], Data.field[0], zahl);
                     }
                     else
                     {
@@ -289,7 +289,7 @@ namespace Schluesselzahlen
                     if (zahl > 0 && zahl <= Data.field[0])
                     {
                         club.ElementAt(e.RowIndex).b = zahl;
-                        club.ElementAt(e.RowIndex).a = Data.nm.getGegenlaeufig(Data.field[0], Data.field[0], zahl);
+                        club.ElementAt(e.RowIndex).a = Data.nm.getOpposed(Data.field[0], Data.field[0], zahl);
                     }
                     else
                     {
@@ -309,7 +309,7 @@ namespace Schluesselzahlen
                     if (zahl > 0 && zahl <= Data.field[1])
                     {
                         club.ElementAt(e.RowIndex).x = zahl;
-                        club.ElementAt(e.RowIndex).y = Data.nm.getGegenlaeufig(Data.field[1], Data.field[1], zahl);
+                        club.ElementAt(e.RowIndex).y = Data.nm.getOpposed(Data.field[1], Data.field[1], zahl);
                     }
                     else
                     {
@@ -329,7 +329,7 @@ namespace Schluesselzahlen
                     if (zahl > 0 && zahl <= Data.field[1])
                     {
                         club.ElementAt(e.RowIndex).y = zahl;
-                        club.ElementAt(e.RowIndex).x = Data.nm.getGegenlaeufig(Data.field[1], Data.field[1], zahl);
+                        club.ElementAt(e.RowIndex).x = Data.nm.getOpposed(Data.field[1], Data.field[1], zahl);
                     }
                     else
                     {
