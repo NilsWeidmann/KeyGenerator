@@ -44,5 +44,17 @@ namespace Schluesselzahlen
 
             return true;
         }
+
+        public static String clear(String s)
+        {
+            s = s.Replace("Ä", "Ae");
+            s = s.Replace("Ö", "Oe");
+            s = s.Replace("Ü", "Ue");
+            s = s.Replace("ä", "ae");
+            s = s.Replace("ö", "oe");
+            s = s.Replace("ü", "ue");
+            s = s.Replace("ß", "ss");
+            return s;
+        }
     }
 }

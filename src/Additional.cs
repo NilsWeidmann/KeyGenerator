@@ -66,6 +66,7 @@ namespace Schluesselzahlen
             comboBox14.Items.Add("B");
             comboBox14.Items.Add("X");
             comboBox14.Items.Add("Y");
+
             switch (t.week)
             {
                 case '-': comboBox14.SelectedIndex = 0; break;
@@ -119,6 +120,11 @@ namespace Schluesselzahlen
         {
             caller.WindowState = this.WindowState;
             this.Focus();
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

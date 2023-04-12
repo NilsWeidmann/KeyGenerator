@@ -38,7 +38,7 @@ namespace Schluesselzahlen
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dataGridView1.Rows.Clear();
             foreach (Partnership p in Data.partnership)
-                if (p.a.index == v.index || p.b.index == v.index)
+                if (p.clubA.index == v.index || p.clubB.index == v.index)
                 {
                     p_akt = p;
                     dataGridView1.Rows.Add();
@@ -64,10 +64,10 @@ namespace Schluesselzahlen
             dgvcbc.Items.Add("Y");
             if (!dataGridView1.Rows[e.RowIndex].IsNewRow)
             {
-                if (p_akt.a.index == v.index)
-                    woche = p_akt.week_a;
+                if (p_akt.clubA.index == v.index)
+                    woche = p_akt.weekA;
                 else
-                    woche = p_akt.week_b;
+                    woche = p_akt.weekB;
                 switch (woche)
                 {
                     case 'A': dgvcbc.Value = dgvcbc.Items[0]; break;
@@ -87,10 +87,10 @@ namespace Schluesselzahlen
             for (int i = 0; i < Data.club.Length; i++)
                 dgvcbc.Items.Add(Data.club[i].name);
             if (!dataGridView1.Rows[e.RowIndex].IsNewRow)
-                if (p_akt.a.index == v.index)
-                    dgvcbc.Value = dgvcbc.Items[p_akt.b.index];
+                if (p_akt.clubA.index == v.index)
+                    dgvcbc.Value = dgvcbc.Items[p_akt.clubB.index];
                 else
-                    dgvcbc.Value = dgvcbc.Items[p_akt.a.index];
+                    dgvcbc.Value = dgvcbc.Items[p_akt.clubA.index];
             dataGridView1.Rows[e.RowIndex].Cells[3] = dgvcbc;
 
             // Woche Partnerverein
@@ -102,10 +102,10 @@ namespace Schluesselzahlen
             dgvcbc.Items.Add("Y");
             if (!dataGridView1.Rows[e.RowIndex].IsNewRow)
             {
-                if (p_akt.a.index == v.index)
-                    woche = p_akt.week_b;
+                if (p_akt.clubA.index == v.index)
+                    woche = p_akt.weekB;
                 else
-                    woche = p_akt.week_a;
+                    woche = p_akt.weekA;
                 switch (woche)
                 {
                     case 'A': dgvcbc.Value = dgvcbc.Items[0]; break;
@@ -128,7 +128,7 @@ namespace Schluesselzahlen
                     this.Visible = false;
                     List<Partnership> p_remove = new List<Partnership>();
                     foreach (Partnership p in Data.partnership)
-                        if (p.a.index == v.index || p.b.index == v.index)
+                        if (p.clubA.index == v.index || p.clubB.index == v.index)
                             p_remove.Add(p);
                     foreach (Partnership p in p_remove)
                         Data.partnership.Remove(p);

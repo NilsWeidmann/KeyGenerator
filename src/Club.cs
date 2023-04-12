@@ -7,6 +7,9 @@ namespace Schluesselzahlen
 {
     public class Club : IComparable
     {
+        public static TextFile file;
+        public static TextFile backup;
+
         public String name;
         public int id;
         public int index;
@@ -32,19 +35,19 @@ namespace Schluesselzahlen
         {
             prio = 0;
             for (int i = 0; i < team.Count; i++)
-                if (team[i].week != '-' && team[i].number == 0)
+                if (team[i].week != '-' && team[i].key == 0)
                     prio++;
             foreach (Partnership p in partnership)
-                if (p.a.index == index)
+                if (p.clubA.index == index)
                 {
-                    for (int i = 0; i < p.b.team.Count; i++)
-                        if (p.b.team[i].week != '-' && p.b.team[i].number == 0)
+                    for (int i = 0; i < p.clubB.team.Count; i++)
+                        if (p.clubB.team[i].week != '-' && p.clubB.team[i].key == 0)
                             prio++;
                 }
-                else if (p.b.index == index)
+                else if (p.clubB.index == index)
                 {
-                    for (int j = 0; j < p.a.team.Count; j++)
-                        if (p.a.team[j].week != '-' && p.a.team[j].number == 0)
+                    for (int j = 0; j < p.clubA.team.Count; j++)
+                        if (p.clubA.team[j].week != '-' && p.clubA.team[j].key == 0)
                             prio++;
                 }
         }

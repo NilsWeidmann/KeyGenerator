@@ -7,48 +7,48 @@ namespace Schluesselzahlen
 {
     public class Partnership
     {
-        public Club a;
-        public char week_a;
-        public Club b;
-        public char week_b;
+        public Club clubA;
+        public char weekA;
+        public Club clubB;
+        public char weekB;
 
-        public Partnership(Club a, string week_a, string name_b, string week_b, Club[] v_list)
+        public Partnership(Club clubA, string weekA, string nameB, string weekB, Club[] clubList)
         {
-            Club b = null;
-            for (int i = 0; i < v_list.Length; i++)
-                if (v_list[i].name == name_b)
-                    b = v_list[i];
-            if (a.index > b.index)
+            Club clubB = null;
+            for (int i = 0; i < clubList.Length; i++)
+                if (clubList[i].name == nameB)
+                    clubB = clubList[i];
+            if (clubA.index > clubB.index)
             {
-                this.a = a;
-                this.b = b;
-                this.week_a = week_a.ToCharArray()[0];
-                this.week_b = week_b.ToCharArray()[0];
+                this.clubA = clubA;
+                this.clubB = clubB;
+                this.weekA = weekA.ToCharArray()[0];
+                this.weekB = weekB.ToCharArray()[0];
             }
             else
             {
-                this.a = b;
-                this.b = a;
-                this.week_a = week_b.ToCharArray()[0];
-                this.week_b = week_a.ToCharArray()[0];
+                this.clubA = clubB;
+                this.clubB = clubA;
+                this.weekA = weekB.ToCharArray()[0];
+                this.weekB = weekA.ToCharArray()[0];
             }
         }
 
-        public Partnership(Club a, char woche_a, Club b, char woche_b)
+        public Partnership(Club clubA, char weekA, Club clubB, char weekB)
         {
-            if (a.index > b.index)
+            if (clubA.index > clubB.index)
             {
-                this.a = a;
-                this.week_a = woche_a;
-                this.b = b;
-                this.week_b = woche_b;
+                this.clubA = clubA;
+                this.weekA = weekA;
+                this.clubB = clubB;
+                this.weekB = weekB;
             }
             else
             {
-                this.a = b;
-                this.week_a = woche_b;
-                this.b = a;
-                this.week_b = woche_a;
+                this.clubA = clubB;
+                this.weekA = weekB;
+                this.clubB = clubA;
+                this.weekB = weekA;
             }
         }
     }

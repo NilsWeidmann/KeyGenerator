@@ -42,10 +42,10 @@ namespace Schluesselzahlen
                 for (int j=0; j<k[i].t.Length; j++)
                     for (int x=0; x<k.Length; x++)
                         for (int y=0; y<k[x].t.Length; y++)
-                            if (k[i].t[j].league == k[x].t[y].league && k[i].t[j].number == k[x].t[y].number)
+                            if (k[i].t[j].league == k[x].t[y].league && k[i].t[j].key == k[x].t[y].key)
                                 if (i != x)
                                 {
-                                    MessageBox.Show("Vergeben Sie die Zahl " + k[i].t[j].number + " in der " + k[i].t[j].league.name + " nur einmal!");
+                                    MessageBox.Show("Vergeben Sie die Zahl " + k[i].t[j].key + " in der " + k[i].t[j].league.name + " nur einmal!");
                                     return;
                                 }
                                 else if (j != y)
@@ -82,13 +82,13 @@ namespace Schluesselzahlen
                 if (box < k[i].t.Length)
                 {
                     combo[box].Items.Clear();
-                    combo[box].Text = k[i].t[box].number.ToString();
+                    combo[box].Text = k[i].t[box].key.ToString();
                     text[box].Text = k[i].wish.ToString();
                     for (int j = 0; j < 3; j++)
-                        if (k[i].number[j] != 0)
+                        if (k[i].key[j] != 0)
                         {
-                            combo[box].Items.Add(k[i].number[j]);
-                            if (k[i].t[box].number == k[i].number[j])
+                            combo[box].Items.Add(k[i].key[j]);
+                            if (k[i].t[box].key == k[i].key[j])
                                 combo[box].SelectedIndex = j;
                         }
                     combo[box].Enabled = true;
@@ -128,7 +128,7 @@ namespace Schluesselzahlen
                 if (combo[box] != sender && sender.SelectedIndex == combo[box].SelectedIndex)
                     combo[box].SelectedIndex = -1;
                 if (combo[box] == sender && combo[box].SelectedIndex != -1)
-                    k[i].t[box].number = int.Parse(combo[box].SelectedItem.ToString());
+                    k[i].t[box].key = int.Parse(combo[box].SelectedItem.ToString());
             }
         }
 
@@ -140,18 +140,18 @@ namespace Schluesselzahlen
                 case DialogResult.No:
                     try
                     {
-                        caller.loadFromFile(Data.clubs_b, Data.group_b, Data.relations_b);
+                        caller.loadFromFile(Club.backup, League.backup, Team.backup);
                     }
                     catch (Exception ex)
                     {
                         Data.notification.Append(ex.ToString());
-                        caller.loadFromFile(Data.clubs, Data.group, Data.relations);
+                        caller.loadFromFile(Club.file, League.file, Team.file);
                     }
                     prepareCaller();
                     break;
                 case DialogResult.Yes:
-                    Data.save(Data.league, Data.club, Data.partnership, Data.clubs, Data.group, Data.relations);
-                    caller.loadFromFile(Data.clubs, Data.group, Data.relations);
+                    Data.save(Data.league, Data.club, Data.partnership, Club.file, League.file, Team.file);
+                    caller.loadFromFile(Club.file, League.file, Team.file);
                     prepareCaller();
                     break;
                 case DialogResult.Cancel:

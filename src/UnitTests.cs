@@ -12,7 +12,7 @@ namespace Schluesselzahlen
             foreach (League league in l)
                 for (int i = 0; i < league.team.Length; i++)
                     for (int j = i + 1; j < league.team.Length; j++)
-                        if (league.team[i].number == league.team[j].number)
+                        if (league.team[i].key == league.team[j].key)
                             return false;
             return true;
         }
@@ -21,7 +21,7 @@ namespace Schluesselzahlen
         {
             foreach (League league in l)
                 for (int i = 0; i < league.team.Length; i++)
-                    if (league.team[i].number < 1 || league.team[i].number > league.field)
+                    if (league.team[i].key < 1 || league.team[i].key > league.field)
                         return false;
             return true;
         }

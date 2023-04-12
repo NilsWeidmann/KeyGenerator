@@ -9,32 +9,30 @@ using System.Windows.Forms;
 
 namespace Schluesselzahlen
 {
-    public partial class Staffel : Form
+    public partial class Group : Form
     {
         DataInput caller;
-        int min = 6;
-        int max = 14;
-        League liga;
-        bool neu;
+        League group;
+        bool isNew;
 
-        public Staffel(League l, bool neu, DataInput caller)
+        public Group(League group, bool isNew, DataInput caller)
         {
             InitializeComponent();
-            this.neu = neu;
-            this.liga = l;
+            this.isNew = isNew;
+            this.group = group;
             this.caller = caller;
 
-            textBox1.Text = l.name;
-            if (!neu)
-                if (min < l.nr_of_teams + l.nr_of_teams % 2)
-                    min = l.nr_of_teams + l.nr_of_teams % 2;
-            for (int i = min; i <= max; i += 2)
+            textBox1.Text = group.name;
+            if (!isNew)
+                if (Data.TEAM_MIN < group.nrOfTeams + group.nrOfTeams % 2)
+                    Data.TEAM_MIN = group.nrOfTeams + group.nrOfTeams % 2;
+            for (int i = Data.TEAM_MIN; i <= Data.TEAM_MAX; i += 2)
                 comboBox1.Items.Add(i);
-            if (neu)
+            if (isNew)
                 comboBox1.SelectedIndex = 0;
             else
                 for (int i = 0; i < comboBox1.Items.Count; i++)
-                    if (Util.toInt(comboBox1.Items[i].ToString()) == l.field)
+                    if (Util.toInt(comboBox1.Items[i].ToString()) == group.field)
                         comboBox1.SelectedIndex = i;
         }
 
@@ -47,18 +45,18 @@ namespace Schluesselzahlen
 
         private void button2_Click(object sender, EventArgs e)
         {
-            liga.name = Data.clear(textBox1.Text);
-            liga.field = Util.toInt(comboBox1.SelectedItem.ToString());
-            if (neu)
+            group.name = Util.clear(textBox1.Text);
+            group.field = Util.toInt(comboBox1.SelectedItem.ToString());
+            if (isNew)
             {
-                liga.team = new Team[max];
-                liga.index = caller.league.Count;
-                caller.league.Add(liga);
-                caller.comboBox1.Items.Add(liga.name);
-                caller.comboBox1.SelectedIndex = liga.index;
+                group.team = new Team[Data.TEAM_MAX];
+                group.index = caller.league.Count;
+                caller.league.Add(group);
+                caller.comboBox1.Items.Add(group.name);
+                caller.comboBox1.SelectedIndex = group.index;
             }
             else
-                caller.comboBox1.Items[caller.comboBox1.SelectedIndex] = liga.name;
+                caller.comboBox1.Items[caller.comboBox1.SelectedIndex] = group.name;
             this.Close();
             caller.enableGUIElements();
             caller.Enabled = true;
@@ -75,6 +73,11 @@ namespace Schluesselzahlen
         {
             caller.WindowState = this.WindowState;
             this.Focus();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

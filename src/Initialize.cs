@@ -24,13 +24,13 @@ namespace Schluesselzahlen
             this.Enabled = false;
             try
             {
-                caller.loadFromFile(Data.clubs_b, Data.group_b, Data.relations_b);
+                caller.loadFromFile(Club.backup, League.backup, Team.backup);
             }
             catch (Exception ex)
             {
                 Data.notification.Append(ex.ToString());
                 MessageBox.Show("Es ist kein Backup vorhanden!");
-                caller.loadFromFile(Data.clubs, Data.group, Data.relations);
+                caller.loadFromFile(Club.file, League.file, Team.file);
             }
             returnToCaller();
         }
@@ -73,7 +73,7 @@ namespace Schluesselzahlen
         {
             this.Enabled = false;
             for (int i = 0; i < Data.league.Length; i++)
-                for (int j = 0; j < Data.league[i].nr_of_teams; j++)
+                for (int j = 0; j < Data.league[i].nrOfTeams; j++)
                     Data.league[i].team[j].week = '-';
             returnToCaller();
         }
@@ -82,8 +82,8 @@ namespace Schluesselzahlen
         {
             this.Enabled = false;
             for (int i = 0; i < Data.league.Length; i++)
-                for (int j = 0; j < Data.league[i].nr_of_teams; j++)
-                    Data.league[i].team[j].number = 0;
+                for (int j = 0; j < Data.league[i].nrOfTeams; j++)
+                    Data.league[i].team[j].key = 0;
             returnToCaller();
         }
 
@@ -100,8 +100,8 @@ namespace Schluesselzahlen
         {
             this.Enabled = false;
             for (int i = 0; i < Data.league.Length; i++)
-                for (int j = 0; j < Data.league[i].nr_of_teams; j++)
-                    for (int k = 0; k < Data.team_max; k++)
+                for (int j = 0; j < Data.league[i].nrOfTeams; j++)
+                    for (int k = 0; k < Data.TEAM_MAX; k++)
                         Data.league[i].team[j].day[k] = '-';
             returnToCaller();
         }

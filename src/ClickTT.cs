@@ -79,10 +79,10 @@ namespace Schluesselzahlen
                 foreach (HtmlNode node_s in group_table.Descendants())
                 {
                     if (node_s.Name.Equals("h2"))
-                        ageGroup = Data.clear(node_s.InnerText);
+                        ageGroup = Util.clear(node_s.InnerText);
                     if (node_s.Name.Equals("a") && !node_s.ParentNode.GetAttributeValue("class", "").Equals("matrix-relegation-more"))
                     {
-                        division = Data.clear(node_s.InnerText);
+                        division = Util.clear(node_s.InnerText);
                         League l = new League
                         {
                             name = ageGroup + " " + division,
@@ -115,9 +115,9 @@ namespace Schluesselzahlen
                                     t.name = node_t.InnerText.Replace("\n", "");
                                     t.name = t.name.TrimStart(trimChars);
                                     t.name = t.name.TrimEnd(trimChars);
-                                    t.name = Data.clear(t.name);
+                                    t.name = Util.clear(t.name);
                                     t.league = l;
-                                    l.nr_of_teams++;
+                                    l.nrOfTeams++;
                                     t.week = '-';
                                     t.index = index_t++;
                                     for (int i = 0; i < lv.Count; i++)
@@ -137,7 +137,7 @@ namespace Schluesselzahlen
                         while (lt.Count < 14)
                             lt.Add(null);
                         l.team = lt.ToArray();
-                        l.field = l.nr_of_teams + l.nr_of_teams % 2;
+                        l.field = l.nrOfTeams + l.nrOfTeams % 2;
                         ll.Add(l);
                         dataGridView1.Rows.Add(l.name);
                     }
@@ -177,7 +177,7 @@ namespace Schluesselzahlen
                     if (link.Name.Equals("a"))
                     {
                         Club verein = new Club {
-                            name = Data.clear(link.InnerText),
+                            name = Util.clear(link.InnerText),
                             index = index++
                         };
                         lv.Add(verein);
@@ -247,7 +247,7 @@ namespace Schluesselzahlen
             dataGridView3.Rows.Clear();
             if (ll != null && e.RowIndex < ll.Count)
             {
-                for (int i = 0; i < ll[e.RowIndex].nr_of_teams; i++)
+                for (int i = 0; i < ll[e.RowIndex].nrOfTeams; i++)
                     dataGridView3.Rows.Add(ll[e.RowIndex].team[i].name);
             }
         }
@@ -255,8 +255,8 @@ namespace Schluesselzahlen
         private void button3_Click(object sender, EventArgs e)
         {
             button3.Enabled = false;
-            Data.save(ll.ToArray(), lv.ToArray(), lp, Data.clubs, Data.group, Data.relations);
-            caller.loadFromFile(Data.clubs, Data.group, Data.relations);
+            Data.save(ll.ToArray(), lv.ToArray(), lp, Club.file, League.file, Team.file);
+            caller.loadFromFile(Club.file, League.file, Team.file);
             button3.Enabled = true;
         }
 
@@ -271,8 +271,8 @@ namespace Schluesselzahlen
                         caller.Focus();
                         break;
                     case DialogResult.Yes:
-                        Data.save(ll.ToArray(), lv.ToArray(), lp, Data.clubs, Data.group, Data.relations);
-                        caller.loadFromFile(Data.clubs, Data.group, Data.relations);
+                        Data.save(ll.ToArray(), lv.ToArray(), lp, Club.file, League.file, Team.file);
+                        caller.loadFromFile(Club.file, League.file, Team.file);
                         caller.Enabled = true;
                         caller.Focus();
                         break;

@@ -42,7 +42,7 @@ namespace Schluesselzahlen
             int[] konflikte = { 0, -1 };
             best_l = new League[Data.league.Length];
             best_v = new Club[Data.club.Length];
-            Data.save(Data.league, Data.club, Data.partnership, Data.clubs_b, Data.group_b, Data.relations_b);
+            Data.save(Data.league, Data.club, Data.partnership, Club.backup, League.backup, Team.backup);
             if (Data.notification.Count > 0)
             {
                 MessageBox.Show(Data.notification[0]);

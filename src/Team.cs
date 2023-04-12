@@ -8,15 +8,18 @@ namespace Schluesselzahlen
 {
     public class Team
     {
+        public static TextFile file;
+        public static TextFile backup;
+
         public String name;
         public League league;
         public Club club;
         public String team;
-        public int number = 0;
+        public int key;
         public int index;
         public bool[] option;
         public int nrOfOptions;
-        public char week = '-';
+        public char week;
         public char[] day;
 
         public Team(String name, Club club, String team) :this()
@@ -28,30 +31,32 @@ namespace Schluesselzahlen
 
         public Team()
         {
-            option = new bool[Data.team_max];
-            day = new char[Data.team_max];
-            for (int i = 0; i < Data.team_max; i++)
+            key = 0;
+            week = '-';
+            option = new bool[Data.TEAM_MAX];
+            day = new char[Data.TEAM_MAX];
+            for (int i = 0; i < Data.TEAM_MAX; i++)
                 day[i] = '-';
         }
 
         public void setNrOfOptions()
         {
             nrOfOptions = 0;
-            for (int k = 0; k < Data.team_max; k++)
+            for (int k = 0; k < Data.TEAM_MAX; k++)
                 if (option[k])
                     nrOfOptions++;
         }
 
-        public void getNumber()
+        public void getKey()
         {
-            int number = 0;
-            for (int i = 0; i < Data.team_max; i++)
+            int key = 0;
+            for (int i = 0; i < Data.TEAM_MAX; i++)
                 if (option[i])
-                    if (number == 0)
-                        number = i + 1;
+                    if (key == 0)
+                        key = i + 1;
                     else
                         return;
-            this.number = number;
+            this.key = key;
         }
 
         public bool hasAdditional()
@@ -62,13 +67,13 @@ namespace Schluesselzahlen
             return false;
         }
 
-        public bool numberOK(int number)
+        public bool keyOK(int key)
         {
-            if (number == 0)
+            if (key == 0)
                 return true;
             for (int i = 0; i < day.Length; i++)
-                if (Data.schedule_1[league.field - 1, number - 1, i] == 'H' && day[i] == 'A'
-                ||  Data.schedule_1[league.field - 1, number - 1, i] == 'A' && day[i] == 'H')
+                if (Data.schedule_1[league.field - 1, key - 1, i] == 'H' && day[i] == 'A'
+                ||  Data.schedule_1[league.field - 1, key - 1, i] == 'A' && day[i] == 'H')
                     return false;
             return true;
         }
@@ -79,14 +84,14 @@ namespace Schluesselzahlen
             t.index = index;
             t.league = league;
             t.name = name;
-            t.option = new bool[Data.team_max];
-            for (int k = 0; k < Data.team_max; k++)
+            t.option = new bool[Data.TEAM_MAX];
+            for (int k = 0; k < Data.TEAM_MAX; k++)
                 t.option[k] = option[k];
             for (int k = 0; k < day.Length; k++)
                 t.day[k] = day[k];
             t.week = week;
             t.team = team;
-            t.number = number;
+            t.key = key;
             return t;
         }
     }

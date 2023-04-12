@@ -80,3 +80,4 @@ C:\Users\Nils Weidmann\Documents\GitHub\schluesselzahlen\src\bin\Debug\HtmlAgili
 C:\Users\Nils Weidmann\Documents\GitHub\schluesselzahlen\src\obj\x86\Debug\Schluesselzahlen.csproj.CopyComplete
 C:\Users\Nils Weidmann\Documents\GitHub\schluesselzahlen\src\obj\x86\Debug\WindowsApplication.exe
 C:\Users\Nils Weidmann\Documents\GitHub\schluesselzahlen\src\obj\x86\Debug\WindowsApplication.pdb
+C:\Users\Nils Weidmann\Documents\GitHub\schluesselzahlen\src\obj\x86\Debug\Schluesselzahlen.Group.resources

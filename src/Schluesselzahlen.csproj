@@ -88,7 +88,7 @@
     </Compile>
     <Compile Include="Conflict.cs" />
     <Compile Include="League.cs" />
-    <Compile Include="NumberMapper.cs" />
+    <Compile Include="KeyMapper.cs" />
     <Compile Include="Partner.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,11 +99,11 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="Staffel.cs">
+    <Compile Include="Group.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Staffel.Designer.cs">
-      <DependentUpon>Staffel.cs</DependentUpon>
+    <Compile Include="Group.Designer.cs">
+      <DependentUpon>Group.cs</DependentUpon>
     </Compile>
     <Compile Include="Team.cs" />
     <Compile Include="TextFile.cs" />
@@ -139,8 +139,8 @@
     <EmbeddedResource Include="Partner.resx">
       <DependentUpon>Partner.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Staffel.resx">
-      <DependentUpon>Staffel.cs</DependentUpon>
+    <EmbeddedResource Include="Group.resx">
+      <DependentUpon>Group.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Additional.resx">
       <DependentUpon>Additional.cs</DependentUpon>
