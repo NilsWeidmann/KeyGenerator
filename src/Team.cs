@@ -15,6 +15,7 @@ namespace Schluesselzahlen
         public League league;
         public Club club;
         public String team;
+        public String ageGroup;
         public int key;
         public int index;
         public bool[] option;
@@ -22,11 +23,12 @@ namespace Schluesselzahlen
         public char week;
         public char[] day;
 
-        public Team(String name, Club club, String team) :this()
+        public Team(String name, Club club, String team, String ageGroup) :this()
         {
             this.name = name;   
             this.club = club;
             this.team = team;   
+            this.ageGroup = ageGroup;  
         }
 
         public Team()

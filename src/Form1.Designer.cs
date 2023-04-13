@@ -530,7 +530,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(128, 35);
             this.button5.TabIndex = 80;
-            this.button5.Text = "Aus XML";
+            this.button5.Text = "Aus Click-TT";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 

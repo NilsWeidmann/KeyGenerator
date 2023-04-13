@@ -58,7 +58,7 @@ namespace Schluesselzahlen
         public void fillFields(ComboBox cb)
         {
             cb.Items.Clear();
-            for (int i = Data.TEAM_MIN; i<= Data.TEAM_MAX; i+=2)
+            for (int i = Data.TEAM_MIN; i <= Data.TEAM_MAX; i += 2)
                 cb.Items.Add(i.ToString());
             cb.SelectedIndex = -1;
         }
@@ -113,7 +113,7 @@ namespace Schluesselzahlen
             comboBox3.SelectedIndex = -1;
             comboBox3.Text = "";
             comboBox3.Items.Clear();
-            if (Data.club != null)  
+            if (Data.club != null)
                 for (int i = 0; i < Data.club.Length; i++)
                     comboBox3.Items.Add(Data.club[i].name);
             enableFields();
@@ -195,7 +195,7 @@ namespace Schluesselzahlen
             dataGridView1.Columns[1].ReadOnly = true;
             dataGridView1.Columns[2].ReadOnly = true;
             comboBox3.Enabled = radioButton1.Checked;
-            checkBox1.Enabled = comboBox4.Enabled = comboBox5.Enabled = comboBox6.Enabled = 
+            checkBox1.Enabled = comboBox4.Enabled = comboBox5.Enabled = comboBox6.Enabled =
             comboBox7.Enabled = comboBox8.Enabled = radioButton1.Checked && comboBox3.SelectedIndex != -1;
             if (!radioButton1.Checked || comboBox3.SelectedIndex == -1)
                 comboBox4.Text = comboBox5.Text = comboBox6.Text = comboBox7.Text = comboBox8.Text = "";
@@ -213,7 +213,7 @@ namespace Schluesselzahlen
                 }
                 else
                     comboBox3.Text = comboBox4.Text = comboBox5.Text = comboBox6.Text = comboBox7.Text = comboBox8.Text = "";
-                
+
             }
             else
             {
@@ -310,7 +310,7 @@ namespace Schluesselzahlen
                             inhalt[2] = Data.km.getParallel(Data.field[1], feld, team.club.y).ToString();
                     else
                         inhalt[2] = "";
-                    
+
                     dataGridView1.Rows.Add(inhalt);
                     if (!inhalt[2].Equals(""))
                         for (int i = 0; i < 3; i++)
@@ -486,7 +486,7 @@ namespace Schluesselzahlen
             else
                 comboBox6.SelectedIndex = 0;
             Data.field[0] = Util.toInt(comboBox10.SelectedItem.ToString());
-            checkWochen();
+            checkWeeks();
             if (comboBox10.SelectedIndex != -1 && comboBox11.SelectedIndex != -1 && League.file != null)
             {
                 button6.Enabled = true;
@@ -514,7 +514,7 @@ namespace Schluesselzahlen
             else
                 comboBox8.SelectedIndex = 0;
             Data.field[1] = Util.toInt(comboBox11.SelectedItem.ToString());
-            checkWochen();
+            checkWeeks();
             if (comboBox10.SelectedIndex != -1 && comboBox11.SelectedIndex != -1 && League.file != null)
             {
                 button6.Enabled = true;
@@ -523,7 +523,7 @@ namespace Schluesselzahlen
             }
         }
 
-        public static void checkWochen() 
+        public static void checkWeeks()
         {
             if (Data.club == null)
                 return;
@@ -606,17 +606,17 @@ namespace Schluesselzahlen
             dataGridView1.Width = this.Width - 350;
         }
 
-/*      private void button1_Click(object sender, EventArgs e)
-        {
-            bool success = loadFromFile(Data.clubs, Data.group, Data.relations);
-            if (success)
-            {
-                this.Enabled = false;
-                ClickTT ctt = new ClickTT(Data.league, Data.club, Data.partnership, this);
-                ctt.Visible = true;
-            }
-        }
-*/
+        /*      private void button1_Click(object sender, EventArgs e)
+                {
+                    bool success = loadFromFile(Data.clubs, Data.group, Data.relations);
+                    if (success)
+                    {
+                        this.Enabled = false;
+                        ClickTT ctt = new ClickTT(Data.league, Data.club, Data.partnership, this);
+                        ctt.Visible = true;
+                    }
+                }
+        */
         private void Schluesselzahlen_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!(Data.club == null || Data.league == null))
@@ -699,145 +699,262 @@ namespace Schluesselzahlen
             return input;
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private bool addWishes(Hashtable groups, Hashtable clubs)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+
+            Stream file = openFileDialog1.OpenFile();
+            HtmlWeb web = new HtmlAgilityPack.HtmlWeb();
+            HtmlAgilityPack.HtmlDocument wishes = new HtmlAgilityPack.HtmlDocument();
+
+            bool isHeader = true;
+            wishes.Load(file);
+            // Regex clubNameAndID = new Regex("(\\w+\\s)+\\([0-9]{6}\\)");
+            Regex clubIDPattern = new Regex(@"^[0-9]{6}$");
+            HtmlNodeCollection divs = wishes.DocumentNode.SelectNodes("//div");
+
+            if (divs == null)
+                return false;
+
+            Club currentClub = null;
+            Club dummyClub = new Club();
+            Team currentTeam = null;
+            Team dummyTeam = new Team();
+
+            foreach (HtmlNode div in divs)
             {
-                Stream file = openFileDialog1.OpenFile();
-                HtmlAgilityPack.HtmlWeb web = new HtmlAgilityPack.HtmlWeb();
-                HtmlAgilityPack.HtmlDocument wishes = new HtmlAgilityPack.HtmlDocument();
+                IEnumerable<HtmlNode> ps = div.Descendants("p");
+                isHeader = true;
 
-                Hashtable clubs = new Hashtable();
-                Hashtable leagues = new Hashtable();
-                bool isHeader = true;
+                if (ps == null)
+                    return false;
 
-                try
+                foreach (HtmlNode p in ps)
                 {
-                    wishes.Load(file);
-                    // Regex clubNameAndID = new Regex("(\\w+\\s)+\\([0-9]{6}\\)");
-                    Regex clubIDPattern = new Regex(@"^[0-9]{6}$");
-                    HtmlNodeCollection divs = wishes.DocumentNode.SelectNodes("//div");
-                    
-                    Club currentClub = null;
-                    Team currentTeam = null;
-                    League currentLeague = null;
+                    string[] lines = p.InnerHtml.Split(new string[] { "<br>", "<br/>", "<b>", "</b>" }, StringSplitOptions.RemoveEmptyEntries);
 
-                    foreach (HtmlNode div in divs)
+                    foreach (string line in lines)
                     {
-                        IEnumerable<HtmlNode> ps = div.Descendants("p");
-                        isHeader = true;
+                        string parsedLine = replaceUmlauts(line);
 
-                        foreach (HtmlNode p in ps)
+                        // Header vorbei?
+                        if (parsedLine.Equals("Terminwünsche"))
+                            isHeader = false;
+
+                        if (isHeader)
                         {
-                            string[] lines = p.InnerHtml.Split(new string[] { "<br>", "<br/>", "<b>", "</b>" }, StringSplitOptions.RemoveEmptyEntries);
+                            continue;
+                        }
 
-                            foreach(string line in lines)
+                        // Neuer Verein
+                        string[] clubNameAndID = parsedLine.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (clubNameAndID.Length == 2)
+                        {
+                            if (clubIDPattern.IsMatch(clubNameAndID[1]))
                             {
-                                string parsedLine = replaceUmlauts(line);
 
-                                // Header vorbei?
-                                if (parsedLine.Equals("Terminwünsche"))
-                                    isHeader = false;
+                                string clubID = clubNameAndID[1];
+                                string clubName = clubNameAndID[0].TrimEnd(' ');
 
-                                if (isHeader)
-                                {
-                                    foreach (string ageGroup in Data.ageGroups)
-                                    {
-                                        if (parsedLine.StartsWith(ageGroup))
-                                        { 
-                                            string leagueName = parsedLine.TrimEnd(' ');
-                                            if (currentLeague != null && currentLeague.name.Equals(leagueName))
-                                                break;
-                                            else
-                                            {
-                                                currentLeague = new League(leagueName, leagues.Count);
-                                                leagues.Add(leagues.Count, currentLeague);
-                                                currentTeam = null;
-                                            }
-                                        }
-                                        
-                                    }
-                                    continue;
-                                }
-
-                                // Neuer Verein
-                                string[] clubNameAndID = parsedLine.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
-                                if (clubNameAndID.Length == 2)
-                                {
-                                    if (clubIDPattern.IsMatch(clubNameAndID[1])) {
-
-                                        int clubID = Util.toInt(clubNameAndID[1]);
-                                        string clubName = clubNameAndID[0].TrimEnd(' ');
-
-                                        if (clubs.ContainsKey(clubID))
-                                            currentClub = (Club)clubs[clubID];
-                                        else
-                                        {
-                                            currentClub = new Club(clubName, clubID, clubs.Count);
-                                            clubs.Add(clubID, currentClub); 
-                                        }
-                                        currentTeam = null;
-                                    }
-                                }
-                                // Neue Mannschaft
-                                foreach (string ageGroup in Data.ageGroups)
-                                {
-                                    if (parsedLine.StartsWith(ageGroup))
-                                    {
-
-                                        string team = parsedLine.Replace(ageGroup, "").Split(new char[] { ' ' }, StringSplitOptions.None)[0];
-
-                                        if (!Util.isRomanNumber(team))
-                                            team = "I";
-                                        bool found = false;
-                                        foreach (Team t in currentClub.team)
-                                            if (t.name.Equals(ageGroup) && t.team.Equals(team)) {
-                                                currentTeam = t;
-                                                found = true;
-                                                break;
-                                            }
-
-                                        if (!found)
-                                        {
-                                            currentTeam = new Team(ageGroup, currentClub, team);
-                                            currentClub.team.Add(currentTeam);
-                                        }
-                                    }
-                                }
-                                if (parsedLine.StartsWith("Spielwoche"))
-                                {
-                                    currentTeam.week = parsedLine.ToCharArray()[11];
-                                }
+                                if (clubs.ContainsKey(clubID))
+                                    currentClub = (Club)clubs[clubID];
+                                else
+                                    currentClub = dummyClub;
+                                currentTeam = dummyTeam;
                             }
                         }
+                        // Neue Mannschaft
+                        foreach (string ageGroup in Data.ageGroups)
+                        {
+                            if (parsedLine.StartsWith(ageGroup))
+                            {
+                                string team;
+                                if (parsedLine.Equals(ageGroup))
+                                    team = "I";
+                                else
+                                    team = parsedLine.Replace(ageGroup, "").Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0];
+
+                                if (!Util.isRomanNumber(team))
+                                    team = "I";
+                                bool found = false;
+                                foreach (Team t in currentClub.team)
+                                    if (t.club.name.Equals(currentClub.name)
+                                        && t.ageGroup.Equals(ageGroup)
+                                        && t.team.Equals(team))
+                                    {
+                                        currentTeam = t;
+                                        found = true;
+                                        break;
+                                    }
+
+                                if (!found)
+                                    currentTeam = dummyTeam;
+                            }
+                        }
+                        if (parsedLine.StartsWith("Spielwoche"))
+                        {
+                            currentTeam.week = parsedLine.ToCharArray()[11];
+                        }
                     }
-
-                    List<Club> cl = new List<Club>();
-                    foreach (Club c in clubs.Values) {
-                        cl.Add(c);
-                    }
-                    cl.Sort();
-                    Data.club = cl.ToArray();
-
-                    List<League> ll = new List<League>();
-                    foreach (League l in leagues.Values)
-                    {
-                        ll.Add(l);
-                    }
-                    ll.Sort();
-                    Data.league = ll.ToArray();
-                    initUI();
-
-                }
-
-                catch (Exception ex)
-                {
-                    Data.notification.Append(ex.ToString());
-                    MessageBox.Show("Beim Dateninport ist ein Fehler aufgetreten. Bitte den Link überprüfen!");
-                    this.Enabled = true;
-                    return;
                 }
             }
+
+            return true;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            // Daten-Sammelstrukturen
+            Hashtable clubs = new Hashtable();
+            Hashtable groups = new Hashtable();
+
+            try
+            {
+                if (MessageBox.Show("Wählen Sie zunächst die exportierte CSV-Datei mit der Gruppeneinteilung aus!",
+                    "Gruppeneinteilung auswählen", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.Cancel)
+                    return;
+
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                    while (!parseGroupsAndClubs(groups, clubs))
+                    {
+                        if (MessageBox.Show("Fehler beim Lesen der Datei, versuchen Sie es noch einmal!",
+                            "Fehler beim Lesen der Datei", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.Cancel
+                            || openFileDialog1.ShowDialog() != DialogResult.OK)
+                            return;
+                    }
+                else
+                    return;
+
+                if (MessageBox.Show("Wählen Sie nun die HTML-Datei mit den Terminwünschen aus!",
+                    "Terminwünsche auswählen", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.Cancel)
+                    return;
+
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                    while (!addWishes(groups, clubs)) {
+                        if (MessageBox.Show("Fehler beim Lesen der Datei, versuchen Sie es noch einmal!",
+                            "Fehler beim Lesen der Datei", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.Cancel
+                            || openFileDialog1.ShowDialog() != DialogResult.OK)
+                            return;
+                    }
+                else
+                    return;
+            }
+            catch (Exception ex)
+            {
+                Data.notification.Append(ex.ToString());
+                MessageBox.Show("Beim Dateninport ist ein Fehler aufgetreten. Bitte die Dateien überprüfen!");
+                this.Enabled = true;
+                return;
+            }
+
+            // Alles scheint geklappt zu haben!
+            saveInData(groups, clubs);
+            initUI();
+            button3.Enabled = true;
+            button14.Enabled = true;
+            button15.Enabled = true;
+            radioButton1.Enabled = true;
+            radioButton2.Enabled = true;
+            radioButton1.Checked = true;
+            comboBox1.Enabled = comboBox2.Enabled = comboBox3.Enabled = true;
+            button6.Enabled = true;
+        }
+
+        private void saveInData(Hashtable groups, Hashtable clubs)
+        {
+            List<Club> cl = new List<Club>();
+            foreach (Club c in clubs.Values)
+            {
+                cl.Add(c);
+            }
+            cl.Sort();
+            Data.club = cl.ToArray();
+
+            List<League> lg = new List<League>();
+            foreach (League g in groups.Values)
+            {
+                // Feld ermitteln. Default: so klein wie möglich
+                g.field = g.nrOfTeams + (g.nrOfTeams % 2);
+                g.field = g.field < Data.TEAM_MIN ? Data.TEAM_MIN : g.field;
+                lg.Add(g);
+            }
+            lg.Sort();
+            Data.league = lg.ToArray();
+        }
+
+        private bool parseGroupsAndClubs(Hashtable groups, Hashtable clubs)
+        {
+            Club currentClub = null;
+            Team currentTeam = null;
+            League currentGroup = null;
+
+            TextFile groupFile = new TextFile(openFileDialog1.FileName);
+            List<String> notification = new List<string>();
+            String content = groupFile.ReadFile(false, notification);
+            String[] row = content.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (row.Length == 0)
+                return false;
+
+            String[] colNames = row[0].Split(new char[] { ';' }, StringSplitOptions.None);
+            Util.Index idx = new Util.Index(-1);         
+
+            // Indizes ermitteln
+            for (int i = 0; i < colNames.Length; i++)
+            {
+                switch (colNames[i])
+                {
+                    case "Region":
+                        idx.region = i; break;
+                    case "Gruppe":
+                        idx.group = i; break;
+                    case "VereinNr":
+                        idx.clubId = i; break;
+                    case "VereinName":
+                        idx.clubName = i; break;
+                    case "MannschaftAltersklasse":
+                        idx.ageGroup = i; break;
+                    case "MannschaftNr":
+                        idx.teamNo = i; break;
+                }
+            }
+
+            // Sichergehen, dass alle Indizes gefunden wurden
+            if (idx.region == -1 || idx.group == -1 || idx.clubId == -1 || idx.clubName == -1 || idx.ageGroup == -1 || idx.teamNo == -1)
+                return false;
+
+            // Daten auslesen
+            for (int i = 1; i < row.Length; i++)
+            {
+                String[] data = row[i].Split(new char[] { ';' }, StringSplitOptions.None);
+
+                // Verein ermitteln oder anlegen
+                if (clubs.ContainsKey(data[idx.clubId]))
+                    currentClub = (Club)clubs[data[idx.clubId]];
+                else
+                {
+                    currentClub = new Club(data[idx.clubName], Util.toInt(data[idx.clubId]), clubs.Count);
+                    clubs.Add(data[idx.clubId], currentClub);
+                }
+
+                // Gruppe ermitteln oder anlegen
+                String fullName = data[idx.group] + " (" + data[idx.region] + ")";
+                if (groups.ContainsKey(fullName))
+                    currentGroup = (League)groups[fullName];
+                else
+                {
+                    currentGroup = new League(fullName, groups.Count);
+                    groups.Add(fullName, currentGroup);
+                }
+
+                // Team anlegen und der Gruppe hinzufügen
+                currentTeam = new Team(currentClub.name + " " + Util.toRoman(data[idx.teamNo]), currentClub,
+                    Util.toRoman(data[idx.teamNo]), data[idx.ageGroup]);
+                currentTeam.league = currentGroup;
+                currentGroup.team[currentGroup.nrOfTeams++] = currentTeam;
+                currentClub.team.Add(currentTeam);
+            }
+
+            return true;
         }
     }
 }

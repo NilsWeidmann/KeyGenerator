@@ -28,8 +28,6 @@ namespace Schluesselzahlen
         {
             this.name = name;
             this.index = index;
-            nrOfTeams = Data.TEAM_MAX;
-            field = Data.TEAM_MAX;
         }
 
         public void removeOptions(int number)

@@ -21,14 +21,16 @@ namespace Schluesselzahlen
         public int prio;
         public bool capacity;
 
-        public Club() { 
+        public Club() {
+            this.team = new List<Team>();
         }
         
-        public Club(String name, int id, int index)
+        public Club(String name, int id, int index) : this() 
         {
             this.name = name;
             this.id = id;
-            this.team = new List<Team>();
+            this.index = index; 
+            
         }
 
         public void setPrio(List<Partnership> partnership)

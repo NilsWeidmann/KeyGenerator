@@ -27,7 +27,10 @@ namespace Schluesselzahlen
         public static KeyMapper km;
 
         public static string[] ageGroups = {
-            "Herren", "Damen", "Jungen 19", "Jungen 15", "Jungen 13", "Mädchen 19", "Mädchen 15", "Mädchen 13"
+            "Herren", "Damen", 
+            "Jungen 19", "Jungen 15", "Jungen 13", "Mädchen 19", "Mädchen 15", "Mädchen 13",
+            "Senioren 40", "Senioren 50", "Senioren 60", "Senioren 70",
+            "Seniorinnen 40", "Seniorinnen 50", "Seniorinnen 60", "Seniorinnen 70"
         };
 
         public static string[] weekdays = {
