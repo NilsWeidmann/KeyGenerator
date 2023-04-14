@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Schluesselzahlen
@@ -136,7 +131,7 @@ namespace Schluesselzahlen
                         if (dataGridView1.Rows[i].Cells[1].Value != null && dataGridView1.Rows[i].Cells[3].Value != null && dataGridView1.Rows[i].Cells[4].Value != null)
                             Data.partnership.Add(new Partnership(v, (string)dataGridView1.Rows[i].Cells[1].Value, (string)dataGridView1.Rows[i].Cells[3].Value,
                                                   (string)dataGridView1.Rows[i].Cells[4].Value, Data.club));
-                            
+
                     caller.Enabled = true;
                     caller.Focus();
                     break;
@@ -167,7 +162,7 @@ namespace Schluesselzahlen
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            for (int i=0; i<dataGridView1.Rows.Count; i++)
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 if (dataGridView1.Rows[i].Cells[0].Value.Equals(dataGridView1.Rows[i].Cells[3].Value))
                 {
                     dataGridView1.Rows[i].Cells[3].Value = null;

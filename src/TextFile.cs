@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 namespace Schluesselzahlen
@@ -104,7 +102,7 @@ namespace Schluesselzahlen
             catch (Exception e)
             {
                 m.Add(error);
-                m.Add(e.ToString());     
+                m.Add(e.ToString());
             }
             return sContent;
         }

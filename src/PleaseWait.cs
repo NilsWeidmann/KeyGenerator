@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Schluesselzahlen
@@ -65,7 +60,7 @@ namespace Schluesselzahlen
             DateTime end = DateTime.Now;
             DateTime report = DateTime.Now;
             TimeSpan span = end - start;
-            TimeSpan repspan = end -report;
+            TimeSpan repspan = end - report;
             int[] schluessel = new int[Data.club.Length * 2];
             backgroundWorker1.ReportProgress((int)(span.TotalSeconds * 100 / Data.runtime));
             while (span.TotalSeconds < Data.runtime && !Data.ht.Contains("") && konflikte[1] != 0)
@@ -105,6 +100,13 @@ namespace Schluesselzahlen
                 label2.Text += "0" + seconds;
             else
                 label2.Text += seconds;
+            string newText = Data.currentConflicts == 0 ? "-" : "" + Data.currentConflicts;
+            if (!newText.Equals(label4.Text))
+            {
+                label4.Text = newText;
+                label4.Refresh();
+            }
+
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -139,6 +141,21 @@ namespace Schluesselzahlen
         {
             caller.WindowState = this.WindowState;
             this.Focus();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

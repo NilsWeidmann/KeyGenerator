@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Schluesselzahlen
@@ -17,16 +11,17 @@ namespace Schluesselzahlen
 
         public Group(League group, bool isNew, DataInput caller)
         {
-            InitializeComponent();
             this.isNew = isNew;
             this.group = group;
             this.caller = caller;
+            InitializeComponent();
 
             textBox1.Text = group.name;
+            int minFieldSize = Data.TEAM_MIN;
             if (!isNew)
-                if (Data.TEAM_MIN < group.nrOfTeams + group.nrOfTeams % 2)
-                    Data.TEAM_MIN = group.nrOfTeams + group.nrOfTeams % 2;
-            for (int i = Data.TEAM_MIN; i <= Data.TEAM_MAX; i += 2)
+                minFieldSize = group.nrOfTeams < Data.TEAM_MIN ?
+                    Data.TEAM_MIN : group.nrOfTeams + group.nrOfTeams % 2;
+            for (int i = minFieldSize; i <= Data.TEAM_MAX; i += 2)
                 comboBox1.Items.Add(i);
             if (isNew)
                 comboBox1.SelectedIndex = 0;

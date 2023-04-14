@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Linq;
-using System.Text;
 
 namespace Schluesselzahlen
 {
@@ -23,12 +19,12 @@ namespace Schluesselzahlen
         public char week;
         public char[] day;
 
-        public Team(String name, Club club, String team, String ageGroup) :this()
+        public Team(String name, Club club, String team, String ageGroup) : this()
         {
-            this.name = name;   
+            this.name = name;
             this.club = club;
-            this.team = team;   
-            this.ageGroup = ageGroup;  
+            this.team = team;
+            this.ageGroup = ageGroup;
         }
 
         public Team()
@@ -75,7 +71,7 @@ namespace Schluesselzahlen
                 return true;
             for (int i = 0; i < day.Length; i++)
                 if (Data.schedule_1[league.field - 1, key - 1, i] == 'H' && day[i] == 'A'
-                ||  Data.schedule_1[league.field - 1, key - 1, i] == 'A' && day[i] == 'H')
+                || Data.schedule_1[league.field - 1, key - 1, i] == 'A' && day[i] == 'H')
                     return false;
             return true;
         }

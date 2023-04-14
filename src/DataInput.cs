@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Schluesselzahlen
@@ -41,7 +37,8 @@ namespace Schluesselzahlen
             dataGridView1.Columns.Clear();
             dataGridView1.Rows.Clear();
             string[] values = { "Verein", "A", "B", "X", "Y", "Kap." };
-            foreach (string s in values) {
+            foreach (string s in values)
+            {
                 dataGridView1.Columns.Add(s, s);
             }
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
@@ -141,7 +138,7 @@ namespace Schluesselzahlen
                     external[i].Enabled = false;
                     teamIdent[i].Enabled = true;
                     reset[i].Enabled = true;
-                    
+
                     if (club.Contains(league.ElementAt(comboBox1.SelectedIndex).team[i].club))
                     {
                         external[i].Checked = false;
@@ -226,7 +223,7 @@ namespace Schluesselzahlen
         private void checkBoxI_CheckedChanged(object sender, EventArgs e)
         {
             if (!automatic)
-                for (int i=0; i< Data.TEAM_MAX; i++)
+                for (int i = 0; i < Data.TEAM_MAX; i++)
                     if (sender.Equals(external[i]))
                     {
                         if (external[i].Checked)
@@ -370,7 +367,7 @@ namespace Schluesselzahlen
             club.RemoveAt(e.Row.Index - 1);
             for (int i = e.Row.Index - 1; i < club.Count; i++)
                 club.ElementAt(i).index--;
-            
+
         }
 
         private void assignGUIElements()

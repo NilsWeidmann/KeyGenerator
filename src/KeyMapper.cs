@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Schluesselzahlen
 {
@@ -13,8 +10,9 @@ namespace Schluesselzahlen
         private int[,,] parallel_1;
 
 
-        public KeyMapper(String path) {
-            
+        public KeyMapper(String path)
+        {
+
             // Gegenläufig
             TextFile opposed = new TextFile(path + @"\Gegenlaeufig.csv");
             int[,] fieldOpposed = getField(opposed, 5);
@@ -37,7 +35,7 @@ namespace Schluesselzahlen
             // Vereinsintern - multipel
             TextFile clubInternal = new TextFile(path + @"\Vereinsintern.csv");
             //int[,] feld_v = getField(vereinsintern, 5);
-            
+
             // Ähnliche Zahlen
             TextFile similar = new TextFile(path + @"\Aehnlich.csv");
             int[,] fieldSimilar = getField(similar, 4);

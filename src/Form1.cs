@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections;
-using System.Threading;
+using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
-using System.Xml;
-using HtmlAgilityPack;
-using System.Xml.Linq;
+using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Schluesselzahlen
 {
@@ -735,9 +729,10 @@ namespace Schluesselzahlen
                     foreach (string line in lines)
                     {
                         string parsedLine = replaceUmlauts(line);
+                        parsedLine = Util.clear(parsedLine);
 
                         // Header vorbei?
-                        if (parsedLine.Equals("Terminwünsche"))
+                        if (parsedLine.Equals("Terminwuensche"))
                             isHeader = false;
 
                         if (isHeader)
@@ -829,7 +824,8 @@ namespace Schluesselzahlen
                     return;
 
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                    while (!addWishes(groups, clubs)) {
+                    while (!addWishes(groups, clubs))
+                    {
                         if (MessageBox.Show("Fehler beim Lesen der Datei, versuchen Sie es noch einmal!",
                             "Fehler beim Lesen der Datei", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.Cancel
                             || openFileDialog1.ShowDialog() != DialogResult.OK)
@@ -890,13 +886,14 @@ namespace Schluesselzahlen
             TextFile groupFile = new TextFile(openFileDialog1.FileName);
             List<String> notification = new List<string>();
             String content = groupFile.ReadFile(false, notification);
+            content = Util.clear(content);
             String[] row = content.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (row.Length == 0)
                 return false;
 
             String[] colNames = row[0].Split(new char[] { ';' }, StringSplitOptions.None);
-            Util.Index idx = new Util.Index(-1);         
+            Util.Index idx = new Util.Index(-1);
 
             // Indizes ermitteln
             for (int i = 0; i < colNames.Length; i++)

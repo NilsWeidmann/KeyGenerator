@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Schluesselzahlen
@@ -38,10 +33,10 @@ namespace Schluesselzahlen
             konflikte[0] = -1;
             konflikte[1] = -1;
             int[] schluessel = new int[Data.club.Length * 2];
-            for (int i=0; i<k.Length; i++)
-                for (int j=0; j<k[i].t.Length; j++)
-                    for (int x=0; x<k.Length; x++)
-                        for (int y=0; y<k[x].t.Length; y++)
+            for (int i = 0; i < k.Length; i++)
+                for (int j = 0; j < k[i].t.Length; j++)
+                    for (int x = 0; x < k.Length; x++)
+                        for (int y = 0; y < k[x].t.Length; y++)
                             if (k[i].t[j].league == k[x].t[y].league && k[i].t[j].key == k[x].t[y].key)
                                 if (i != x)
                                 {

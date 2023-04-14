@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Schluesselzahlen
 {
@@ -18,13 +15,14 @@ namespace Schluesselzahlen
         public int field;
 
 
-        public League() {
+        public League()
+        {
             team = new Team[Data.TEAM_MAX];
             nrOfTeams = 0;
             field = 0;
         }
 
-        public League(String name, int index) : this() 
+        public League(String name, int index) : this()
         {
             this.name = name;
             this.index = index;
@@ -138,5 +136,5 @@ namespace Schluesselzahlen
             }
             return l;
         }
-    }  
+    }
 }

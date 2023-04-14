@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 
 namespace Schluesselzahlen
 {
@@ -52,7 +48,7 @@ namespace Schluesselzahlen
         public static bool isRomanNumber(String s)
         {
             string pattern = "IVX";
-            
+
             foreach (char c in s)
                 if (pattern.IndexOf(c) < 0)
                     return false;
