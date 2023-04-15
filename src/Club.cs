@@ -11,18 +11,17 @@ namespace Schluesselzahlen
         public String name;
         public int id;
         public int index;
-        public int a;
-        public int b;
-        public int x;
-        public int y;
+        public Dictionary<char, int> keys;
         public List<Team> team;
-        public int prioAB;
-        public int prioXY;
+        public int[] prio;
         public bool capacity;
 
         public Club()
         {
             this.team = new List<Team>();
+            this.keys = new Dictionary<char, int>();
+            keys['A'] = keys['B'] = keys['X'] = keys['Y'] = 0;
+            prio = new int[2];
         }
 
         public Club(String name, int id, int index) : this()
@@ -33,33 +32,18 @@ namespace Schluesselzahlen
 
         }
 
-        public void setPrio(List<Partnership> partnership)
+        public void setPrio()
         {
-            prioAB = prioXY = 0;
+            prio[0] = prio[1] = 0;
 
-            if (a == 0 && b == 0)
+            if (keys['A'] == 0 && keys['B'] == 0)
                 for (int i = 0; i < team.Count; i++)
                     if ((team[i].week == 'A' || team[i].week == 'B') && team[i].key == 0)
-                        prioAB++;
-            if (x == 0 && y == 0)
+                        prio[0]++;
+            if (keys['X'] == 0 && keys['Y'] == 0)
                 for (int i = 0; i < team.Count; i++)
                     if ((team[i].week == 'X' || team[i].week == 'Y') && team[i].key == 0)
-                        prioXY++;
-
-            // Partnerschaften der Einfachheit halber weglassen
-            /*foreach (Partnership p in partnership)
-                if (p.clubA.index == index)
-                {
-                    for (int i = 0; i < p.clubB.team.Count; i++)
-                        if (p.clubB.team[i].week != '-' && p.clubB.team[i].key == 0)
-                            prio++;
-                }
-                else if (p.clubB.index == index)
-                {
-                    for (int j = 0; j < p.clubA.team.Count; j++)
-                        if (p.clubA.team[j].week != '-' && p.clubA.team[j].key == 0)
-                            prio++;
-                }*/
+                        prio[1]++;
         }
 
         public Club clone()
@@ -68,10 +52,9 @@ namespace Schluesselzahlen
             v.name = name;
             v.id = id;
             v.index = index;
-            v.a = a;
-            v.b = b;
-            v.x = x;
-            v.y = y;
+            v.keys = new Dictionary<char, int>();
+            foreach (char c in keys.Keys)
+                v.keys[c] = keys[c];
             //Referenzen werden später gesetzt!
             v.team = new List<Team>();
             v.capacity = capacity;

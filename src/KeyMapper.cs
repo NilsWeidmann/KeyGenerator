@@ -1,60 +1,78 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace Schluesselzahlen
 {
     public class KeyMapper
     {
-        private int[,] similar_1;
-        private int[,] similar_2;
-        private int[,,] opposed_1;
-        private int[,,] parallel_1;
-
+        private Tuple<int,int>[,] similar;
+        private int[,,] opposed;
+        private int[,,] parallel;
+        private char[,,] schedule;
 
         public KeyMapper(String path)
         {
 
             // Gegenläufig
-            TextFile opposed = new TextFile(path + @"\Gegenlaeufig.csv");
-            int[,] fieldOpposed = getField(opposed, 5);
-            opposed_1 = new int[Data.TEAM_MAX, Data.TEAM_MAX, Data.TEAM_MAX];
+            TextFile fileOpposed = new TextFile(path + @"\Gegenlaeufig.csv");
+            int[,] fieldOpposed = getField(fileOpposed, 5);
+            opposed = new int[Data.TEAM_MAX, Data.TEAM_MAX, Data.TEAM_MAX];
             for (int i = 0; i < fieldOpposed.GetLength(0); i++)
                 if (fieldOpposed[i, 0] != 0 && fieldOpposed[i, 1] != 0 && fieldOpposed[i, 2] != 0)
-                    opposed_1[fieldOpposed[i, 0] - 1, fieldOpposed[i, 1] - 1, fieldOpposed[i, 2] - 1] = fieldOpposed[i, 3];
+                    opposed[fieldOpposed[i, 0] - 1, fieldOpposed[i, 1] - 1, fieldOpposed[i, 2] - 1] = fieldOpposed[i, 3];
 
             // Parallel
-            TextFile parallel = new TextFile(path + @"\Parallel.csv");
-            int[,] fieldParallel = getField(parallel, 4);
-            parallel_1 = new int[Data.TEAM_MAX, Data.TEAM_MAX, Data.TEAM_MAX];
+            TextFile fileParallel = new TextFile(path + @"\Parallel.csv");
+            int[,] fieldParallel = getField(fileParallel, 4);
+            parallel = new int[Data.TEAM_MAX, Data.TEAM_MAX, Data.TEAM_MAX];
             for (int i = 0; i < fieldParallel.GetLength(0); i++)
                 if (fieldParallel[i, 0] != 0 && fieldParallel[i, 1] != 0 && fieldParallel[i, 2] != 0)
-                    parallel_1[fieldParallel[i, 0] - 1, fieldParallel[i, 1] - 1, fieldParallel[i, 2] - 1] = fieldParallel[i, 3];
+                    parallel[fieldParallel[i, 0] - 1, fieldParallel[i, 1] - 1, fieldParallel[i, 2] - 1] = fieldParallel[i, 3];
             for (int i = Data.TEAM_MIN; i <= Data.TEAM_MAX; i++)
                 for (int j = 0; j < i; j++)
-                    parallel_1[i - 1, i - 1, j] = j + 1;
+                    parallel[i - 1, i - 1, j] = j + 1;
 
             // Vereinsintern - multipel
-            TextFile clubInternal = new TextFile(path + @"\Vereinsintern.csv");
+            //TextFile clubInternal = new TextFile(path + @"\Vereinsintern.csv");
             //int[,] feld_v = getField(vereinsintern, 5);
 
             // Ähnliche Zahlen
-            TextFile similar = new TextFile(path + @"\Aehnlich.csv");
-            int[,] fieldSimilar = getField(similar, 4);
-            similar_1 = new int[Data.TEAM_MAX, Data.TEAM_MAX];
-            similar_2 = new int[Data.TEAM_MAX, Data.TEAM_MAX];
+            TextFile fileSimilar = new TextFile(path + @"\Aehnlich.csv");
+            int[,] fieldSimilar = getField(fileSimilar, 4);
+            similar = new Tuple<int,int>[Data.TEAM_MAX, Data.TEAM_MAX];
             for (int i = 0; i < fieldSimilar.GetLength(0); i++)
+                similar[fieldSimilar[i, 0] - 1, fieldSimilar[i, 1] - 1] = Tuple.Create(fieldSimilar[i, 2], fieldSimilar[i, 3]);
+
+            // Spielplan
+            TextFile schedule = new TextFile(path + @"\Spielplan.csv");
+            this.schedule = getSchedule(schedule);
+            
+        }
+
+        private char[,,] getSchedule(TextFile file)
+        {
+            String content = file.ReadFile(false, Data.notification);
+            String[] help;
+            char[] split = { '\n' };
+
+            char[,,] schedule = new char[Data.TEAM_MAX, Data.TEAM_MAX, Data.TEAM_MAX];
+            String[] row = content.Split(split, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < row.Length; i++)
             {
-                similar_1[fieldSimilar[i, 0] - 1, fieldSimilar[i, 1] - 1] = fieldSimilar[i, 2];
-                similar_2[fieldSimilar[i, 0] - 1, fieldSimilar[i, 1] - 1] = fieldSimilar[i, 3];
+                help = row[i].Split(';');
+                for (int j = 2; j < help.Length; j++)
+                    schedule[Util.toInt(help[0]) - 1, Util.toInt(help[1]) - 1, j - 2] = help[j].ToCharArray()[0];
             }
+            return schedule;
         }
 
         private int[,] getField(TextFile file, int cols)
         {
             String content = file.ReadFile(true, Data.notification);
             String[] help;
-            String[] row;
             char[] split = { '\n' };
-            row = content.Split(split, StringSplitOptions.RemoveEmptyEntries);
+
+            String[] row = content.Split(split, StringSplitOptions.RemoveEmptyEntries);
             int[,] field = new int[row.Length, cols];
             for (int i = 0; i < row.Length; i++)
             {
@@ -65,19 +83,24 @@ namespace Schluesselzahlen
             return field;
         }
 
+        public char getDay(int field, int key, int weekNumber)
+        {
+            return schedule[field - 1, key - 1, weekNumber];
+        }
+
         public int getParallel(int fieldFrom, int fieldTo, int keyFrom)
         {
-            return parallel_1[fieldFrom - 1, fieldTo - 1, keyFrom - 1];
+            return parallel[fieldFrom - 1, fieldTo - 1, keyFrom - 1];
         }
 
         public int getOpposed(int fieldFrom, int fieldTo, int keyTo)
         {
-            return opposed_1[fieldFrom - 1, fieldTo - 1, keyTo - 1];
+            return opposed[fieldFrom - 1, fieldTo - 1, keyTo - 1];
         }
 
-        public int[] getSimilar(int field, int key)
+        public Tuple<int,int> getSimilar(int field, int key)
         {
-            return new int[] { similar_1[field - 1, key - 1], similar_2[field - 1, key - 1] };
+            return similar[field - 1, key - 1];
         }
     }
 }

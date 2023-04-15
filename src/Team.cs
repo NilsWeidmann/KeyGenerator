@@ -70,8 +70,8 @@ namespace Schluesselzahlen
             if (key == 0)
                 return true;
             for (int i = 0; i < day.Length; i++)
-                if (Data.schedule_1[league.field - 1, key - 1, i] == 'H' && day[i] == 'A'
-                || Data.schedule_1[league.field - 1, key - 1, i] == 'A' && day[i] == 'H')
+                if (Data.km.getDay(league.field, key, i) == 'H' && day[i] == 'A'
+                || Data.km.getDay(league.field, key, i) == 'A' && day[i] == 'H')
                     return false;
             return true;
         }

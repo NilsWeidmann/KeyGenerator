@@ -43,7 +43,7 @@ namespace Schluesselzahlen
             returnToCaller();
         }
 
-        private void loescheVereine()
+        private void deleteClubs()
         {
             List<Club> lv = Data.club.ToList();
             List<Club> lv_d = new List<Club>();
@@ -61,7 +61,7 @@ namespace Schluesselzahlen
         private void button3_Click(object sender, EventArgs e)
         {
             this.Enabled = false;
-            loescheVereine();
+            deleteClubs();
             returnToCaller();
         }
 
@@ -88,7 +88,8 @@ namespace Schluesselzahlen
             this.Enabled = false;
             this.Enabled = false;
             for (int i = 0; i < Data.club.Length; i++)
-                Data.club[i].a = Data.club[i].b = Data.club[i].x = Data.club[i].y = 0;
+                foreach (char c in Data.club[i].keys.Keys)
+                    Data.club[i].keys[c] = 0;
             returnToCaller();
         }
 

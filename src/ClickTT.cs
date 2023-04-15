@@ -9,21 +9,21 @@ namespace Schluesselzahlen
     public partial class ClickTT : Form
     {
         List<League> ll;
-        List<Club> lv;
+        List<Club> lc;
         List<Partnership> lp;
         readonly Schluesselzahlen caller;
 
-        public ClickTT(League[] l, Club[] v, List<Partnership> p, Schluesselzahlen caller)
+        public ClickTT(League[] l, Club[] c, List<Partnership> p, Schluesselzahlen caller)
         {
             InitializeComponent();
             this.caller = caller;
             init();
             ll = l.ToList();
-            foreach (League liga in ll)
-                dataGridView1.Rows.Add(liga.name);
-            lv = v.ToList();
-            foreach (Club verein in lv)
-                dataGridView2.Rows.Add(verein.name);
+            foreach (League group in ll)
+                dataGridView1.Rows.Add(group.name);
+            lc = c.ToList();
+            foreach (Club club in lc)
+                dataGridView2.Rows.Add(club.name);
             lp = p;
         }
 
@@ -115,9 +115,9 @@ namespace Schluesselzahlen
                                     l.nrOfTeams++;
                                     t.week = '-';
                                     t.index = index_t++;
-                                    for (int i = 0; i < lv.Count; i++)
-                                        if (Data.checkClub(t, lv.ElementAt(i)))
-                                            t.club = lv.ElementAt(i);
+                                    for (int i = 0; i < lc.Count; i++)
+                                        if (Data.checkClub(t, lc.ElementAt(i)))
+                                            t.club = lc.ElementAt(i);
                                     if (t.club == null)
                                     {
                                         t.club = new Club
@@ -148,7 +148,7 @@ namespace Schluesselzahlen
             }
         }
 
-        private void webImportVereine()
+        private void webImportClubs()
         {
             HtmlAgilityPack.HtmlWeb web = new HtmlAgilityPack.HtmlWeb();
             HtmlAgilityPack.HtmlDocument clubs;
@@ -160,7 +160,7 @@ namespace Schluesselzahlen
 
                 string[] seperators = { "/" };
                 string domain = textBox2.Text.Split(seperators, StringSplitOptions.RemoveEmptyEntries)[1];
-                int index = lv.Count;
+                int index = lc.Count;
 
                 HtmlNodeCollection tables = clubs.DocumentNode.SelectNodes("//table");
 
@@ -171,13 +171,13 @@ namespace Schluesselzahlen
                 {
                     if (link.Name.Equals("a"))
                     {
-                        Club verein = new Club
+                        Club club = new Club
                         {
                             name = Util.clear(link.InnerText),
                             index = index++
                         };
-                        lv.Add(verein);
-                        dataGridView2.Rows.Add(verein.name);
+                        lc.Add(club);
+                        dataGridView2.Rows.Add(club.name);
                     }
                 }
             }
@@ -191,13 +191,13 @@ namespace Schluesselzahlen
 
         private void button2_Click(object sender, EventArgs e)
         {
-            lv = new List<Club>();
+            lc = new List<Club>();
             lp = new List<Partnership>();
             dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridView2.Columns.Clear();
             dataGridView2.Columns.Add("Verein", "Verein");
             dataGridView2.Rows.Clear();
-            webImportVereine();
+            webImportClubs();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -251,7 +251,7 @@ namespace Schluesselzahlen
         private void button3_Click(object sender, EventArgs e)
         {
             button3.Enabled = false;
-            Data.save(ll.ToArray(), lv.ToArray(), lp, Club.file, League.file, Team.file);
+            Data.save(ll.ToArray(), lc.ToArray(), lp, Club.file, League.file, Team.file);
             caller.loadFromFile(Club.file, League.file, Team.file);
             button3.Enabled = true;
         }
@@ -267,7 +267,7 @@ namespace Schluesselzahlen
                         caller.Focus();
                         break;
                     case DialogResult.Yes:
-                        Data.save(ll.ToArray(), lv.ToArray(), lp, Club.file, League.file, Team.file);
+                        Data.save(ll.ToArray(), lc.ToArray(), lp, Club.file, League.file, Team.file);
                         caller.loadFromFile(Club.file, League.file, Team.file);
                         caller.Enabled = true;
                         caller.Focus();
@@ -292,7 +292,7 @@ namespace Schluesselzahlen
 
         private void button5_Click(object sender, EventArgs e)
         {
-            webImportVereine();
+            webImportClubs();
         }
     }
 }

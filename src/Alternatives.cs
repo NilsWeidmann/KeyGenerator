@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -14,11 +15,12 @@ namespace Schluesselzahlen
 
         public Alternatives(Conflict[] k, League[] l, Club[] v, Schluesselzahlen caller)
         {
-            InitializeComponent();
             this.k = k;
             this.l = l;
             this.v = v;
             this.caller = caller;
+            InitializeComponent();
+            
             comboBox1.Items.Clear();
             for (int j = 0; j < k.Length; j++)
                 comboBox1.Items.Add("Konflikt " + (j + 1));
@@ -123,7 +125,7 @@ namespace Schluesselzahlen
                 if (combo[box] != sender && sender.SelectedIndex == combo[box].SelectedIndex)
                     combo[box].SelectedIndex = -1;
                 if (combo[box] == sender && combo[box].SelectedIndex != -1)
-                    k[i].t[box].key = int.Parse(combo[box].SelectedItem.ToString());
+                    k[i].t[box].key = Util.toInt(combo[box].SelectedItem.ToString());
             }
         }
 
@@ -173,6 +175,30 @@ namespace Schluesselzahlen
         {
             caller.WindowState = this.WindowState;
             this.Focus();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (Conflict conflict in k)
+            {
+                List<int> keysToAssign = conflict.key.ToList();
+                List<Team> teamsToAssign = conflict.t.ToList();
+                
+                // Bereits gelöste Konflikte nicht zurückrollen
+                foreach (Team t in conflict.t)
+                    if (t.key != conflict.wish)
+                    {
+                        keysToAssign.Remove(t.key);
+                        teamsToAssign.Remove(t);
+                    }
+
+                // Rest zuweisen
+                foreach (Team t in teamsToAssign)
+                {
+                    t.key = keysToAssign.First();
+                    keysToAssign.Remove(keysToAssign.First());
+                }   
+            }
         }
     }
 }

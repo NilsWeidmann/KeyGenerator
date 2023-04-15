@@ -60,7 +60,7 @@ namespace Schluesselzahlen
                 Club v = clubArray[i];
                 values[0] = v.name;
 
-                int[] intValues = { v.a, v.b, v.x, v.y };
+                int[] intValues = new int[] { v.keys['A'], v.keys['B'], v.keys['X'], v.keys['Y'] };
                 for (int j = 1; j < 5; j++)
                     values[j] = intValues[j - 1].ToString() == "0" ? "" : intValues[j - 1].ToString();
 
@@ -261,84 +261,16 @@ namespace Schluesselzahlen
                     dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = club.ElementAt(e.RowIndex).name;
                     break;
                 case 1:
-                    if (zahl > 0 && zahl <= Data.field[0])
-                    {
-                        club.ElementAt(e.RowIndex).a = zahl;
-                        club.ElementAt(e.RowIndex).b = Data.km.getOpposed(Data.field[0], Data.field[0], zahl);
-                    }
-                    else
-                    {
-                        club.ElementAt(e.RowIndex).a = 0;
-                        club.ElementAt(e.RowIndex).b = 0;
-                    }
-                    if (club.ElementAt(e.RowIndex).a == 0)
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
-                    else
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = club.ElementAt(e.RowIndex).a.ToString();
-                    if (club.ElementAt(e.RowIndex).b == 0)
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value = "";
-                    else
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value = club.ElementAt(e.RowIndex).b.ToString();
+                    assignValue('A', 'B', zahl, Data.field[0], e.RowIndex, 1, 2);
                     break;
                 case 2:
-                    if (zahl > 0 && zahl <= Data.field[0])
-                    {
-                        club.ElementAt(e.RowIndex).b = zahl;
-                        club.ElementAt(e.RowIndex).a = Data.km.getOpposed(Data.field[0], Data.field[0], zahl);
-                    }
-                    else
-                    {
-                        club.ElementAt(e.RowIndex).a = 0;
-                        club.ElementAt(e.RowIndex).b = 0;
-                    }
-                    if (club.ElementAt(e.RowIndex).a == 0)
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value = "";
-                    else
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value = club.ElementAt(e.RowIndex).a.ToString();
-                    if (club.ElementAt(e.RowIndex).b == 0)
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
-                    else
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = club.ElementAt(e.RowIndex).b.ToString();
+                    assignValue('B', 'A', zahl, Data.field[0], e.RowIndex, 2, 1);
                     break;
                 case 3:
-                    if (zahl > 0 && zahl <= Data.field[1])
-                    {
-                        club.ElementAt(e.RowIndex).x = zahl;
-                        club.ElementAt(e.RowIndex).y = Data.km.getOpposed(Data.field[1], Data.field[1], zahl);
-                    }
-                    else
-                    {
-                        club.ElementAt(e.RowIndex).x = 0;
-                        club.ElementAt(e.RowIndex).y = 0;
-                    }
-                    if (club.ElementAt(e.RowIndex).x == 0)
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
-                    else
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = club.ElementAt(e.RowIndex).x.ToString();
-                    if (club.ElementAt(e.RowIndex).y == 0)
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value = "";
-                    else
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value = club.ElementAt(e.RowIndex).y.ToString();
+                    assignValue('X', 'Y', zahl, Data.field[1], e.RowIndex, 3, 4);
                     break;
                 case 4:
-                    if (zahl > 0 && zahl <= Data.field[1])
-                    {
-                        club.ElementAt(e.RowIndex).y = zahl;
-                        club.ElementAt(e.RowIndex).x = Data.km.getOpposed(Data.field[1], Data.field[1], zahl);
-                    }
-                    else
-                    {
-                        club.ElementAt(e.RowIndex).y = 0;
-                        club.ElementAt(e.RowIndex).x = 0;
-                    }
-                    if (club.ElementAt(e.RowIndex).x == 0)
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value = "";
-                    else
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value = club.ElementAt(e.RowIndex).x.ToString();
-                    if (club.ElementAt(e.RowIndex).y == 0)
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
-                    else
-                        dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = club.ElementAt(e.RowIndex).y.ToString();
+                    assignValue('Y', 'X', zahl, Data.field[1], e.RowIndex, 4, 3);
                     break;
                 case 5:
                     if (value.Equals(""))
@@ -348,6 +280,28 @@ namespace Schluesselzahlen
                     dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = club.ElementAt(e.RowIndex).capacity ? "X" : "";
                     break;
             }
+        }
+
+        private void assignValue(char week1, char week2, int key, int field, int rowIdx, int colIdx1, int colIdx2)
+        {
+            if (key > 0 && key <= field)
+            {
+                club.ElementAt(rowIdx).keys[week1] = key;
+                club.ElementAt(rowIdx).keys[week2] = Data.km.getOpposed(field, field, key);
+            }
+            else
+            {
+                club.ElementAt(rowIdx).keys[week1] = 0;
+                club.ElementAt(rowIdx).keys[week2] = 0;
+            }
+            if (club.ElementAt(rowIdx).keys[week1] == 0)
+                dataGridView1.Rows[rowIdx].Cells[colIdx1].Value = "";
+            else
+                dataGridView1.Rows[rowIdx].Cells[colIdx1].Value = club.ElementAt(rowIdx).keys[week1].ToString();
+            if (club.ElementAt(rowIdx).keys[week2] == 0)
+                dataGridView1.Rows[rowIdx].Cells[colIdx2].Value = "";
+            else
+                dataGridView1.Rows[rowIdx].Cells[colIdx2].Value = club.ElementAt(rowIdx).keys[week2].ToString();
         }
 
         private void dataGridView1_UserAddedRow(object sender, DataGridViewRowEventArgs e)

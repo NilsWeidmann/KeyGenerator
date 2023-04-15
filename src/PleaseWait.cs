@@ -34,7 +34,7 @@ namespace Schluesselzahlen
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            int[] konflikte = { 0, -1 };
+            int[] conflicts = { 0, -1 };
             best_l = new League[Data.league.Length];
             best_v = new Club[Data.club.Length];
             Data.save(Data.league, Data.club, Data.partnership, Club.backup, League.backup, Team.backup);
@@ -61,9 +61,9 @@ namespace Schluesselzahlen
             DateTime report = DateTime.Now;
             TimeSpan span = end - start;
             TimeSpan repspan = end - report;
-            int[] schluessel = new int[Data.club.Length * 2];
+            int[] keys = new int[Data.club.Length * 2];
             backgroundWorker1.ReportProgress((int)(span.TotalSeconds * 100 / Data.runtime));
-            while (span.TotalSeconds < Data.runtime && !Data.ht.Contains("") && konflikte[1] != 0)
+            while (span.TotalSeconds < Data.runtime && !Data.ht.Contains("") && conflicts[1] != 0)
             {
                 if (backgroundWorker1.CancellationPending)
                 {
@@ -75,13 +75,13 @@ namespace Schluesselzahlen
                     report = DateTime.Now;
                     backgroundWorker1.ReportProgress((int)(span.TotalSeconds * 100 / Data.runtime));
                 }
-                Data.findSolution(0, Data.league, best_l, Data.club, best_v, konflikte, schluessel);
+                Data.findSolution(0, Data.league, best_l, Data.club, best_v, conflicts, keys);
                 end = DateTime.Now;
                 span = end - start;
                 repspan = end - report;
             }
             backgroundWorker1.ReportProgress(0);
-            if (konflikte[1] == -1)
+            if (conflicts[1] == -1)
                 Data.notification.Add("Es konnten keine Schlüsselzahlen ermittelt werden!");
         }
 
