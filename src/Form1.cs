@@ -75,8 +75,10 @@ namespace Schluesselzahlen
             comboBox4.Enabled = comboBox1.SelectedIndex != -1;
         }
 
-        public void showResults(League[] best_l, Club[] best_v, bool cancelled)
+        public void showResults(League[] best_l, Club[] best_v, int conflicts, bool cancelled)
         {
+            if (conflicts == -1)
+                Data.notification.Add("Es konnten keine Schlüsselzahlen ermittelt werden!");
             if (Data.notification.Count > 0)
             {
                 MessageBox.Show(Data.notification[0]);

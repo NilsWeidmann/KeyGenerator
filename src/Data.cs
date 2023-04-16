@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Windows.Forms;
+using static System.Windows.Forms.AxHost;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Schluesselzahlen
 {
@@ -510,68 +513,94 @@ namespace Schluesselzahlen
             copy(l, best_l, club, best_club, Data.partnership, Data.partnership);
         }
 
-        public static void findSolution(int p, League[] l, League[] best_l, Club[] c, Club[] best_c, int[] conflicts, int[] key)
+        public static void findSolution(League[] l, League[] best_l, Club[] c, Club[] best_c, int[] conflicts, int[] key, BackgroundWorker bw)
         {
             string value;
+            int p = 0;
+            Club club;
+            int idx;
+            char week1, week2;
+            DateTime start = DateTime.Now;
+            int progress = 0;
 
-            if (p < c.Length * 2)
+            while (!ht.Contains(""))
             {
-                Club club = c[prio[p].Item1];
-                int idx = prio[p].Item2 ? 0 : 1;
-                char week1 = prio[p].Item2 ? 'A' : 'X';
-                char week2 = prio[p].Item2 ? 'B' : 'Y';
-
-                if (club.prio[idx] == 0)
+                if (p == c.Length * 2)
                 {
                     setAdditional(l, best_l, c, best_c, conflicts, key);
-                    int[] keyCopy = (int[])key.Clone();
-                    safeAdd(p, keyCopy, prio);
-                    return;
-                }
-
-                do
-                {
-                    rand[idx] %= field[idx];
-                    key[p] = ++rand[idx];
-                    value = getValue(key);
-                } while (ht.Contains(value));
-
-                club.keys[week1] = key[p];
-                club.keys[week2] = km.getOpposed(field[idx], field[idx], key[p]);
-                foreach (Team team in club.team)
-                    if (team == null)
-                        continue;
-                    else if (team.week == week1)
-                        team.key = km.getParallel(field[idx], team.league.field, club.keys[week1]);
-                    else if (team.week == week2)
-                        team.key = km.getParallel(field[idx], team.league.field, club.keys[week2]);
-
-                if (checkFatal(l, conflicts) != null || !partnerOK(c, prio[p].Item1, p, prio[p].Item2, key))
-                {
-                    int[] keyCopy = (int[])key.Clone();
-                    safeAdd(p, keyCopy, prio);
+                    safeAdd(p, key, prio);
                 }
                 else
-                    findSolution(p + 1, l, best_l, c, best_c, conflicts, key);
+                {
+                    club = c[prio[p].Item1];
+                    idx = prio[p].Item2 ? 0 : 1;
+                    week1 = prio[p].Item2 ? 'A' : 'X';
+                    week2 = prio[p].Item2 ? 'B' : 'Y';
 
+                    if (club.prio[idx] == 0)
+                    {
+                        setAdditional(l, best_l, c, best_c, conflicts, key);
+                        safeAdd(p, key, prio);
+                    }
+                    else { 
+                        do
+                        {
+                            rand[idx] %= field[idx];
+                            key[p] = ++rand[idx];
+                            value = getValue(key);
+                        } while (ht.Contains(value));
+
+                        club.keys[week1] = key[p];
+                        club.keys[week2] = km.getOpposed(field[idx], field[idx], key[p]);
+                        foreach (Team team in club.team)
+                            if (team == null)
+                                continue;
+                            else if (team.week == week1)
+                                team.key = km.getParallel(field[idx], team.league.field, club.keys[week1]);
+                            else if (team.week == week2)
+                                team.key = km.getParallel(field[idx], team.league.field, club.keys[week2]);
+
+                        if (checkFatal(l, conflicts) != null) // || !partnerOK(c, prio[p].Item1, p, prio[p].Item2, key))
+                            safeAdd(p, key, prio);
+                        else
+                        {
+                            p++;
+                            continue;
+                        }
+                    }
+                }
+                
                 // Zurücksetzen
-                club.keys[week1] = club.keys[week2] = 0;
-                foreach (Team team in club.team)
-                    if (team == null)
-                        continue;
-                    else if (team.week == week1 || team.week == week2)
-                        team.key = 0;
-
                 conflicts[0] = -1;
-                key[p] = 0;
-            }
-            else
-            {
-                setAdditional(l, best_l, c, best_c, conflicts, key);
-                int[] keyCopy = (int[])key.Clone();
-                safeAdd(p, keyCopy, prio);
+                for (; p > 0; p--)
+                {
+                    club = c[prio[p].Item1];
+                    idx = prio[p].Item2 ? 0 : 1;
+                    week1 = prio[p].Item2 ? 'A' : 'X';
+                    week2 = prio[p].Item2 ? 'B' : 'Y';
+
+                    club.keys[week1] = club.keys[week2] = 0;
+                    foreach (Team team in club.team)
+                        if (team == null)
+                            continue;
+                        else if (team.week == week1 || team.week == week2)
+                            team.key = 0;
+                    key[p] = 0;
+                    
+                    if (bw.CancellationPending)
+                        return;
+                    else
+                        if (progress < 100 * (int)(DateTime.Now - start).TotalSeconds / runtime)
+                        {
+                            progress = 100 * (int)(DateTime.Now - start).TotalSeconds / runtime;
+                            bw.ReportProgress(progress);
+                            if (progress >= 100)
+                                bw.CancelAsync();
+                        }
+                }
             }
         }
+            
 
         public static void safeAdd(int pos, int[] keys, Tuple<int, bool>[] prio)
         {
@@ -616,7 +645,6 @@ namespace Schluesselzahlen
                         }
                         else
                             team.key = 0;
-                //setPartner(verein, i);
             }
         }
 
@@ -672,19 +700,6 @@ namespace Schluesselzahlen
                 }
 
                 return teamName.Equals(clubName);
-                // Präfixvergleich bringt mehr Probleme als nutzen
-                /*char[] chars = team.ToCharArray();
-                for (int i = 0; i < chars.Length; i++)
-                    if (!club.Contains(chars[i]))
-                        return false;
-                    else
-                    {
-                        if (club.IndexOf(chars[i]) != 0)
-                            if (Char.IsLetter(chars[i]) && Char.IsLetter(club.ToCharArray()[club.IndexOf(chars[i]) - 1]))
-                                return false;
-                        club = club.Substring(club.IndexOf(chars[i]) + 1);
-                    }*/
-                //return true;
             }
             catch (Exception e)
             {

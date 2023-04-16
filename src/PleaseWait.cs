@@ -6,17 +6,20 @@ namespace Schluesselzahlen
 {
     public partial class PleaseWait : Form
     {
-        readonly Schluesselzahlen caller;
+        Schluesselzahlen caller;
         League[] best_l;
         Club[] best_v;
+        int[] conflicts;
 
         public PleaseWait(Schluesselzahlen caller)
         {
             this.caller = caller;
             caller.Enabled = false;
+            best_l = new League[Data.league.Length];
+            best_v = new Club[Data.club.Length];
             InitializeComponent();
             initProgressBar(progressBar1);
-            backgroundWorker1.RunWorkerAsync();
+            backgroundWorker2.RunWorkerAsync();
         }
 
         public void initProgressBar(ProgressBar pb)
@@ -28,91 +31,8 @@ namespace Schluesselzahlen
 
         private void cancel(object sender, EventArgs e)
         {
-            backgroundWorker1.CancelAsync();
+            backgroundWorker2.CancelAsync();
             returnToCaller();
-        }
-
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            int[] conflicts = { 0, -1 };
-            best_l = new League[Data.league.Length];
-            best_v = new Club[Data.club.Length];
-            Data.save(Data.league, Data.club, Data.partnership, Club.backup, League.backup, Team.backup);
-            if (Data.notification.Count > 0)
-            {
-                MessageBox.Show(Data.notification[0]);
-                return;
-            }
-            Data.setOptions();
-            Data.setWeeks();
-            Data.copyKeys();
-            Data.createPriority();
-            Data.copy(Data.league, best_l, Data.club, best_v, Data.partnership, Data.partnership);
-            Data.checkPlausibility(Data.league, Data.notification);
-            Data.checkFatal(Data.league, Data.notification);
-            if (Data.notification.Count > 0)
-            {
-                MessageBox.Show(Data.notification[0]);
-                return;
-            }
-            //Data.ht.Clear();
-            DateTime start = DateTime.Now;
-            DateTime end = DateTime.Now;
-            DateTime report = DateTime.Now;
-            TimeSpan span = end - start;
-            TimeSpan repspan = end - report;
-            int[] keys = new int[Data.club.Length * 2];
-            backgroundWorker1.ReportProgress((int)(span.TotalSeconds * 100 / Data.runtime));
-            while (span.TotalSeconds < Data.runtime && !Data.ht.Contains("") && conflicts[1] != 0)
-            {
-                if (backgroundWorker1.CancellationPending)
-                {
-                    e.Cancel = true;
-                    return;
-                }
-                if (repspan.TotalSeconds >= 1)
-                {
-                    report = DateTime.Now;
-                    backgroundWorker1.ReportProgress((int)(span.TotalSeconds * 100 / Data.runtime));
-                }
-                Data.findSolution(0, Data.league, best_l, Data.club, best_v, conflicts, keys);
-                end = DateTime.Now;
-                span = end - start;
-                repspan = end - report;
-            }
-            backgroundWorker1.ReportProgress(0);
-            if (conflicts[1] == -1)
-                Data.notification.Add("Es konnten keine Schlüsselzahlen ermittelt werden!");
-        }
-
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            progressBar1.Value = e.ProgressPercentage * 10;
-            int seconds = Data.runtime * (100 - e.ProgressPercentage) / 100 % 60;
-            int minutes = Data.runtime * (100 - e.ProgressPercentage) / 6000;
-            label2.Text = "";
-            if (minutes < 10)
-                label2.Text += "0" + minutes;
-            else
-                label2.Text += minutes;
-            label2.Text += ":";
-            if (seconds < 10)
-                label2.Text += "0" + seconds;
-            else
-                label2.Text += seconds;
-            string newText = Data.currentConflicts == 0 ? "-" : "" + Data.currentConflicts;
-            if (!newText.Equals(label4.Text))
-            {
-                label4.Text = newText;
-                label4.Refresh();
-            }
-
-        }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            returnToCaller();
-            caller.showResults(best_l, best_v, e.Cancelled);
         }
 
         private void returnToCaller()
@@ -131,7 +51,7 @@ namespace Schluesselzahlen
 
         private void BitteWarten_FormClosing(object sender, FormClosingEventArgs e)
         {
-            backgroundWorker1.CancelAsync();
+            backgroundWorker2.CancelAsync();
             returnToCaller();
         }
 
@@ -141,17 +61,69 @@ namespace Schluesselzahlen
             this.Focus();
         }
 
-        private void label3_Click(object sender, EventArgs e)
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
+            Data.save(Data.league, Data.club, Data.partnership, Club.backup, League.backup, Team.backup);
+            if (Data.notification.Count > 0)
+            {
+                MessageBox.Show(Data.notification[0]);
+                return;
+            }
+            Data.setOptions();
+            Data.setWeeks();
+            Data.copyKeys();
+            Data.createPriority();
+            Data.copy(Data.league, best_l, Data.club, best_v, Data.partnership, Data.partnership);
+            Data.checkPlausibility(Data.league, Data.notification);
+            Data.checkFatal(Data.league, Data.notification);
+            if (Data.notification.Count > 0)
+            {
+                MessageBox.Show(Data.notification[0]);
+                return;
+            }
+            int[] keys = new int[Data.club.Length * 2];
+            conflicts = new int[]{ 0, -1 };
+            Data.findSolution(Data.league, best_l, Data.club, best_v, conflicts, keys, backgroundWorker2);
+        }
 
+        private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            returnToCaller();
+            caller.showResults(best_l, best_v, conflicts[1], e.Cancelled);
+        }
+
+        private void backgroundWorker2_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage * 10;
+            int seconds = Data.runtime * (1000 - progressBar1.Value) / 1000 % 60;
+            int minutes = Data.runtime * (1000 - progressBar1.Value) / 60000;
+
+            string newTime = "";
+            if (minutes < 10)
+                newTime += "0" + minutes;
+            else
+                newTime += minutes;
+            newTime += ":";
+            if (seconds < 10)
+                newTime += "0" + seconds;
+            else
+                newTime += seconds;
+
+            if (!newTime.Equals(label2.Text))
+            {
+                label2.Text = newTime;
+                label2.Refresh();
+            }
+
+            string newText = Data.currentConflicts == 0 ? "-" : "" + Data.currentConflicts;
+            if (!newText.Equals(label4.Text))
+            {
+                label4.Text = newText;
+                label4.Refresh();
+            }
         }
 
         private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void progressBar1_Click(object sender, EventArgs e)
         {
 
         }
