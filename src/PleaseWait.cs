@@ -123,6 +123,7 @@ namespace Schluesselzahlen
             caller.comboBox3.Text = "";
             caller.comboBox3.SelectedIndex = -1;
             caller.dataGridView1.Columns.Clear();
+            caller.initUI();
             caller.enableBoxesAndButtons();
             caller.Enabled = true;
             caller.Focus();

@@ -58,6 +58,9 @@ namespace Schluesselzahlen
             dataGridView1.Columns[3].ReadOnly = true;
             foreach (DataGridViewColumn col in dataGridView1.Columns)
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+            // Nur bei Vereinssicht, nicht bei Staffelsicht
+            dataGridView1.Columns[0].Visible = radioButton1.Checked;
         }
         public void fillFields(ComboBox cb)
         {
@@ -165,7 +168,6 @@ namespace Schluesselzahlen
         public void enableBoxesAndButtons()
         {
             dataGridView1.Rows.Clear();
-
             checkBox1.Enabled = checkBox1.Checked = button4.Enabled = false;
 
             comboBox1.Enabled = comboBox3.Enabled = comboBox4.Enabled = comboBox5.Enabled
@@ -188,7 +190,6 @@ namespace Schluesselzahlen
                     comboBox8.Text = comboBox8.SelectedItem.ToString();
                     checkBox1.Checked = Data.club[comboBox3.SelectedIndex].capacity;
                 }
-                dataGridView1.Columns[0].Visible = true;
             }
             else if (radioButton2.Checked)
             {
@@ -200,7 +201,6 @@ namespace Schluesselzahlen
                     comboBox4.Enabled = true;
                     comboBox4.Text = Data.league[comboBox1.SelectedIndex].field.ToString();
                 }
-                dataGridView1.Columns[0].Visible = false;
             }
         }
 
@@ -240,9 +240,13 @@ namespace Schluesselzahlen
                     content[2] = club.team[j].name;
                     if (club.team[j].key != 0)
                         content[3] = club.team[j].key.ToString();
-                    else
+                    else if (club.team[j].week == '-' || club.team[j].club.keys[club.team[j].week] == 0)
                         content[3] = "";
-                    
+                    else if (club.team[j].week == 'A' || club.team[j].week == 'B')
+                        content[3] = Data.km.getParallel(Data.field[0], club.team[j].league.field, club.keys[club.team[j].week]).ToString();
+                    else if (club.team[j].week == 'X' || club.team[j].week == 'Y')
+                        content[3] = Data.km.getParallel(Data.field[1], club.team[j].league.field, club.keys[club.team[j].week]).ToString();
+
                     dataGridView1.Rows.Add(content);
 
                     for (int l = 0; l < 4; l++)
@@ -267,7 +271,7 @@ namespace Schluesselzahlen
                 {
                     String[] content = new String[4];
                     Team team = Data.league[comboBox1.SelectedIndex].team[j];
-                    int feld = Data.league[comboBox1.SelectedIndex].field;
+                    int field = Data.league[comboBox1.SelectedIndex].field;
 
                     if (team.week != '-')
                         content[0] = team.week.ToString();
@@ -281,9 +285,9 @@ namespace Schluesselzahlen
                     else if (team.week == '-' || team.club.keys[team.week] == 0)
                         content[3] = "";
                     else if (team.week == 'A' || team.week == 'B')
-                        content[3] = Data.km.getParallel(Data.field[0], feld, team.club.keys[team.week]).ToString();
+                        content[3] = Data.km.getParallel(Data.field[0], field, team.club.keys[team.week]).ToString();
                     else if (team.week == 'X' || team.week == 'Y')
-                        content[3] = Data.km.getParallel(Data.field[1], feld, team.club.keys[team.week]).ToString();
+                        content[3] = Data.km.getParallel(Data.field[1], field, team.club.keys[team.week]).ToString();
 
                     dataGridView1.Rows.Add(content);
 
@@ -536,15 +540,17 @@ namespace Schluesselzahlen
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             radioButton2.Checked = !radioButton1.Checked;
+            dataGridView1.Columns[0].Visible = radioButton1.Checked;
             if (radioButton1.Checked && comboBox3.SelectedIndex != -1)
                 fillDataGridView(radioButton1);
             else
                 enableBoxesAndButtons();
         }
-
+        
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             radioButton1.Checked = !radioButton2.Checked;
+            dataGridView1.Columns[0].Visible = radioButton1.Checked;
             if (radioButton2.Checked && comboBox1.SelectedIndex != -1)
                 fillDataGridView(radioButton2);
             else

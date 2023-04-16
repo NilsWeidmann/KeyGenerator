@@ -115,13 +115,14 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(459, 83);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.Size = new System.Drawing.Size(825, 512);
+            this.dataGridView1.Size = new System.Drawing.Size(780, 494);
             this.dataGridView1.TabIndex = 23;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);
@@ -477,7 +478,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1306, 617);
+            this.ClientSize = new System.Drawing.Size(1261, 599);
             this.Controls.Add(this.comboBox4);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -518,7 +519,7 @@
             this.Controls.Add(this.button3);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Schluesselzahlen";
-            this.Text = "Schlüsselzahlen";
+            this.Text = "Schlüsselzahlen generieren";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Schluesselzahlen_FormClosing);
             this.Resize += new System.EventHandler(this.Schluesselzahlen_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
