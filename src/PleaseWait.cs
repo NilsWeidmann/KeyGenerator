@@ -120,13 +120,10 @@ namespace Schluesselzahlen
             this.Visible = false;
             caller.comboBox1.Text = "";
             caller.comboBox1.SelectedIndex = -1;
-            caller.comboBox2.Text = "";
-            caller.comboBox2.SelectedIndex = -1;
             caller.comboBox3.Text = "";
             caller.comboBox3.SelectedIndex = -1;
-            caller.comboBox12.Text = "";
             caller.dataGridView1.Columns.Clear();
-            caller.clearGrid();
+            caller.enableBoxesAndButtons();
             caller.Enabled = true;
             caller.Focus();
         }

@@ -55,7 +55,7 @@ namespace Schluesselzahlen
             this.Visible = false;
             if (caller.radioButton2.Checked)
                 if (caller.comboBox1.SelectedIndex != -1)
-                    caller.init();
+                    caller.fillDataGridView(button1);
             caller.Enabled = true;
             caller.Focus();
         }
