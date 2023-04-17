@@ -371,7 +371,7 @@ namespace Schluesselzahlen
                     
                     League currentLeague = Data.league[comboBox1.SelectedIndex];
                     int start = currentLeague.nrOfTeams + currentLeague.nrOfTeams % 2;
-                    start = currentLeague.nrOfTeams > Data.TEAM_MIN ? currentLeague.nrOfTeams : Data.TEAM_MIN;
+                    start = start > Data.TEAM_MIN ? start : Data.TEAM_MIN;
 
                     for (int j = start, counter = 0; j <= Data.TEAM_MAX; j += 2, counter++)
                     {
@@ -562,6 +562,7 @@ namespace Schluesselzahlen
         private void button2_Click(object sender, EventArgs e)
         {
             this.Enabled = false;
+            Data.save(Data.league, Data.club, Data.partnership, Club.file, League.file, Team.file);
             DataInput d = new DataInput(this);
             d.Visible = true;
         }

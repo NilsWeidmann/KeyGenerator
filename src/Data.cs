@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Windows.Forms;
@@ -528,7 +529,7 @@ namespace Schluesselzahlen
                 if (p == c.Length * 2)
                 {
                     setAdditional(l, best_l, c, best_c, conflicts, key);
-                    safeAdd(p, key, prio);
+                    safeAdd(p-1, key, prio);
                 }
                 else
                 {
@@ -540,7 +541,7 @@ namespace Schluesselzahlen
                     if (club.prio[idx] == 0)
                     {
                         setAdditional(l, best_l, c, best_c, conflicts, key);
-                        safeAdd(p, key, prio);
+                        safeAdd(p-1, key, prio);
                     }
                     else { 
                         do
@@ -572,7 +573,7 @@ namespace Schluesselzahlen
                 
                 // Zurücksetzen
                 conflicts[0] = -1;
-                for (; p > 0; p--)
+                for (; p >= 0; p--)
                 {
                     club = c[prio[p].Item1];
                     idx = prio[p].Item2 ? 0 : 1;
@@ -586,26 +587,36 @@ namespace Schluesselzahlen
                         else if (team.week == week1 || team.week == week2)
                             team.key = 0;
                     key[p] = 0;
-                    
+
                     if (bw.CancellationPending)
                         return;
                     else
-                        if (progress < 100 * (int)(DateTime.Now - start).TotalSeconds / runtime)
-                        {
-                            progress = 100 * (int)(DateTime.Now - start).TotalSeconds / runtime;
-                            bw.ReportProgress(progress);
-                            if (progress >= 100)
-                                bw.CancelAsync();
-                        }
+                        progress = reportProgress(progress, start, bw);
                 }
+                p++;
             }
         }
             
+        private static int reportProgress(int progress, DateTime start, BackgroundWorker bw)
+        {
+            if (progress < 100 * (int)(DateTime.Now - start).TotalSeconds / runtime)
+            {
+                progress = 100 * (int)(DateTime.Now - start).TotalSeconds / runtime;
+                bw.ReportProgress(progress > 100 ? 100: progress);
+                if (progress >= 100)
+                    bw.CancelAsync();
+            }
+            return progress;
+        }
 
         public static void safeAdd(int pos, int[] keys, Tuple<int, bool>[] prio)
         {
             string value = getValue(keys);
             ht.Add(value, 1);
+
+            if (pos < 0)
+                return;
+
             int currentField = prio[pos].Item2 ? field[0] : field[1];
 
             for (int i = 1; i <= currentField; i++)
@@ -623,6 +634,7 @@ namespace Schluesselzahlen
                 ht.Remove(value);
             }
             keys[pos] = 0;
+
             safeAdd(pos - 1, keys, prio);
         }
 

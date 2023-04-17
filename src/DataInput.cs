@@ -19,13 +19,13 @@ namespace Schluesselzahlen
 
         public DataInput(Schluesselzahlen caller)
         {
-            InitializeComponent();
             this.caller = caller;
             automatic = false;
             external = new CheckBox[Data.TEAM_MAX];
             teamName = new TextBox[Data.TEAM_MAX];
             teamIdent = new TextBox[Data.TEAM_MAX];
             reset = new Button[Data.TEAM_MAX];
+            InitializeComponent();
             initGrid();
             assignGUIElements();
             enableGUIElements();
@@ -41,11 +41,12 @@ namespace Schluesselzahlen
             {
                 dataGridView1.Columns.Add(s, s);
             }
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dataGridView1.AutoResizeColumns();
+            //dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            //dataGridView1.AutoResizeColumns();
             dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
             foreach (DataGridViewColumn col in dataGridView1.Columns)
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
+            dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
 
         private void loadData()
@@ -115,6 +116,22 @@ namespace Schluesselzahlen
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             enableGUIElements();
+            comboBox2.Items.Clear();
+            comboBox2.Text = "";
+
+            // Mögliche Feldgrößen ermitteln
+            if (comboBox1.SelectedIndex == -1)
+                comboBox2.SelectedIndex = -1;
+            else
+            {
+                League l = league.ElementAt(comboBox1.SelectedIndex);
+                int minFieldSize = l.nrOfTeams < Data.TEAM_MIN ? Data.TEAM_MIN : l.nrOfTeams + l.nrOfTeams % 2;
+                for (int i = minFieldSize; i <= Data.TEAM_MAX; i += 2)
+                    comboBox2.Items.Add(i);
+                for (int i = 0; i < comboBox2.Items.Count; i++)
+                    if (Util.toInt(comboBox2.Items[i].ToString()) == l.field)
+                        comboBox2.SelectedIndex = i;
+            }
         }
 
         public void enableGUIElements()
@@ -352,21 +369,27 @@ namespace Schluesselzahlen
 
         private void button15_Click(object sender, EventArgs e)
         {
-            League l = new League();
-            Group s = new Group(l, true, this);
-            s.Visible = true;
-            this.Enabled = false;
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-            Group s;
-            if (comboBox1.SelectedIndex != -1)
-            {
-                s = new Group(league[comboBox1.SelectedIndex], false, this);
-                s.Visible = true;
-                this.Enabled = false;
+            if (comboBox1.Text.Equals("")) 
+            { 
+                MessageBox.Show("Geben Sie zunächst einen Namen für die neue Liga an!", "Liga anlegen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
+            else
+                foreach (League l in league)
+                    if (l.name.Equals(comboBox1.Text))
+                    {
+                        MessageBox.Show("Der Name " + comboBox1.Text + " ist bereits vergeben!", "Liga anlegen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+            League group = new League();
+            group.name = Util.clear(comboBox1.Text);
+            group.field = Data.field[0];
+            group.team = new Team[Data.TEAM_MAX];
+            group.index = league.Count;
+            league.Add(group);
+            comboBox1.Items.Add(group.name);
+            comboBox1.SelectedIndex = group.index;
+            enableGUIElements();
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -401,6 +424,15 @@ namespace Schluesselzahlen
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex != -1 && comboBox1.SelectedIndex != -1)
+            {
+                league.ElementAt(comboBox1.SelectedIndex).field = Util.toInt(comboBox2.SelectedItem.ToString());
+                enableGUIElements();
+            }
         }
     }
 }

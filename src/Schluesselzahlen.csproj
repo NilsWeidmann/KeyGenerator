@@ -99,12 +99,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="Group.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Group.Designer.cs">
-      <DependentUpon>Group.cs</DependentUpon>
-    </Compile>
     <Compile Include="Team.cs" />
     <Compile Include="TextFile.cs" />
     <Compile Include="UnitTests.cs" />
@@ -138,9 +132,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Partner.resx">
       <DependentUpon>Partner.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Group.resx">
-      <DependentUpon>Group.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Additional.resx">
       <DependentUpon>Additional.cs</DependentUpon>

@@ -52,10 +52,6 @@ namespace Schluesselzahlen
                                     return;
                                 }
             this.Visible = false;
-            // Data.createPriority();
-            // Data.copy(l, best_l, v, best_v, Data.partnership, Data.partnership);
-            // Data.findSolution(l, best_l, v, best_v, konflikte, schluessel);
-            // Data.copy(best_l, l, best_v, v, Data.partnership, Data.partnership);
             caller.solveConflicts(l, v);
             caller.Enabled = true;
         }
