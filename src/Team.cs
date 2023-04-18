@@ -8,7 +8,7 @@ namespace Schluesselzahlen
         public static TextFile backup;
 
         public String name;
-        public League league;
+        public Group group;
         public Club club;
         public String team;
         public String ageGroup;
@@ -70,8 +70,8 @@ namespace Schluesselzahlen
             if (key == 0)
                 return true;
             for (int i = 0; i < day.Length; i++)
-                if (Data.km.getDay(league.field, key, i) == 'H' && day[i] == 'A'
-                || Data.km.getDay(league.field, key, i) == 'A' && day[i] == 'H')
+                if (Data.km.getDay(group.field, key, i) == 'H' && day[i] == 'A'
+                || Data.km.getDay(group.field, key, i) == 'A' && day[i] == 'H')
                     return false;
             return true;
         }
@@ -80,7 +80,7 @@ namespace Schluesselzahlen
         {
             Team t = new Team();
             t.index = index;
-            t.league = league;
+            t.group = group;
             t.name = name;
             t.option = new bool[Data.TEAM_MAX];
             for (int k = 0; k < Data.TEAM_MAX; k++)

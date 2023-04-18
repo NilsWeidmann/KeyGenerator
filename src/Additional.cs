@@ -18,7 +18,7 @@ namespace Schluesselzahlen
             InitializeComponent();
 
             textBox1.Text = t.name;
-            textBox2.Text = t.league.name;
+            textBox2.Text = t.group.name;
 
             cb = new ComboBox[] { comboBox1, comboBox2, comboBox3, comboBox4, comboBox5, comboBox6,
                 comboBox7, comboBox8, comboBox9, comboBox10, comboBox11, comboBox12, comboBox13};
@@ -29,14 +29,14 @@ namespace Schluesselzahlen
                 cb[i].Items.AddRange(days);
             }
 
-            for (int i = 0; i < (t.league.field == 6 ? 10 : t.league.field - 1); i++)
+            for (int i = 0; i < (t.group.field == 6 ? 10 : t.group.field - 1); i++)
             {
                 cb[i].Enabled = true;
                 for (int j = 0; j < days.Length; j++)
                     if (days[j].StartsWith(t.day[i].ToString()))
                         cb[i].SelectedIndex = j;
             }
-            for (int i = (t.league.field == 6 ? 10 : t.league.field - 1); i < 13; i++)
+            for (int i = (t.group.field == 6 ? 10 : t.group.field - 1); i < 13; i++)
                 cb[i].Enabled = false;
 
             comboBox14.Items.Clear();
@@ -48,7 +48,7 @@ namespace Schluesselzahlen
 
         private void button1_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < t.league.field - 1; i++)
+            for (int i = 0; i < t.group.field - 1; i++)
                 t.day[i] = ((string)cb[i].SelectedItem)[0];
 
             t.week = ((String)comboBox14.SelectedItem)[0];

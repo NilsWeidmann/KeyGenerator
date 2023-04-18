@@ -8,12 +8,12 @@ namespace Schluesselzahlen
     public partial class Alternatives : Form
     {
         public Conflict[] k;
-        public League[] l;
+        public Group[] l;
         public Club[] v;
         public int i;
         public Schluesselzahlen caller;
 
-        public Alternatives(Conflict[] k, League[] l, Club[] v, Schluesselzahlen caller)
+        public Alternatives(Conflict[] k, Group[] l, Club[] v, Schluesselzahlen caller)
         {
             this.k = k;
             this.l = l;
@@ -29,7 +29,7 @@ namespace Schluesselzahlen
 
         private void button2_Click(object sender, EventArgs e)
         {
-            League[] best_l = new League[l.Length];
+            Group[] best_l = new Group[l.Length];
             Club[] best_v = new Club[v.Length];
             int[] konflikte = new int[2];
             konflikte[0] = -1;
@@ -39,10 +39,10 @@ namespace Schluesselzahlen
                 for (int j = 0; j < k[i].t.Length; j++)
                     for (int x = 0; x < k.Length; x++)
                         for (int y = 0; y < k[x].t.Length; y++)
-                            if (k[i].t[j].league == k[x].t[y].league && k[i].t[j].key == k[x].t[y].key)
+                            if (k[i].t[j].group == k[x].t[y].group && k[i].t[j].key == k[x].t[y].key)
                                 if (i != x)
                                 {
-                                    MessageBox.Show("Vergeben Sie die Zahl " + k[i].t[j].key + " in der " + k[i].t[j].league.name + " nur einmal!");
+                                    MessageBox.Show("Vergeben Sie die Zahl " + k[i].t[j].key + " in der " + k[i].t[j].group.name + " nur einmal!");
                                     return;
                                 }
                                 else if (j != y)
@@ -65,7 +65,7 @@ namespace Schluesselzahlen
                 textBox3.Text = k[i].t[2].name;
             else
                 textBox3.Text = "";
-            textBox7.Text = k[i].t[0].league.name;
+            textBox7.Text = k[i].t[0].group.name;
 
             ComboBox[] combo = { comboBox2, comboBox3, comboBox4 };
             TextBox[] text = { textBox4, textBox5, textBox6 };
@@ -133,18 +133,18 @@ namespace Schluesselzahlen
                 case DialogResult.No:
                     try
                     {
-                        caller.loadFromFile(Club.backup, League.backup, Team.backup);
+                        caller.loadFromFile(Club.backup, Group.backup, Team.backup);
                     }
                     catch (Exception ex)
                     {
                         Data.notification.Append(ex.ToString());
-                        caller.loadFromFile(Club.file, League.file, Team.file);
+                        caller.loadFromFile(Club.file, Group.file, Team.file);
                     }
                     prepareCaller();
                     break;
                 case DialogResult.Yes:
-                    Data.save(Data.league, Data.club, Data.partnership, Club.file, League.file, Team.file);
-                    caller.loadFromFile(Club.file, League.file, Team.file);
+                    Data.save(Data.group, Data.club, Data.partnership, Club.file, Group.file, Team.file);
+                    caller.loadFromFile(Club.file, Group.file, Team.file);
                     prepareCaller();
                     break;
                 case DialogResult.Cancel:
@@ -159,7 +159,7 @@ namespace Schluesselzahlen
             caller.comboBox1.Text = "";
             caller.comboBox1.SelectedIndex = -1;
             caller.comboBox3.Text = "";
-            caller.dataGridView1.Columns.Clear();
+            caller.comboBox3.SelectedIndex = -1;
             caller.Enabled = true;
             caller.Focus();
         }

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Schluesselzahlen
 {
-    public class League : IComparable
+    public class Group : IComparable
     {
         public static TextFile file;
         public static TextFile backup;
@@ -15,14 +16,14 @@ namespace Schluesselzahlen
         public int field;
 
 
-        public League()
+        public Group()
         {
             team = new Team[Data.TEAM_MAX];
             nrOfTeams = 0;
             field = 0;
         }
 
-        public League(String name, int index) : this()
+        public Group(String name, int index) : this()
         {
             this.name = name;
             this.index = index;
@@ -63,9 +64,9 @@ namespace Schluesselzahlen
             }
         }
 
-        public League clone()
+        public Group clone()
         {
-            League l = new League();
+            Group l = new Group();
             l.nrOfTeams = nrOfTeams;
             l.index = index;
             l.name = name;
@@ -79,32 +80,34 @@ namespace Schluesselzahlen
             if ((obj == null) || !obj.GetType().Equals(this.GetType()))
                 return 0;
             else
-                return index - ((League)obj).index;
+                return index - ((Group)obj).index;
         }
 
-        public static League[] getGroups(Club[] clubs, TextFile inputFile, List<String> notification)
+        public static Group[] getGroups(Club[] clubs, TextFile inputFile, List<String> notification)
         {
             String content = inputFile.ReadLine(1, false, notification);
             if (notification.Count > 0)
                 return null;
             char[] split = { ';' };
             String[] help = content.Split(split, StringSplitOptions.RemoveEmptyEntries);
-            League[] l = new League[help.Length];
+            List<Group> groupList = new List<Group>();
             String[] help2;
-            for (int i = 0; i < l.Length; i++)
+
+            for (int i = 0; i < help.Length; i++)
             {
-                l[i] = new League();
+                Group group = new Group();
                 help2 = help[i].Split('[');
-                l[i].name = help2[0].TrimEnd(' ');
-                l[i].index = i;
+                group.name = help2[0].TrimEnd(' ');
+                group.index = i;
                 if (help2.Length > 1)
-                    l[i].field = Util.toInt(help2[1]);
+                    group.field = Util.toInt(help2[1]);
+                groupList.Add(group);
             }
             for (int i = 0; i < Data.TEAM_MAX; i++)
             {
                 content = inputFile.ReadLine(2 + i, false, notification);
                 if (notification.Count > 0)
-                    return l;
+                    return groupList.ToArray();
                 help = content.Split(';');
                 for (int j = 0; j < help.Length; j++)
                     if (!help[j].Equals(""))
@@ -112,29 +115,31 @@ namespace Schluesselzahlen
                         help[j] = Util.clear(help[j]);
                         if (help[j].Contains("Dummy"))
                             continue;
-                        l[j].team[i] = new Team();
-                        l[j].nrOfTeams++;
+                        Group group = groupList.ElementAt(j);
+                        Team team = new Team();
+                        group.team[i] = team;
+                        group.nrOfTeams++;
                         help2 = help[j].Split('[');
-                        l[j].team[i].name = help2[0].TrimEnd(' ');
+                        team.name = help2[0].TrimEnd(' ');
                         if (help2.Length > 1)
-                            l[j].team[i].key = Util.toInt(help2[1]);
-                        l[j].team[i].league = l[j];
-                        l[j].team[i].index = i;
+                            team.key = Util.toInt(help2[1]);
+                        team.group = group;
+                        team.index = i;
                         for (int k = 0; k < clubs.Length; k++)
-                            if (Data.checkClub(l[j].team[i], clubs[k]))
-                                l[j].team[i].club = clubs[k];
-                        if (l[j].team[i].club == null)
+                            if (Data.checkClub(team, clubs[k]))
+                                team.club = clubs[k];
+                        if (team.club == null)
                         {
-                            l[j].team[i].club = new Club
+                            team.club = new Club
                             {
-                                name = l[j].team[i].name,
+                                name = team.name,
                                 index = -1
                             };
-                            l[j].team[i].week = '-';
+                            team.week = '-';
                         }
                     }
             }
-            return l;
+            return groupList.ToArray();
         }
     }
 }

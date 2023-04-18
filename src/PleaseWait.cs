@@ -7,7 +7,7 @@ namespace Schluesselzahlen
     public partial class PleaseWait : Form
     {
         Schluesselzahlen caller;
-        League[] best_l;
+        Group[] best_l;
         Club[] best_v;
         int[] conflicts;
 
@@ -15,7 +15,7 @@ namespace Schluesselzahlen
         {
             this.caller = caller;
             caller.Enabled = false;
-            best_l = new League[Data.league.Length];
+            best_l = new Group[Data.group.Length];
             best_v = new Club[Data.club.Length];
             InitializeComponent();
             initProgressBar(progressBar1);
@@ -63,7 +63,7 @@ namespace Schluesselzahlen
 
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
-            Data.save(Data.league, Data.club, Data.partnership, Club.backup, League.backup, Team.backup);
+            Data.save(Data.group, Data.club, Data.partnership, Club.backup, Group.backup, Team.backup);
             if (Data.notification.Count > 0)
             {
                 MessageBox.Show(Data.notification[0]);
@@ -73,9 +73,9 @@ namespace Schluesselzahlen
             Data.setWeeks();
             Data.copyKeys();
             Data.createPriority();
-            Data.copy(Data.league, best_l, Data.club, best_v, Data.partnership, Data.partnership);
-            Data.checkPlausibility(Data.league, Data.notification);
-            Data.checkFatal(Data.league, Data.notification);
+            Data.copy(Data.group, best_l, Data.club, best_v, Data.partnership, Data.partnership);
+            Data.checkPlausibility(Data.group, Data.notification);
+            Data.checkFatal(Data.group, Data.notification);
             if (Data.notification.Count > 0)
             {
                 MessageBox.Show(Data.notification[0]);
@@ -83,7 +83,7 @@ namespace Schluesselzahlen
             }
             int[] keys = new int[Data.club.Length * 2];
             conflicts = new int[]{ 0, -1 };
-            Data.findSolution(Data.league, best_l, Data.club, best_v, conflicts, keys, backgroundWorker2);
+            Data.findSolution(Data.group, best_l, Data.club, best_v, conflicts, keys, backgroundWorker2);
         }
 
         private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

@@ -71,7 +71,6 @@ C:\Users\Nils Weidmann\Documents\GitHub\schluesselzahlen\src\obj\x86\Debug\Schlu
 C:\Users\Nils Weidmann\Documents\GitHub\schluesselzahlen\src\obj\x86\Debug\Schluesselzahlen.ClickTT.resources
 C:\Users\Nils Weidmann\Documents\GitHub\schluesselzahlen\src\obj\x86\Debug\Schluesselzahlen.DataInput.resources
 C:\Users\Nils Weidmann\Documents\GitHub\schluesselzahlen\src\obj\x86\Debug\Schluesselzahlen.Schluesselzahlen.resources
-C:\Users\Nils Weidmann\Documents\GitHub\schluesselzahlen\src\obj\x86\Debug\Schluesselzahlen.Initialize.resources
 C:\Users\Nils Weidmann\Documents\GitHub\schluesselzahlen\src\obj\x86\Debug\Schluesselzahlen.Partner.resources
 C:\Users\Nils Weidmann\Documents\GitHub\schluesselzahlen\src\obj\x86\Debug\Schluesselzahlen.Additional.resources
 C:\Users\Nils Weidmann\Documents\GitHub\schluesselzahlen\src\obj\x86\Debug\Schluesselzahlen.csproj.GenerateResource.cache
@@ -79,3 +78,4 @@ C:\Users\Nils Weidmann\Documents\GitHub\schluesselzahlen\src\obj\x86\Debug\Schlu
 C:\Users\Nils Weidmann\Documents\GitHub\schluesselzahlen\src\obj\x86\Debug\Schluesselzahlen.csproj.CopyComplete
 C:\Users\Nils Weidmann\Documents\GitHub\schluesselzahlen\src\obj\x86\Debug\WindowsApplication.exe
 C:\Users\Nils Weidmann\Documents\GitHub\schluesselzahlen\src\obj\x86\Debug\WindowsApplication.pdb
+C:\Users\Nils Weidmann\Documents\GitHub\schluesselzahlen\src\obj\x86\Debug\Schluesselzahlen.Miscellaneous.resources

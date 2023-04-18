@@ -32,10 +32,6 @@ namespace Schluesselzahlen
                 for (int j = 0; j < i; j++)
                     parallel[i - 1, i - 1, j] = j + 1;
 
-            // Vereinsintern - multipel
-            //TextFile clubInternal = new TextFile(path + @"\Vereinsintern.csv");
-            //int[,] feld_v = getField(vereinsintern, 5);
-
             // Ähnliche Zahlen
             TextFile fileSimilar = new TextFile(path + @"\Aehnlich.csv");
             int[,] fieldSimilar = getField(fileSimilar, 4);

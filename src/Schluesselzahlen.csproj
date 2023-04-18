@@ -80,14 +80,14 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Initialize.cs">
+    <Compile Include="Miscellaneous.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Initialize.Designer.cs">
-      <DependentUpon>Initialize.cs</DependentUpon>
+    <Compile Include="Miscellaneous.Designer.cs">
+      <DependentUpon>Miscellaneous.cs</DependentUpon>
     </Compile>
     <Compile Include="Conflict.cs" />
-    <Compile Include="League.cs" />
+    <Compile Include="Group.cs" />
     <Compile Include="KeyMapper.cs" />
     <Compile Include="Partner.cs">
       <SubType>Form</SubType>
@@ -127,8 +127,8 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Initialize.resx">
-      <DependentUpon>Initialize.cs</DependentUpon>
+    <EmbeddedResource Include="Miscellaneous.resx">
+      <DependentUpon>Miscellaneous.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Partner.resx">
       <DependentUpon>Partner.cs</DependentUpon>

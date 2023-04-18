@@ -13,7 +13,7 @@ namespace Schluesselzahlen
         TextBox[] teamIdent;
         Button[] reset;
         public List<Club> club;
-        public List<League> league;
+        public List<Group> group;
         public List<Partnership> partnership;
         Schluesselzahlen caller;
 
@@ -69,12 +69,12 @@ namespace Schluesselzahlen
                 dataGridView1.Rows.Add(values);
             }
 
-            League[] groupArray = League.getGroups(clubArray, League.file, Data.notification);
+            Group[] groupArray = Group.getGroups(clubArray, Group.file, Data.notification);
             Data.getRelations(groupArray, Team.file);
             Data.allocateTeams(clubArray, groupArray);
 
             club = clubArray.ToList<Club>();
-            league = groupArray.ToList<League>();
+            group = groupArray.ToList<Group>();
             comboBox1.Items.Clear();
             for (int i = 0; i < groupArray.Length; i++)
                 comboBox1.Items.Add(groupArray[i].name);
@@ -91,8 +91,8 @@ namespace Schluesselzahlen
                     caller.Focus();
                     break;
                 case DialogResult.Yes:
-                    Data.save(league.ToArray(), club.ToArray(), partnership, Club.file, League.file, Team.file);
-                    caller.loadFromFile(Club.file, League.file, Team.file);
+                    Data.save(group.ToArray(), club.ToArray(), partnership, Club.file, Group.file, Team.file);
+                    caller.loadFromFile(Club.file, Group.file, Team.file);
                     caller.Enabled = true;
                     caller.Focus();
                     break;
@@ -109,8 +109,8 @@ namespace Schluesselzahlen
 
         private void button18_Click(object sender, EventArgs e)
         {
-            Data.save(league.ToArray(), club.ToArray(), partnership, Club.file, League.file, Team.file);
-            caller.loadFromFile(Club.file, League.file, Team.file);
+            Data.save(group.ToArray(), club.ToArray(), partnership, Club.file, Group.file, Team.file);
+            caller.loadFromFile(Club.file, Group.file, Team.file);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -124,7 +124,7 @@ namespace Schluesselzahlen
                 comboBox2.SelectedIndex = -1;
             else
             {
-                League l = league.ElementAt(comboBox1.SelectedIndex);
+                Group l = group.ElementAt(comboBox1.SelectedIndex);
                 int minFieldSize = l.nrOfTeams < Data.TEAM_MIN ? Data.TEAM_MIN : l.nrOfTeams + l.nrOfTeams % 2;
                 for (int i = minFieldSize; i <= Data.TEAM_MAX; i += 2)
                     comboBox2.Items.Add(i);
@@ -150,13 +150,13 @@ namespace Schluesselzahlen
                 }
             else
             {
-                for (int i = 0; i < league.ElementAt(comboBox1.SelectedIndex).nrOfTeams; i++)
+                for (int i = 0; i < group.ElementAt(comboBox1.SelectedIndex).nrOfTeams; i++)
                 {
                     external[i].Enabled = false;
                     teamIdent[i].Enabled = true;
                     reset[i].Enabled = true;
 
-                    if (club.Contains(league.ElementAt(comboBox1.SelectedIndex).team[i].club))
+                    if (club.Contains(group.ElementAt(comboBox1.SelectedIndex).team[i].club))
                     {
                         external[i].Checked = false;
                         teamName[i].Enabled = false;
@@ -167,11 +167,11 @@ namespace Schluesselzahlen
                         teamName[i].Enabled = true;
                     }
 
-                    teamName[i].Text = league.ElementAt(comboBox1.SelectedIndex).team[i].club.name;
-                    teamIdent[i].Text = league.ElementAt(comboBox1.SelectedIndex).team[i].team;
+                    teamName[i].Text = group.ElementAt(comboBox1.SelectedIndex).team[i].club.name;
+                    teamIdent[i].Text = group.ElementAt(comboBox1.SelectedIndex).team[i].team;
 
                 }
-                for (int i = league.ElementAt(comboBox1.SelectedIndex).nrOfTeams; i < Data.TEAM_MAX; i++)
+                for (int i = group.ElementAt(comboBox1.SelectedIndex).nrOfTeams; i < Data.TEAM_MAX; i++)
                 {
                     external[i].Enabled = false;
                     external[i].Checked = false;
@@ -181,13 +181,13 @@ namespace Schluesselzahlen
                     teamIdent[i].Text = "";
                     reset[i].Enabled = false;
                 }
-                if (league.ElementAt(comboBox1.SelectedIndex).nrOfTeams < league.ElementAt(comboBox1.SelectedIndex).field)
-                    external[league.ElementAt(comboBox1.SelectedIndex).nrOfTeams].Enabled = true; ;
+                if (group.ElementAt(comboBox1.SelectedIndex).nrOfTeams < group.ElementAt(comboBox1.SelectedIndex).field)
+                    external[group.ElementAt(comboBox1.SelectedIndex).nrOfTeams].Enabled = true; ;
             }
             automatic = false;
         }
 
-        private void deleteTeam(League l, int t)
+        private void deleteTeam(Group l, int t)
         {
             l.nrOfTeams--;
             for (int i = t; i < l.nrOfTeams; i++)
@@ -196,13 +196,13 @@ namespace Schluesselzahlen
             enableGUIElements();
         }
 
-        private void createExternal(League l, int t)
+        private void createExternal(Group l, int t)
         {
             if (l.nrOfTeams == t)
                 l.nrOfTeams++;
             l.team[t] = new Team();
             l.team[t].index = t;
-            l.team[t].league = l;
+            l.team[t].group = l;
             l.team[t].week = '-';
             l.team[t].key = 0;
             l.team[t].club = new Club();
@@ -214,18 +214,18 @@ namespace Schluesselzahlen
         {
             if (comboBox1.SelectedIndex == -1)
                 return;
-            League l = league.ElementAt(comboBox1.SelectedIndex);
-            if (e.ColumnIndex == 0 && l.nrOfTeams < l.field)
+            Group g = group.ElementAt(comboBox1.SelectedIndex);
+            if (e.ColumnIndex == 0 && g.nrOfTeams < g.field)
             {
-                l.team[l.nrOfTeams] = new Team();
-                l.team[l.nrOfTeams].index = l.nrOfTeams;
-                l.team[l.nrOfTeams].name = club.ElementAt(e.RowIndex).name;
-                l.team[l.nrOfTeams].team = "";
-                l.team[l.nrOfTeams].league = l;
-                l.team[l.nrOfTeams].club = club.ElementAt(e.RowIndex);
-                l.team[l.nrOfTeams].week = '-';
-                l.team[l.nrOfTeams].key = 0;
-                l.nrOfTeams++;
+                g.team[g.nrOfTeams] = new Team();
+                g.team[g.nrOfTeams].index = g.nrOfTeams;
+                g.team[g.nrOfTeams].name = club.ElementAt(e.RowIndex).name;
+                g.team[g.nrOfTeams].team = "";
+                g.team[g.nrOfTeams].group = g;
+                g.team[g.nrOfTeams].club = club.ElementAt(e.RowIndex);
+                g.team[g.nrOfTeams].week = '-';
+                g.team[g.nrOfTeams].key = 0;
+                g.nrOfTeams++;
                 enableGUIElements();
             }
         }
@@ -234,7 +234,7 @@ namespace Schluesselzahlen
         {
             for (int i = 0; i < Data.TEAM_MAX; i++)
                 if (sender.Equals(reset[i]))
-                    deleteTeam(league.ElementAt(comboBox1.SelectedIndex), i);
+                    deleteTeam(group.ElementAt(comboBox1.SelectedIndex), i);
         }
 
         private void checkBoxI_CheckedChanged(object sender, EventArgs e)
@@ -244,9 +244,9 @@ namespace Schluesselzahlen
                     if (sender.Equals(external[i]))
                     {
                         if (external[i].Checked)
-                            createExternal(league.ElementAt(comboBox1.SelectedIndex), i);
+                            createExternal(group.ElementAt(comboBox1.SelectedIndex), i);
                         else
-                            deleteTeam(league.ElementAt(comboBox1.SelectedIndex), i);
+                            deleteTeam(group.ElementAt(comboBox1.SelectedIndex), i);
                     }
         }
 
@@ -257,9 +257,9 @@ namespace Schluesselzahlen
                 {
                     teamName[i].Text = Util.clear(teamName[i].Text);
                     teamIdent[i].Text = Util.clear(teamIdent[i].Text);
-                    league.ElementAt(comboBox1.SelectedIndex).team[i].name = teamName[i].Text + " " + teamIdent[i].Text;
-                    league.ElementAt(comboBox1.SelectedIndex).team[i].team = teamIdent[i].Text;
-                    league.ElementAt(comboBox1.SelectedIndex).team[i].club.name = teamName[i].Text;
+                    group.ElementAt(comboBox1.SelectedIndex).team[i].name = teamName[i].Text + " " + teamIdent[i].Text;
+                    group.ElementAt(comboBox1.SelectedIndex).team[i].team = teamIdent[i].Text;
+                    group.ElementAt(comboBox1.SelectedIndex).team[i].club.name = teamName[i].Text;
                 }
         }
 
@@ -375,18 +375,18 @@ namespace Schluesselzahlen
                 return;
             }
             else
-                foreach (League l in league)
+                foreach (Group l in this.group)
                     if (l.name.Equals(comboBox1.Text))
                     {
                         MessageBox.Show("Der Name " + comboBox1.Text + " ist bereits vergeben!", "Liga anlegen", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
-            League group = new League();
+            Group group = new Group();
             group.name = Util.clear(comboBox1.Text);
             group.field = Data.field[0];
             group.team = new Team[Data.TEAM_MAX];
-            group.index = league.Count;
-            league.Add(group);
+            group.index = this.group.Count;
+            this.group.Add(group);
             comboBox1.Items.Add(group.name);
             comboBox1.SelectedIndex = group.index;
             enableGUIElements();
@@ -395,14 +395,14 @@ namespace Schluesselzahlen
         private void button17_Click(object sender, EventArgs e)
         {
             if (comboBox1.SelectedIndex != -1)
-                switch (MessageBox.Show("Wollen Sie die " + league[comboBox1.SelectedIndex].name + " löschen?", "Liga löschen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
+                switch (MessageBox.Show("Wollen Sie die " + group[comboBox1.SelectedIndex].name + " löschen?", "Liga löschen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
                 {
                     case DialogResult.No:
                         break;
                     case DialogResult.Yes:
-                        league.RemoveAt(comboBox1.SelectedIndex);
-                        for (int i = comboBox1.SelectedIndex; i < league.Count; i++)
-                            league[i].index--;
+                        group.RemoveAt(comboBox1.SelectedIndex);
+                        for (int i = comboBox1.SelectedIndex; i < group.Count; i++)
+                            group[i].index--;
                         comboBox1.Items.RemoveAt(comboBox1.SelectedIndex);
                         enableGUIElements();
                         this.Enabled = true;
@@ -430,7 +430,7 @@ namespace Schluesselzahlen
         {
             if (comboBox2.SelectedIndex != -1 && comboBox1.SelectedIndex != -1)
             {
-                league.ElementAt(comboBox1.SelectedIndex).field = Util.toInt(comboBox2.SelectedItem.ToString());
+                group.ElementAt(comboBox1.SelectedIndex).field = Util.toInt(comboBox2.SelectedItem.ToString());
                 enableGUIElements();
             }
         }

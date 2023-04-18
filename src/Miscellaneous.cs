@@ -5,14 +5,14 @@ using System.Windows.Forms;
 
 namespace Schluesselzahlen
 {
-    public partial class Initialize : Form
+    public partial class Miscellaneous : Form
     {
         public Schluesselzahlen caller;
 
-        public Initialize(Schluesselzahlen caller)
+        public Miscellaneous(Schluesselzahlen caller)
         {
-            InitializeComponent();
             this.caller = caller;
+            InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -20,13 +20,13 @@ namespace Schluesselzahlen
             this.Enabled = false;
             try
             {
-                caller.loadFromFile(Club.backup, League.backup, Team.backup);
+                caller.loadFromFile(Club.backup, Group.backup, Team.backup);
             }
             catch (Exception ex)
             {
                 Data.notification.Append(ex.ToString());
                 MessageBox.Show("Es ist kein Backup vorhanden!");
-                caller.loadFromFile(Club.file, League.file, Team.file);
+                caller.loadFromFile(Club.file, Group.file, Team.file);
             }
             returnToCaller();
         }
@@ -43,7 +43,7 @@ namespace Schluesselzahlen
             returnToCaller();
         }
 
-        private void deleteClubs()
+        private void deleteClubsWithoutTeams()
         {
             List<Club> lv = Data.club.ToList();
             List<Club> lv_d = new List<Club>();
@@ -61,25 +61,25 @@ namespace Schluesselzahlen
         private void button3_Click(object sender, EventArgs e)
         {
             this.Enabled = false;
-            deleteClubs();
+            deleteClubsWithoutTeams();
             returnToCaller();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             this.Enabled = false;
-            for (int i = 0; i < Data.league.Length; i++)
-                for (int j = 0; j < Data.league[i].nrOfTeams; j++)
-                    Data.league[i].team[j].week = '-';
+            for (int i = 0; i < Data.group.Length; i++)
+                for (int j = 0; j < Data.group[i].nrOfTeams; j++)
+                    Data.group[i].team[j].week = '-';
             returnToCaller();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             this.Enabled = false;
-            for (int i = 0; i < Data.league.Length; i++)
-                for (int j = 0; j < Data.league[i].nrOfTeams; j++)
-                    Data.league[i].team[j].key = 0;
+            for (int i = 0; i < Data.group.Length; i++)
+                for (int j = 0; j < Data.group[i].nrOfTeams; j++)
+                    Data.group[i].team[j].key = 0;
             returnToCaller();
         }
 
@@ -96,10 +96,10 @@ namespace Schluesselzahlen
         private void button6_Click(object sender, EventArgs e)
         {
             this.Enabled = false;
-            for (int i = 0; i < Data.league.Length; i++)
-                for (int j = 0; j < Data.league[i].nrOfTeams; j++)
+            for (int i = 0; i < Data.group.Length; i++)
+                for (int j = 0; j < Data.group[i].nrOfTeams; j++)
                     for (int k = 0; k < Data.TEAM_MAX; k++)
-                        Data.league[i].team[j].day[k] = '-';
+                        Data.group[i].team[j].day[k] = '-';
             returnToCaller();
         }
 

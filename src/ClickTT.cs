@@ -8,18 +8,18 @@ namespace Schluesselzahlen
 {
     public partial class ClickTT : Form
     {
-        List<League> ll;
+        List<Group> ll;
         List<Club> lc;
         List<Partnership> lp;
         readonly Schluesselzahlen caller;
 
-        public ClickTT(League[] l, Club[] c, List<Partnership> p, Schluesselzahlen caller)
+        public ClickTT(Group[] l, Club[] c, List<Partnership> p, Schluesselzahlen caller)
         {
             InitializeComponent();
             this.caller = caller;
             init();
             ll = l.ToList();
-            foreach (League group in ll)
+            foreach (Group group in ll)
                 dataGridView1.Rows.Add(group.name);
             lc = c.ToList();
             foreach (Club club in lc)
@@ -78,7 +78,7 @@ namespace Schluesselzahlen
                     if (node_s.Name.Equals("a") && !node_s.ParentNode.GetAttributeValue("class", "").Equals("matrix-relegation-more"))
                     {
                         division = Util.clear(node_s.InnerText);
-                        League l = new League
+                        Group l = new Group
                         {
                             name = ageGroup + " " + division,
                             index = index_l++
@@ -111,7 +111,7 @@ namespace Schluesselzahlen
                                     t.name = t.name.TrimStart(trimChars);
                                     t.name = t.name.TrimEnd(trimChars);
                                     t.name = Util.clear(t.name);
-                                    t.league = l;
+                                    t.group = l;
                                     l.nrOfTeams++;
                                     t.week = '-';
                                     t.index = index_t++;
@@ -202,7 +202,7 @@ namespace Schluesselzahlen
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ll = new List<League>();
+            ll = new List<Group>();
             dataGridView1.Rows.Clear();
             dataGridView3.Rows.Clear();
             webImportGroups();
@@ -251,8 +251,8 @@ namespace Schluesselzahlen
         private void button3_Click(object sender, EventArgs e)
         {
             button3.Enabled = false;
-            Data.save(ll.ToArray(), lc.ToArray(), lp, Club.file, League.file, Team.file);
-            caller.loadFromFile(Club.file, League.file, Team.file);
+            Data.save(ll.ToArray(), lc.ToArray(), lp, Club.file, Group.file, Team.file);
+            caller.loadFromFile(Club.file, Group.file, Team.file);
             button3.Enabled = true;
         }
 
@@ -267,8 +267,8 @@ namespace Schluesselzahlen
                         caller.Focus();
                         break;
                     case DialogResult.Yes:
-                        Data.save(ll.ToArray(), lc.ToArray(), lp, Club.file, League.file, Team.file);
-                        caller.loadFromFile(Club.file, League.file, Team.file);
+                        Data.save(ll.ToArray(), lc.ToArray(), lp, Club.file, Group.file, Team.file);
+                        caller.loadFromFile(Club.file, Group.file, Team.file);
                         caller.Enabled = true;
                         caller.Focus();
                         break;

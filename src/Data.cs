@@ -15,8 +15,7 @@ namespace Schluesselzahlen
     {
         public const int TEAM_MIN = 6;
         public const int TEAM_MAX = 14;
-        public static string path;
-        public static League[] league;
+        public static Group[] group;
         public static Club[] club;
         public static List<Partnership> partnership = new List<Partnership>();
         public static Schluesselzahlen caller;
@@ -24,8 +23,6 @@ namespace Schluesselzahlen
         public static int[] field = new int[2];
         public static Tuple<int, bool>[] prio;
         public static int runtime;
-        public static Hashtable ht = new Hashtable();
-        public static int[] rand = { 0, 0 };
         public static KeyMapper km;
         public static int currentConflicts;
 
@@ -40,7 +37,7 @@ namespace Schluesselzahlen
             "Mo", "Di","Mi","Do","Fr","Sa","So"
         };
 
-        public static void copy(League[] oldLeague, League[] newLeague, Club[] oldClub, Club[] newClub, List<Partnership> oldPartnership, List<Partnership> newPartnership)
+        public static void copy(Group[] oldGroup, Group[] newGroup, Club[] oldClub, Club[] newClub, List<Partnership> oldPartnership, List<Partnership> newPartnership)
         {
             for (int i = 0; i < oldClub.Length && oldClub[i] != null; i++)
                 newClub[i] = oldClub[i].clone();
@@ -49,26 +46,26 @@ namespace Schluesselzahlen
             foreach (Partnership p in oldPartnership)
                 newPartnership.Add(new Partnership(newClub[p.clubA.index], p.weekA, newClub[p.clubB.index], p.weekB));
 
-            for (int i = 0; i < oldLeague.Length && oldLeague[i] != null; i++)
+            for (int i = 0; i < oldGroup.Length && oldGroup[i] != null; i++)
             {
-                newLeague[i] = oldLeague[i].clone();
-                for (int j = 0; j < oldLeague[i].team.Length && oldLeague[i].team[j] != null; j++)
+                newGroup[i] = oldGroup[i].clone();
+                for (int j = 0; j < oldGroup[i].team.Length && oldGroup[i].team[j] != null; j++)
                 {
-                    newLeague[i].team[j] = oldLeague[i].team[j].clone();
-                    if (oldLeague[i].team[j].club.index == -1)
-                        newLeague[i].team[j].club = oldLeague[i].team[j].club.clone();
+                    newGroup[i].team[j] = oldGroup[i].team[j].clone();
+                    if (oldGroup[i].team[j].club.index == -1)
+                        newGroup[i].team[j].club = oldGroup[i].team[j].club.clone();
                     else
                     {
-                        newLeague[i].team[j].club = newClub[oldLeague[i].team[j].club.index];
+                        newGroup[i].team[j].club = newClub[oldGroup[i].team[j].club.index];
                     }
                 }
             }
-            allocateTeams(newClub, newLeague);
+            allocateTeams(newClub, newGroup);
         }
 
         public static void setOptions()
         {
-            foreach (League l in league)
+            foreach (Group l in group)
                 foreach (Team t in l.team)
                     if (t == null)
                         continue;
@@ -99,10 +96,10 @@ namespace Schluesselzahlen
 
         public static void setWeeks()
         {
-            for (int i = 0; i < league.Length; i++)
-                for (int j = 0; j < league[i].nrOfTeams; j++)
-                    if (league[i].team[j].key != 0)
-                        league[i].team[j].week = '-';
+            for (int i = 0; i < group.Length; i++)
+                for (int j = 0; j < group[i].nrOfTeams; j++)
+                    if (group[i].team[j].key != 0)
+                        group[i].team[j].week = '-';
         }
 
         public static Club[] getClubs(TextFile c, List<Partnership> p)
@@ -143,7 +140,7 @@ namespace Schluesselzahlen
             return v;
         }
 
-        public static int nrOfKeys(League[] l)
+        public static int nrOfKeys(Group[] l)
         {
             int keys = 0;
             int teams = 0;
@@ -160,7 +157,7 @@ namespace Schluesselzahlen
 
         public static int run()
         {
-            foreach (League l in league)
+            foreach (Group l in group)
                 foreach (Team t in l.team)
                 {
                     if (t == null)
@@ -171,12 +168,12 @@ namespace Schluesselzahlen
                         l.removeOptions(t.key);
                     l.checkOneOption();
                 }
-            return nrOfKeys(league);
+            return nrOfKeys(group);
         }
 
         public static bool isComplete()
         {
-            foreach (League l in league)
+            foreach (Group l in group)
                 foreach (Team t in l.team)
                     if (t == null)
                         continue;
@@ -188,7 +185,7 @@ namespace Schluesselzahlen
         public static bool hasError()
         {
             bool help;
-            foreach (League l in league)
+            foreach (Group l in group)
                 foreach (Team t in l.team)
                 {
                     if (t == null)
@@ -205,7 +202,7 @@ namespace Schluesselzahlen
             return false;
         }
 
-        public static void save(League[] l, Club[] c, List<Partnership> p, TextFile clubs, TextFile groups, TextFile relations)
+        public static void save(Group[] l, Club[] c, List<Partnership> p, TextFile clubs, TextFile groups, TextFile relations)
         {
             String help;
             int line = 0;
@@ -257,7 +254,7 @@ namespace Schluesselzahlen
             }
         }
 
-        public static void getRelations(League[] l, TextFile relations)
+        public static void getRelations(Group[] l, TextFile relations)
         {
             String content;
             String[] help;
@@ -302,9 +299,9 @@ namespace Schluesselzahlen
         {
             setOptions();
             solve();
-            bool done = Data.isComplete();
+            bool done = isComplete();
             while (!done)
-                foreach (League l in league)
+                foreach (Group l in group)
                     foreach (Team t in l.team)
                     {
                         if (t == null)
@@ -322,10 +319,10 @@ namespace Schluesselzahlen
                                     else if (!t2.Equals(t))
                                         t2.option[k] = false;
                                 solve();
-                                done = Data.isComplete();
+                                done = isComplete();
                             }
                     }
-            save(Data.league, Data.club, Data.partnership, Club.file, League.file, Team.file);
+            save(Data.group, Data.club, Data.partnership, Club.file, Group.file, Team.file);
             caller.initUI();
             if (hasError())
                 notification.Add("Die Generierung ist aufgrund eines logischen Fehlers nicht moeglich!");
@@ -333,11 +330,11 @@ namespace Schluesselzahlen
                 notification.Add("Die Schluesselzahlen wurden erfolgreich generiert!");
         }
 
-        public static Tuple<League,Team,int> checkFatal(League[] league, int[] conflicts)
+        public static Tuple<Group,Team,int> checkFatal(Group[] group, int[] conflicts)
         {
             int[] allocation;
             conflicts[0] = 0;
-            foreach (League l in league)
+            foreach (Group l in group)
             {
                 allocation = new int[l.field];
 
@@ -359,7 +356,7 @@ namespace Schluesselzahlen
                     {
                         conflicts[0]++;
                         if (conflicts[1] != -1 && conflicts[0] >= conflicts[1])
-                            return Tuple.Create((League)null, (Team)null, 0); // Zu viele Konflikte
+                            return Tuple.Create((Group)null, (Team)null, 0); // Zu viele Konflikte
                         foreach (Team t in l.team)
                             foreach (Team t2 in l.team)
                                 if (t == null || t2 == null)
@@ -381,9 +378,9 @@ namespace Schluesselzahlen
             return null;
         }
 
-        public static void checkFatal(League[] l, List<string> notification)
+        public static void checkFatal(Group[] l, List<string> notification)
         {
-            Tuple<League, Team, int> fatal = checkFatal(l, new int[] { 0, -1 });
+            Tuple<Group, Team, int> fatal = checkFatal(l, new int[] { 0, -1 });
 
             if (fatal == null)
                 return;
@@ -398,20 +395,20 @@ namespace Schluesselzahlen
                     + fatal.Item3 + " den Vorgaben für Heim- und Auswärtsspieltage!");
         }
 
-        public static List<Conflict> getConflicts(League[] leagues)
+        public static List<Conflict> getConflicts(Group[] groups)
         {
             int[] allocation;
             List<Conflict> conflicts = new List<Conflict>();
             int team;
             int number;
 
-            foreach (League league in leagues)
+            foreach (Group group in groups)
             {
-                allocation = new int[league.field];
-                for (int j = 0; j < league.nrOfTeams; j++)
-                    if (league.team[j].key > 0)
-                        allocation[league.team[j].key - 1]++;
-                for (int j = 0; j < league.field; j++)
+                allocation = new int[group.field];
+                for (int j = 0; j < group.nrOfTeams; j++)
+                    if (group.team[j].key > 0)
+                        allocation[group.team[j].key - 1]++;
+                for (int j = 0; j < group.field; j++)
                     if (allocation[j] > 1)
                     {
                         team = 0;
@@ -421,12 +418,12 @@ namespace Schluesselzahlen
                             wish = j + 1,
                             t = new Team[allocation[j]]
                         };
-                        for (int x = 0; x < league.nrOfTeams; x++)
-                            if (league.team[x].key == j + 1)
-                                conflict.t[team++] = league.team[x];
+                        for (int x = 0; x < group.nrOfTeams; x++)
+                            if (group.team[x].key == j + 1)
+                                conflict.t[team++] = group.team[x];
 
-                        int alt1 = km.getSimilar(league.field, j + 1).Item1;
-                        int alt2 = km.getSimilar(league.field, j + 1).Item2;
+                        int alt1 = km.getSimilar(group.field, j + 1).Item1;
+                        int alt2 = km.getSimilar(group.field, j + 1).Item2;
                         conflict.key[number++] = j + 1;
                         if (alt1 > 0 && allocation[alt1 - 1] == 0)
                             conflict.key[number++] = alt1;
@@ -487,7 +484,7 @@ namespace Schluesselzahlen
             return okay;
         }
 
-        public static void setAdditional(League[] l, League[] best_l, Club[] club, Club[] best_club, int[] conflicts, int[] key)
+        public static void setAdditional(Group[] l, Group[] best_l, Club[] club, Club[] best_club, int[] conflicts, int[] key)
         {
             for (int i = 0; i < l.Length; i++)
                 for (int j = 0; j < l[i].nrOfTeams; j++)
@@ -514,7 +511,7 @@ namespace Schluesselzahlen
             copy(l, best_l, club, best_club, Data.partnership, Data.partnership);
         }
 
-        public static void findSolution(League[] l, League[] best_l, Club[] c, Club[] best_c, int[] conflicts, int[] key, BackgroundWorker bw)
+        public static void findSolution(Group[] l, Group[] best_l, Club[] c, Club[] best_c, int[] conflicts, int[] key, BackgroundWorker bw)
         {
             string value;
             int p = 0;
@@ -523,13 +520,15 @@ namespace Schluesselzahlen
             char week1, week2;
             DateTime start = DateTime.Now;
             int progress = 0;
+            HashSet<string> ht = new HashSet<string>();
+            int[] rand = { 0, 0 };
 
             while (!ht.Contains(""))
             {
                 if (p == c.Length * 2)
                 {
                     setAdditional(l, best_l, c, best_c, conflicts, key);
-                    safeAdd(p-1, key, prio);
+                    safeAdd(p-1, key, prio, ht);
                 }
                 else
                 {
@@ -541,7 +540,7 @@ namespace Schluesselzahlen
                     if (club.prio[idx] == 0)
                     {
                         setAdditional(l, best_l, c, best_c, conflicts, key);
-                        safeAdd(p-1, key, prio);
+                        safeAdd(p-1, key, prio, ht);
                     }
                     else { 
                         do
@@ -557,12 +556,12 @@ namespace Schluesselzahlen
                             if (team == null)
                                 continue;
                             else if (team.week == week1)
-                                team.key = km.getParallel(field[idx], team.league.field, club.keys[week1]);
+                                team.key = km.getParallel(field[idx], team.group.field, club.keys[week1]);
                             else if (team.week == week2)
-                                team.key = km.getParallel(field[idx], team.league.field, club.keys[week2]);
+                                team.key = km.getParallel(field[idx], team.group.field, club.keys[week2]);
 
                         if (checkFatal(l, conflicts) != null) // || !partnerOK(c, prio[p].Item1, p, prio[p].Item2, key))
-                            safeAdd(p, key, prio);
+                            safeAdd(p, key, prio, ht);
                         else
                         {
                             p++;
@@ -609,10 +608,10 @@ namespace Schluesselzahlen
             return progress;
         }
 
-        public static void safeAdd(int pos, int[] keys, Tuple<int, bool>[] prio)
+        public static void safeAdd(int pos, int[] keys, Tuple<int, bool>[] prio, HashSet<string> ht)
         {
             string value = getValue(keys);
-            ht.Add(value, 1);
+            ht.Add(value);
 
             if (pos < 0)
                 return;
@@ -635,7 +634,7 @@ namespace Schluesselzahlen
             }
             keys[pos] = 0;
 
-            safeAdd(pos - 1, keys, prio);
+            safeAdd(pos - 1, keys, prio, ht);
         }
 
         public static void copyKeys()
@@ -648,19 +647,19 @@ namespace Schluesselzahlen
                     else if (team.key == 0)
                         if (team.week == 'A' || team.week == 'B') { 
                             if (club.keys[team.week] > 0)
-                                team.key = km.getParallel(field[0], team.league.field, club.keys[team.week]);
+                                team.key = km.getParallel(field[0], team.group.field, club.keys[team.week]);
                         }
                         else if (team.week == 'X' || team.week == 'Y')
                         {
                             if (club.keys[team.week] > 0)
-                                team.key = km.getParallel(field[1], team.league.field, club.keys[team.week]);
+                                team.key = km.getParallel(field[1], team.group.field, club.keys[team.week]);
                         }
                         else
                             team.key = 0;
             }
         }
 
-        public static void allocateTeams(Club[] v, League[] l)
+        public static void allocateTeams(Club[] v, Group[] l)
         {
             if (v == null || l == null)
                 return;
@@ -720,22 +719,22 @@ namespace Schluesselzahlen
             }
         }
 
-        public static void checkPlausibility(League[] leagues, List<string> m)
+        public static void checkPlausibility(Group[] groups, List<string> m)
         {
             bool plausible;
-            foreach (League league in leagues)
-                foreach (Team team in league.team)
+            foreach (Group group in groups)
+                foreach (Team team in group.team)
                 {
                     if (team == null)
                         continue;
                     plausible = false;
                     if (team.key == 0)
-                        for (int k = 0; k < league.field; k++)
+                        for (int k = 0; k < group.field; k++)
                             plausible |= team.keyOK(k + 1);
                     else
                         plausible = team.keyOK(team.key);
                     if (!plausible)
-                        m.Add("Der Spielplan für " + team.name + " in der " + league.name + " ist inkonsistent!");
+                        m.Add("Der Spielplan für " + team.name + " in der " + group.name + " ist inkonsistent!");
                 }
             if (m.Count > 0)
                 return;
