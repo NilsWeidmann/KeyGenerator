@@ -74,11 +74,11 @@
     <Compile Include="DataInput.Designer.cs">
       <DependentUpon>DataInput.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Miscellaneous.cs">
       <SubType>Form</SubType>
@@ -124,8 +124,8 @@
     <EmbeddedResource Include="DataInput.resx">
       <DependentUpon>DataInput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Miscellaneous.resx">
       <DependentUpon>Miscellaneous.cs</DependentUpon>
@@ -141,7 +141,7 @@
     <None Include=".vs\Schluesselzahlen\v16\.suo" />
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Schluesselzahlen_TemporaryKey.pfx" />
+    <None Include="KeyGenerator_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="HtmlAgilityPack.dll" />

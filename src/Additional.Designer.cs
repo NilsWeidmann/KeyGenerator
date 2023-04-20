@@ -1,4 +1,4 @@
-﻿namespace Schluesselzahlen
+﻿namespace KeyGenerator
 {
     partial class Additional
     {
@@ -29,21 +29,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.boxTeam = new System.Windows.Forms.TextBox();
+            this.boxDay01 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
-            this.comboBox7 = new System.Windows.Forms.ComboBox();
-            this.comboBox8 = new System.Windows.Forms.ComboBox();
-            this.comboBox9 = new System.Windows.Forms.ComboBox();
-            this.comboBox10 = new System.Windows.Forms.ComboBox();
-            this.comboBox11 = new System.Windows.Forms.ComboBox();
-            this.comboBox12 = new System.Windows.Forms.ComboBox();
-            this.comboBox13 = new System.Windows.Forms.ComboBox();
+            this.boxDay02 = new System.Windows.Forms.ComboBox();
+            this.boxDay03 = new System.Windows.Forms.ComboBox();
+            this.boxDay04 = new System.Windows.Forms.ComboBox();
+            this.boxDay05 = new System.Windows.Forms.ComboBox();
+            this.boxDay06 = new System.Windows.Forms.ComboBox();
+            this.boxDay07 = new System.Windows.Forms.ComboBox();
+            this.boxDay08 = new System.Windows.Forms.ComboBox();
+            this.boxDay09 = new System.Windows.Forms.ComboBox();
+            this.boxDay10 = new System.Windows.Forms.ComboBox();
+            this.boxDay11 = new System.Windows.Forms.ComboBox();
+            this.boxDay12 = new System.Windows.Forms.ComboBox();
+            this.boxDay13 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -57,31 +57,31 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.boxGroup = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.comboBox14 = new System.Windows.Forms.ComboBox();
+            this.buttonDeleteTeamOkay = new System.Windows.Forms.Button();
+            this.buttonDeleteTeamCancel = new System.Windows.Forms.Button();
+            this.boxWeek = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // textBox1
+            // boxTeam
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(112, 20);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(294, 26);
-            this.textBox1.TabIndex = 0;
+            this.boxTeam.Enabled = false;
+            this.boxTeam.Location = new System.Drawing.Point(112, 20);
+            this.boxTeam.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxTeam.Name = "boxTeam";
+            this.boxTeam.Size = new System.Drawing.Size(294, 26);
+            this.boxTeam.TabIndex = 0;
             // 
-            // comboBox1
+            // boxDay01
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(518, 20);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(156, 28);
-            this.comboBox1.TabIndex = 1;
+            this.boxDay01.FormattingEnabled = true;
+            this.boxDay01.Location = new System.Drawing.Point(518, 20);
+            this.boxDay01.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxDay01.Name = "boxDay01";
+            this.boxDay01.Size = new System.Drawing.Size(156, 28);
+            this.boxDay01.TabIndex = 1;
             // 
             // label1
             // 
@@ -93,113 +93,113 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "1. Spieltag";
             // 
-            // comboBox2
+            // boxDay02
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(518, 62);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(156, 28);
-            this.comboBox2.TabIndex = 3;
+            this.boxDay02.FormattingEnabled = true;
+            this.boxDay02.Location = new System.Drawing.Point(518, 62);
+            this.boxDay02.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxDay02.Name = "boxDay02";
+            this.boxDay02.Size = new System.Drawing.Size(156, 28);
+            this.boxDay02.TabIndex = 3;
             // 
-            // comboBox3
+            // boxDay03
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(518, 103);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(156, 28);
-            this.comboBox3.TabIndex = 4;
+            this.boxDay03.FormattingEnabled = true;
+            this.boxDay03.Location = new System.Drawing.Point(518, 103);
+            this.boxDay03.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxDay03.Name = "boxDay03";
+            this.boxDay03.Size = new System.Drawing.Size(156, 28);
+            this.boxDay03.TabIndex = 4;
             // 
-            // comboBox4
+            // boxDay04
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(518, 145);
-            this.comboBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(156, 28);
-            this.comboBox4.TabIndex = 5;
+            this.boxDay04.FormattingEnabled = true;
+            this.boxDay04.Location = new System.Drawing.Point(518, 145);
+            this.boxDay04.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxDay04.Name = "boxDay04";
+            this.boxDay04.Size = new System.Drawing.Size(156, 28);
+            this.boxDay04.TabIndex = 5;
             // 
-            // comboBox5
+            // boxDay05
             // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(518, 186);
-            this.comboBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(156, 28);
-            this.comboBox5.TabIndex = 6;
+            this.boxDay05.FormattingEnabled = true;
+            this.boxDay05.Location = new System.Drawing.Point(518, 186);
+            this.boxDay05.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxDay05.Name = "boxDay05";
+            this.boxDay05.Size = new System.Drawing.Size(156, 28);
+            this.boxDay05.TabIndex = 6;
             // 
-            // comboBox6
+            // boxDay06
             // 
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(518, 228);
-            this.comboBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(156, 28);
-            this.comboBox6.TabIndex = 7;
+            this.boxDay06.FormattingEnabled = true;
+            this.boxDay06.Location = new System.Drawing.Point(518, 228);
+            this.boxDay06.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxDay06.Name = "boxDay06";
+            this.boxDay06.Size = new System.Drawing.Size(156, 28);
+            this.boxDay06.TabIndex = 7;
             // 
-            // comboBox7
+            // boxDay07
             // 
-            this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Location = new System.Drawing.Point(518, 269);
-            this.comboBox7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(156, 28);
-            this.comboBox7.TabIndex = 8;
+            this.boxDay07.FormattingEnabled = true;
+            this.boxDay07.Location = new System.Drawing.Point(518, 269);
+            this.boxDay07.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxDay07.Name = "boxDay07";
+            this.boxDay07.Size = new System.Drawing.Size(156, 28);
+            this.boxDay07.TabIndex = 8;
             // 
-            // comboBox8
+            // boxDay08
             // 
-            this.comboBox8.FormattingEnabled = true;
-            this.comboBox8.Location = new System.Drawing.Point(518, 311);
-            this.comboBox8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox8.Name = "comboBox8";
-            this.comboBox8.Size = new System.Drawing.Size(156, 28);
-            this.comboBox8.TabIndex = 9;
+            this.boxDay08.FormattingEnabled = true;
+            this.boxDay08.Location = new System.Drawing.Point(518, 311);
+            this.boxDay08.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxDay08.Name = "boxDay08";
+            this.boxDay08.Size = new System.Drawing.Size(156, 28);
+            this.boxDay08.TabIndex = 9;
             // 
-            // comboBox9
+            // boxDay09
             // 
-            this.comboBox9.FormattingEnabled = true;
-            this.comboBox9.Location = new System.Drawing.Point(518, 352);
-            this.comboBox9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox9.Name = "comboBox9";
-            this.comboBox9.Size = new System.Drawing.Size(156, 28);
-            this.comboBox9.TabIndex = 10;
+            this.boxDay09.FormattingEnabled = true;
+            this.boxDay09.Location = new System.Drawing.Point(518, 352);
+            this.boxDay09.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxDay09.Name = "boxDay09";
+            this.boxDay09.Size = new System.Drawing.Size(156, 28);
+            this.boxDay09.TabIndex = 10;
             // 
-            // comboBox10
+            // boxDay10
             // 
-            this.comboBox10.FormattingEnabled = true;
-            this.comboBox10.Location = new System.Drawing.Point(518, 394);
-            this.comboBox10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox10.Name = "comboBox10";
-            this.comboBox10.Size = new System.Drawing.Size(156, 28);
-            this.comboBox10.TabIndex = 11;
+            this.boxDay10.FormattingEnabled = true;
+            this.boxDay10.Location = new System.Drawing.Point(518, 394);
+            this.boxDay10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxDay10.Name = "boxDay10";
+            this.boxDay10.Size = new System.Drawing.Size(156, 28);
+            this.boxDay10.TabIndex = 11;
             // 
-            // comboBox11
+            // boxDay11
             // 
-            this.comboBox11.FormattingEnabled = true;
-            this.comboBox11.Location = new System.Drawing.Point(518, 435);
-            this.comboBox11.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox11.Name = "comboBox11";
-            this.comboBox11.Size = new System.Drawing.Size(156, 28);
-            this.comboBox11.TabIndex = 12;
+            this.boxDay11.FormattingEnabled = true;
+            this.boxDay11.Location = new System.Drawing.Point(518, 435);
+            this.boxDay11.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxDay11.Name = "boxDay11";
+            this.boxDay11.Size = new System.Drawing.Size(156, 28);
+            this.boxDay11.TabIndex = 12;
             // 
-            // comboBox12
+            // boxDay12
             // 
-            this.comboBox12.FormattingEnabled = true;
-            this.comboBox12.Location = new System.Drawing.Point(518, 477);
-            this.comboBox12.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox12.Name = "comboBox12";
-            this.comboBox12.Size = new System.Drawing.Size(156, 28);
-            this.comboBox12.TabIndex = 13;
+            this.boxDay12.FormattingEnabled = true;
+            this.boxDay12.Location = new System.Drawing.Point(518, 477);
+            this.boxDay12.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxDay12.Name = "boxDay12";
+            this.boxDay12.Size = new System.Drawing.Size(156, 28);
+            this.boxDay12.TabIndex = 13;
             // 
-            // comboBox13
+            // boxDay13
             // 
-            this.comboBox13.FormattingEnabled = true;
-            this.comboBox13.Location = new System.Drawing.Point(518, 518);
-            this.comboBox13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox13.Name = "comboBox13";
-            this.comboBox13.Size = new System.Drawing.Size(156, 28);
-            this.comboBox13.TabIndex = 14;
+            this.boxDay13.FormattingEnabled = true;
+            this.boxDay13.Location = new System.Drawing.Point(518, 518);
+            this.boxDay13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxDay13.Name = "boxDay13";
+            this.boxDay13.Size = new System.Drawing.Size(156, 28);
+            this.boxDay13.TabIndex = 14;
             // 
             // label2
             // 
@@ -331,15 +331,14 @@
             this.label14.TabIndex = 27;
             this.label14.Text = "Team";
             // 
-            // textBox2
+            // boxGroup
             // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(112, 60);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(294, 26);
-            this.textBox2.TabIndex = 28;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.boxGroup.Enabled = false;
+            this.boxGroup.Location = new System.Drawing.Point(112, 60);
+            this.boxGroup.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxGroup.Name = "boxGroup";
+            this.boxGroup.Size = new System.Drawing.Size(294, 26);
+            this.boxGroup.TabIndex = 28;
             // 
             // label15
             // 
@@ -351,37 +350,37 @@
             this.label15.TabIndex = 29;
             this.label15.Text = "Liga";
             // 
-            // button1
+            // buttonDeleteTeamOkay
             // 
-            this.button1.Location = new System.Drawing.Point(174, 100);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(112, 35);
-            this.button1.TabIndex = 30;
-            this.button1.Text = "OK";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            this.button1.Resize += new System.EventHandler(this.button1_Resize);
+            this.buttonDeleteTeamOkay.Location = new System.Drawing.Point(174, 100);
+            this.buttonDeleteTeamOkay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonDeleteTeamOkay.Name = "buttonDeleteTeamOkay";
+            this.buttonDeleteTeamOkay.Size = new System.Drawing.Size(112, 35);
+            this.buttonDeleteTeamOkay.TabIndex = 30;
+            this.buttonDeleteTeamOkay.Text = "OK";
+            this.buttonDeleteTeamOkay.UseVisualStyleBackColor = true;
+            this.buttonDeleteTeamOkay.Click += new System.EventHandler(this.buttonDeleteTeamOkay_Click);
+            this.buttonDeleteTeamOkay.Resize += new System.EventHandler(this.buttonDeleteTeamOkay_Resize);
             // 
-            // button2
+            // buttonDeleteTeamCancel
             // 
-            this.button2.Location = new System.Drawing.Point(296, 100);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(112, 35);
-            this.button2.TabIndex = 31;
-            this.button2.Text = "Abbrechen";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonDeleteTeamCancel.Location = new System.Drawing.Point(296, 100);
+            this.buttonDeleteTeamCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonDeleteTeamCancel.Name = "buttonDeleteTeamCancel";
+            this.buttonDeleteTeamCancel.Size = new System.Drawing.Size(112, 35);
+            this.buttonDeleteTeamCancel.TabIndex = 31;
+            this.buttonDeleteTeamCancel.Text = "Abbrechen";
+            this.buttonDeleteTeamCancel.UseVisualStyleBackColor = true;
+            this.buttonDeleteTeamCancel.Click += new System.EventHandler(this.buttonDeleteTeamCancel_Click);
             // 
-            // comboBox14
+            // boxWeek
             // 
-            this.comboBox14.FormattingEnabled = true;
-            this.comboBox14.Location = new System.Drawing.Point(112, 103);
-            this.comboBox14.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox14.Name = "comboBox14";
-            this.comboBox14.Size = new System.Drawing.Size(50, 28);
-            this.comboBox14.TabIndex = 32;
+            this.boxWeek.FormattingEnabled = true;
+            this.boxWeek.Location = new System.Drawing.Point(112, 103);
+            this.boxWeek.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxWeek.Name = "boxWeek";
+            this.boxWeek.Size = new System.Drawing.Size(50, 28);
+            this.boxWeek.TabIndex = 32;
             // 
             // label16
             // 
@@ -399,11 +398,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(692, 566);
             this.Controls.Add(this.label16);
-            this.Controls.Add(this.comboBox14);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.boxWeek);
+            this.Controls.Add(this.buttonDeleteTeamCancel);
+            this.Controls.Add(this.buttonDeleteTeamOkay);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.boxGroup);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
@@ -417,25 +416,25 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox13);
-            this.Controls.Add(this.comboBox12);
-            this.Controls.Add(this.comboBox11);
-            this.Controls.Add(this.comboBox10);
-            this.Controls.Add(this.comboBox9);
-            this.Controls.Add(this.comboBox8);
-            this.Controls.Add(this.comboBox7);
-            this.Controls.Add(this.comboBox6);
-            this.Controls.Add(this.comboBox5);
-            this.Controls.Add(this.comboBox4);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.boxDay13);
+            this.Controls.Add(this.boxDay12);
+            this.Controls.Add(this.boxDay11);
+            this.Controls.Add(this.boxDay10);
+            this.Controls.Add(this.boxDay09);
+            this.Controls.Add(this.boxDay08);
+            this.Controls.Add(this.boxDay07);
+            this.Controls.Add(this.boxDay06);
+            this.Controls.Add(this.boxDay05);
+            this.Controls.Add(this.boxDay04);
+            this.Controls.Add(this.boxDay03);
+            this.Controls.Add(this.boxDay02);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.boxDay01);
+            this.Controls.Add(this.boxTeam);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Additional";
             this.Text = "Zusatz";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Zusatz_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Additional_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -443,21 +442,21 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox boxTeam;
+        private System.Windows.Forms.ComboBox boxDay01;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.ComboBox comboBox5;
-        private System.Windows.Forms.ComboBox comboBox6;
-        private System.Windows.Forms.ComboBox comboBox7;
-        private System.Windows.Forms.ComboBox comboBox8;
-        private System.Windows.Forms.ComboBox comboBox9;
-        private System.Windows.Forms.ComboBox comboBox10;
-        private System.Windows.Forms.ComboBox comboBox11;
-        private System.Windows.Forms.ComboBox comboBox12;
-        private System.Windows.Forms.ComboBox comboBox13;
+        private System.Windows.Forms.ComboBox boxDay02;
+        private System.Windows.Forms.ComboBox boxDay03;
+        private System.Windows.Forms.ComboBox boxDay04;
+        private System.Windows.Forms.ComboBox boxDay05;
+        private System.Windows.Forms.ComboBox boxDay06;
+        private System.Windows.Forms.ComboBox boxDay07;
+        private System.Windows.Forms.ComboBox boxDay08;
+        private System.Windows.Forms.ComboBox boxDay09;
+        private System.Windows.Forms.ComboBox boxDay10;
+        private System.Windows.Forms.ComboBox boxDay11;
+        private System.Windows.Forms.ComboBox boxDay12;
+        private System.Windows.Forms.ComboBox boxDay13;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -471,11 +470,11 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox boxGroup;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox comboBox14;
+        private System.Windows.Forms.Button buttonDeleteTeamOkay;
+        private System.Windows.Forms.Button buttonDeleteTeamCancel;
+        private System.Windows.Forms.ComboBox boxWeek;
         private System.Windows.Forms.Label label16;
     }
 }

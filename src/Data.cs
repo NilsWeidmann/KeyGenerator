@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using static System.Windows.Forms.AxHost;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace Schluesselzahlen
+namespace KeyGenerator
 {
     public class Data
     {
@@ -17,8 +17,8 @@ namespace Schluesselzahlen
         public const int TEAM_MAX = 14;
         public static Group[] group;
         public static Club[] club;
-        public static List<Partnership> partnership = new List<Partnership>();
-        public static Schluesselzahlen caller;
+        //public static List<Partnership> partnership = new List<Partnership>();
+        public static KeyGenerator caller;
         public static List<String> notification = new List<String>();
         public static int[] field = new int[2];
         public static Tuple<int, bool>[] prio;
@@ -37,14 +37,10 @@ namespace Schluesselzahlen
             "Mo", "Di","Mi","Do","Fr","Sa","So"
         };
 
-        public static void copy(Group[] oldGroup, Group[] newGroup, Club[] oldClub, Club[] newClub, List<Partnership> oldPartnership, List<Partnership> newPartnership)
+        public static void copy(Group[] oldGroup, Group[] newGroup, Club[] oldClub, Club[] newClub)
         {
             for (int i = 0; i < oldClub.Length && oldClub[i] != null; i++)
                 newClub[i] = oldClub[i].clone();
-
-            newPartnership = new List<Partnership>();
-            foreach (Partnership p in oldPartnership)
-                newPartnership.Add(new Partnership(newClub[p.clubA.index], p.weekA, newClub[p.clubB.index], p.weekB));
 
             for (int i = 0; i < oldGroup.Length && oldGroup[i] != null; i++)
             {
@@ -102,7 +98,7 @@ namespace Schluesselzahlen
                         group[i].team[j].week = '-';
         }
 
-        public static Club[] getClubs(TextFile c, List<Partnership> p)
+        public static Club[] getClubs(TextFile c)
         {
             int nrOfClubs;
             String content = c.ReadLine(1, false, notification).Replace("\r", "");
@@ -110,7 +106,7 @@ namespace Schluesselzahlen
             for (nrOfClubs = 0; !content.Equals(""); nrOfClubs++)
                 content = c.ReadLine(2 + nrOfClubs, false, notification).Replace("\r", "");
             Club[] v = new Club[nrOfClubs];
-            p.Clear();
+            
             for (int i = 0; i < nrOfClubs; i++)
             {
                 content = c.ReadLine(1 + i, false, notification).Replace("\r", "");
@@ -130,7 +126,7 @@ namespace Schluesselzahlen
                     v[i].keys['Y'] = Util.toInt(help[4]);
                     v[i].capacity = help[5] == "X";
                     for (int j = 6; j < help.Length - 2; j += 3)
-                        p.Add(new Partnership(v[i], help[j].ToCharArray()[0], v[Util.toInt(help[j + 1])], help[j + 2].ToCharArray()[0]));
+                        v[i].partnerships.Add(new Partnership(v[i], help[j], v[Util.toInt(help[j + 1])], help[j + 2]));
                 }
                 catch (Exception e)
                 {
@@ -202,7 +198,7 @@ namespace Schluesselzahlen
             return false;
         }
 
-        public static void save(Group[] l, Club[] c, List<Partnership> p, TextFile clubs, TextFile groups, TextFile relations)
+        public static void save(Group[] l, Club[] c, TextFile clubs, TextFile groups, TextFile relations)
         {
             String help;
             int line = 0;
@@ -227,9 +223,9 @@ namespace Schluesselzahlen
                     help += "X;";
                 else
                     help += ";";
-                foreach (Partnership pt in p)
-                    if (pt.clubA == c[i])
-                        help += pt.weekA + ";" + pt.clubB.index + ";" + pt.weekB + ";";
+                foreach (Partnership pt in c[i].partnerships)
+                    if (pt.indexA == c[i].index) // Sollte immer der Fall sein!
+                        help += pt.weekA + ";" + pt.indexB + ";" + pt.weekB + ";";
                 help += "\n";
                 clubs.Append(help, notification);
             }
@@ -322,7 +318,7 @@ namespace Schluesselzahlen
                                 done = isComplete();
                             }
                     }
-            save(Data.group, Data.club, Data.partnership, Club.file, Group.file, Team.file);
+            save(Data.group, Data.club, Club.file, Group.file, Team.file);
             caller.initUI();
             if (hasError())
                 notification.Add("Die Generierung ist aufgrund eines logischen Fehlers nicht moeglich!");
@@ -401,6 +397,7 @@ namespace Schluesselzahlen
             List<Conflict> conflicts = new List<Conflict>();
             int team;
             int number;
+            int index = 0;
 
             foreach (Group group in groups)
             {
@@ -416,7 +413,8 @@ namespace Schluesselzahlen
                         Conflict conflict = new Conflict
                         {
                             wish = j + 1,
-                            t = new Team[allocation[j]]
+                            t = new Team[allocation[j]],
+                            index = index++
                         };
                         for (int x = 0; x < group.nrOfTeams; x++)
                             if (group.team[x].key == j + 1)
@@ -440,34 +438,34 @@ namespace Schluesselzahlen
             return conflicts;
         }
 
-        public static bool partnerOK(Club[] club, int c, int p, bool ab, int[] key)
+        public static bool partnerOK(Club[] club, int clubIndex, int partnerIndex, bool ab, int[] key)
         {
             int keyA = 0, keyB = 0, fieldA = 0, fieldB = 0;
             bool okay = true;
 
             if (ab)
             {
-                club[c].keys['A'] = key[p];
-                club[c].keys['B'] = km.getOpposed(field[0], field[0], key[p]);
+                club[clubIndex].keys['A'] = key[partnerIndex];
+                club[clubIndex].keys['B'] = km.getOpposed(field[0], field[0], key[partnerIndex]);
             }
             else
             {
-                club[c].keys['X'] = key[p];
-                club[c].keys['Y'] = km.getOpposed(field[1], field[1], key[p]);
+                club[clubIndex].keys['X'] = key[partnerIndex];
+                club[clubIndex].keys['Y'] = km.getOpposed(field[1], field[1], key[partnerIndex]);
             }
-            for (int i = 0; i < partnership.Count; i++)
+            foreach (Partnership p in club[clubIndex].partnerships)
             {
-                if (partnership[i].clubA.index != club[c].index && partnership[i].clubB.index != club[c].index)
+                if (p.indexA != club[clubIndex].index && p.indexB != club[clubIndex].index)
                     continue;
-                if (partnership[i].weekA != '-')
+                if (p.weekA != '-')
                 {
-                    keyA = partnership[i].clubA.keys[partnership[i].weekA];
-                    fieldA = partnership[i].weekA == 'A' || partnership[i].weekA == 'B' ? field[0] : field[1];
+                    keyA = club[p.indexA].keys[p.weekA];
+                    fieldA = p.weekA == 'A' || p.weekA == 'B' ? field[0] : field[1];
                 }
-                if (partnership[i].weekB != '-')
+                if (p.weekB != '-')
                 {
-                    keyB = partnership[i].clubB.keys[partnership[i].weekB];
-                    fieldB = partnership[i].weekB == 'A' || partnership[i].weekB == 'B' ? field[0] : field[1];
+                    keyB = club[p.indexB].keys[p.weekB];
+                    fieldB = p.weekB == 'A' || p.weekB == 'B' ? field[0] : field[1];
                 }
 
                 if (keyA == 0 || keyB == 0)
@@ -478,9 +476,9 @@ namespace Schluesselzahlen
                 break;
             }
             if (ab)
-                club[c].keys['A'] = club[c].keys['B'] = 0;
+                club[clubIndex].keys['A'] = club[clubIndex].keys['B'] = 0;
             else
-                club[c].keys['X'] = club[c].keys['Y'] = 0;
+                club[clubIndex].keys['X'] = club[clubIndex].keys['Y'] = 0;
             return okay;
         }
 
@@ -508,7 +506,7 @@ namespace Schluesselzahlen
             // Neue beste Lösung wurde gefunden
             conflicts[1] = conflicts[0];
             currentConflicts = conflicts[0];
-            copy(l, best_l, club, best_club, Data.partnership, Data.partnership);
+            copy(l, best_l, club, best_club);
         }
 
         public static void findSolution(Group[] l, Group[] best_l, Club[] c, Club[] best_c, int[] conflicts, int[] key, BackgroundWorker bw)
@@ -523,7 +521,7 @@ namespace Schluesselzahlen
             HashSet<string> ht = new HashSet<string>();
             int[] rand = { 0, 0 };
 
-            while (!ht.Contains(""))
+            while (!ht.Contains("") && prio.Length > 0)
             {
                 if (p == c.Length * 2)
                 {

@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 
-namespace Schluesselzahlen
+namespace KeyGenerator
 {
     public class Util
     {
@@ -96,6 +99,36 @@ namespace Schluesselzahlen
             s = s.Replace("ü", "ue");
             s = s.Replace("ß", "ss");
             return s;
+        }
+
+        public static bool confirm(KeyGenerator caller, Group[] groups, Club[] clubs)
+        {
+            if (!(clubs == null || groups == null))
+                switch (MessageBox.Show("Wollen Sie die Änderungen speichern?", "Änderungen speichern", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
+                {
+                    case DialogResult.No:
+                        /*try
+                        {
+                            caller.loadFromFile(Club.backup, Group.backup, Team.backup);
+                        }
+                        catch (Exception ex)
+                        {
+                            Data.notification.Append(ex.ToString());
+                            caller.loadFromFile(Club.file, Group.file, Team.file);
+                        }*/
+                        caller.prepare();
+                        return true;
+                    case DialogResult.Yes:
+                        Data.save(groups,clubs, Club.file, Group.file, Team.file);
+                        caller.loadFromFile(Club.file, Group.file, Team.file);
+                        caller.prepare();
+                        return true;
+                    case DialogResult.Cancel:
+                        return false;
+                    default:
+                        return false;
+                }
+            return true;
         }
     }
 }

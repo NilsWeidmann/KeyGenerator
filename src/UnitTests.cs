@@ -1,4 +1,4 @@
-﻿namespace Schluesselzahlen
+﻿namespace KeyGenerator
 {
     class UnitTests
     {

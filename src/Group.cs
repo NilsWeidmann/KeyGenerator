@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Schluesselzahlen
+namespace KeyGenerator
 {
     public class Group : IComparable
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Schluesselzahlen
+namespace KeyGenerator
 {
     public class Team
     {

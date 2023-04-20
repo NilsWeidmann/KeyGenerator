@@ -2,53 +2,60 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace Schluesselzahlen
+namespace KeyGenerator
 {
     public partial class Partner : Form
     {
-        Schluesselzahlen caller;
-        Club v;
-        Partnership p_akt;
+        KeyGenerator caller;
+        Club[] clubs;
+        int index;
 
-        public Partner(Schluesselzahlen caller, Club v)
+        public Partner(KeyGenerator caller, Club[] clubs, int index)
         {
             InitializeComponent();
             this.caller = caller;
-            this.v = v;
-            dataGridView1.Columns.Clear();
-            dataGridView1.Columns.Add("Verein A", "Verein A");
-            dataGridView1.Columns[0].ReadOnly = true;
+            this.clubs = clubs;
+            this.index = index;
+
+            dataGridView.Columns.Clear();
+            dataGridView.Columns.Add("Verein A", "Verein A");
+            dataGridView.Columns[0].ReadOnly = true;
             DataGridViewColumn dgvc = new DataGridViewComboBoxColumn();
             dgvc.HeaderText = "Woche";
-            dataGridView1.Columns.Add(dgvc);
-            dataGridView1.Columns.Add(" ", " ");
-            dataGridView1.Columns[2].ReadOnly = true;
+            dataGridView.Columns.Add(dgvc);
+            dataGridView.Columns.Add(" ", " ");
+            dataGridView.Columns[2].ReadOnly = true;
             dgvc = new DataGridViewComboBoxColumn();
             dgvc.HeaderText = "Verein B";
-            dataGridView1.Columns.Add(dgvc);
+            dataGridView.Columns.Add(dgvc);
             dgvc = new DataGridViewComboBoxColumn();
             dgvc.HeaderText = "Woche";
-            dataGridView1.Columns.Add(dgvc);
+            dataGridView.Columns.Add(dgvc);
 
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dataGridView1.Rows.Clear();
-            foreach (Partnership p in Data.partnership)
-                if (p.clubA.index == v.index || p.clubB.index == v.index)
-                {
-                    p_akt = p;
-                    dataGridView1.Rows.Add();
-                }
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dataGridView.Rows.Clear();
+
+            foreach (Club c in clubs)
+                foreach (Partnership p in c.partnerships) 
+                    if (p.indexA == index || p.indexB == index) {  
+                        DataGridViewRow row = new DataGridViewRow();
+                        fillRow(row,p);
+                        dataGridView.Rows.Add(row);
+                    }
         }
 
-        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        private void fillRow(DataGridViewRow row, Partnership p)
         {
-            char woche;
-
-            if (dataGridView1.Rows[e.RowIndex].Cells.Count < 5)
+            if (row.Cells.Count < 5)
                 return;
 
-            // Aktueller Verein
-            dataGridView1.Rows[e.RowIndex].Cells[0].Value = v.name;
+            Club currentClub = clubs[index];
+            char currentWeek = index == p.indexA ? p.weekA : p.weekB;
+            Club otherClub = index == p.indexA ? clubs[p.indexB] : clubs[p.indexA];
+            char otherWeek = index == p.indexA ? p.weekB : p.weekA;
+
+            // Verein A
+            row.Cells[0].Value = currentClub.name;
 
             // Woche aktueller Verein
             DataGridViewComboBoxCell dgvcbc = new DataGridViewComboBoxCell();
@@ -57,36 +64,28 @@ namespace Schluesselzahlen
             dgvcbc.Items.Add("B");
             dgvcbc.Items.Add("X");
             dgvcbc.Items.Add("Y");
-            if (!dataGridView1.Rows[e.RowIndex].IsNewRow)
+
+            switch (currentWeek)
             {
-                if (p_akt.clubA.index == v.index)
-                    woche = p_akt.weekA;
-                else
-                    woche = p_akt.weekB;
-                switch (woche)
-                {
-                    case 'A': dgvcbc.Value = dgvcbc.Items[0]; break;
-                    case 'B': dgvcbc.Value = dgvcbc.Items[1]; break;
-                    case 'X': dgvcbc.Value = dgvcbc.Items[2]; break;
-                    case 'Y': dgvcbc.Value = dgvcbc.Items[3]; break;
-                }
+                case 'A': dgvcbc.Value = dgvcbc.Items[0]; break;
+                case 'B': dgvcbc.Value = dgvcbc.Items[1]; break;
+                case 'X': dgvcbc.Value = dgvcbc.Items[2]; break;
+                case 'Y': dgvcbc.Value = dgvcbc.Items[3]; break;
             }
-            dataGridView1.Rows[e.RowIndex].Cells[1] = dgvcbc;
+            
+            row.Cells[1] = dgvcbc;
 
             // Gleichheitszeichen
-            dataGridView1.Rows[e.RowIndex].Cells[2].Value = "=";
+            row.Cells[2].Value = "=";
 
             // Partnerverein
             dgvcbc = new DataGridViewComboBoxCell();
             dgvcbc.FlatStyle = FlatStyle.Flat;
-            for (int i = 0; i < Data.club.Length; i++)
-                dgvcbc.Items.Add(Data.club[i].name);
-            if (!dataGridView1.Rows[e.RowIndex].IsNewRow)
-                if (p_akt.clubA.index == v.index)
-                    dgvcbc.Value = dgvcbc.Items[p_akt.clubB.index];
-                else
-                    dgvcbc.Value = dgvcbc.Items[p_akt.clubA.index];
-            dataGridView1.Rows[e.RowIndex].Cells[3] = dgvcbc;
+            for (int i = 0; i < clubs.Length; i++)
+                dgvcbc.Items.Add(clubs[i].name);
+            if (!row.IsNewRow)
+                dgvcbc.Value = dgvcbc.Items[otherClub.index];
+            row.Cells[3] = dgvcbc;
 
             // Woche Partnerverein
             dgvcbc = new DataGridViewComboBoxCell();
@@ -95,58 +94,53 @@ namespace Schluesselzahlen
             dgvcbc.Items.Add("B");
             dgvcbc.Items.Add("X");
             dgvcbc.Items.Add("Y");
-            if (!dataGridView1.Rows[e.RowIndex].IsNewRow)
+            
+            switch (otherWeek)
             {
-                if (p_akt.clubA.index == v.index)
-                    woche = p_akt.weekB;
-                else
-                    woche = p_akt.weekA;
-                switch (woche)
-                {
-                    case 'A': dgvcbc.Value = dgvcbc.Items[0]; break;
-                    case 'B': dgvcbc.Value = dgvcbc.Items[1]; break;
-                    case 'X': dgvcbc.Value = dgvcbc.Items[2]; break;
-                    case 'Y': dgvcbc.Value = dgvcbc.Items[3]; break;
-                }
+                case 'A': dgvcbc.Value = dgvcbc.Items[0]; break;
+                case 'B': dgvcbc.Value = dgvcbc.Items[1]; break;
+                case 'X': dgvcbc.Value = dgvcbc.Items[2]; break;
+                case 'Y': dgvcbc.Value = dgvcbc.Items[3]; break;
             }
-            dataGridView1.Rows[e.RowIndex].Cells[4] = dgvcbc;
+            
+            row.Cells[4] = dgvcbc;
 
             // AutoResizeColumns
-            dataGridView1.AutoResizeColumns();
+            dataGridView.AutoResizeColumns();
         }
 
+        bool convert(DataGridViewRow row, String[] values)
+        {
+            values = new string[row.Cells.Count];
+            foreach (DataGridViewCell dgvc in row.Cells)
+                if (dgvc.Value == null)
+                    return false;
+                else
+                    values[dgvc.RowIndex] = dgvc.Value.ToString();
+            return true;
+        }
+
+        private void updatePartners()
+        {
+            // Alte Partnerschaften löschen, die den aktuellen Verein betreffen
+            foreach (Club c in clubs)
+                foreach (Partnership p in c.partnerships)
+                    if (p.indexA == index || p.indexB == index)
+                        c.partnerships.Remove(p);
+
+            // Neue Partnerschaften hinzufügen
+            String[] values = null;
+            foreach (DataGridViewRow row in dataGridView.Rows)
+                if (convert(row, values))
+                    clubs[getIndex(values[0])].partnerships.Add(new Partnership(getIndex(values[0]), values[1][0], getIndex(values[3]), values[4][0]));
+        }
         private void Partner_FormClosing(object sender, FormClosingEventArgs e)
         {
-            switch (MessageBox.Show("Wollen Sie die Änderungen speichern?", "Änderungen speichern", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
-            {
-                case DialogResult.Yes:
-                    this.Visible = false;
-                    List<Partnership> p_remove = new List<Partnership>();
-                    foreach (Partnership p in Data.partnership)
-                        if (p.clubA.index == v.index || p.clubB.index == v.index)
-                            p_remove.Add(p);
-                    foreach (Partnership p in p_remove)
-                        Data.partnership.Remove(p);
-                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                        if (dataGridView1.Rows[i].Cells[1].Value != null && dataGridView1.Rows[i].Cells[3].Value != null && dataGridView1.Rows[i].Cells[4].Value != null)
-                            Data.partnership.Add(new Partnership(v, (string)dataGridView1.Rows[i].Cells[1].Value, (string)dataGridView1.Rows[i].Cells[3].Value,
-                                                  (string)dataGridView1.Rows[i].Cells[4].Value, Data.club));
-
-                    caller.Enabled = true;
-                    caller.Focus();
-                    break;
-                case DialogResult.No:
-                    this.Visible = false;
-                    caller.Enabled = true;
-                    caller.Focus();
-                    break;
-                case DialogResult.Cancel:
-                    e.Cancel = true;
-                    break;
-                case DialogResult.Abort:
-                    e.Cancel = true;
-                    break;
-            }
+            updatePartners();
+            this.Enabled = false;
+            if (Util.confirm(caller, Data.group, clubs))
+                caller.prepare();
+            this.Enabled = true;
         }
 
         private void Partner_Resize(object sender, EventArgs e)
@@ -155,20 +149,28 @@ namespace Schluesselzahlen
             this.Focus();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
 
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        private void dataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                if (dataGridView1.Rows[i].Cells[0].Value.Equals(dataGridView1.Rows[i].Cells[3].Value))
+            for (int i = 0; i < dataGridView.Rows.Count; i++)
+                if (dataGridView.Rows[i].Cells[0].Value.Equals(dataGridView.Rows[i].Cells[3].Value))
                 {
-                    dataGridView1.Rows[i].Cells[3].Value = null;
+                    dataGridView.Rows[i].Cells[3].Value = null;
                     MessageBox.Show("Partnerschaften mit sich selbst sind unzulässig!");
                     return;
                 }
+        }
+
+        private int getIndex(string name)
+        {
+            for (int i=0; i<clubs.Length; i++)
+                if (clubs[i].name.Equals(name))
+                    return i;
+            return -1;
         }
     }
 }

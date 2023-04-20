@@ -1,4 +1,4 @@
-﻿namespace Schluesselzahlen
+﻿namespace KeyGenerator
 {
     partial class PleaseWait
     {
@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.buttonCancel = new System.Windows.Forms.Button();
+            this.labelTime = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.labelNrOfConflicts = new System.Windows.Forms.Label();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // label1
@@ -48,34 +48,34 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Schlüsselzahlen werden generiert. Verbleibende Zeit:";
             // 
-            // progressBar1
+            // progressBar
             // 
-            this.progressBar1.Location = new System.Drawing.Point(24, 106);
-            this.progressBar1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(321, 35);
-            this.progressBar1.TabIndex = 1;
+            this.progressBar.Location = new System.Drawing.Point(24, 106);
+            this.progressBar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(321, 35);
+            this.progressBar.TabIndex = 1;
             // 
-            // button1
+            // buttonCancel
             // 
-            this.button1.Location = new System.Drawing.Point(354, 106);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(112, 35);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Abbrechen";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.cancel);
+            this.buttonCancel.Location = new System.Drawing.Point(354, 106);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(112, 35);
+            this.buttonCancel.TabIndex = 2;
+            this.buttonCancel.Text = "Abbrechen";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.cancel);
             // 
-            // label2
+            // labelTime
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(416, 20);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 20);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "00:00";
+            this.labelTime.AutoSize = true;
+            this.labelTime.Location = new System.Drawing.Point(416, 20);
+            this.labelTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTime.Name = "labelTime";
+            this.labelTime.Size = new System.Drawing.Size(49, 20);
+            this.labelTime.TabIndex = 3;
+            this.labelTime.Text = "00:00";
             // 
             // label3
             // 
@@ -86,41 +86,40 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Anzahl an Konflikten in der aktuellen Lösung:";
             // 
-            // label4
+            // labelNrOfConflicts
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(416, 53);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(14, 20);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "-";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.labelNrOfConflicts.AutoSize = true;
+            this.labelNrOfConflicts.Location = new System.Drawing.Point(416, 53);
+            this.labelNrOfConflicts.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelNrOfConflicts.Name = "labelNrOfConflicts";
+            this.labelNrOfConflicts.Size = new System.Drawing.Size(14, 20);
+            this.labelNrOfConflicts.TabIndex = 5;
+            this.labelNrOfConflicts.Text = "-";
             // 
-            // backgroundWorker2
+            // backgroundWorker
             // 
-            this.backgroundWorker2.WorkerReportsProgress = true;
-            this.backgroundWorker2.WorkerSupportsCancellation = true;
-            this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
-            this.backgroundWorker2.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker2_ProgressChanged);
-            this.backgroundWorker2.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker2_RunWorkerCompleted);
+            this.backgroundWorker.WorkerReportsProgress = true;
+            this.backgroundWorker.WorkerSupportsCancellation = true;
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
             // PleaseWait
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(480, 158);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.labelNrOfConflicts);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.labelTime);
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "PleaseWait";
             this.Text = "Bitte Warten";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BitteWarten_FormClosing);
-            this.Resize += new System.EventHandler(this.BitteWarten_Resize);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PleaseWait_FormClosing);
+            this.Resize += new System.EventHandler(this.PleaseWait_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -129,11 +128,11 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Label labelTime;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.ComponentModel.BackgroundWorker backgroundWorker2;
+        private System.Windows.Forms.Label labelNrOfConflicts;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }

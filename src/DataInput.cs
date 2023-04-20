@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Schluesselzahlen
+namespace KeyGenerator
 {
     public partial class DataInput : Form
     {
@@ -15,9 +15,9 @@ namespace Schluesselzahlen
         public List<Club> club;
         public List<Group> group;
         public List<Partnership> partnership;
-        Schluesselzahlen caller;
+        KeyGenerator caller;
 
-        public DataInput(Schluesselzahlen caller)
+        public DataInput(KeyGenerator caller, Club[] clubs, Group[] groups)
         {
             this.caller = caller;
             automatic = false;
@@ -29,32 +29,33 @@ namespace Schluesselzahlen
             initGrid();
             assignGUIElements();
             enableGUIElements();
-            loadData();
+            club = clubs.ToList();
+            group = groups.ToList();
+            loadData(clubs, groups);
         }
 
         private void initGrid()
         {
-            dataGridView1.Columns.Clear();
-            dataGridView1.Rows.Clear();
+            dataGridViewClubsAndKeys.Columns.Clear();
+            dataGridViewClubsAndKeys.Rows.Clear();
             string[] values = { "Verein", "A", "B", "X", "Y", "Kap." };
             foreach (string s in values)
             {
-                dataGridView1.Columns.Add(s, s);
+                dataGridViewClubsAndKeys.Columns.Add(s, s);
             }
-            //dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            //dataGridView1.AutoResizeColumns();
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            foreach (DataGridViewColumn col in dataGridView1.Columns)
+            dataGridViewClubsAndKeys.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            foreach (DataGridViewColumn col in dataGridViewClubsAndKeys.Columns)
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
-            dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            dataGridViewClubsAndKeys.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
 
-        private void loadData()
+        private void loadData(Club[] clubArray, Group[] groupArray)
         {
-            button18.Enabled = false;
+            buttonSave.Enabled = false;
             String[] values = new String[6];
             partnership = new List<Partnership>();
-            Club[] clubArray = Data.getClubs(Club.file, partnership);
+
+            // DataGridView füllen
             initGrid();
             for (int i = 0; i < clubArray.Length; i++)
             {
@@ -66,40 +67,24 @@ namespace Schluesselzahlen
                     values[j] = intValues[j - 1].ToString() == "0" ? "" : intValues[j - 1].ToString();
 
                 values[5] = v.capacity ? "X" : "";
-                dataGridView1.Rows.Add(values);
+                dataGridViewClubsAndKeys.Rows.Add(values);
             }
 
-            Group[] groupArray = Group.getGroups(clubArray, Group.file, Data.notification);
-            Data.getRelations(groupArray, Team.file);
-            Data.allocateTeams(clubArray, groupArray);
-
+            // Gruppenliste füllen
             club = clubArray.ToList<Club>();
             group = groupArray.ToList<Group>();
-            comboBox1.Items.Clear();
+            boxGroup.Items.Clear();
             for (int i = 0; i < groupArray.Length; i++)
-                comboBox1.Items.Add(groupArray[i].name);
-            comboBox1.SelectedIndex = -1;
-            button18.Enabled = true;
+                boxGroup.Items.Add(groupArray[i].name);
+            boxGroup.SelectedIndex = -1;
+            buttonSave.Enabled = true;
         }
 
-        private void Dateninput_FormClosing(object sender, FormClosingEventArgs e)
+        private void DataInput_FormClosing(object sender, FormClosingEventArgs e)
         {
-            switch (MessageBox.Show("Wollen Sie die Änderungen speichern?", "Änderungen speichern", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
-            {
-                case DialogResult.No:
-                    caller.Enabled = true;
-                    caller.Focus();
-                    break;
-                case DialogResult.Yes:
-                    Data.save(group.ToArray(), club.ToArray(), partnership, Club.file, Group.file, Team.file);
-                    caller.loadFromFile(Club.file, Group.file, Team.file);
-                    caller.Enabled = true;
-                    caller.Focus();
-                    break;
-                case DialogResult.Cancel:
-                    e.Cancel = true;
-                    break;
-            }
+            this.Enabled = false;
+            e.Cancel = !Util.confirm(caller, group.ToArray(), club.ToArray());
+            this.Enabled = true;
         }
 
         private void splitContainer1_Resize(object sender, EventArgs e)
@@ -107,37 +92,44 @@ namespace Schluesselzahlen
             splitContainer1.SplitterDistance = splitContainer1.Width - 400;
         }
 
-        private void button18_Click(object sender, EventArgs e)
+        private void buttonSave_Click(object sender, EventArgs e)
         {
-            Data.save(group.ToArray(), club.ToArray(), partnership, Club.file, Group.file, Team.file);
+            Data.save(group.ToArray(), club.ToArray(), Club.file, Group.file, Team.file);
             caller.loadFromFile(Club.file, Group.file, Team.file);
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void boxGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
             enableGUIElements();
-            comboBox2.Items.Clear();
-            comboBox2.Text = "";
+            boxField.Items.Clear();
+            boxField.Text = "";
 
             // Mögliche Feldgrößen ermitteln
-            if (comboBox1.SelectedIndex == -1)
-                comboBox2.SelectedIndex = -1;
+            if (boxGroup.SelectedIndex == -1)
+                boxField.SelectedIndex = -1;
             else
             {
-                Group l = group.ElementAt(comboBox1.SelectedIndex);
-                int minFieldSize = l.nrOfTeams < Data.TEAM_MIN ? Data.TEAM_MIN : l.nrOfTeams + l.nrOfTeams % 2;
-                for (int i = minFieldSize; i <= Data.TEAM_MAX; i += 2)
-                    comboBox2.Items.Add(i);
-                for (int i = 0; i < comboBox2.Items.Count; i++)
-                    if (Util.toInt(comboBox2.Items[i].ToString()) == l.field)
-                        comboBox2.SelectedIndex = i;
+                fillBoxField();
             }
         }
 
+        private void fillBoxField()
+        {
+            boxField.Items.Clear();
+            boxField.Text = "";
+            Group l = group.ElementAt(boxGroup.SelectedIndex);
+            int minFieldSize = l.nrOfTeams < Data.TEAM_MIN ? Data.TEAM_MIN : l.nrOfTeams + l.nrOfTeams % 2;
+            for (int i = minFieldSize; i <= Data.TEAM_MAX; i += 2)
+                boxField.Items.Add(i);
+            for (int i = 0; i < boxField.Items.Count; i++)
+                if (Util.toInt(boxField.Items[i].ToString()) == l.field)
+                    boxField.SelectedIndex = i;
+            boxField.Text = boxField.SelectedItem.ToString();
+        }
         public void enableGUIElements()
         {
             automatic = true;
-            if (comboBox1.SelectedIndex == -1)
+            if (boxGroup.SelectedIndex == -1)
                 for (int i = 0; i < Data.TEAM_MAX; i++)
                 {
                     external[i].Enabled = false;
@@ -150,13 +142,13 @@ namespace Schluesselzahlen
                 }
             else
             {
-                for (int i = 0; i < group.ElementAt(comboBox1.SelectedIndex).nrOfTeams; i++)
+                for (int i = 0; i < group.ElementAt(boxGroup.SelectedIndex).nrOfTeams; i++)
                 {
                     external[i].Enabled = false;
                     teamIdent[i].Enabled = true;
                     reset[i].Enabled = true;
 
-                    if (club.Contains(group.ElementAt(comboBox1.SelectedIndex).team[i].club))
+                    if (club.Contains(group.ElementAt(boxGroup.SelectedIndex).team[i].club))
                     {
                         external[i].Checked = false;
                         teamName[i].Enabled = false;
@@ -167,11 +159,11 @@ namespace Schluesselzahlen
                         teamName[i].Enabled = true;
                     }
 
-                    teamName[i].Text = group.ElementAt(comboBox1.SelectedIndex).team[i].club.name;
-                    teamIdent[i].Text = group.ElementAt(comboBox1.SelectedIndex).team[i].team;
+                    teamName[i].Text = group.ElementAt(boxGroup.SelectedIndex).team[i].club.name;
+                    teamIdent[i].Text = group.ElementAt(boxGroup.SelectedIndex).team[i].team;
 
                 }
-                for (int i = group.ElementAt(comboBox1.SelectedIndex).nrOfTeams; i < Data.TEAM_MAX; i++)
+                for (int i = group.ElementAt(boxGroup.SelectedIndex).nrOfTeams; i < Data.TEAM_MAX; i++)
                 {
                     external[i].Enabled = false;
                     external[i].Checked = false;
@@ -181,9 +173,9 @@ namespace Schluesselzahlen
                     teamIdent[i].Text = "";
                     reset[i].Enabled = false;
                 }
-                if (group.ElementAt(comboBox1.SelectedIndex).nrOfTeams < group.ElementAt(comboBox1.SelectedIndex).field)
-                    external[group.ElementAt(comboBox1.SelectedIndex).nrOfTeams].Enabled = true; ;
-            }
+                if (group.ElementAt(boxGroup.SelectedIndex).nrOfTeams < group.ElementAt(boxGroup.SelectedIndex).field)
+                    external[group.ElementAt(boxGroup.SelectedIndex).nrOfTeams].Enabled = true;
+            }            
             automatic = false;
         }
 
@@ -212,9 +204,9 @@ namespace Schluesselzahlen
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (comboBox1.SelectedIndex == -1)
+            if (boxGroup.SelectedIndex == -1)
                 return;
-            Group g = group.ElementAt(comboBox1.SelectedIndex);
+            Group g = group.ElementAt(boxGroup.SelectedIndex);
             if (e.ColumnIndex == 0 && g.nrOfTeams < g.field)
             {
                 g.team[g.nrOfTeams] = new Team();
@@ -227,47 +219,49 @@ namespace Schluesselzahlen
                 g.team[g.nrOfTeams].key = 0;
                 g.nrOfTeams++;
                 enableGUIElements();
+                fillBoxField();
             }
         }
 
-        private void buttonI_Click(object sender, EventArgs e)
+        private void buttonDeleteTeamI_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < Data.TEAM_MAX; i++)
                 if (sender.Equals(reset[i]))
-                    deleteTeam(group.ElementAt(comboBox1.SelectedIndex), i);
+                    deleteTeam(group.ElementAt(boxGroup.SelectedIndex), i);
+            fillBoxField();
         }
 
-        private void checkBoxI_CheckedChanged(object sender, EventArgs e)
+        private void boxExternalI_CheckedChanged(object sender, EventArgs e)
         {
             if (!automatic)
                 for (int i = 0; i < Data.TEAM_MAX; i++)
                     if (sender.Equals(external[i]))
                     {
                         if (external[i].Checked)
-                            createExternal(group.ElementAt(comboBox1.SelectedIndex), i);
+                            createExternal(group.ElementAt(boxGroup.SelectedIndex), i);
                         else
-                            deleteTeam(group.ElementAt(comboBox1.SelectedIndex), i);
+                            deleteTeam(group.ElementAt(boxGroup.SelectedIndex), i);
                     }
         }
 
-        private void textBoxI_Leave(object sender, EventArgs e)
+        private void boxClubI_Leave(object sender, EventArgs e)
         {
             for (int i = 0; i < Data.TEAM_MAX; i++)
                 if (sender.Equals(teamName[i]) || sender.Equals(teamIdent[i]))
                 {
                     teamName[i].Text = Util.clear(teamName[i].Text);
                     teamIdent[i].Text = Util.clear(teamIdent[i].Text);
-                    group.ElementAt(comboBox1.SelectedIndex).team[i].name = teamName[i].Text + " " + teamIdent[i].Text;
-                    group.ElementAt(comboBox1.SelectedIndex).team[i].team = teamIdent[i].Text;
-                    group.ElementAt(comboBox1.SelectedIndex).team[i].club.name = teamName[i].Text;
+                    group.ElementAt(boxGroup.SelectedIndex).team[i].name = teamName[i].Text + " " + teamIdent[i].Text;
+                    group.ElementAt(boxGroup.SelectedIndex).team[i].team = teamIdent[i].Text;
+                    group.ElementAt(boxGroup.SelectedIndex).team[i].club.name = teamName[i].Text;
                 }
         }
 
         private void dataGridView1_CellLeave(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridView1.Rows[e.RowIndex].IsNewRow && e.ColumnIndex != 0)
+            if (dataGridViewClubsAndKeys.Rows[e.RowIndex].IsNewRow && e.ColumnIndex != 0)
                 return;
-            String value = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].EditedFormattedValue.ToString();
+            String value = dataGridViewClubsAndKeys.Rows[e.RowIndex].Cells[e.ColumnIndex].EditedFormattedValue.ToString();
             int zahl = Util.toInt(value);
             switch (e.ColumnIndex)
             {
@@ -275,7 +269,7 @@ namespace Schluesselzahlen
                     if (value.Equals(""))
                         break;
                     club.ElementAt(e.RowIndex).name = Util.clear(value);
-                    dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = club.ElementAt(e.RowIndex).name;
+                    dataGridViewClubsAndKeys.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = club.ElementAt(e.RowIndex).name;
                     break;
                 case 1:
                     assignValue('A', 'B', zahl, Data.field[0], e.RowIndex, 1, 2);
@@ -294,7 +288,7 @@ namespace Schluesselzahlen
                         club.ElementAt(e.RowIndex).capacity = false;
                     else
                         club.ElementAt(e.RowIndex).capacity = true;
-                    dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = club.ElementAt(e.RowIndex).capacity ? "X" : "";
+                    dataGridViewClubsAndKeys.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = club.ElementAt(e.RowIndex).capacity ? "X" : "";
                     break;
             }
         }
@@ -312,13 +306,13 @@ namespace Schluesselzahlen
                 club.ElementAt(rowIdx).keys[week2] = 0;
             }
             if (club.ElementAt(rowIdx).keys[week1] == 0)
-                dataGridView1.Rows[rowIdx].Cells[colIdx1].Value = "";
+                dataGridViewClubsAndKeys.Rows[rowIdx].Cells[colIdx1].Value = "";
             else
-                dataGridView1.Rows[rowIdx].Cells[colIdx1].Value = club.ElementAt(rowIdx).keys[week1].ToString();
+                dataGridViewClubsAndKeys.Rows[rowIdx].Cells[colIdx1].Value = club.ElementAt(rowIdx).keys[week1].ToString();
             if (club.ElementAt(rowIdx).keys[week2] == 0)
-                dataGridView1.Rows[rowIdx].Cells[colIdx2].Value = "";
+                dataGridViewClubsAndKeys.Rows[rowIdx].Cells[colIdx2].Value = "";
             else
-                dataGridView1.Rows[rowIdx].Cells[colIdx2].Value = club.ElementAt(rowIdx).keys[week2].ToString();
+                dataGridViewClubsAndKeys.Rows[rowIdx].Cells[colIdx2].Value = club.ElementAt(rowIdx).keys[week2].ToString();
         }
 
         private void dataGridView1_UserAddedRow(object sender, DataGridViewRowEventArgs e)
@@ -333,7 +327,7 @@ namespace Schluesselzahlen
         private void dataGridView1_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
             foreach (Partnership p in partnership)
-                if (p.clubA.index == e.Row.Index - 1 || p.clubB.index == e.Row.Index - 1)
+                if (p.indexA == e.Row.Index - 1 || p.indexB == e.Row.Index - 1)
                     partnership.Remove(p);
             club.RemoveAt(e.Row.Index - 1);
             for (int i = e.Row.Index - 1; i < club.Count; i++)
@@ -343,67 +337,68 @@ namespace Schluesselzahlen
 
         private void assignGUIElements()
         {
-            CheckBox[] checkBoxes = {checkBox1, checkBox2, checkBox3, checkBox4, checkBox5, checkBox6, checkBox7,
-                                     checkBox8, checkBox9,checkBox10,checkBox11,checkBox12,checkBox13,checkBox14};
+            CheckBox[] boxExternales = {boxExternal1, boxExternal2, boxExternal3, boxExternal4, boxExternal5, boxExternal6, boxExternal7,
+                                     boxExternal8, boxExternal9,boxExternal10,boxExternal11,boxExternal12,boxExternal13,boxExternal14};
 
             for (int i = 0; i < 14; i++)
-                external[i] = checkBoxes[i];
+                external[i] = boxExternales[i];
 
-            TextBox[] textBoxes = { textBox1,  textBox2, textBox3, textBox4, textBox5, textBox6, textBox7,
-                                    textBox8,  textBox9,textBox10,textBox11,textBox12,textBox13,textBox14,
-                                   textBox15, textBox16,textBox17,textBox18,textBox19,textBox20,textBox21,
-                                   textBox22, textBox23,textBox24,textBox25,textBox26,textBox27,textBox28 };
-
-            for (int i = 0; i < 14; i++)
-                teamName[i] = textBoxes[i];
+            TextBox[] boxClubes = { boxClub1,  boxClub2, boxClub3, boxClub4, boxClub5, boxClub6, boxClub7,
+                                    boxClub8,  boxClub9,boxClub10,boxClub11,boxClub12,boxClub13,boxClub14,
+                                   boxTeam1, boxTeam2,boxTeam3,boxTeam4,boxTeam5,boxTeam6,boxTeam7,
+                                   boxTeam8, boxTeam9,boxTeam10,boxTeam11,boxTeam12,boxTeam13,boxTeam14 };
 
             for (int i = 0; i < 14; i++)
-                teamIdent[i] = textBoxes[i + 14];
-
-            Button[] buttons = {button1, button2, button3, button4, button5, button6, button7,
-                                button8, button9,button10,button11,button12,button13,button14};
+                teamName[i] = boxClubes[i];
 
             for (int i = 0; i < 14; i++)
-                reset[i] = buttons[i];
+                teamIdent[i] = boxClubes[i + 14];
+
+            Button[] buttonDeleteTeams = {buttonDeleteTeam1, buttonDeleteTeam2, buttonDeleteTeam3, buttonDeleteTeam4, buttonDeleteTeam5, buttonDeleteTeam6, buttonDeleteTeam7,
+                                buttonDeleteTeam8, buttonDeleteTeam9,buttonDeleteTeam10,buttonDeleteTeam11,buttonDeleteTeam12,buttonDeleteTeam13,buttonDeleteTeam14};
+
+            for (int i = 0; i < 14; i++)
+                reset[i] = buttonDeleteTeams[i];
         }
 
-        private void button15_Click(object sender, EventArgs e)
+        private void buttonCreateGroup_Click(object sender, EventArgs e)
         {
-            if (comboBox1.Text.Equals("")) 
+            if (boxGroup.Text.Equals("")) 
             { 
                 MessageBox.Show("Geben Sie zunächst einen Namen für die neue Liga an!", "Liga anlegen", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             else
                 foreach (Group l in this.group)
-                    if (l.name.Equals(comboBox1.Text))
+                    if (l.name.Equals(boxGroup.Text))
                     {
-                        MessageBox.Show("Der Name " + comboBox1.Text + " ist bereits vergeben!", "Liga anlegen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Der Name " + boxGroup.Text + " ist bereits vergeben!", "Liga anlegen", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
             Group group = new Group();
-            group.name = Util.clear(comboBox1.Text);
+            group.name = Util.clear(boxGroup.Text);
             group.field = Data.field[0];
             group.team = new Team[Data.TEAM_MAX];
+            group.nrOfTeams = 0;
             group.index = this.group.Count;
             this.group.Add(group);
-            comboBox1.Items.Add(group.name);
-            comboBox1.SelectedIndex = group.index;
+            boxGroup.Items.Add(group.name);
+            boxGroup.SelectedIndex = group.index;
             enableGUIElements();
         }
 
-        private void button17_Click(object sender, EventArgs e)
+        private void buttonDeleteGroup_Click(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedIndex != -1)
-                switch (MessageBox.Show("Wollen Sie die " + group[comboBox1.SelectedIndex].name + " löschen?", "Liga löschen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
+            if (boxGroup.SelectedIndex != -1)
+                switch (MessageBox.Show("Wollen Sie die " + group[boxGroup.SelectedIndex].name + " löschen?", "Liga löschen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
                 {
                     case DialogResult.No:
                         break;
                     case DialogResult.Yes:
-                        group.RemoveAt(comboBox1.SelectedIndex);
-                        for (int i = comboBox1.SelectedIndex; i < group.Count; i++)
+                        group.RemoveAt(boxGroup.SelectedIndex);
+                        for (int i = boxGroup.SelectedIndex; i < group.Count; i++)
                             group[i].index--;
-                        comboBox1.Items.RemoveAt(comboBox1.SelectedIndex);
+                        boxGroup.Items.RemoveAt(boxGroup.SelectedIndex);
                         enableGUIElements();
                         this.Enabled = true;
                         this.Focus();
@@ -415,7 +410,7 @@ namespace Schluesselzahlen
                 }
         }
 
-        private void Dateninput_Resize(object sender, EventArgs e)
+        private void DataInput_Resize(object sender, EventArgs e)
         {
             caller.WindowState = this.WindowState;
             this.Focus();
@@ -426,11 +421,15 @@ namespace Schluesselzahlen
 
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void boxField_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox2.SelectedIndex != -1 && comboBox1.SelectedIndex != -1)
+            if (boxField.SelectedIndex != -1 && boxGroup.SelectedIndex != -1)
             {
-                group.ElementAt(comboBox1.SelectedIndex).field = Util.toInt(comboBox2.SelectedItem.ToString());
+                int newField = Util.toInt(boxField.SelectedItem.ToString());
+                if (newField < group.ElementAt(boxGroup.SelectedIndex).nrOfTeams)
+                    boxField.SelectedIndex = -1;
+                else
+                    group.ElementAt(boxGroup.SelectedIndex).field = newField;
                 enableGUIElements();
             }
         }

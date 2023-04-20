@@ -2,24 +2,24 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace Schluesselzahlen
+namespace KeyGenerator
 {
     public partial class PleaseWait : Form
     {
-        Schluesselzahlen caller;
+        KeyGenerator caller;
         Group[] best_l;
         Club[] best_v;
         int[] conflicts;
 
-        public PleaseWait(Schluesselzahlen caller)
+        public PleaseWait(KeyGenerator caller)
         {
             this.caller = caller;
             caller.Enabled = false;
             best_l = new Group[Data.group.Length];
             best_v = new Club[Data.club.Length];
             InitializeComponent();
-            initProgressBar(progressBar1);
-            backgroundWorker2.RunWorkerAsync();
+            initProgressBar(progressBar);
+            backgroundWorker.RunWorkerAsync();
         }
 
         public void initProgressBar(ProgressBar pb)
@@ -31,39 +31,38 @@ namespace Schluesselzahlen
 
         private void cancel(object sender, EventArgs e)
         {
-            backgroundWorker2.CancelAsync();
-            returnToCaller();
+            this.Close();
         }
 
         private void returnToCaller()
         {
             this.Visible = false;
-            caller.comboBox1.Text = "";
-            caller.comboBox1.SelectedIndex = -1;
-            caller.comboBox3.Text = "";
-            caller.comboBox3.SelectedIndex = -1;
-            caller.dataGridView1.Columns.Clear();
+            caller.dataGridView.Columns.Clear();
             caller.initUI();
             caller.enableBoxesAndButtons();
-            caller.Enabled = true;
-            caller.Focus();
+            caller.prepare();
         }
 
-        private void BitteWarten_FormClosing(object sender, FormClosingEventArgs e)
+        private void PleaseWait_FormClosing(object sender, FormClosingEventArgs e)
         {
-            backgroundWorker2.CancelAsync();
-            returnToCaller();
+            this.Enabled = false;   
+            e.Cancel = !Util.confirm(caller, best_l, best_v);
+            if (!e.Cancel)
+            {
+                backgroundWorker.CancelAsync();
+            }
+            this.Enabled = true;
         }
 
-        private void BitteWarten_Resize(object sender, EventArgs e)
+        private void PleaseWait_Resize(object sender, EventArgs e)
         {
             caller.WindowState = this.WindowState;
             this.Focus();
         }
 
-        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            Data.save(Data.group, Data.club, Data.partnership, Club.backup, Group.backup, Team.backup);
+            Data.save(Data.group, Data.club, Club.backup, Group.backup, Team.backup);
             if (Data.notification.Count > 0)
             {
                 MessageBox.Show(Data.notification[0]);
@@ -73,7 +72,7 @@ namespace Schluesselzahlen
             Data.setWeeks();
             Data.copyKeys();
             Data.createPriority();
-            Data.copy(Data.group, best_l, Data.club, best_v, Data.partnership, Data.partnership);
+            Data.copy(Data.group, best_l, Data.club, best_v);
             Data.checkPlausibility(Data.group, Data.notification);
             Data.checkFatal(Data.group, Data.notification);
             if (Data.notification.Count > 0)
@@ -83,20 +82,20 @@ namespace Schluesselzahlen
             }
             int[] keys = new int[Data.club.Length * 2];
             conflicts = new int[]{ 0, -1 };
-            Data.findSolution(Data.group, best_l, Data.club, best_v, conflicts, keys, backgroundWorker2);
+            Data.findSolution(Data.group, best_l, Data.club, best_v, conflicts, keys, backgroundWorker);
         }
 
-        private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             returnToCaller();
-            caller.showResults(best_l, best_v, conflicts[1], e.Cancelled);
+            caller.showResults(best_l, best_v, conflicts[1]);
         }
 
-        private void backgroundWorker2_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            progressBar1.Value = e.ProgressPercentage * 10;
-            int seconds = Data.runtime * (1000 - progressBar1.Value) / 1000 % 60;
-            int minutes = Data.runtime * (1000 - progressBar1.Value) / 60000;
+            progressBar.Value = e.ProgressPercentage * 10;
+            int seconds = Data.runtime * (1000 - progressBar.Value) / 1000 % 60;
+            int minutes = Data.runtime * (1000 - progressBar.Value) / 60000;
 
             string newTime = "";
             if (minutes < 10)
@@ -109,23 +108,18 @@ namespace Schluesselzahlen
             else
                 newTime += seconds;
 
-            if (!newTime.Equals(label2.Text))
+            if (!newTime.Equals(labelTime.Text))
             {
-                label2.Text = newTime;
-                label2.Refresh();
+                labelTime.Text = newTime;
+                labelTime.Refresh();
             }
 
             string newText = Data.currentConflicts == 0 ? "-" : "" + Data.currentConflicts;
-            if (!newText.Equals(label4.Text))
+            if (!newText.Equals(labelNrOfConflicts.Text))
             {
-                label4.Text = newText;
-                label4.Refresh();
+                labelNrOfConflicts.Text = newText;
+                labelNrOfConflicts.Refresh();
             }
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

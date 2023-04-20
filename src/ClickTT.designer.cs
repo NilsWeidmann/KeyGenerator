@@ -1,4 +1,4 @@
-﻿namespace Schluesselzahlen
+﻿namespace KeyGenerator
 {
     partial class ClickTT
     {
@@ -28,180 +28,200 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.boxLinkGroups = new System.Windows.Forms.TextBox();
+            this.buttonDeleteTeamNewGroup = new System.Windows.Forms.Button();
+            this.dataGridViewGroups = new System.Windows.Forms.DataGridView();
+            this.dataGridViewClubs = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.boxLinkClubs = new System.Windows.Forms.TextBox();
+            this.buttonDeleteTeamNewClub = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.buttonDeleteTeamAddGroup = new System.Windows.Forms.Button();
+            this.dataGridViewTeams = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.buttonDeleteTeamAddClub = new System.Windows.Forms.Button();
+            this.buttonDeleteTeamSave = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGroups)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClubs)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTeams)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBox1
+            // boxLinkGroups
             // 
-            this.textBox1.Location = new System.Drawing.Point(43, 16);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(517, 20);
-            this.textBox1.TabIndex = 0;
+            this.boxLinkGroups.Location = new System.Drawing.Point(64, 25);
+            this.boxLinkGroups.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxLinkGroups.Name = "boxLinkGroups";
+            this.boxLinkGroups.Size = new System.Drawing.Size(774, 26);
+            this.boxLinkGroups.TabIndex = 0;
             // 
-            // button1
+            // buttonDeleteTeamNewGroup
             // 
-            this.button1.Location = new System.Drawing.Point(566, 14);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Neu";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonDeleteTeamNewGroup.Location = new System.Drawing.Point(849, 22);
+            this.buttonDeleteTeamNewGroup.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonDeleteTeamNewGroup.Name = "buttonDeleteTeamNewGroup";
+            this.buttonDeleteTeamNewGroup.Size = new System.Drawing.Size(112, 35);
+            this.buttonDeleteTeamNewGroup.TabIndex = 1;
+            this.buttonDeleteTeamNewGroup.Text = "Neu";
+            this.buttonDeleteTeamNewGroup.UseVisualStyleBackColor = true;
+            this.buttonDeleteTeamNewGroup.Click += new System.EventHandler(this.buttonDeleteTeamNewGroup_Click);
             // 
-            // dataGridView1
+            // dataGridViewGroups
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(10, 43);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(350, 99);
-            this.dataGridView1.TabIndex = 3;
-            this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowEnter);
+            this.dataGridViewGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewGroups.Location = new System.Drawing.Point(15, 66);
+            this.dataGridViewGroups.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dataGridViewGroups.Name = "dataGridViewGroups";
+            this.dataGridViewGroups.RowHeadersWidth = 62;
+            this.dataGridViewGroups.Size = new System.Drawing.Size(525, 152);
+            this.dataGridViewGroups.TabIndex = 3;
+            this.dataGridViewGroups.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowEnter);
             // 
-            // dataGridView2
+            // dataGridViewClubs
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(10, 43);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(712, 99);
-            this.dataGridView2.TabIndex = 4;
+            this.dataGridViewClubs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewClubs.Location = new System.Drawing.Point(15, 66);
+            this.dataGridViewClubs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dataGridViewClubs.Name = "dataGridViewClubs";
+            this.dataGridViewClubs.RowHeadersWidth = 62;
+            this.dataGridViewClubs.Size = new System.Drawing.Size(1068, 152);
+            this.dataGridViewClubs.TabIndex = 4;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 16);
+            this.label2.Location = new System.Drawing.Point(10, 25);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(30, 13);
+            this.label2.Size = new System.Drawing.Size(42, 20);
             this.label2.TabIndex = 5;
             this.label2.Text = "Link:";
             // 
-            // textBox2
+            // boxLinkClubs
             // 
-            this.textBox2.Location = new System.Drawing.Point(43, 13);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(517, 20);
-            this.textBox2.TabIndex = 6;
+            this.boxLinkClubs.Location = new System.Drawing.Point(64, 20);
+            this.boxLinkClubs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxLinkClubs.Name = "boxLinkClubs";
+            this.boxLinkClubs.Size = new System.Drawing.Size(774, 26);
+            this.boxLinkClubs.TabIndex = 6;
             // 
-            // button2
+            // buttonDeleteTeamNewClub
             // 
-            this.button2.Location = new System.Drawing.Point(566, 10);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Neu";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonDeleteTeamNewClub.Location = new System.Drawing.Point(849, 15);
+            this.buttonDeleteTeamNewClub.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonDeleteTeamNewClub.Name = "buttonDeleteTeamNewClub";
+            this.buttonDeleteTeamNewClub.Size = new System.Drawing.Size(112, 35);
+            this.buttonDeleteTeamNewClub.TabIndex = 7;
+            this.buttonDeleteTeamNewClub.Text = "Neu";
+            this.buttonDeleteTeamNewClub.UseVisualStyleBackColor = true;
+            this.buttonDeleteTeamNewClub.Click += new System.EventHandler(this.buttonDeleteTeamNewClub_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Controls.Add(this.dataGridView3);
+            this.groupBox1.Controls.Add(this.buttonDeleteTeamAddGroup);
+            this.groupBox1.Controls.Add(this.dataGridViewTeams);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.dataGridView1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Controls.Add(this.boxLinkGroups);
+            this.groupBox1.Controls.Add(this.buttonDeleteTeamNewGroup);
+            this.groupBox1.Controls.Add(this.dataGridViewGroups);
+            this.groupBox1.Location = new System.Drawing.Point(18, 18);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(728, 148);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Size = new System.Drawing.Size(1092, 228);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Staffeln";
             // 
-            // button4
+            // buttonDeleteTeamAddGroup
             // 
-            this.button4.Location = new System.Drawing.Point(647, 14);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "Hinzu";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.buttonDeleteTeamAddGroup.Location = new System.Drawing.Point(970, 22);
+            this.buttonDeleteTeamAddGroup.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonDeleteTeamAddGroup.Name = "buttonDeleteTeamAddGroup";
+            this.buttonDeleteTeamAddGroup.Size = new System.Drawing.Size(112, 35);
+            this.buttonDeleteTeamAddGroup.TabIndex = 5;
+            this.buttonDeleteTeamAddGroup.Text = "Hinzu";
+            this.buttonDeleteTeamAddGroup.UseVisualStyleBackColor = true;
+            this.buttonDeleteTeamAddGroup.Click += new System.EventHandler(this.buttonDeleteTeamAddGroup_Click);
             // 
-            // dataGridView3
+            // dataGridViewTeams
             // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(372, 43);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(350, 99);
-            this.dataGridView3.TabIndex = 4;
+            this.dataGridViewTeams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewTeams.Location = new System.Drawing.Point(558, 66);
+            this.dataGridViewTeams.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dataGridViewTeams.Name = "dataGridViewTeams";
+            this.dataGridViewTeams.RowHeadersWidth = 62;
+            this.dataGridViewTeams.Size = new System.Drawing.Size(525, 152);
+            this.dataGridViewTeams.TabIndex = 4;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 20);
+            this.label1.Location = new System.Drawing.Point(10, 31);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 13);
+            this.label1.Size = new System.Drawing.Size(42, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Link:";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button5);
+            this.groupBox2.Controls.Add(this.buttonDeleteTeamAddClub);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.textBox2);
-            this.groupBox2.Controls.Add(this.dataGridView2);
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Location = new System.Drawing.Point(12, 166);
+            this.groupBox2.Controls.Add(this.boxLinkClubs);
+            this.groupBox2.Controls.Add(this.dataGridViewClubs);
+            this.groupBox2.Controls.Add(this.buttonDeleteTeamNewClub);
+            this.groupBox2.Location = new System.Drawing.Point(18, 255);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(728, 148);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox2.Size = new System.Drawing.Size(1092, 228);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Vereine";
             // 
-            // button5
+            // buttonDeleteTeamAddClub
             // 
-            this.button5.Location = new System.Drawing.Point(647, 11);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "Hinzu";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.buttonDeleteTeamAddClub.Location = new System.Drawing.Point(970, 17);
+            this.buttonDeleteTeamAddClub.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonDeleteTeamAddClub.Name = "buttonDeleteTeamAddClub";
+            this.buttonDeleteTeamAddClub.Size = new System.Drawing.Size(112, 35);
+            this.buttonDeleteTeamAddClub.TabIndex = 8;
+            this.buttonDeleteTeamAddClub.Text = "Hinzu";
+            this.buttonDeleteTeamAddClub.UseVisualStyleBackColor = true;
+            this.buttonDeleteTeamAddClub.Click += new System.EventHandler(this.buttonDeleteTeamAddClub_Click);
             // 
-            // button3
+            // buttonDeleteTeamSave
             // 
-            this.button3.Location = new System.Drawing.Point(659, 320);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 10;
-            this.button3.Text = "Speichern";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.buttonDeleteTeamSave.Location = new System.Drawing.Point(988, 492);
+            this.buttonDeleteTeamSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonDeleteTeamSave.Name = "buttonDeleteTeamSave";
+            this.buttonDeleteTeamSave.Size = new System.Drawing.Size(112, 35);
+            this.buttonDeleteTeamSave.TabIndex = 10;
+            this.buttonDeleteTeamSave.Text = "Speichern";
+            this.buttonDeleteTeamSave.UseVisualStyleBackColor = true;
+            this.buttonDeleteTeamSave.Click += new System.EventHandler(this.buttonDeleteTeamSave_Click);
             // 
-            // click_tt
+            // ClickTT
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(752, 353);
-            this.Controls.Add(this.button3);
+            this.ClientSize = new System.Drawing.Size(1128, 543);
+            this.Controls.Add(this.buttonDeleteTeamSave);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Name = "click_tt";
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Name = "ClickTT";
             this.Text = "click-tt Import";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.click_tt_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClickTT_FormClosing);
             this.Resize += new System.EventHandler(this.Form1_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGroups)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClubs)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTeams)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -210,20 +230,20 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.TextBox boxLinkGroups;
+        private System.Windows.Forms.Button buttonDeleteTeamNewGroup;
+        private System.Windows.Forms.DataGridView dataGridViewGroups;
+        private System.Windows.Forms.DataGridView dataGridViewClubs;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox boxLinkClubs;
+        private System.Windows.Forms.Button buttonDeleteTeamNewClub;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.GroupBox groupBox1;
         public System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dataGridView3;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.DataGridView dataGridViewTeams;
+        private System.Windows.Forms.Button buttonDeleteTeamSave;
+        private System.Windows.Forms.Button buttonDeleteTeamAddGroup;
+        private System.Windows.Forms.Button buttonDeleteTeamAddClub;
     }
 }
 

@@ -1,27 +1,27 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Schluesselzahlen
+namespace KeyGenerator
 {
     public partial class Additional : Form
     {
         private ComboBox[] cb;
         private Team t;
-        private Schluesselzahlen caller;
+        private KeyGenerator caller;
         private static string[] weeks = { "-", "A", "B", "X", "Y" };
         private static string[] days = { "-", "Heimspiel", "Auswärtsspiel" };
 
-    public Additional(Team t, Schluesselzahlen caller)
+    public Additional(Team t, KeyGenerator caller)
         {
             this.t = t;
             this.caller = caller;
             InitializeComponent();
 
-            textBox1.Text = t.name;
-            textBox2.Text = t.group.name;
+            boxTeam.Text = t.name;
+            boxGroup.Text = t.group.name;
 
-            cb = new ComboBox[] { comboBox1, comboBox2, comboBox3, comboBox4, comboBox5, comboBox6,
-                comboBox7, comboBox8, comboBox9, comboBox10, comboBox11, comboBox12, comboBox13};
+            cb = new ComboBox[] { boxDay01, boxDay02, boxDay03, boxDay04, boxDay05, boxDay06,
+                boxDay07, boxDay08, boxDay09, boxDay10, boxDay11, boxDay12, boxDay13};
 
             for (int i = 0; i < 13; i++)
             {
@@ -39,50 +39,43 @@ namespace Schluesselzahlen
             for (int i = (t.group.field == 6 ? 10 : t.group.field - 1); i < 13; i++)
                 cb[i].Enabled = false;
 
-            comboBox14.Items.Clear();
-            comboBox14.Items.AddRange(weeks);
+            boxWeek.Items.Clear();
+            boxWeek.Items.AddRange(weeks);
             for (int i = 0; i < weeks.Length; i++)
                 if (t.week.ToString().Equals(weeks[i]))
-                    comboBox14.SelectedIndex = i;
+                    boxWeek.SelectedIndex = i;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonDeleteTeamOkay_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < t.group.field - 1; i++)
                 t.day[i] = ((string)cb[i].SelectedItem)[0];
 
-            t.week = ((String)comboBox14.SelectedItem)[0];
+            t.week = ((String)boxWeek.SelectedItem)[0];
             this.Visible = false;
-            if (caller.radioButton2.Checked)
-                if (caller.comboBox1.SelectedIndex != -1)
-                    caller.fillDataGridView(button1);
+            if (caller.buttonGroupView.Checked)
+                if (caller.boxGroups.SelectedIndex != -1)
+                    caller.fillDataGridView(buttonDeleteTeamOkay);
             caller.Enabled = true;
             caller.Focus();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonDeleteTeamCancel_Click(object sender, EventArgs e)
         {
-            this.Visible = false;
-            caller.Enabled = true;
-            caller.Focus();
+            this.Close();
         }
 
-        private void Zusatz_FormClosing(object sender, FormClosingEventArgs e)
+        private void Additional_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.Visible = false;
-            caller.Enabled = true;
-            caller.Focus();
+            this.Enabled = false;
+            e.Cancel = !Util.confirm(caller, Data.group, Data.club);
+            this.Enabled = true;
         }
 
-        private void button1_Resize(object sender, EventArgs e)
+        private void buttonDeleteTeamOkay_Resize(object sender, EventArgs e)
         {
             caller.WindowState = this.WindowState;
             this.Focus();
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace Schluesselzahlen
+namespace KeyGenerator
 {
     public class TextFile
     {

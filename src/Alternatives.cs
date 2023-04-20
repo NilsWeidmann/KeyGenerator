@@ -3,176 +3,150 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Schluesselzahlen
+namespace KeyGenerator
 {
     public partial class Alternatives : Form
     {
-        public Conflict[] k;
-        public Group[] l;
-        public Club[] v;
-        public int i;
-        public Schluesselzahlen caller;
+        public Conflict[] conflicts;
+        public Group[] group;
+        public Club[] club;
+        public KeyGenerator caller;
 
-        public Alternatives(Conflict[] k, Group[] l, Club[] v, Schluesselzahlen caller)
+        public Alternatives(Conflict[] conflicts, Group[] groups, Club[] clubs, KeyGenerator caller)
         {
-            this.k = k;
-            this.l = l;
-            this.v = v;
+            this.conflicts = conflicts;
+            this.group = groups;
+            this.club = clubs;
             this.caller = caller;
             InitializeComponent();
             
-            comboBox1.Items.Clear();
-            for (int j = 0; j < k.Length; j++)
-                comboBox1.Items.Add("Konflikt " + (j + 1));
-            comboBox1.SelectedIndex = 0;
+            boxConflict.Items.Clear();
+            for (int j = 0; j < conflicts.Length; j++)
+                boxConflict.Items.Add("Konflikt " + (conflicts[j].index + 1));
+            boxConflict.SelectedIndex = 0;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonOkay_Click(object sender, EventArgs e)
         {
-            Group[] best_l = new Group[l.Length];
-            Club[] best_v = new Club[v.Length];
-            int[] konflikte = new int[2];
-            konflikte[0] = -1;
-            konflikte[1] = -1;
-            int[] schluessel = new int[Data.club.Length * 2];
-            for (int i = 0; i < k.Length; i++)
-                for (int j = 0; j < k[i].t.Length; j++)
-                    for (int x = 0; x < k.Length; x++)
-                        for (int y = 0; y < k[x].t.Length; y++)
-                            if (k[i].t[j].group == k[x].t[y].group && k[i].t[j].key == k[x].t[y].key)
-                                if (i != x)
-                                {
-                                    MessageBox.Show("Vergeben Sie die Zahl " + k[i].t[j].key + " in der " + k[i].t[j].group.name + " nur einmal!");
-                                    return;
-                                }
-                                else if (j != y)
-                                {
+            Group[] bestGroup = new Group[group.Length];
+            Club[] bestClub = new Club[club.Length];
+            int[] conflicts = new int[2];
+            conflicts[0] = -1;
+            conflicts[1] = -1;
+            int[] keys = new int[Data.club.Length * 2];
 
-                                    MessageBox.Show("Lösen Sie zunächst Konflikt " + (i + 1) + "!");
+            foreach (Conflict conflict1 in this.conflicts)
+                foreach (Team team1 in conflict1.t)
+                    foreach (Conflict conflict2 in this.conflicts)
+                        foreach (Team team2 in conflict2.t)
+                            if (team1.group.Equals(team2.group) && team1.key == team2.key)
+                                if (!conflict1.Equals(conflict2))
+                                {
+                                    // Problem: Verschiedene Konflikte beinhalten dieselbe Schlüsselzahl
+                                    MessageBox.Show("Vergeben Sie die Zahl " + team1.key + " in der " + team1.group.name 
+                                        + " nur einmal (Konflikt " + (conflict1.index + 1) + "/" + (conflict2.index + 1) + ")!");
                                     return;
                                 }
+                                else if (!team1.Equals(team2))
+                                {
+                                    // Problem: Konflikt ist noch nicht aufgelöst
+                                    MessageBox.Show("Lösen Sie zunächst Konflikt " + (boxConflict.SelectedIndex + 1) + "!");
+                                    return;
+                                }
+
             this.Visible = false;
-            caller.solveConflicts(l, v);
+            caller.solveConflicts(group, club);
             caller.Enabled = true;
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void boxConflict_SelectedIndexChanged(object sender, EventArgs e)
         {
-            i = comboBox1.SelectedIndex;
-            textBox1.Text = k[i].t[0].name;
-            textBox2.Text = k[i].t[1].name;
-            if (k[i].t.Length == 3)
-                textBox3.Text = k[i].t[2].name;
-            else
-                textBox3.Text = "";
-            textBox7.Text = k[i].t[0].group.name;
+            if (boxConflict.SelectedIndex == -1)
+                return;
 
-            ComboBox[] combo = { comboBox2, comboBox3, comboBox4 };
-            TextBox[] text = { textBox4, textBox5, textBox6 };
+            Conflict conflict = conflicts[boxConflict.SelectedIndex];
+            boxTeam1.Text = conflict.t[0].name;
+            boxTeam2.Text = conflict.t[1].name;
+            if (conflict.t.Length == 3)
+                boxTeam3.Text = conflict.t[2].name;
+            else
+                boxTeam3.Text = "";
+            boxGroup.Text = conflict.t[0].group.name;
+
+            ComboBox[] keys = { boxKey1, boxKey2, boxKey3 };
+            TextBox[] wish = { boxWish1, boxWish2, boxWish3 };
 
             for (int box = 0; box < 3; box++)
             {
-                if (box < k[i].t.Length)
+                if (box < conflict.t.Length)
                 {
-                    combo[box].Items.Clear();
-                    combo[box].Text = k[i].t[box].key.ToString();
-                    text[box].Text = k[i].wish.ToString();
+                    keys[box].Items.Clear();
+                    keys[box].Text = conflict.t[box].key.ToString();
+                    wish[box].Text = conflict.wish.ToString();
                     for (int j = 0; j < 3; j++)
-                        if (k[i].key[j] != 0)
+                        if (conflict.key[j] != 0)
                         {
-                            combo[box].Items.Add(k[i].key[j]);
-                            if (k[i].t[box].key == k[i].key[j])
-                                combo[box].SelectedIndex = j;
+                            keys[box].Items.Add(conflict.key[j]);
+                            if (conflict.t[box].key == conflict.key[j])
+                                keys[box].SelectedIndex = j;
                         }
-                    combo[box].Enabled = true;
+                    keys[box].Enabled = true;
                 }
                 else
                 {
-                    combo[box].Items.Clear();
-                    combo[box].Text = "";
-                    text[box].Text = "";
-                    combo[box].SelectedIndex = -1;
-                    combo[box].Enabled = false;
+                    keys[box].Items.Clear();
+                    keys[box].Text = "";
+                    wish[box].Text = "";
+                    keys[box].SelectedIndex = -1;
+                    keys[box].Enabled = false;
                 }
             }
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void boxKey1_SelectedIndexChanged(object sender, EventArgs e)
         {
             resetSelectedIndices((ComboBox)sender);
         }
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        private void boxKey2_SelectedIndexChanged(object sender, EventArgs e)
         {
             resetSelectedIndices((ComboBox)sender);
         }
 
-        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        private void boxKey3_SelectedIndexChanged(object sender, EventArgs e)
         {
             resetSelectedIndices((ComboBox)sender);
         }
 
         private void resetSelectedIndices(ComboBox sender)
         {
-            ComboBox[] combo = { comboBox2, comboBox3, comboBox4 };
+            ComboBox[] combo = { boxKey1, boxKey2, boxKey3 };
 
             for (int box = 0; box < 3; box++)
             {
                 if (combo[box] != sender && sender.SelectedIndex == combo[box].SelectedIndex)
                     combo[box].SelectedIndex = -1;
                 if (combo[box] == sender && combo[box].SelectedIndex != -1)
-                    k[i].t[box].key = Util.toInt(combo[box].SelectedItem.ToString());
+                    conflicts[boxConflict.SelectedIndex].t[box].key = Util.toInt(combo[box].SelectedItem.ToString());
             }
         }
 
-        private void Alternativen_FormClosing(object sender, FormClosingEventArgs e)
+        private void Alternatives_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Enabled = false;
-            switch (MessageBox.Show("Wollen Sie die Änderungen speichern?", "Änderungen speichern", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
-            {
-                case DialogResult.No:
-                    try
-                    {
-                        caller.loadFromFile(Club.backup, Group.backup, Team.backup);
-                    }
-                    catch (Exception ex)
-                    {
-                        Data.notification.Append(ex.ToString());
-                        caller.loadFromFile(Club.file, Group.file, Team.file);
-                    }
-                    prepareCaller();
-                    break;
-                case DialogResult.Yes:
-                    Data.save(Data.group, Data.club, Data.partnership, Club.file, Group.file, Team.file);
-                    caller.loadFromFile(Club.file, Group.file, Team.file);
-                    prepareCaller();
-                    break;
-                case DialogResult.Cancel:
-                    e.Cancel = true;
-                    break;
-            }
+            e.Cancel = !Util.confirm(caller, group, club);
             this.Enabled = true;
         }
 
-        private void prepareCaller()
-        {
-            caller.comboBox1.Text = "";
-            caller.comboBox1.SelectedIndex = -1;
-            caller.comboBox3.Text = "";
-            caller.comboBox3.SelectedIndex = -1;
-            caller.Enabled = true;
-            caller.Focus();
-        }
-
-        private void Alternativen_Resize(object sender, EventArgs e)
+        private void Alternativex_Resize(object sender, EventArgs e)
         {
             caller.WindowState = this.WindowState;
             this.Focus();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonProposal_Click(object sender, EventArgs e)
         {
-            foreach (Conflict conflict in k)
+            foreach (Conflict conflict in conflicts)
             {
                 List<int> keysToAssign = conflict.key.ToList();
                 List<Team> teamsToAssign = conflict.t.ToList();
@@ -192,6 +166,8 @@ namespace Schluesselzahlen
                     keysToAssign.Remove(keysToAssign.First());
                 }   
             }
+            boxConflict.SelectedIndex = -1;
+            boxConflict.SelectedIndex = 0;
         }
     }
 }

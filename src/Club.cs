@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Schluesselzahlen
+namespace KeyGenerator
 {
     public class Club : IComparable
     {
@@ -15,13 +15,16 @@ namespace Schluesselzahlen
         public List<Team> team;
         public int[] prio;
         public bool capacity;
+        public List<Partnership> partnerships;
 
         public Club()
         {
+            this.name = "";
             this.team = new List<Team>();
             this.keys = new Dictionary<char, int>();
             keys['A'] = keys['B'] = keys['X'] = keys['Y'] = 0;
             prio = new int[2];
+            partnerships = new List<Partnership>();
         }
 
         public Club(String name, int id, int index) : this()
@@ -29,7 +32,6 @@ namespace Schluesselzahlen
             this.name = name;
             this.id = id;
             this.index = index;
-
         }
 
         public void setPrio()
@@ -58,6 +60,9 @@ namespace Schluesselzahlen
             //Referenzen werden später gesetzt!
             v.team = new List<Team>();
             v.capacity = capacity;
+            v.partnerships = new List<Partnership>();
+            foreach (Partnership p in partnerships)
+                v.partnerships.Add(new Partnership(p.indexA, p.weekA, p.indexB, p.weekB));
             return v;
         }
 

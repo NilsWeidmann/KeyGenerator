@@ -9,57 +9,58 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Schluesselzahlen
+namespace KeyGenerator
 {
-    public partial class Schluesselzahlen : Form
+    public partial class KeyGenerator : Form
     {
         private Club club;
         private string[] weeks = { "-", "A", "B", "X", "Y" };
 
-        public Schluesselzahlen()
+        public KeyGenerator()
         {
             InitializeComponent();
-            this.dataGridView1.ReadOnly = false;
+            this.dataGridView.ReadOnly = false;
             initDataGridView();
             enableFields();
-            checkBox1.Enabled = false;
-            textBox2.Enabled = false;
-            button3.Enabled = false;
-            button6.Enabled = false;
-            button14.Enabled = false;
-            button15.Enabled = false;
-            comboBox1.Enabled = false;
-            comboBox3.Enabled = false;
-            comboBox4.Enabled = false;
-            fillFields(comboBox10);
-            comboBox10.SelectedIndex = 3;
-            fillFields(comboBox11);
-            comboBox11.SelectedIndex = 2;
-            textBox1.Text = "2";
-            textBox2.Text = Application.StartupPath;
-            textBox3.Text = "0";
+            boxCapacity.Enabled = false;
+            boxDirectory.Enabled = false;
+            buttonGenerate.Enabled = false;
+            buttonInputFromFile.Enabled = false;
+            buttonMiscellaneous.Enabled = false;
+            buttonSave.Enabled = false;
+            boxGroups.Enabled = false;
+            boxClubs.Enabled = false;
+            boxFields.Enabled = false;
+            fillFields(boxFieldAB);
+            boxFieldAB.SelectedIndex = 3;
+            fillFields(boxFieldXY);
+            boxFieldXY.SelectedIndex = 2;
+            boxRuntimeMinutes.Text = "2";
+            boxDirectory.Text = Application.StartupPath;
+            boxRuntimeSeconds.Text = "0";
             setFiles(Application.StartupPath);
             Data.caller = this;
+
             enableBoxesAndButtons();
         }
 
         private void initDataGridView()
         {
-            dataGridView1.Rows.Clear();
-            dataGridView1.Columns.Clear();
-            dataGridView1.Columns.Add("Woche", "Woche");
-            dataGridView1.Columns.Add("Liga", "Liga");
-            dataGridView1.Columns.Add("Team", "Team");
-            dataGridView1.Columns.Add("Schlüssel", "Schlüssel");
-            dataGridView1.Columns[0].ReadOnly = false;
-            dataGridView1.Columns[1].ReadOnly = true;
-            dataGridView1.Columns[2].ReadOnly = true;
-            dataGridView1.Columns[3].ReadOnly = true;
-            foreach (DataGridViewColumn col in dataGridView1.Columns)
+            dataGridView.Rows.Clear();
+            dataGridView.Columns.Clear();
+            dataGridView.Columns.Add("Woche", "Woche");
+            dataGridView.Columns.Add("Liga", "Liga");
+            dataGridView.Columns.Add("Team", "Team");
+            dataGridView.Columns.Add("Schlüssel", "Schlüssel");
+            dataGridView.Columns[0].ReadOnly = false;
+            dataGridView.Columns[1].ReadOnly = true;
+            dataGridView.Columns[2].ReadOnly = true;
+            dataGridView.Columns[3].ReadOnly = true;
+            foreach (DataGridViewColumn col in dataGridView.Columns)
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
 
             // Nur bei Vereinssicht, nicht bei Staffelsicht
-            dataGridView1.Columns[0].Visible = radioButton1.Checked;
+            dataGridView.Columns[0].Visible = buttonClubView.Checked;
         }
         public void fillFields(ComboBox cb)
         {
@@ -71,10 +72,10 @@ namespace Schluesselzahlen
 
         public void enableFields()
         {
-            comboBox4.Enabled = comboBox1.SelectedIndex != -1;
+            boxFields.Enabled = boxGroups.SelectedIndex != -1;
         }
 
-        public void showResults(Group[] best_l, Club[] best_v, int conflicts, bool cancelled)
+        public void showResults(Group[] best_l, Club[] best_v, int conflicts)
         {
             if (conflicts == -1)
                 Data.notification.Add("Es konnten keine Schlüsselzahlen ermittelt werden!");
@@ -84,19 +85,17 @@ namespace Schluesselzahlen
                 Data.notification.Clear();
                 loadFromFile(Club.backup, Group.backup, Team.backup);
             }
-            else if (cancelled)
-                loadFromFile(Club.backup, Group.backup, Team.backup);
             else
             {
-                Data.copy(best_l, Data.group, best_v, Data.club, Data.partnership, Data.partnership);
+                Data.copy(best_l, Data.group, best_v, Data.club);
                 solveConflicts(Data.group, Data.club);
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void buttonGenerate_Click(object sender, EventArgs e)
         {
             this.Enabled = false;
-            Data.runtime = Util.toInt(textBox1.Text) * 60 + Util.toInt(textBox3.Text);
+            Data.runtime = Util.toInt(boxRuntimeMinutes.Text) * 60 + Util.toInt(boxRuntimeSeconds.Text);
             PleaseWait bw = new PleaseWait(this);
             bw.Visible = true;
         }
@@ -111,124 +110,124 @@ namespace Schluesselzahlen
         public void initUI()
         {
             initDataGridView();
-            checkBox1.Enabled = false;
+            boxCapacity.Enabled = false;
 
-            ComboBox[] boxes = { comboBox1, comboBox3 };
+            ComboBox[] boxes = { boxGroups, boxClubs };
             foreach (ComboBox box in boxes) {
                 reset(box);
             }
             
             if (Data.group != null)
                 for (int i = 0; i < Data.group.Length; i++)
-                    comboBox1.Items.Add(Data.group[i].name);
+                    boxGroups.Items.Add(Data.group[i].name);
             if (Data.club != null)
                 for (int i = 0; i < Data.club.Length; i++)
-                    comboBox3.Items.Add(Data.club[i].name);
+                    boxClubs.Items.Add(Data.club[i].name);
             enableFields();
         }
 
-        public bool loadFromFile(TextFile ver, TextFile sta, TextFile bez)
+        public bool loadFromFile(TextFile ver, TextFile groupFile, TextFile relationshipFile)
         {
-            button2.Enabled = button5.Enabled = button6.Enabled = false;
-            Data.club = Data.getClubs(ver, Data.partnership);
-            Data.group = Group.getGroups(Data.club, sta, Data.notification);
-            Data.getRelations(Data.group, bez);
+            buttonManualInput.Enabled = buttonClickTTInput.Enabled = buttonInputFromFile.Enabled = false;
+            Data.club = Data.getClubs(ver);
+            Data.group = Group.getGroups(Data.club, groupFile, Data.notification);
+            Data.getRelations(Data.group, relationshipFile);
             Data.allocateTeams(Data.club, Data.group);
             
             if (Data.notification.Count > 0)
             {
-                button3.Enabled = false;
-                button14.Enabled = false;
-                button15.Enabled = false;
+                buttonGenerate.Enabled = false;
+                buttonMiscellaneous.Enabled = false;
+                buttonSave.Enabled = false;
                 MessageBox.Show(Data.notification[0]);
                 Data.notification.Clear();
-                button2.Enabled = button5.Enabled = button6.Enabled = true;
+                buttonManualInput.Enabled = buttonClickTTInput.Enabled = buttonInputFromFile.Enabled = true;
                 return false;
             }
             else
             {
                 initUI();
-                radioButton1.Enabled = true;
-                radioButton2.Enabled = true;
-                radioButton1.Checked = true;
-                button3.Enabled = true;
-                button14.Enabled = true;
-                button15.Enabled = true;
-                button2.Enabled = button5.Enabled = button6.Enabled = true;
+                buttonClubView.Enabled = true;
+                buttonGroupView.Enabled = true;
+                buttonClubView.Checked = true;
+                buttonGenerate.Enabled = true;
+                buttonMiscellaneous.Enabled = true;
+                buttonSave.Enabled = true;
+                buttonManualInput.Enabled = buttonClickTTInput.Enabled = buttonInputFromFile.Enabled = true;
                 enableBoxesAndButtons();
                 return true;
             }
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void buttonInputFromFile_Click(object sender, EventArgs e)
         {
             loadFromFile(Club.file, Group.file, Team.file);
         }
 
         public void enableBoxesAndButtons()
         {
-            dataGridView1.Rows.Clear();
-            checkBox1.Enabled = checkBox1.Checked = button4.Enabled = false;
+            dataGridView.Rows.Clear();
+            boxCapacity.Enabled = boxCapacity.Checked = buttonPartner.Enabled = false;
 
-            comboBox1.Enabled = comboBox3.Enabled = comboBox4.Enabled = comboBox5.Enabled
-                 = comboBox6.Enabled = comboBox7.Enabled = comboBox8.Enabled = false;
+            boxGroups.Enabled = boxClubs.Enabled = boxFields.Enabled = boxWeekA.Enabled
+                 = boxWeekB.Enabled = boxWeekX.Enabled = boxWeekY.Enabled = false;
 
-            comboBox1.Text = comboBox3.Text = comboBox4.Text = comboBox5.Text 
-                = comboBox6.Text = comboBox7.Text = comboBox8.Text = "";
+            boxGroups.Text = boxClubs.Text = boxFields.Text = boxWeekA.Text 
+                = boxWeekB.Text = boxWeekX.Text = boxWeekY.Text = "";
 
-            if (radioButton1.Checked)
+            if (buttonClubView.Checked)
             {
                 // Vereinssicht
-                comboBox3.Enabled = true;
-                if (comboBox3.SelectedItem != null)
+                boxClubs.Enabled = true;
+                if (boxClubs.SelectedItem != null)
                 {
-                    checkBox1.Enabled = comboBox5.Enabled = comboBox6.Enabled = comboBox7.Enabled = comboBox8.Enabled = true;
-                    comboBox3.Text = comboBox3.SelectedItem.ToString();
-                    comboBox5.Text = comboBox5.SelectedItem.ToString();
-                    comboBox6.Text = comboBox6.SelectedItem.ToString();
-                    comboBox7.Text = comboBox7.SelectedItem.ToString();
-                    comboBox8.Text = comboBox8.SelectedItem.ToString();
-                    checkBox1.Checked = Data.club[comboBox3.SelectedIndex].capacity;
+                    boxCapacity.Enabled = boxWeekA.Enabled = boxWeekB.Enabled = boxWeekX.Enabled = boxWeekY.Enabled = true;
+                    boxClubs.Text = boxClubs.SelectedItem.ToString();
+                    boxWeekA.Text = boxWeekA.SelectedItem.ToString();
+                    boxWeekB.Text = boxWeekB.SelectedItem.ToString();
+                    boxWeekX.Text = boxWeekX.SelectedItem.ToString();
+                    boxWeekY.Text = boxWeekY.SelectedItem.ToString();
+                    boxCapacity.Checked = Data.club[boxClubs.SelectedIndex].capacity;
                 }
             }
-            else if (radioButton2.Checked)
+            else if (buttonGroupView.Checked)
             {
                 // Staffelsicht
-                comboBox1.Enabled = true;
-                if (comboBox1.SelectedItem != null)
+                boxGroups.Enabled = true;
+                if (boxGroups.SelectedItem != null)
                 {
-                    comboBox1.Text = comboBox1.SelectedItem.ToString();
-                    comboBox4.Enabled = true;
-                    comboBox4.Text = Data.group[comboBox1.SelectedIndex].field.ToString();
+                    boxGroups.Text = boxGroups.SelectedItem.ToString();
+                    boxFields.Enabled = true;
+                    boxFields.Text = Data.group[boxGroups.SelectedIndex].field.ToString();
                 }
             }
         }
 
         public void fillDataGridView(Control caller)
         {
-            dataGridView1.Rows.Clear();
-            if (radioButton1.Checked && comboBox3.SelectedIndex != -1)
+            dataGridView.Rows.Clear();
+            if (buttonClubView.Checked && boxClubs.SelectedIndex != -1)
             {
                 // Vereinssicht
-                club = Data.club[comboBox3.SelectedIndex];
-                if (comboBox3.SelectedIndex == -1)
+                club = Data.club[boxClubs.SelectedIndex];
+                if (boxClubs.SelectedIndex == -1)
                 {
-                    checkBox1.Checked = checkBox1.Enabled = button4.Enabled = false;
-                    comboBox5.Text = comboBox6.Text = comboBox7.Text = comboBox8.Text = "";
+                    boxCapacity.Checked = boxCapacity.Enabled = buttonPartner.Enabled = false;
+                    boxWeekA.Text = boxWeekB.Text = boxWeekX.Text = boxWeekY.Text = "";
                 }
                 else
                 {
-                    checkBox1.Checked = club.capacity;
-                    button4.Enabled = true;
+                    boxCapacity.Checked = club.capacity;
+                    buttonPartner.Enabled = true;
                 }
-                if (comboBox5.Items.Count > club.keys['A'])
-                    comboBox5.SelectedIndex = club.keys['A'];
-                if (comboBox6.Items.Count > club.keys['B'])
-                    comboBox6.SelectedIndex = club.keys['B'];
-                if (comboBox7.Items.Count > club.keys['X'])
-                    comboBox7.SelectedIndex = club.keys['X'];
-                if (comboBox8.Items.Count > club.keys['Y'])
-                    comboBox8.SelectedIndex = club.keys['Y'];
+                if (boxWeekA.Items.Count > club.keys['A'])
+                    boxWeekA.SelectedIndex = club.keys['A'];
+                if (boxWeekB.Items.Count > club.keys['B'])
+                    boxWeekB.SelectedIndex = club.keys['B'];
+                if (boxWeekX.Items.Count > club.keys['X'])
+                    boxWeekX.SelectedIndex = club.keys['X'];
+                if (boxWeekY.Items.Count > club.keys['Y'])
+                    boxWeekY.SelectedIndex = club.keys['Y'];
                 for (int j = 0; j < club.team.Count; j++)
                 {
                     String[] content = new String[4];
@@ -247,7 +246,7 @@ namespace Schluesselzahlen
                     else if (club.team[j].week == 'X' || club.team[j].week == 'Y')
                         content[3] = Data.km.getParallel(Data.field[1], club.team[j].group.field, club.keys[club.team[j].week]).ToString();
 
-                    dataGridView1.Rows.Add(content);
+                    dataGridView.Rows.Add(content);
 
                     for (int l = 0; l < 4; l++)
                     {
@@ -260,25 +259,25 @@ namespace Schluesselzahlen
                             case 'Y': color = Color.LightGreen; break;
                             default: color = Color.White; break;
                         }
-                        dataGridView1.Rows[j].Cells[l].Style.BackColor = color;
+                        dataGridView.Rows[j].Cells[l].Style.BackColor = color;
                     }
                 }
             }
-            else if (radioButton2.Checked && comboBox1.SelectedIndex != -1)
+            else if (buttonGroupView.Checked && boxGroups.SelectedIndex != -1)
             {
                 // Staffelsicht
-                for (int j = 0; j < Data.group[comboBox1.SelectedIndex].nrOfTeams; j++)
+                for (int j = 0; j < Data.group[boxGroups.SelectedIndex].nrOfTeams; j++)
                 {
                     String[] content = new String[4];
-                    Team team = Data.group[comboBox1.SelectedIndex].team[j];
-                    int field = Data.group[comboBox1.SelectedIndex].field;
+                    Team team = Data.group[boxGroups.SelectedIndex].team[j];
+                    int field = Data.group[boxGroups.SelectedIndex].field;
 
                     if (team.week != '-')
                         content[0] = team.week.ToString();
                     else
                         content[0] = "";
-                    content[1] = Data.group[comboBox1.SelectedIndex].name;
-                    content[2] = Data.group[comboBox1.SelectedIndex].team[j].name;
+                    content[1] = Data.group[boxGroups.SelectedIndex].name;
+                    content[2] = Data.group[boxGroups.SelectedIndex].team[j].name;
 
                     if (team.key != 0)
                         content[3] = team.key.ToString();
@@ -289,7 +288,7 @@ namespace Schluesselzahlen
                     else if (team.week == 'X' || team.week == 'Y')
                         content[3] = Data.km.getParallel(Data.field[1], field, team.club.keys[team.week]).ToString();
 
-                    dataGridView1.Rows.Add(content);
+                    dataGridView.Rows.Add(content);
                     Color backgroundColor;
 
                     if (team.week == '-')
@@ -304,11 +303,11 @@ namespace Schluesselzahlen
                             backgroundColor = Color.LightGreen;
 
                     for (int i = 0; i < 4; i++)
-                        dataGridView1.Rows[j].Cells[i].Style.BackColor = backgroundColor;
+                        dataGridView.Rows[j].Cells[i].Style.BackColor = backgroundColor;
                 }
                 club = null;
             }
-            dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            dataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             caller.Focus();
         }
 
@@ -320,30 +319,30 @@ namespace Schluesselzahlen
             Club.backup = new TextFile(path + @"\Vereine_Backup.csv");
             Team.file = new TextFile(path + @"\Beziehungen.csv");
             Team.backup = new TextFile(path + @"\Beziehungen_Backup.csv");
-            if (comboBox10.SelectedIndex != -1 && comboBox11.SelectedIndex != -1)
+            if (boxFieldAB.SelectedIndex != -1 && boxFieldXY.SelectedIndex != -1)
             {
-                button6.Enabled = true;
-                button2.Enabled = true;
+                buttonInputFromFile.Enabled = true;
+                buttonManualInput.Enabled = true;
             }
             Data.km = new KeyMapper(path);
         }
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        private void boxClubs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ComboBox[] boxes = { comboBox5, comboBox6, comboBox7, comboBox8};
-            if (radioButton1.Checked && comboBox3.SelectedIndex != -1)
+            ComboBox[] boxes = { boxWeekA, boxWeekB, boxWeekX, boxWeekY};
+            if (buttonClubView.Checked && boxClubs.SelectedIndex != -1)
             {
-                checkBox1.Enabled = button4.Enabled = true;
+                boxCapacity.Enabled = buttonPartner.Enabled = true;
                 foreach (ComboBox cb in boxes)
                 {
                     cb.Enabled = true;
                     cb.Text = cb.SelectedItem.ToString();
                 }
-                fillDataGridView(comboBox3);
+                fillDataGridView(boxClubs);
             }
             else
             {
-                checkBox1.Enabled = checkBox1.Checked = button4.Enabled = false;
+                boxCapacity.Enabled = boxCapacity.Checked = buttonPartner.Enabled = false;
                 foreach (ComboBox cb in boxes)
                 {
                     cb.Enabled = false;
@@ -352,48 +351,48 @@ namespace Schluesselzahlen
             }   
         }
 
-        private void button13_Click(object sender, EventArgs e)
+        private void buttonBrowse_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                textBox2.Text = folderBrowserDialog1.SelectedPath;
-                setFiles(textBox2.Text);
+                boxDirectory.Text = folderBrowserDialog1.SelectedPath;
+                setFiles(boxDirectory.Text);
             }
         }
 
-        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void boxGroups_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedIndex == -1)
+            if (boxGroups.SelectedIndex == -1)
             {
-                comboBox4.SelectedIndex = -1;
-                comboBox4.Enabled = false;
+                boxFields.SelectedIndex = -1;
+                boxFields.Enabled = false;
             }
             else
             {
-                for (int i = 0; i < Data.group[comboBox1.SelectedIndex].nrOfTeams; i++)
+                for (int i = 0; i < Data.group[boxGroups.SelectedIndex].nrOfTeams; i++)
                 {
-                    comboBox4.Items.Clear();
+                    boxFields.Items.Clear();
                     
-                    Group currentGroup = Data.group[comboBox1.SelectedIndex];
+                    Group currentGroup = Data.group[boxGroups.SelectedIndex];
                     int start = currentGroup.nrOfTeams + currentGroup.nrOfTeams % 2;
                     start = start > Data.TEAM_MIN ? start : Data.TEAM_MIN;
 
                     for (int j = start, counter = 0; j <= Data.TEAM_MAX; j += 2, counter++)
                     {
-                        comboBox4.Items.Add(j.ToString());
+                        boxFields.Items.Add(j.ToString());
                         if (j == currentGroup.field)
-                            comboBox4.SelectedIndex = counter;
+                            boxFields.SelectedIndex = counter;
                     }
 
                 }
 
-                if (radioButton2.Checked)
-                    fillDataGridView(comboBox1);
+                if (buttonGroupView.Checked)
+                    fillDataGridView(boxGroups);
             }
             enableFields();
         }
 
-        private void button14_Click(object sender, EventArgs e)
+        private void buttonMiscellaneous_Click(object sender, EventArgs e)
         {
             Miscellaneous i = new Miscellaneous(this);
             this.Enabled = false;
@@ -401,67 +400,67 @@ namespace Schluesselzahlen
             i.Focus();
         }
 
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
             {
                 // Groß- und Kleinschreibung tolerieren
-                string input = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].EditedFormattedValue.ToString().ToUpper();
+                string input = dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].EditedFormattedValue.ToString().ToUpper();
 
                 // Auch Leerzeichen und leere Strings erlauben
                 if (input.Equals("") || input.Equals(" "))
                     input = "-";
 
-                if (radioButton1.Checked && club != null) {
+                if (buttonClubView.Checked && club != null) {
                     // Vereinssicht
                     if (weeks.Contains(input) && e.RowIndex < club.team.Count)
                         club.team[e.RowIndex].week = input[0];
                 }
-                else if (radioButton2.Checked && comboBox1.SelectedIndex != -1)
+                else if (buttonGroupView.Checked && boxGroups.SelectedIndex != -1)
                     { 
                     // Staffelsicht
-                    if (weeks.Contains(input) && e.RowIndex < Data.group[comboBox1.SelectedIndex].team.Length)
-                        Data.group[comboBox1.SelectedIndex].team[e.RowIndex].week = input[0];
+                    if (weeks.Contains(input) && e.RowIndex < Data.group[boxGroups.SelectedIndex].team.Length)
+                        Data.group[boxGroups.SelectedIndex].team[e.RowIndex].week = input[0];
                 }
-                fillDataGridView(dataGridView1);
+                fillDataGridView(dataGridView);
             }
         }
 
-        private void button15_Click(object sender, EventArgs e)
+        private void buttonSave_Click(object sender, EventArgs e)
         {
-            Data.save(Data.group, Data.club, Data.partnership, Club.file, Group.file, Team.file);
+            Data.save(Data.group, Data.club, Club.file, Group.file, Team.file);
         }
 
-        private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
+        private void boxWeekA_SelectedIndexChanged(object sender, EventArgs e)
         {
-            setKeys('A', 'B', Data.field[0], comboBox5, comboBox6);
+            setKeys('A', 'B', Data.field[0], boxWeekA, boxWeekB);
         }
 
-        private void comboBox6_SelectedIndexChanged(object sender, EventArgs e)
+        private void boxWeekB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            setKeys('B', 'A', Data.field[0], comboBox6, comboBox5);
+            setKeys('B', 'A', Data.field[0], boxWeekB, boxWeekA);
         }
 
-        private void comboBox7_SelectedIndexChanged(object sender, EventArgs e)
+        private void boxWeekX_SelectedIndexChanged(object sender, EventArgs e)
         {
-            setKeys('X', 'Y', Data.field[1], comboBox7, comboBox8);
+            setKeys('X', 'Y', Data.field[1], boxWeekX, boxWeekY);
         }
 
-        private void comboBox8_SelectedIndexChanged(object sender, EventArgs e)
+        private void boxWeekY_SelectedIndexChanged(object sender, EventArgs e)
         {
-            setKeys('Y', 'X', Data.field[1], comboBox8, comboBox7);
+            setKeys('Y', 'X', Data.field[1], boxWeekY, boxWeekX);
         }
 
         private void setKeys(char week1, char week2, int field, ComboBox cb1, ComboBox cb2)
         {
-            if (comboBox3.SelectedIndex >= 0)
+            if (boxClubs.SelectedIndex >= 0)
             {
-                Data.club[comboBox3.SelectedIndex].keys[week1] = cb1.SelectedIndex;
+                Data.club[boxClubs.SelectedIndex].keys[week1] = cb1.SelectedIndex;
                 if (cb1.SelectedIndex == 0)
-                    Data.club[comboBox3.SelectedIndex].keys[week2] = 0;
+                    Data.club[boxClubs.SelectedIndex].keys[week2] = 0;
                 else
-                    Data.club[comboBox3.SelectedIndex].keys[week2] = Data.km.getOpposed(field, field, cb1.SelectedIndex);
-                cb2.SelectedIndex = Data.club[comboBox3.SelectedIndex].keys[week2];
+                    Data.club[boxClubs.SelectedIndex].keys[week2] = Data.km.getOpposed(field, field, cb1.SelectedIndex);
+                cb2.SelectedIndex = Data.club[boxClubs.SelectedIndex].keys[week2];
             }
         }
 
@@ -485,21 +484,21 @@ namespace Schluesselzahlen
                 cb2.SelectedIndex = 0;
             Data.field[idx] = refField;
             checkWeeks();
-            if (comboBox10.SelectedIndex != -1 && comboBox11.SelectedIndex != -1 && Group.file != null)
+            if (boxFieldAB.SelectedIndex != -1 && boxFieldXY.SelectedIndex != -1 && Group.file != null)
             {
-                button6.Enabled = true;
-                button2.Enabled = true;
+                buttonInputFromFile.Enabled = true;
+                buttonManualInput.Enabled = true;
             }
         }
 
-        private void comboBox10_SelectedIndexChanged(object sender, EventArgs e)
+        private void boxFieldAB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            adjustReferenceFields(comboBox5, comboBox6, 0, Util.toInt(comboBox10.SelectedItem.ToString()));
+            adjustReferenceFields(boxWeekA, boxWeekB, 0, Util.toInt(boxFieldAB.SelectedItem.ToString()));
         }
 
-        private void comboBox11_SelectedIndexChanged(object sender, EventArgs e)
+        private void boxFieldXY_SelectedIndexChanged(object sender, EventArgs e)
         {
-            adjustReferenceFields(comboBox7, comboBox8, 1, Util.toInt(comboBox11.SelectedItem.ToString()));
+            adjustReferenceFields(boxWeekX, boxWeekY, 1, Util.toInt(boxFieldXY.SelectedItem.ToString()));
         }
 
         public static void checkWeeks()
@@ -521,11 +520,11 @@ namespace Schluesselzahlen
 
         public void solveConflicts(Group[] l, Club[] v)
         {
-            int[] konflikte = new int[2];
-            List<Conflict> k = Data.getConflicts(l);
-            if (k.Count > 0)
+            int[] conflicts = new int[2];
+            List<Conflict> conflictList = Data.getConflicts(l);
+            if (conflictList.Count > 0)
             {
-                Alternatives a = new Alternatives(k.ToArray(), l, v, this);
+                Alternatives a = new Alternatives(conflictList.ToArray(), l, v, this);
                 this.Enabled = false;
                 a.Visible = true;
             }
@@ -538,78 +537,74 @@ namespace Schluesselzahlen
             }
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void boxCapacity_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButton1.Checked && comboBox3.SelectedIndex != -1)
-                Data.club[comboBox3.SelectedIndex].capacity = checkBox1.Checked;
+            if (buttonClubView.Checked && boxClubs.SelectedIndex != -1)
+                Data.club[boxClubs.SelectedIndex].capacity = boxCapacity.Checked;
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        private void buttonClubView_CheckedChanged(object sender, EventArgs e)
         {
-            radioButton2.Checked = !radioButton1.Checked;
-            dataGridView1.Columns[0].Visible = radioButton1.Checked;
-            if (radioButton1.Checked && comboBox3.SelectedIndex != -1)
-                fillDataGridView(radioButton1);
+            buttonGroupView.Checked = !buttonClubView.Checked;
+            dataGridView.Columns[0].Visible = buttonClubView.Checked;
+            if (buttonClubView.Checked && boxClubs.SelectedIndex != -1)
+                fillDataGridView(buttonClubView);
             else
                 enableBoxesAndButtons();
         }
         
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        private void buttonGroupView_CheckedChanged(object sender, EventArgs e)
         {
-            radioButton1.Checked = !radioButton2.Checked;
-            dataGridView1.Columns[0].Visible = radioButton1.Checked;
-            if (radioButton2.Checked && comboBox1.SelectedIndex != -1)
-                fillDataGridView(radioButton2);
+            buttonClubView.Checked = !buttonGroupView.Checked;
+            dataGridView.Columns[0].Visible = buttonClubView.Checked;
+            if (buttonGroupView.Checked && boxGroups.SelectedIndex != -1)
+                fillDataGridView(buttonGroupView);
             else
                 enableBoxesAndButtons();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonManualInput_Click(object sender, EventArgs e)
         {
             this.Enabled = false;
-            Data.save(Data.group, Data.club, Data.partnership, Club.file, Group.file, Team.file);
-            DataInput d = new DataInput(this);
+
+            if (Data.group == null)
+                Data.group = new Group[0];
+            if (Data.club == null)
+                Data.club = new Club[0];
+                    
+            //Data.save(Data.group, Data.club, Club.file, Group.file, Team.file);
+            DataInput d = new DataInput(this, Data.club, Data.group);
             d.Visible = true;
         }
 
         private void Schluesselzahlen_Resize(object sender, EventArgs e)
         {
-            dataGridView1.Height = this.Height - 100;
-            dataGridView1.Width = this.Width - 350;
+            dataGridView.Height = this.Height - 100;
+            dataGridView.Width = this.Width - 350;
         }
 
         private void Schluesselzahlen_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!(Data.club == null || Data.group == null))
-                switch (MessageBox.Show("Wollen Sie die Änderungen speichern?", "Änderungen speichern", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
-                {
-                    case DialogResult.No:
-                        break;
-                    case DialogResult.Yes:
-                        Data.save(Data.group, Data.club, Data.partnership, Club.file, Group.file, Team.file);
-                        this.loadFromFile(Club.file, Group.file, Team.file);
-                        break;
-                    case DialogResult.Cancel:
-                        e.Cancel = true;
-                        break;
-                }
+            this.Enabled = false;
+            e.Cancel = !Util.confirm(this, Data.group, Data.club);
+            this.Enabled = true;
         }
 
-        private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void dataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
-                if (dataGridView1.Rows[e.RowIndex].IsNewRow)
+                if (dataGridView.Rows[e.RowIndex].IsNewRow)
                     return;
                 Team t = null;
-                if (radioButton1.Checked)
+                if (buttonClubView.Checked)
                 {
-                    Club v = Data.club[comboBox3.SelectedIndex];
+                    Club v = Data.club[boxClubs.SelectedIndex];
                     t = v.team.ElementAt(e.RowIndex);
                 }
-                else if (radioButton2.Checked)
+                else if (buttonGroupView.Checked)
                 {
-                    Group l = Data.group[comboBox1.SelectedIndex];
+                    Group l = Data.group[boxGroups.SelectedIndex];
                     t = l.team.ElementAt(e.RowIndex);
                 }
                 Additional z = new Additional(t, this);
@@ -618,9 +613,9 @@ namespace Schluesselzahlen
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void buttonPartner_Click(object sender, EventArgs e)
         {
-            Partner p = new Partner(this, Data.club[comboBox3.SelectedIndex]);
+            Partner p = new Partner(this, Data.club, boxClubs.SelectedIndex);
             this.Enabled = false;
             p.Visible = true;
         }
@@ -740,7 +735,7 @@ namespace Schluesselzahlen
             return true;
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void buttonClickTTInput_Click(object sender, EventArgs e)
         {
             // Daten-Sammelstrukturen
             Hashtable clubs = new Hashtable();
@@ -789,14 +784,14 @@ namespace Schluesselzahlen
             // Alles scheint geklappt zu haben!
             saveInData(groups, clubs);
             initUI();
-            button3.Enabled = true;
-            button14.Enabled = true;
-            button15.Enabled = true;
-            radioButton1.Enabled = true;
-            radioButton2.Enabled = true;
-            radioButton1.Checked = true;
-            comboBox1.Enabled = comboBox3.Enabled = true;
-            button6.Enabled = true;
+            buttonGenerate.Enabled = true;
+            buttonMiscellaneous.Enabled = true;
+            buttonSave.Enabled = true;
+            buttonClubView.Enabled = true;
+            buttonGroupView.Enabled = true;
+            buttonClubView.Checked = true;
+            boxGroups.Enabled = boxClubs.Enabled = true;
+            buttonInputFromFile.Enabled = true;
         }
 
         private void saveInData(Hashtable groups, Hashtable clubs)
@@ -898,13 +893,23 @@ namespace Schluesselzahlen
             return true;
         }
 
-        private void comboBox4_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void boxFields_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox4.SelectedIndex != -1)
+            if (boxFields.SelectedIndex != -1)
             {
-                Data.group[comboBox1.SelectedIndex].field = Util.toInt(comboBox4.SelectedItem.ToString());
-                fillDataGridView(comboBox4);
+                Data.group[boxGroups.SelectedIndex].field = Util.toInt(boxFields.SelectedItem.ToString());
+                fillDataGridView(boxFields);
             }
+        }
+
+        public void prepare()
+        {
+            boxGroups.Text = "";
+            boxGroups.SelectedIndex = -1;
+            boxClubs.Text = "";
+            boxClubs.SelectedIndex = -1;
+            Enabled = true;
+            Focus();
         }
     }
 }

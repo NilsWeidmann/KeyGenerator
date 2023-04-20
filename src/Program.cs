@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Schluesselzahlen
+namespace KeyGenerator
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace Schluesselzahlen
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //s = new Schluesselzahlen();
-            Application.Run(new Schluesselzahlen());
+            Application.Run(new KeyGenerator());
         }
     }
 }

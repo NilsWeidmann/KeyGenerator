@@ -1,4 +1,4 @@
-﻿namespace Schluesselzahlen
+﻿namespace KeyGenerator
 {
     partial class Alternatives
     {
@@ -28,55 +28,55 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.boxConflict = new System.Windows.Forms.ComboBox();
+            this.boxTeam1 = new System.Windows.Forms.TextBox();
+            this.boxTeam2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.boxKey1 = new System.Windows.Forms.ComboBox();
+            this.boxKey2 = new System.Windows.Forms.ComboBox();
+            this.buttonOkay = new System.Windows.Forms.Button();
+            this.boxGroup = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.boxWish1 = new System.Windows.Forms.TextBox();
+            this.boxWish2 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.boxTeam3 = new System.Windows.Forms.TextBox();
+            this.boxWish3 = new System.Windows.Forms.TextBox();
+            this.boxKey3 = new System.Windows.Forms.ComboBox();
+            this.buttonProposal = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // boxConflict
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(92, 35);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(318, 28);
-            this.comboBox1.TabIndex = 0;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.boxConflict.FormattingEnabled = true;
+            this.boxConflict.Location = new System.Drawing.Point(92, 35);
+            this.boxConflict.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxConflict.Name = "boxConflict";
+            this.boxConflict.Size = new System.Drawing.Size(318, 28);
+            this.boxConflict.TabIndex = 0;
+            this.boxConflict.SelectedIndexChanged += new System.EventHandler(this.boxConflict_SelectedIndexChanged);
             // 
-            // textBox1
+            // boxTeam1
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(92, 117);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(318, 26);
-            this.textBox1.TabIndex = 1;
+            this.boxTeam1.Enabled = false;
+            this.boxTeam1.Location = new System.Drawing.Point(92, 117);
+            this.boxTeam1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxTeam1.Name = "boxTeam1";
+            this.boxTeam1.Size = new System.Drawing.Size(318, 26);
+            this.boxTeam1.TabIndex = 1;
             // 
-            // textBox2
+            // boxTeam2
             // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(92, 160);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(318, 26);
-            this.textBox2.TabIndex = 2;
+            this.boxTeam2.Enabled = false;
+            this.boxTeam2.Location = new System.Drawing.Point(92, 160);
+            this.boxTeam2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxTeam2.Name = "boxTeam2";
+            this.boxTeam2.Size = new System.Drawing.Size(318, 26);
+            this.boxTeam2.TabIndex = 2;
             // 
             // label1
             // 
@@ -88,45 +88,45 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Zahl";
             // 
-            // comboBox2
+            // boxKey1
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(514, 115);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(58, 28);
-            this.comboBox2.TabIndex = 4;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.boxKey1.FormattingEnabled = true;
+            this.boxKey1.Location = new System.Drawing.Point(514, 115);
+            this.boxKey1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxKey1.Name = "boxKey1";
+            this.boxKey1.Size = new System.Drawing.Size(58, 28);
+            this.boxKey1.TabIndex = 4;
+            this.boxKey1.SelectedIndexChanged += new System.EventHandler(this.boxKey1_SelectedIndexChanged);
             // 
-            // comboBox3
+            // boxKey2
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(514, 158);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(58, 28);
-            this.comboBox3.TabIndex = 5;
-            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            this.boxKey2.FormattingEnabled = true;
+            this.boxKey2.Location = new System.Drawing.Point(514, 158);
+            this.boxKey2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxKey2.Name = "boxKey2";
+            this.boxKey2.Size = new System.Drawing.Size(58, 28);
+            this.boxKey2.TabIndex = 5;
+            this.boxKey2.SelectedIndexChanged += new System.EventHandler(this.boxKey2_SelectedIndexChanged);
             // 
-            // button2
+            // buttonOkay
             // 
-            this.button2.Location = new System.Drawing.Point(446, 248);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(129, 35);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "OK";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonOkay.Location = new System.Drawing.Point(446, 248);
+            this.buttonOkay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonOkay.Name = "buttonOkay";
+            this.buttonOkay.Size = new System.Drawing.Size(129, 35);
+            this.buttonOkay.TabIndex = 7;
+            this.buttonOkay.Text = "OK";
+            this.buttonOkay.UseVisualStyleBackColor = true;
+            this.buttonOkay.Click += new System.EventHandler(this.buttonOkay_Click);
             // 
-            // textBox7
+            // boxGroup
             // 
-            this.textBox7.Enabled = false;
-            this.textBox7.Location = new System.Drawing.Point(92, 77);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(318, 26);
-            this.textBox7.TabIndex = 8;
+            this.boxGroup.Enabled = false;
+            this.boxGroup.Location = new System.Drawing.Point(92, 77);
+            this.boxGroup.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxGroup.Name = "boxGroup";
+            this.boxGroup.Size = new System.Drawing.Size(318, 26);
+            this.boxGroup.TabIndex = 8;
             // 
             // label2
             // 
@@ -168,23 +168,23 @@
             this.label5.TabIndex = 12;
             this.label5.Text = "Team 2:";
             // 
-            // textBox4
+            // boxWish1
             // 
-            this.textBox4.Enabled = false;
-            this.textBox4.Location = new System.Drawing.Point(446, 117);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(58, 26);
-            this.textBox4.TabIndex = 13;
+            this.boxWish1.Enabled = false;
+            this.boxWish1.Location = new System.Drawing.Point(446, 117);
+            this.boxWish1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxWish1.Name = "boxWish1";
+            this.boxWish1.Size = new System.Drawing.Size(58, 26);
+            this.boxWish1.TabIndex = 13;
             // 
-            // textBox5
+            // boxWish2
             // 
-            this.textBox5.Enabled = false;
-            this.textBox5.Location = new System.Drawing.Point(446, 160);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(58, 26);
-            this.textBox5.TabIndex = 14;
+            this.boxWish2.Enabled = false;
+            this.boxWish2.Location = new System.Drawing.Point(446, 160);
+            this.boxWish2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxWish2.Name = "boxWish2";
+            this.boxWish2.Size = new System.Drawing.Size(58, 26);
+            this.boxWish2.TabIndex = 14;
             // 
             // label6
             // 
@@ -206,75 +206,75 @@
             this.label7.TabIndex = 16;
             this.label7.Text = "Team 3:";
             // 
-            // textBox3
+            // boxTeam3
             // 
-            this.textBox3.Enabled = false;
-            this.textBox3.Location = new System.Drawing.Point(92, 200);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(318, 26);
-            this.textBox3.TabIndex = 17;
+            this.boxTeam3.Enabled = false;
+            this.boxTeam3.Location = new System.Drawing.Point(92, 200);
+            this.boxTeam3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxTeam3.Name = "boxTeam3";
+            this.boxTeam3.Size = new System.Drawing.Size(318, 26);
+            this.boxTeam3.TabIndex = 17;
             // 
-            // textBox6
+            // boxWish3
             // 
-            this.textBox6.Enabled = false;
-            this.textBox6.Location = new System.Drawing.Point(446, 200);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(58, 26);
-            this.textBox6.TabIndex = 18;
+            this.boxWish3.Enabled = false;
+            this.boxWish3.Location = new System.Drawing.Point(446, 200);
+            this.boxWish3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxWish3.Name = "boxWish3";
+            this.boxWish3.Size = new System.Drawing.Size(58, 26);
+            this.boxWish3.TabIndex = 18;
             // 
-            // comboBox4
+            // boxKey3
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(514, 198);
-            this.comboBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(58, 28);
-            this.comboBox4.TabIndex = 19;
-            this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
+            this.boxKey3.FormattingEnabled = true;
+            this.boxKey3.Location = new System.Drawing.Point(514, 198);
+            this.boxKey3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.boxKey3.Name = "boxKey3";
+            this.boxKey3.Size = new System.Drawing.Size(58, 28);
+            this.boxKey3.TabIndex = 19;
+            this.boxKey3.SelectedIndexChanged += new System.EventHandler(this.boxKey3_SelectedIndexChanged);
             // 
-            // button1
+            // buttonProposal
             // 
-            this.button1.Location = new System.Drawing.Point(280, 248);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(130, 35);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "Vorschlag";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonProposal.Location = new System.Drawing.Point(280, 248);
+            this.buttonProposal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonProposal.Name = "buttonProposal";
+            this.buttonProposal.Size = new System.Drawing.Size(130, 35);
+            this.buttonProposal.TabIndex = 20;
+            this.buttonProposal.Text = "Vorschlag";
+            this.buttonProposal.UseVisualStyleBackColor = true;
+            this.buttonProposal.Click += new System.EventHandler(this.buttonProposal_Click);
             // 
             // Alternatives
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(592, 302);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox4);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.buttonProposal);
+            this.Controls.Add(this.boxKey3);
+            this.Controls.Add(this.boxWish3);
+            this.Controls.Add(this.boxTeam3);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.boxWish2);
+            this.Controls.Add(this.boxWish1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.boxGroup);
+            this.Controls.Add(this.buttonOkay);
+            this.Controls.Add(this.boxKey2);
+            this.Controls.Add(this.boxKey1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.boxTeam2);
+            this.Controls.Add(this.boxTeam1);
+            this.Controls.Add(this.boxConflict);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Alternatives";
             this.Text = "Alternativen";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Alternativen_FormClosing);
-            this.Resize += new System.EventHandler(this.Alternativen_Resize);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Alternatives_FormClosing);
+            this.Resize += new System.EventHandler(this.Alternativex_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -282,25 +282,25 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.ComboBox boxConflict;
+        private System.Windows.Forms.TextBox boxTeam1;
+        private System.Windows.Forms.TextBox boxTeam2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.ComboBox boxKey1;
+        private System.Windows.Forms.ComboBox boxKey2;
+        private System.Windows.Forms.Button buttonOkay;
+        private System.Windows.Forms.TextBox boxGroup;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox boxWish1;
+        private System.Windows.Forms.TextBox boxWish2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox boxTeam3;
+        private System.Windows.Forms.TextBox boxWish3;
+        private System.Windows.Forms.ComboBox boxKey3;
+        private System.Windows.Forms.Button buttonProposal;
     }
 }

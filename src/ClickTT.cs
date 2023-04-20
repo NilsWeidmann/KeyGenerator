@@ -4,46 +4,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Schluesselzahlen
+namespace KeyGenerator
 {
     public partial class ClickTT : Form
     {
         List<Group> ll;
         List<Club> lc;
-        List<Partnership> lp;
-        readonly Schluesselzahlen caller;
+        readonly KeyGenerator caller;
 
-        public ClickTT(Group[] l, Club[] c, List<Partnership> p, Schluesselzahlen caller)
+        public ClickTT(Group[] l, Club[] c, KeyGenerator caller)
         {
             InitializeComponent();
             this.caller = caller;
             init();
             ll = l.ToList();
             foreach (Group group in ll)
-                dataGridView1.Rows.Add(group.name);
+                dataGridViewGroups.Rows.Add(group.name);
             lc = c.ToList();
             foreach (Club club in lc)
-                dataGridView2.Rows.Add(club.name);
-            lp = p;
+                dataGridViewClubs.Rows.Add(club.name);
         }
 
         private void init()
         {
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView1.Columns.Clear();
-            dataGridView1.Columns.Add("Liga", "Liga");
-            dataGridView1.Rows.Clear();
-            dataGridView1.ReadOnly = true;
-            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView2.Columns.Clear();
-            dataGridView2.Columns.Add("Verein", "Verein");
-            dataGridView2.Rows.Clear();
-            dataGridView2.ReadOnly = true;
-            dataGridView3.ReadOnly = true;
-            dataGridView3.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView3.Columns.Clear();
-            dataGridView3.Columns.Add("Team", "Team");
-            dataGridView3.Rows.Clear();
+            dataGridViewGroups.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewGroups.Columns.Clear();
+            dataGridViewGroups.Columns.Add("Liga", "Liga");
+            dataGridViewGroups.Rows.Clear();
+            dataGridViewGroups.ReadOnly = true;
+            dataGridViewClubs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewClubs.Columns.Clear();
+            dataGridViewClubs.Columns.Add("Verein", "Verein");
+            dataGridViewClubs.Rows.Clear();
+            dataGridViewClubs.ReadOnly = true;
+            dataGridViewTeams.ReadOnly = true;
+            dataGridViewTeams.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewTeams.Columns.Clear();
+            dataGridViewTeams.Columns.Add("Team", "Team");
+            dataGridViewTeams.Rows.Clear();
         }
 
         private void webImportGroups()
@@ -60,13 +58,13 @@ namespace Schluesselzahlen
             try
             {
                 string[] seperators = { "/" };
-                string protocol = textBox1.Text.Split(seperators, StringSplitOptions.RemoveEmptyEntries)[0];
-                string domain = textBox1.Text.Split(seperators, StringSplitOptions.RemoveEmptyEntries)[1];
+                string protocol = boxLinkGroups.Text.Split(seperators, StringSplitOptions.RemoveEmptyEntries)[0];
+                string domain = boxLinkGroups.Text.Split(seperators, StringSplitOptions.RemoveEmptyEntries)[1];
                 HtmlNodeCollection tables = null;
                 HtmlNode group_table = null;
                 HtmlNode team_table = null;
 
-                groups = web.Load(textBox1.Text);
+                groups = web.Load(boxLinkGroups.Text);
                 tables = groups.DocumentNode.SelectNodes("//table");
                 foreach (HtmlNode tab in tables)
                     if (tab.GetAttributeValue("class", "").Equals("matrix"))
@@ -134,7 +132,7 @@ namespace Schluesselzahlen
                         l.team = lt.ToArray();
                         l.field = l.nrOfTeams + l.nrOfTeams % 2;
                         ll.Add(l);
-                        dataGridView1.Rows.Add(l.name);
+                        dataGridViewGroups.Rows.Add(l.name);
                     }
                 }
                 this.Enabled = true;
@@ -155,11 +153,11 @@ namespace Schluesselzahlen
 
             try
             {
-                clubs = web.Load(textBox2.Text);
+                clubs = web.Load(boxLinkClubs.Text);
                 HtmlNode club_table = null;
 
                 string[] seperators = { "/" };
-                string domain = textBox2.Text.Split(seperators, StringSplitOptions.RemoveEmptyEntries)[1];
+                string domain = boxLinkClubs.Text.Split(seperators, StringSplitOptions.RemoveEmptyEntries)[1];
                 int index = lc.Count;
 
                 HtmlNodeCollection tables = clubs.DocumentNode.SelectNodes("//table");
@@ -177,7 +175,7 @@ namespace Schluesselzahlen
                             index = index++
                         };
                         lc.Add(club);
-                        dataGridView2.Rows.Add(club.name);
+                        dataGridViewClubs.Rows.Add(club.name);
                     }
                 }
             }
@@ -189,22 +187,21 @@ namespace Schluesselzahlen
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonDeleteTeamNewClub_Click(object sender, EventArgs e)
         {
             lc = new List<Club>();
-            lp = new List<Partnership>();
-            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView2.Columns.Clear();
-            dataGridView2.Columns.Add("Verein", "Verein");
-            dataGridView2.Rows.Clear();
+            dataGridViewClubs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewClubs.Columns.Clear();
+            dataGridViewClubs.Columns.Add("Verein", "Verein");
+            dataGridViewClubs.Rows.Clear();
             webImportClubs();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonDeleteTeamNewGroup_Click(object sender, EventArgs e)
         {
             ll = new List<Group>();
-            dataGridView1.Rows.Clear();
-            dataGridView3.Rows.Clear();
+            dataGridViewGroups.Rows.Clear();
+            dataGridViewTeams.Rows.Clear();
             webImportGroups();
         }
 
@@ -217,65 +214,50 @@ namespace Schluesselzahlen
             groupBox2.Top = (this.Height - 95) / 2 + 20;
             groupBox1.Height = (this.Height - 95) / 2;
             groupBox2.Height = (this.Height - 95) / 2;
-            dataGridView1.Height = (this.Height - 200) / 2;
-            dataGridView2.Height = (this.Height - 200) / 2;
-            dataGridView3.Height = (this.Height - 200) / 2;
+            dataGridViewGroups.Height = (this.Height - 200) / 2;
+            dataGridViewClubs.Height = (this.Height - 200) / 2;
+            dataGridViewTeams.Height = (this.Height - 200) / 2;
 
             // Set proper widths
-            dataGridView1.Width = (this.Width - 68) / 2;
-            dataGridView2.Width = this.Width - 56;
-            dataGridView3.Width = (this.Width - 68) / 2;
+            dataGridViewGroups.Width = (this.Width - 68) / 2;
+            dataGridViewClubs.Width = this.Width - 56;
+            dataGridViewTeams.Width = (this.Width - 68) / 2;
             groupBox1.Width = this.Width - 40;
             groupBox2.Width = this.Width - 40;
-            textBox1.Width = this.Width - 250;
-            textBox2.Width = this.Width - 250;
-            button1.Left = groupBox1.Width - 80;
-            button2.Left = groupBox2.Width - 80;
-            button4.Left = groupBox1.Width - 160;
-            button5.Left = groupBox2.Width - 160;
-            dataGridView3.Left = dataGridView1.Left + dataGridView1.Width + 12;
-            button3.Left = this.Width - 110;
-            button3.Top = this.Height - 70;
+            boxLinkGroups.Width = this.Width - 250;
+            boxLinkClubs.Width = this.Width - 250;
+            buttonDeleteTeamNewGroup.Left = groupBox1.Width - 80;
+            buttonDeleteTeamNewClub.Left = groupBox2.Width - 80;
+            buttonDeleteTeamAddGroup.Left = groupBox1.Width - 160;
+            buttonDeleteTeamAddClub.Left = groupBox2.Width - 160;
+            dataGridViewTeams.Left = dataGridViewGroups.Left + dataGridViewGroups.Width + 12;
+            buttonDeleteTeamSave.Left = this.Width - 110;
+            buttonDeleteTeamSave.Top = this.Height - 70;
         }
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridView3.Rows.Clear();
+            dataGridViewTeams.Rows.Clear();
             if (ll != null && e.RowIndex < ll.Count)
             {
                 for (int i = 0; i < ll[e.RowIndex].nrOfTeams; i++)
-                    dataGridView3.Rows.Add(ll[e.RowIndex].team[i].name);
+                    dataGridViewTeams.Rows.Add(ll[e.RowIndex].team[i].name);
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void buttonDeleteTeamSave_Click(object sender, EventArgs e)
         {
-            button3.Enabled = false;
-            Data.save(ll.ToArray(), lc.ToArray(), lp, Club.file, Group.file, Team.file);
+            buttonDeleteTeamSave.Enabled = false;
+            Data.save(ll.ToArray(), lc.ToArray(), Club.file, Group.file, Team.file);
             caller.loadFromFile(Club.file, Group.file, Team.file);
-            button3.Enabled = true;
+            buttonDeleteTeamSave.Enabled = true;
         }
 
-        private void click_tt_FormClosing(object sender, FormClosingEventArgs e)
+        private void ClickTT_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (button3.Enabled)
+            if (buttonDeleteTeamSave.Enabled)
             {
-                switch (MessageBox.Show("Wollen Sie die Änderungen speichern?", "Änderungen speichern", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
-                {
-                    case DialogResult.No:
-                        caller.Enabled = true;
-                        caller.Focus();
-                        break;
-                    case DialogResult.Yes:
-                        Data.save(ll.ToArray(), lc.ToArray(), lp, Club.file, Group.file, Team.file);
-                        caller.loadFromFile(Club.file, Group.file, Team.file);
-                        caller.Enabled = true;
-                        caller.Focus();
-                        break;
-                    case DialogResult.Cancel:
-                        e.Cancel = true;
-                        break;
-                }
+                e.Cancel = !Util.confirm(caller, ll.ToArray(), lc.ToArray());
             }
             else
             {
@@ -285,12 +267,12 @@ namespace Schluesselzahlen
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void buttonDeleteTeamAddGroup_Click(object sender, EventArgs e)
         {
             webImportGroups();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void buttonDeleteTeamAddClub_Click(object sender, EventArgs e)
         {
             webImportClubs();
         }
