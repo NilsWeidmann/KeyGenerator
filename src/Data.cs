@@ -512,88 +512,88 @@ namespace KeyGenerator
         public static void findSolution(Group[] l, Group[] best_l, Club[] c, Club[] best_c, int[] conflicts, int[] key, BackgroundWorker bw)
         {
             string value;
-            int p = 0;
+            int pointer = -1, idx;
             Club club;
-            int idx;
             char week1, week2;
             DateTime start = DateTime.Now;
             int progress = 0;
             HashSet<string> ht = new HashSet<string>();
-            int[] rand = { 0, 0 };
+            int[] rand = {  (int)(new Random()).NextDouble() * field[0],
+                            (int)(new Random()).NextDouble() * field[1]};
 
             while (!ht.Contains("") && prio.Length > 0)
             {
-                if (p == c.Length * 2)
+                if (++pointer == c.Length * 2)
                 {
                     setAdditional(l, best_l, c, best_c, conflicts, key);
-                    safeAdd(p-1, key, prio, ht);
+                    safeAdd(--pointer, key, prio, ht);
                 }
                 else
                 {
-                    club = c[prio[p].Item1];
-                    idx = prio[p].Item2 ? 0 : 1;
-                    week1 = prio[p].Item2 ? 'A' : 'X';
-                    week2 = prio[p].Item2 ? 'B' : 'Y';
+                    club = c[prio[pointer].Item1];
+                    idx = prio[pointer].Item2 ? 0 : 1;
+                    week1 = prio[pointer].Item2 ? 'A' : 'X';
+                    week2 = prio[pointer].Item2 ? 'B' : 'Y';
 
                     if (club.prio[idx] == 0)
                     {
                         setAdditional(l, best_l, c, best_c, conflicts, key);
-                        safeAdd(p-1, key, prio, ht);
+                        safeAdd(--pointer, key, prio, ht);
                     }
-                    else { 
+                    else {
                         do
                         {
                             rand[idx] %= field[idx];
-                            key[p] = ++rand[idx];
+                            key[pointer] = ++rand[idx];
                             value = getValue(key);
                         } while (ht.Contains(value));
 
-                        club.keys[week1] = key[p];
-                        club.keys[week2] = km.getOpposed(field[idx], field[idx], key[p]);
-                        foreach (Team team in club.team)
-                            if (team == null)
-                                continue;
-                            else if (team.week == week1)
-                                team.key = km.getParallel(field[idx], team.group.field, club.keys[week1]);
-                            else if (team.week == week2)
-                                team.key = km.getParallel(field[idx], team.group.field, club.keys[week2]);
+                        assignKey(club, week1, week2, key, pointer, idx);
 
-                        if (checkFatal(l, conflicts) != null) // || !partnerOK(c, prio[p].Item1, p, prio[p].Item2, key))
-                            safeAdd(p, key, prio, ht);
+                        if (checkFatal(l, conflicts) != null) 
+                            safeAdd(pointer, key, prio, ht);
                         else
-                        {
-                            p++;
                             continue;
-                        }
                     }
                 }
                 
                 // Zurücksetzen
                 conflicts[0] = -1;
-                for (; p >= 0; p--)
+                for (; pointer>=0; pointer--)
                 {
-                    club = c[prio[p].Item1];
-                    idx = prio[p].Item2 ? 0 : 1;
-                    week1 = prio[p].Item2 ? 'A' : 'X';
-                    week2 = prio[p].Item2 ? 'B' : 'Y';
+                    club = c[prio[pointer].Item1];
+                    week1 = prio[pointer].Item2 ? 'A' : 'X';
+                    week2 = prio[pointer].Item2 ? 'B' : 'Y';
 
+                    key[pointer] = 0;
                     club.keys[week1] = club.keys[week2] = 0;
                     foreach (Team team in club.team)
                         if (team == null)
                             continue;
                         else if (team.week == week1 || team.week == week2)
                             team.key = 0;
-                    key[p] = 0;
-
-                    if (bw.CancellationPending)
-                        return;
-                    else
-                        progress = reportProgress(progress, start, bw);
                 }
-                p++;
+
+                if (bw.CancellationPending)
+                    return;
+                else
+                    progress = reportProgress(progress, start, bw);
             }
         }
-            
+
+        private static void assignKey(Club club, char week1, char week2, int[] key, int p, int idx)
+        {
+            club.keys[week1] = key[p];
+            club.keys[week2] = km.getOpposed(field[idx], field[idx], key[p]);
+            foreach (Team team in club.team)
+                if (team == null)
+                    continue;
+                else if (team.week == week1)
+                    team.key = km.getParallel(field[idx], team.group.field, club.keys[week1]);
+                else if (team.week == week2)
+                    team.key = km.getParallel(field[idx], team.group.field, club.keys[week2]);
+        }
+
         private static int reportProgress(int progress, DateTime start, BackgroundWorker bw)
         {
             if (progress < 100 * (int)(DateTime.Now - start).TotalSeconds / runtime)
