@@ -1,0 +1,7 @@
+src/bin/*
+src/bin/Debug/*
+src/obj/*
+src/.vs/*
+src/.vs/Schluesselzahlen/FileContentIndex/*
+src/obj/x86/Debug/*
+.vs/*
