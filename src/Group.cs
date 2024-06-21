@@ -14,13 +14,14 @@ namespace KeyGenerator
         public int index;
         public int nrOfTeams;
         public int field;
-
+        public int nrOfConflicts;
 
         public Group()
         {
             team = new Team[Data.TEAM_MAX];
             nrOfTeams = 0;
             field = 0;
+            nrOfConflicts = 0;
         }
 
         public Group(String name, int index) : this()
