@@ -346,9 +346,13 @@ namespace KeyGenerator
                         if (!t.keyOK(t.key))
                             return Tuple.Create(l,t,t.key); //Zahl widerspricht den vorgegebenen Spieltagen
                     }
+                    /*else if (t.key == 0 && t.week != '-')
+                        foreach (Team t2 in l.team)
+                            if (t2 != null && t2.index > t.index && t2.club == t.club && t2.week == t.week)
+                                conflicts[0]++; // Wird später zu einem Konflikt*/
 
-                // Treten unlösbare Konflikte auf?
-                for (int j = 0; j < l.field;)
+                                // Treten unlösbare Konflikte auf?
+                                for (int j = 0; j < l.field;)
                     if (allocation[j] > 3)
                         return Tuple.Create(l,(Team)null,j+1); // Zahl j+1 zu oft vergeben
                     else if (allocation[j] > 1)
