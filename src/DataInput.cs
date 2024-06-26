@@ -298,7 +298,7 @@ namespace KeyGenerator
             if (key > 0 && key <= field)
             {
                 club.ElementAt(rowIdx).keys[week1] = key;
-                club.ElementAt(rowIdx).keys[week2] = Data.km.getOpposed(field, field, key);
+                club.ElementAt(rowIdx).keys[week2] = Data.km.getOpposed(field, key);
             }
             else
             {

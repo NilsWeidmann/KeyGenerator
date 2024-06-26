@@ -52,10 +52,12 @@ namespace KeyGenerator
             dataGridView.Columns.Add("Liga", "Liga");
             dataGridView.Columns.Add("Team", "Team");
             dataGridView.Columns.Add("Schlüssel", "Schlüssel");
+            dataGridView.Columns.Add("Wunsch", "Wunsch");
             dataGridView.Columns[0].ReadOnly = false;
             dataGridView.Columns[1].ReadOnly = true;
             dataGridView.Columns[2].ReadOnly = true;
             dataGridView.Columns[3].ReadOnly = true;
+            dataGridView.Columns[4].ReadOnly = true;
             foreach (DataGridViewColumn col in dataGridView.Columns)
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
 
@@ -230,7 +232,7 @@ namespace KeyGenerator
                     boxWeekY.SelectedIndex = club.keys['Y'];
                 for (int j = 0; j < club.team.Count; j++)
                 {
-                    String[] content = new String[4];
+                    String[] content = new String[5];
                     if (club.team[j].week != '-')
                         content[0] = club.team[j].week.ToString();
                     else
@@ -239,16 +241,16 @@ namespace KeyGenerator
                     content[2] = club.team[j].name;
                     if (club.team[j].key != 0)
                         content[3] = club.team[j].key.ToString();
-                    else if (club.team[j].week == '-' || club.team[j].club.keys[club.team[j].week] == 0)
-                        content[3] = "";
+                    if (club.team[j].week == '-' || club.team[j].club.keys[club.team[j].week] == 0)
+                        content[4] = "";
                     else if (club.team[j].week == 'A' || club.team[j].week == 'B')
-                        content[3] = Data.km.getParallel(Data.field[0], club.team[j].group.field, club.keys[club.team[j].week]).ToString();
+                        content[4] = Data.km.getParallel(Data.field[0], club.team[j].group.field, club.keys[club.team[j].week]).ToString();
                     else if (club.team[j].week == 'X' || club.team[j].week == 'Y')
-                        content[3] = Data.km.getParallel(Data.field[1], club.team[j].group.field, club.keys[club.team[j].week]).ToString();
+                        content[4] = Data.km.getParallel(Data.field[1], club.team[j].group.field, club.keys[club.team[j].week]).ToString();
 
                     dataGridView.Rows.Add(content);
 
-                    for (int l = 0; l < 4; l++)
+                    for (int l = 0; l < 5; l++)
                     {
                         Color color;
                         switch (club.team[j].week)
@@ -268,7 +270,7 @@ namespace KeyGenerator
                 // Staffelsicht
                 for (int j = 0; j < Data.group[boxGroups.SelectedIndex].nrOfTeams; j++)
                 {
-                    String[] content = new String[4];
+                    String[] content = new String[5];
                     Team team = Data.group[boxGroups.SelectedIndex].team[j];
                     int field = Data.group[boxGroups.SelectedIndex].field;
 
@@ -281,28 +283,32 @@ namespace KeyGenerator
 
                     if (team.key != 0)
                         content[3] = team.key.ToString();
-                    else if (team.week == '-' || team.club.keys[team.week] == 0)
+                    else
                         content[3] = "";
+
+                    if (team.week == '-' || team.club.keys[team.week] == 0)
+                        content[4] = "";
                     else if (team.week == 'A' || team.week == 'B')
-                        content[3] = Data.km.getParallel(Data.field[0], field, team.club.keys[team.week]).ToString();
+                        content[4] = Data.km.getParallel(Data.field[0], field, team.club.keys[team.week]).ToString();
                     else if (team.week == 'X' || team.week == 'Y')
-                        content[3] = Data.km.getParallel(Data.field[1], field, team.club.keys[team.week]).ToString();
+                        content[4] = Data.km.getParallel(Data.field[1], field, team.club.keys[team.week]).ToString();
 
                     dataGridView.Rows.Add(content);
                     Color backgroundColor;
 
                     if (team.week == '-')
                         if (team.day.Contains('H') || team.day.Contains('A'))
-                            backgroundColor = Color.Orange;
+                            backgroundColor = Color.LightBlue;
                         else
                             backgroundColor = Color.White;
-                    else
-                        if (content[3].Equals(""))
-                            backgroundColor = Color.Yellow;
-                        else
-                            backgroundColor = Color.LightGreen;
+                    else if (content[3].Equals("") && content[4].Equals(""))
+                        backgroundColor = Color.Yellow;
+                    else if (!content[3].Equals(content[4]))
+                        backgroundColor = Color.Orange;  // Conflict
+                    else 
+                        backgroundColor = Color.LightGreen;
 
-                    for (int i = 0; i < 4; i++)
+                    for (int i = 0; i < 5; i++)
                         dataGridView.Rows[j].Cells[i].Style.BackColor = backgroundColor;
                 }
                 club = null;
@@ -459,7 +465,7 @@ namespace KeyGenerator
                 if (cb1.SelectedIndex == 0)
                     Data.club[boxClubs.SelectedIndex].keys[week2] = 0;
                 else
-                    Data.club[boxClubs.SelectedIndex].keys[week2] = Data.km.getOpposed(field, field, cb1.SelectedIndex);
+                    Data.club[boxClubs.SelectedIndex].keys[week2] = Data.km.getOpposed(field, cb1.SelectedIndex);
                 cb2.SelectedIndex = Data.club[boxClubs.SelectedIndex].keys[week2];
             }
         }

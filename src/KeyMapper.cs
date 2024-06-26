@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace KeyGenerator
 {
     public class KeyMapper
     {
         private Tuple<int,int>[,] similar;
-        private int[,,] opposed;
-        private int[,,] parallel;
+        private int /*List<int>*/[,] opposed;
+        private int /*List<int>*/[,,] parallel;
         private char[,,] schedule;
 
         public KeyMapper(String path)
@@ -15,16 +17,23 @@ namespace KeyGenerator
 
             // Gegenläufig
             TextFile fileOpposed = new TextFile(path + @"\Gegenlaeufig.csv");
-            int[,] fieldOpposed = getField(fileOpposed, 5);
-            opposed = new int[Data.TEAM_MAX, Data.TEAM_MAX, Data.TEAM_MAX];
+            int[,] fieldOpposed = getField(fileOpposed, 4);
+            opposed = new int /*List<int>*/[Data.TEAM_MAX, Data.TEAM_MAX];
+            /*for (int i = 0; i < Data.TEAM_MAX; i++)
+                for (int j = 0; j < Data.TEAM_MAX; j++)
+                    opposed[i, j] = new List<int>();*/
             for (int i = 0; i < fieldOpposed.GetLength(0); i++)
-                if (fieldOpposed[i, 0] != 0 && fieldOpposed[i, 1] != 0 && fieldOpposed[i, 2] != 0)
-                    opposed[fieldOpposed[i, 0] - 1, fieldOpposed[i, 1] - 1, fieldOpposed[i, 2] - 1] = fieldOpposed[i, 3];
+                if (fieldOpposed[i, 0] != 0 && fieldOpposed[i, 1] != 0)
+                    opposed[fieldOpposed[i, 0] - 1, fieldOpposed[i, 1] - 1] = fieldOpposed[i, 2];
 
             // Parallel
             TextFile fileParallel = new TextFile(path + @"\Parallel.csv");
             int[,] fieldParallel = getField(fileParallel, 4);
-            parallel = new int[Data.TEAM_MAX, Data.TEAM_MAX, Data.TEAM_MAX];
+            parallel = new int /*List<int>*/[Data.TEAM_MAX, Data.TEAM_MAX, Data.TEAM_MAX];
+            /*for (int i = 0; i < Data.TEAM_MAX; i++)
+                for (int j = 0; j < Data.TEAM_MAX; j++)
+                    for (int k = 0; k < Data.TEAM_MAX; k++)
+                        parallel[i, j, k] = new List<int>();*/
             for (int i = 0; i < fieldParallel.GetLength(0); i++)
                 if (fieldParallel[i, 0] != 0 && fieldParallel[i, 1] != 0 && fieldParallel[i, 2] != 0)
                     parallel[fieldParallel[i, 0] - 1, fieldParallel[i, 1] - 1, fieldParallel[i, 2] - 1] = fieldParallel[i, 3];
@@ -86,12 +95,18 @@ namespace KeyGenerator
 
         public int getParallel(int fieldFrom, int fieldTo, int keyFrom)
         {
-            return parallel[fieldFrom - 1, fieldTo - 1, keyFrom - 1];
+            //if (parallel[fieldFrom - 1, fieldTo - 1, keyFrom - 1].Count == 1)
+                return parallel[fieldFrom - 1, fieldTo - 1, keyFrom - 1];//.First();
+            //else
+                //return parallel[fieldFrom - 1, fieldTo - 1, keyFrom - 1].Last();
         }
 
-        public int getOpposed(int fieldFrom, int fieldTo, int keyTo)
+        public int getOpposed(int field, int key)
         {
-            return opposed[fieldFrom - 1, fieldTo - 1, keyTo - 1];
+            //if (opposed[field - 1, key - 1].Count == 1)
+                return opposed[field - 1, key - 1];//.First();
+            //else
+                //return opposed[field - 1, key - 1].Last();
         }
 
         public Tuple<int,int> getSimilar(int field, int key)

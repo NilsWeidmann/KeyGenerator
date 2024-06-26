@@ -467,12 +467,12 @@ namespace KeyGenerator
             if (ab)
             {
                 club[clubIndex].keys['A'] = key[partnerIndex];
-                club[clubIndex].keys['B'] = km.getOpposed(field[0], field[0], key[partnerIndex]);
+                club[clubIndex].keys['B'] = km.getOpposed(field[0], key[partnerIndex]);
             }
             else
             {
                 club[clubIndex].keys['X'] = key[partnerIndex];
-                club[clubIndex].keys['Y'] = km.getOpposed(field[1], field[1], key[partnerIndex]);
+                club[clubIndex].keys['Y'] = km.getOpposed(field[1], key[partnerIndex]);
             }
             foreach (Partnership p in club[clubIndex].partnerships)
             {
@@ -605,7 +605,7 @@ namespace KeyGenerator
         private static void assignKey(Club club, char week1, char week2, int[] key, int p, int idx)
         {
             club.keys[week1] = key[p];
-            club.keys[week2] = km.getOpposed(field[idx], field[idx], key[p]);
+            club.keys[week2] = km.getOpposed(field[idx], key[p]);
             foreach (Team team in club.team)
                 if (team == null)
                     continue;
@@ -654,7 +654,19 @@ namespace KeyGenerator
             keys[pos] = 0;
 
             safeAdd(pos - 1, keys, prio, ht);
+
+            //fanoCheck(ht);
         }
+
+        /*public static void fanoCheck(HashSet<string> ht)
+        {
+            string[] values = ht.ToArray();
+            foreach (string val1 in values)
+                foreach (string val2 in values)
+                    if (!val1.Equals(val2) && val1.StartsWith(val2))
+                        notification.Add("Verletzung der Fano-Bedingung: " + val1 + " / " + val2);
+
+        }*/
 
         public static void copyKeys()
         {
