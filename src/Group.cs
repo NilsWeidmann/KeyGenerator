@@ -142,5 +142,21 @@ namespace KeyGenerator
             }
             return groupList.ToArray();
         }
+
+        public int[] getAllocation()
+        {
+            nrOfConflicts = 0;
+            int[] allocation = new int[field];
+
+            foreach (Team t in team)
+                if (t != null && t.key > 0)
+                {
+                    allocation[t.key - 1]++;
+                    if (allocation[t.key - 1] > 1)
+                        nrOfConflicts++;
+                }
+
+            return allocation;
+        }
     }
 }

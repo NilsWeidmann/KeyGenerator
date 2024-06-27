@@ -341,53 +341,46 @@ namespace KeyGenerator
                     relevantGroups.Add(tc.group);
 
             foreach (Group g in relevantGroups)
-                //foreach (Group l in group)
             {
-                g.nrOfConflicts = 0;
-                allocation = new int[g.field];
-
+                allocation = g.getAllocation();
+                
                 foreach (Team t in g.team)
-                    if (t == null)
-                        continue;
-                    else if (t.key > 0)
-                    {
-                        allocation[t.key - 1]++;
-                        if (!t.keyOK(t.key))
-                            return Tuple.Create(g, t,t.key); //Zahl widerspricht den vorgegebenen Spieltagen
-                    }
-                    /*else if (t.key == 0 && t.week != '-')
+                {
+                    if (t != null && !t.keyOK(t.key))
+                        return Tuple.Create(g, t, t.key); //Zahl widerspricht den vorgegebenen Spieltagen
+                    if (t != null && t.key != 0 && t.club.capacity)
+                        foreach (Team t2 in g.team)
+                            if (t2 != null && t2.club.capacity)
+                                if (t.key == t2.key && t.club != t2.club)
+                                    return Tuple.Create(g, (Team)null, t.key); // Zahl zu oft vergeben
+                    /*if (t != null && t.key == 0 && t.week != '-')
                         foreach (Team t2 in g.team)
                             if (t2 != null && t2.index > t.index && t2.club == t.club && t2.week == t.week)
-                                conflicts[0]++; // Wird später zu einem Konflikt*/
+                                g.nrOfConflicts++; // Wird später zu einem Konflikt*/
+                }
+                    
 
-                    // Treten unlösbare Konflikte auf?
-                    for (int j = 0; j < g.field;)
-                        if (allocation[j] > 3)
-                            return Tuple.Create(g, (Team)null,j+1); // Zahl j+1 zu oft vergeben
-                        else if (allocation[j] > 1)
+                // Treten unlösbare Konflikte auf?
+                for (int j = 0; j < g.field; j++)
+                    if (allocation[j] > 1)
+                    {
+                        if (km.getSimilar(g.field, j + 1).Item1 != 0 && allocation[km.getSimilar(g.field, j + 1).Item1 - 1] == 0)
                         {
-                            g.nrOfConflicts++;
-                            foreach (Team t in g.team)
-                                foreach (Team t2 in g.team)
-                                    if (t == null || t2 == null)
-                                        continue;
-                                    else if (t.key == j + 1 && t2.key == j + 1 && t.club != t2.club
-                                        && t.club.capacity && t2.club.capacity)
-                                        return Tuple.Create(g, (Team)null, j+1); // Zahl j+1 zu oft vergeben
-                            if (km.getSimilar(g.field, j + 1).Item1 != 0 && allocation[km.getSimilar(g.field, j + 1).Item1 - 1] == 0)
-                                allocation[km.getSimilar(g.field, j + 1).Item1 - 1]++;
-                            else if (km.getSimilar(g.field, j + 1).Item2 != 0 && allocation[km.getSimilar(g.field, j + 1).Item2 - 1] == 0)
-                                allocation[km.getSimilar(g.field, j + 1).Item2 - 1]++;
-                            else
-                                return Tuple.Create(g, (Team)null, j+1); // Zahl j+1 zu oft vergeben
+                            allocation[km.getSimilar(g.field, j + 1).Item1 - 1]++;
                             allocation[j]--;
                         }
-                        else
-                            j++;
+                        if (allocation[j] > 1 && km.getSimilar(g.field, j + 1).Item2 != 0 && allocation[km.getSimilar(g.field, j + 1).Item2 - 1] == 0)
+                        {
+                            allocation[km.getSimilar(g.field, j + 1).Item2 - 1]++;
+                            allocation[j]--;
+                        }
+                        if (allocation[j] > 1)
+                            return Tuple.Create(g, (Team)null, j + 1); // Zahl j+1 zu oft vergeben
+                    }
             }
 
             conflicts[0] = 0;
-            foreach (Group g in group)
+            foreach (Group g in group)  
                 conflicts[0] += g.nrOfConflicts;
 
             if (conflicts[1] != -1 && conflicts[0] >= conflicts[1])
@@ -592,7 +585,10 @@ namespace KeyGenerator
                         if (team == null)
                             continue;
                         else if (team.week == week1 || team.week == week2)
+                        {
                             team.key = 0;
+                            team.group.getAllocation();
+                        }
                 }
 
                 if (bw.CancellationPending)
@@ -630,6 +626,12 @@ namespace KeyGenerator
         public static void safeAdd(int pos, int[] keys, Tuple<int, bool>[] prio, HashSet<string> ht)
         {
             string value = getValue(keys);
+            
+            /*string[] values = ht.ToArray();
+            foreach (string otherValue in values)
+                if (otherValue.StartsWith(value))
+                    ht.Remove(otherValue);*/
+            
             ht.Add(value);
 
             if (pos < 0)
