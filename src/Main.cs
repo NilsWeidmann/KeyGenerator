@@ -1,4 +1,5 @@
 ﻿using HtmlAgilityPack;
+using KeyGenerator;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -331,6 +332,8 @@ namespace KeyGenerator
                 buttonManualInput.Enabled = true;
             }
             Data.km = new KeyMapper(path);
+            Data.log = new TextFile(path + @"\Log.csv");
+            Data.log.WriteFile("Uhrzeit;Laufzeit (in s);Anzahl Konflikte;", Data.notification);
         }
 
         private void boxClubs_SelectedIndexChanged(object sender, EventArgs e)
@@ -359,6 +362,7 @@ namespace KeyGenerator
 
         private void buttonBrowse_Click(object sender, EventArgs e)
         {
+            folderBrowserDialog1.SelectedPath = boxDirectory.Text;
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 boxDirectory.Text = folderBrowserDialog1.SelectedPath;

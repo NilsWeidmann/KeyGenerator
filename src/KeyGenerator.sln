@@ -7,12 +7,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyGenerator", "KeyGenerato
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99E1974C-F2DE-4424-ACE3-85E1EBE04F78}.Debug|x64.ActiveCfg = Debug|x64
+		{99E1974C-F2DE-4424-ACE3-85E1EBE04F78}.Debug|x64.Build.0 = Debug|x64
 		{99E1974C-F2DE-4424-ACE3-85E1EBE04F78}.Debug|x86.ActiveCfg = Debug|x86
 		{99E1974C-F2DE-4424-ACE3-85E1EBE04F78}.Debug|x86.Build.0 = Debug|x86
+		{99E1974C-F2DE-4424-ACE3-85E1EBE04F78}.Release|x64.ActiveCfg = Release|x64
+		{99E1974C-F2DE-4424-ACE3-85E1EBE04F78}.Release|x64.Build.0 = Release|x64
 		{99E1974C-F2DE-4424-ACE3-85E1EBE04F78}.Release|x86.ActiveCfg = Release|x86
 		{99E1974C-F2DE-4424-ACE3-85E1EBE04F78}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection

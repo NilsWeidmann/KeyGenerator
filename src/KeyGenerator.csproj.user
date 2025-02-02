@@ -1,3 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="Additional.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Alternatives.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ClickTT.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DataInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Miscellaneous.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Partner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PleaseWait.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

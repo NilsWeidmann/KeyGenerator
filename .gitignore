@@ -5,3 +5,5 @@ src/.vs/*
 src/.vs/Schluesselzahlen/FileContentIndex/*
 src/obj/x86/Debug/*
 .vs/*
+*.proto
+src/packages/*

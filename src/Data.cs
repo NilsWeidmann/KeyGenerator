@@ -28,6 +28,7 @@ namespace KeyGenerator
         public static int runtime;
         public static KeyMapper km;
         public static int currentConflicts;
+        public static TextFile log;
 
         public static string[] ageGroups = {
             "Herren", "Damen",
@@ -523,6 +524,11 @@ namespace KeyGenerator
             copy(l, best_l, club, best_club);
         }
 
+        private static void writeLog(DateTime start, int currentConflicts)
+        {
+            log.Append("\n" + System.DateTime.Now.ToLongTimeString() + ";" + System.DateTime.Now.Subtract(start).TotalSeconds + ";" + currentConflicts + ";", notification);
+        }
+
         public static void findSolution(Group[] l, Group[] best_l, Club[] c, Club[] best_c, int[] conflicts, int[] key, BackgroundWorker bw)
         {
             DateTime start = DateTime.Now;
@@ -540,6 +546,7 @@ namespace KeyGenerator
                 if (++pointer == c.Length * 2)
                 {
                     setAdditional(l, best_l, c, best_c, conflicts, key);
+                    writeLog(start, currentConflicts);
                     safeAdd(--pointer, key, prio, ht);
                 }
                 else
@@ -552,6 +559,7 @@ namespace KeyGenerator
                     if (club.prio[idx] == 0)
                     {
                         setAdditional(l, best_l, c, best_c, conflicts, key);
+                        writeLog(start, currentConflicts);
                         safeAdd(--pointer, key, prio, ht);
                     }
                     else {
