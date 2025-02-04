@@ -15,7 +15,6 @@ namespace KeyGenerator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //s = new Schluesselzahlen();
             Application.Run(new KeyGenerator());
         }
     }
