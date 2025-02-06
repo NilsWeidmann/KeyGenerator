@@ -236,8 +236,8 @@ namespace KeyGenerator
 
         public void findSolution(Group[] group, Club[] club, int[] conflicts)
         {
-
-            CpSolverStatus status = solver.Solve(model);
+            //KeyGeneratorSolutionCallback callback = new KeyGeneratorSolutionCallback();
+            CpSolverStatus status = solver.Solve(model/*, callback*/);
 
             if (status != CpSolverStatus.Optimal && status != CpSolverStatus.Feasible)
                 conflicts[1] = -1;
@@ -245,6 +245,14 @@ namespace KeyGenerator
             {
                 convertSolution(group, club);
                 conflicts[1] = (int)solver.ObjectiveValue;
+            }
+        }
+
+        class KeyGeneratorSolutionCallback : CpSolverSolutionCallback
+        {
+            public override void OnSolutionCallback()
+            {
+                double d = ObjectiveValue();
             }
         }
     }

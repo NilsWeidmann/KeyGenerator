@@ -12,6 +12,14 @@ namespace KeyGenerator
         private int /*List<int>*/[,,] parallel;
         private char[,,] schedule;
 
+        public KeyMapper(Tuple<int, int>[,] similar, int[,] opposed, int[,,] parallel, char[,,] schedule)
+        {
+            this.similar = similar;
+            this.opposed = opposed;
+            this.parallel = parallel;
+            this.schedule = schedule;
+        }
+
         public KeyMapper(String path)
         {
 

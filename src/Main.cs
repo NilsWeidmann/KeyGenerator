@@ -19,6 +19,7 @@ namespace KeyGenerator
 
         public KeyGenerator()
         {
+            //new InstanceGenerator();
             InitializeComponent();
             this.dataGridView.ReadOnly = false;
             initDataGridView();
