@@ -15,13 +15,11 @@ namespace KeyGenerator
 {
     public class OptimizationModel
     {
-        // Constants
-        private const int NR_OF_WEEKS = 4;
-        private const int WEEK_A = 0;
-        private const int WEEK_B = 1;
-        private const int WEEK_X = 2;
-        private const int WEEK_Y = 3;
-
+        // Configuration
+        private KeyMapper km;
+        private int TEAM_MAX;
+        private char[] week;
+        private int[] field;
 
         // Binary Variables
         private IntVar[,,] t;
@@ -31,17 +29,21 @@ namespace KeyGenerator
         // Solver
         private CpModel model;
         private CpSolver solver;
-        private BackgroundWorker bw;
 
-        public OptimizationModel(Group[] group, Club[] club, BackgroundWorker bw, int runtime)
+        public OptimizationModel(Group[] group, Club[] club, char[] week, int[] field, int runtime, KeyMapper km, int TEAM_MAX)
         {
-            this.bw = bw;
+            this.week = week;
+            this.field = field;
+            this.km = km;
+            this.TEAM_MAX = TEAM_MAX;
+
             model = new CpModel();
             solver = new CpSolver();
+            solver.StringParameters = "max_time_in_seconds:" + runtime + ".0";
 
             if (model is null || solver is null)
             {
-                Data.notification.Append("Optimierung konnte nicht gestartet werden: Solver nicht gefunden.");
+                Console.WriteLine("Optimierung konnte nicht gestartet werden: Solver nicht gefunden.");
                 return;
             }
             createVariables(group, club);
@@ -63,7 +65,7 @@ namespace KeyGenerator
         private void createVariables(Group[] group, Club[] club)
         {
             // Variables for teams
-            t = new IntVar[group.Length, Data.TEAM_MAX, Data.TEAM_MAX];
+            t = new IntVar[group.Length, TEAM_MAX, TEAM_MAX];
 
             for (int i = 0; i < group.Length; i++)
                 for (int j = 0; j < group[i].nrOfTeams; j++)
@@ -71,22 +73,16 @@ namespace KeyGenerator
                         t[i, j, k] = model.NewIntVar(0, 1, group[i].team[j].name + " in group " + group[i].name + " has key " + (k + 1));
 
             // Variables for clubs
-            c = new IntVar[club.Length, NR_OF_WEEKS, Data.TEAM_MAX];
+            c = new IntVar[club.Length, week.Length, TEAM_MAX];
 
             for (int i = 0; i < club.Length; i++)
-            {
-                for (int k = 0; k < Data.field[0]; k++) 
-                    c[i, WEEK_A, k] = model.NewIntVar(0, 1, club[i].name + " has key " + (k + 1) + " in week A");
-                for (int k = 0; k < Data.field[0]; k++) 
-                    c[i, WEEK_B, k] = model.NewIntVar(0, 1, club[i].name + " has key " + (k + 1) + " in week B");
-                for (int k = 0; k < Data.field[1]; k++) 
-                    c[i, WEEK_X, k] = model.NewIntVar(0, 1, club[i].name + " has key " + (k + 1) + " in week X");
-                for (int k = 0; k < Data.field[1]; k++) 
-                    c[i, WEEK_Y, k] = model.NewIntVar(0, 1, club[i].name + " has key " + (k + 1) + " in week Y");
-            }
+                for (int j=0; j< week.Length; j++)
+                    for (int k = 0; k < field[j / 2]; k++) 
+                        c[i, j, k] = model.NewIntVar(0, 1, club[i].name + " has key " + (k + 1) + " in week " + week[j]);
+                
 
             // Variables for conflicts
-            x = new IntVar[group.Length, Data.TEAM_MAX];
+            x = new IntVar[group.Length, TEAM_MAX];
 
             for (int i = 0; i < group.Length; i++)
                 for (int j = 0; j < group[i].nrOfTeams; j++)
@@ -95,27 +91,21 @@ namespace KeyGenerator
 
         private void convertSolution(Group[] group, Club[] club)
         {
-            for (int i = 0; i < club.Length; i++)
-            {
-                for (int k = 0; k < Data.field[0]; k++) 
-                    if (solver.Value(c[i, WEEK_A, k]) == 1)
-                        club[i].keys['A'] = k + 1;
-                for (int k = 0; k < Data.field[0]; k++) 
-                    if (solver.Value(c[i, WEEK_B, k]) == 1)
-                        club[i].keys['B'] = k + 1;
-                for (int k = 0; k < Data.field[1]; k++) 
-                    if (solver.Value(c[i, WEEK_X, k]) == 1)
-                        club[i].keys['X'] = k + 1;
-                for (int k = 0; k < Data.field[1]; k++) 
-                    if (solver.Value(c[i, WEEK_Y, k]) == 1)
-                        club[i].keys['Y'] = k + 1;
+            for (int i = 0; i < club.Length; i++) { 
+                for (int j = 0; j < week.Length; j++)
+                    for (int k = 0; k < field[j / 2]; k++) 
+                        if (solver.Value(c[i, j, k]) == 1)
+                            club[i].keys[week[j]] = k + 1;
 
                 foreach (Team team in club[i].team)
                 {
                     if (team.week != '-')
                     {
-                        int field = team.week == 'A' || team.week == 'B' ? Data.field[0] : Data.field[1];
-                        int key = Data.km.getParallel(field, team.group.field, club[i].keys[team.week]);
+                        int f = -1;
+                        for (int w = 0; w < week.Length; w++)
+                            if (week[w] == team.week)
+                                f = field[w / 2];
+                        int key = km.getParallel(f, team.group.field, club[i].keys[team.week]);
                         team.key = key;
                     }
                 }
@@ -125,44 +115,25 @@ namespace KeyGenerator
         private void fixAssignments(Club[] club)
         {
             for (int i = 0; i < club.Length; i++)
-            {
-                if (club[i].keys['A'] != 0)
-                    model.Add(c[i, WEEK_A, club[i].keys['A'] - 1] == 1);
-                if (club[i].keys['B'] != 0)
-                    model.Add(c[i, WEEK_B, club[i].keys['B'] - 1] == 1);
-                if (club[i].keys['X'] != 0)
-                    model.Add(c[i, WEEK_X, club[i].keys['X'] - 1] == 1);
-                if (club[i].keys['Y'] != 0)
-                    model.Add(c[i, WEEK_Y, club[i].keys['Y'] - 1] == 1);
-            }
+                for (int j=0; j<week.Length; j++)
+                    if (club[i].keys[week[j]] != 0)
+                        model.Add(c[i, j, club[i].keys[week[j]] - 1] == 1);
         }
 
         private void clubHasOneKeyPerWeekScheme(Club[] club)
         {
             for (int i = 0; i < club.Length; i++)
-            {
-                List<LinearExpr> sumA = new List<LinearExpr>();
+                for (int j = 0; j < week.Length; j++)
+                {
+                    List<LinearExpr> sum = new List<LinearExpr>();
 
-                for (int k = 0; k < Data.field[0]; k++)
-                    sumA.Add(c[i, WEEK_A, k]);
-                model.Add(LinearExpr.Sum(sumA) == 1);
-
-                List<LinearExpr> sumB = new List<LinearExpr>();
-                for (int k = 0; k < Data.field[0]; k++)
-                    sumB.Add(c[i, WEEK_B, k]);
-                model.Add(LinearExpr.Sum(sumB) == 1);
-
-                List<LinearExpr> sumX = new List<LinearExpr>();
-                for (int k = 0; k < Data.field[1]; k++)
-                    sumX.Add(c[i, WEEK_X, k]);
-                model.Add(LinearExpr.Sum(sumX) == 1);
-
-                List<LinearExpr> sumY = new List<LinearExpr>();
-                for (int k = 0; k < Data.field[1]; k++)
-                    sumY.Add(c[i, WEEK_Y, k]);
-                model.Add(LinearExpr.Sum(sumY) == 1);
-            }
+                    for (int k = 0; k < field[j / 2]; k++)
+                        sum.Add(c[i, j, k]);
+                    model.Add(LinearExpr.Sum(sum) == 1);
+                }
+            
         }
+
         private void teamHasOneKey(Group[] group)
         {
             for (int i = 0; i < group.Length; i++)
@@ -190,12 +161,9 @@ namespace KeyGenerator
         private void oppositeKeysForOppositeWeekSchemes(Club[] club)
         {
             for (int i = 0; i < club.Length; i++)
-            {
-                for (int k = 0; k < Data.field[0]; k++)
-                    model.Add(c[i, 0, k] - c[i, 1, Data.km.getOpposed(Data.field[0], k + 1) - 1] == 0);
-                for (int k = 0; k < Data.field[1]; k++)
-                    model.Add(c[i, 2, k] - c[i, 3, Data.km.getOpposed(Data.field[1], k + 1) - 1] == 0);
-            }
+                for (int j=0; j<field.Length; j++)
+                    for (int k = 0; k < field[j]; k++)
+                        model.Add(c[i, 2*j, k] - c[i, 2*j+1, km.getOpposed(field[j], k + 1) - 1] == 0);
         }
 
         private void keySimilarity(Group[] group, Club[] club)
@@ -207,15 +175,21 @@ namespace KeyGenerator
                     if (team.week == '-')
                         continue;
 
-                    int field = team.week == 'A' || team.week == 'B' ? Data.field[0] : Data.field[1];
-                    int week = team.week == 'A' ? WEEK_A : team.week == 'B' ? WEEK_B : team.week == 'X' ? WEEK_X : WEEK_Y;
+                    int f = -1;
+                    int w = -1;
+                    for (int j = 0; j < week.Length; j++)
+                        if (week[j] == team.week)
+                        {
+                            f = field[j / 2];
+                            w = j;
+                        }
 
-                    for (int k=0; k<field; k++) {
+                    for (int k=0; k<f; k++) {
 
-                        int p = Data.km.getParallel(field, team.group.field, k + 1);
-                        Tuple<int, int> s = Data.km.getSimilar(team.group.field, p);
+                        int p = km.getParallel(f, team.group.field, k + 1);
+                        Tuple<int, int> s = km.getSimilar(team.group.field, p);
 
-                        model.Add(c[i, week, k] - t[team.group.index, team.index, p - 1] 
+                        model.Add(c[i, w, k] - t[team.group.index, team.index, p - 1] 
                                              - t[team.group.index, team.index, s.Item1 - 1] 
                                              - t[team.group.index, team.index, s.Item2 - 1] <= 0);
                     }
@@ -231,13 +205,19 @@ namespace KeyGenerator
                     if (team.week == '-')
                         continue;
 
-                    int field = team.week == 'A' || team.week == 'B' ? Data.field[0] : Data.field[1];
-                    int week = team.week == 'A' ? WEEK_A : team.week == 'B' ? WEEK_B : team.week == 'X' ? WEEK_X : WEEK_Y;
+                    int f = -1;
+                    int w = -1;
+                    for (int j = 0; j < week.Length; j++)
+                        if (week[j] == team.week)
+                        {
+                            f = field[j / 2];
+                            w = j;
+                        }
 
-                    for (int k = 0; k < field; k++)
+                    for (int k = 0; k < f; k++)
                     {
-                        int p = Data.km.getParallel(field, team.group.field, k + 1);
-                        model.Add(t[team.group.index, team.index, p - 1] - x[team.group.index, team.index] - c[i, week, k] <= 0);
+                        int p = km.getParallel(f, team.group.field, k + 1);
+                        model.Add(t[team.group.index, team.index, p - 1] - x[team.group.index, team.index] - c[i, w, k] <= 0);
                     }
                 }
             }

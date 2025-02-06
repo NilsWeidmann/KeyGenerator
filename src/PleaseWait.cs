@@ -83,7 +83,8 @@ namespace KeyGenerator
             }
             int[] keys = new int[Data.club.Length * 2];
             conflicts = [0, -1];
-            OptimizationModel om = new OptimizationModel(Data.group, Data.club, backgroundWorker, Data.runtime);
+            char[] week = { 'A', 'B', 'X', 'Y' };
+            OptimizationModel om = new OptimizationModel(Data.group, Data.club, week, Data.field, Data.runtime, Data.km, Data.TEAM_MAX);
             om.findSolution(best_l, best_c, conflicts);
 
             //Data.findSolution(Data.group, best_l, Data.club, best_c, conflicts, keys, backgroundWorker);
