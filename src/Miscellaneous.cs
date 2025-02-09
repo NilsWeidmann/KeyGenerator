@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -116,6 +117,13 @@ namespace KeyGenerator
         {
             caller.WindowState = this.WindowState;
             this.Focus();
+        }
+
+        private void generatorTests_Click(object sender, EventArgs e)
+        {
+            PleaseWait pw = new PleaseWait(this);
+            this.Enabled = false;
+            pw.Visible = true;
         }
     }
 }

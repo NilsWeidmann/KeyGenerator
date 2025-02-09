@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows.Forms;
 using Google.OrTools.Graph;
 using Google.OrTools.Init;
@@ -29,6 +30,7 @@ namespace KeyGenerator
         // Solver
         private CpModel model;
         private CpSolver solver;
+        private int runtime;
 
         public OptimizationModel(Group[] group, Club[] club, char[] week, int[] field, int runtime, KeyMapper km, int TEAM_MAX)
         {
@@ -40,6 +42,7 @@ namespace KeyGenerator
             model = new CpModel();
             solver = new CpSolver();
             solver.StringParameters = "max_time_in_seconds:" + runtime + ".0";
+            this.runtime = runtime;
 
             if (model is null || solver is null)
             {
@@ -234,10 +237,10 @@ namespace KeyGenerator
             model.Minimize(objective);
         }
 
-        public void findSolution(Group[] group, Club[] club, int[] conflicts)
+        public void findSolution(Group[] group, Club[] club, int[] conflicts, BackgroundWorker bw)
         {
-            //KeyGeneratorSolutionCallback callback = new KeyGeneratorSolutionCallback();
-            CpSolverStatus status = solver.Solve(model/*, callback*/);
+            KeyGeneratorSolutionCallback callback = new KeyGeneratorSolutionCallback(bw, runtime);
+            CpSolverStatus status = solver.Solve(model, callback);
 
             if (status != CpSolverStatus.Optimal && status != CpSolverStatus.Feasible)
                 conflicts[1] = -1;
@@ -250,9 +253,35 @@ namespace KeyGenerator
 
         class KeyGeneratorSolutionCallback : CpSolverSolutionCallback
         {
+            private BackgroundWorker bw;
+            private DateTime start;
+            private int runtime;
+            private int progress;
+
+            public KeyGeneratorSolutionCallback(BackgroundWorker bw, int runtime)
+            {
+                this.bw = bw;
+                this.runtime = runtime;
+                this.start = DateTime.Now;
+                this.progress = 0;
+            }
+
             public override void OnSolutionCallback()
             {
                 double d = ObjectiveValue();
+                Data.currentConflicts = (int)d;
+                reportProgress(bw, runtime, start, progress);
+            }
+            private static int reportProgress(BackgroundWorker bw, int runtime, DateTime start, int progress)
+            {
+                if (progress < 100 * (int)(DateTime.Now - start).TotalSeconds / runtime)
+                {
+                    progress = 100 * (int)(DateTime.Now - start).TotalSeconds / runtime;
+                    bw.ReportProgress(progress > 100 ? 100 : progress);
+                    if (progress >= 100)
+                        bw.CancelAsync();
+                }
+                return progress;
             }
         }
     }

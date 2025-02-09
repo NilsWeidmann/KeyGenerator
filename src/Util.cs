@@ -107,15 +107,6 @@ namespace KeyGenerator
                 switch (MessageBox.Show("Wollen Sie die Änderungen speichern?", "Änderungen speichern", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
                 {
                     case DialogResult.No:
-                        /*try
-                        {
-                            caller.loadFromFile(Club.backup, Group.backup, Team.backup);
-                        }
-                        catch (Exception ex)
-                        {
-                            Data.notification.Append(ex.ToString());
-                            caller.loadFromFile(Club.file, Group.file, Team.file);
-                        }*/
                         caller.prepare();
                         return true;
                     case DialogResult.Yes:

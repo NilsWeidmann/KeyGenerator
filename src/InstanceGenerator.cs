@@ -1,28 +1,68 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing.Text;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace KeyGenerator
 {
     public class InstanceGenerator
     {
-        // Configuration
-        static KeyMapper km;
-        static int runtime = 120;
+        // Basic Configuration
+        BackgroundWorker bw;
+        KeyMapper km;
+        int timeout;
         const int TEAM_MIN = 6;
         const int TEAM_MAX = 14;
-        
-        public InstanceGenerator()
+        char[] WEEK_SCHEMES = ['A', 'B', 'X', 'Y', 'C', 'D', 'E', 'F', 'G', 'H'];
+
+        // Test Configuration
+        int[] nrOfGroups = [50, 100, 200, 500, 1000, 2000];
+        int[] nrOfTeamsPerDivision = [6, 8, 10, 12, 14];
+        int[] nrOfClubs = [20, 50, 100, 200, 500];
+        int[] nrOfWeekSchemes = [1, 2, 3, 4, 5];
+
+        double[] portionOfTeamsWithDependencies = [0.5, 0.6, 0.7, 0.8, 0.9];
+        double[] portionOfFixedAssignments = [0.05, 0.10, 0.15, 0.20, 0.25];
+
+        int[] bS = [0, 2, 2, 1, 2, 2];
+
+        public InstanceGenerator(int timeout, BackgroundWorker bw)
         {
             km = createKeyMapper();
+            this.timeout = timeout;
+            this.bw = bw;
+        }
 
-            Tuple<Group[], Club[]> data = generate(50, 10, 100, ['A','B','X','Y'], 0.7, 0.15);
-            OptimizationModel om = new OptimizationModel(data.Item1, data.Item2, ['A', 'B', 'X', 'Y'], [10, 10], runtime, km, 10);
+        public void runTests()
+        {
+            int testNo = 0;
+            int totalNoOfTests = nrOfGroups.Length + nrOfTeamsPerDivision.Length + nrOfClubs.Length + nrOfWeekSchemes.Length + portionOfTeamsWithDependencies.Length + portionOfFixedAssignments.Length;
+
+            foreach (int nOG in nrOfGroups)
+            {
+                runTest(nOG, nrOfTeamsPerDivision[bS[1]], nrOfClubs[bS[2]], SubArray(WEEK_SCHEMES, nrOfWeekSchemes[bS[3]] * 2), portionOfTeamsWithDependencies[bS[4]], portionOfFixedAssignments[bS[5]]);
+                bw.ReportProgress(100 * testNo++ / totalNoOfTests);
+            }
+        }
+
+        private void runTest(int nOG, int nOTPD, int nOC, char[] wS, double pOTWD, double pOFA)
+        {
             int[] conflicts = [-1, -1];
-            om.findSolution(data.Item1, data.Item2, conflicts);
+            Tuple<Group[], Club[]> data = generate(nOG, nOTPD, nOC, wS, pOTWD, pOFA);
+            OptimizationModel om = new OptimizationModel(data.Item1, data.Item2, wS, [nOTPD, nOTPD], timeout, km, nOTPD);
+            om.findSolution(data.Item1, data.Item2, conflicts, bw);
+        }
+
+        private static char[] SubArray(char[] data, int length)
+        {
+            char[] result = new char[length];
+            Array.Copy(data, 0, result, 0, length);
+            return result;
         }
 
         private static KeyMapper createKeyMapper()
@@ -60,7 +100,7 @@ namespace KeyGenerator
             return new KeyMapper(similar, opposed, parallel, null);
         }
 
-        private static Tuple<Group[],Club[]> generate(int nrOfGroups, int nrOfTeamsPerGroup, int nrOfClubs, char[] week, double portionOfDependentTeams, double portionOfFixedKeys)
+        private Tuple<Group[],Club[]> generate(int nrOfGroups, int nrOfTeamsPerGroup, int nrOfClubs, char[] week, double portionOfDependentTeams, double portionOfFixedKeys)
         {
             Random r = new Random();
 
