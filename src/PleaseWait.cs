@@ -120,7 +120,7 @@ namespace KeyGenerator
             }
             else if (caller is Miscellaneous m)
             {
-                InstanceGenerator ig = new InstanceGenerator(Data.runtime,(BackgroundWorker)sender);
+                InstanceGenerator ig = new InstanceGenerator((BackgroundWorker)sender);
                 ig.runTests();
             }
         }
