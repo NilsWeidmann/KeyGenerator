@@ -240,8 +240,9 @@ namespace KeyGenerator
         public void findSolution(Group[] group, Club[] club, int[] conflicts, BackgroundWorker bw)
         {
             KeyGeneratorSolutionCallback callback = new KeyGeneratorSolutionCallback(bw, runtime);
+            bw.ReportProgress(0);
             CpSolverStatus status = solver.Solve(model, callback);
-
+            
             if (status != CpSolverStatus.Optimal && status != CpSolverStatus.Feasible)
                 conflicts[1] = -1;
             else
@@ -281,6 +282,7 @@ namespace KeyGenerator
                     if (progress >= 100)
                         bw.CancelAsync();
                 }
+                
                 return progress;
             }
         }

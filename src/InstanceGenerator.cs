@@ -15,7 +15,7 @@ namespace KeyGenerator
         // Basic Configuration
         BackgroundWorker bw;
         KeyMapper km;
-        const int timeout = 120;
+        int timeout;
         const int TEAM_MIN = 6;
         const int TEAM_MAX = 14;
         char[] WEEK_SCHEMES = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
@@ -32,53 +32,51 @@ namespace KeyGenerator
         // Base Scenario
         int[] bS = [0, 2, 2, 1, 2, 2];
 
-        public InstanceGenerator(BackgroundWorker bw)
+        // Status
+        int testNo;
+        int totalNoOfTests;
+
+        public InstanceGenerator(BackgroundWorker bw, int timeout)
         {
             km = createKeyMapper();
             this.bw = bw;
+            this.timeout = timeout;
+            testNo = 0;
+            totalNoOfTests = nrOfGroups.Length + nrOfTeamsPerDivision.Length + nrOfClubs.Length + nrOfWeekSchemes.Length + portionOfTeamsWithDependencies.Length + portionOfFixedAssignments.Length;
         }
 
         public void runTests()
         {
-            int testNo = 0;
-            int totalNoOfTests = nrOfGroups.Length + nrOfTeamsPerDivision.Length + nrOfClubs.Length + nrOfWeekSchemes.Length + portionOfTeamsWithDependencies.Length + portionOfFixedAssignments.Length;
             List<Tuple<double, int>> results = new List<Tuple<double, int>>();
-
 
             foreach (int nOG in nrOfGroups)
             {
                 results.Add(runTest(nOG, nrOfTeamsPerDivision[bS[1]], nrOfClubs[bS[2]], SubArray(WEEK_SCHEMES, nrOfWeekSchemes[bS[3]] * 2), portionOfTeamsWithDependencies[bS[4]], portionOfFixedAssignments[bS[5]]));
-                bw.ReportProgress(100 * ++testNo / totalNoOfTests);
             }
 
             foreach (int nOTPD in nrOfTeamsPerDivision)
             {
                 results.Add(runTest(nrOfGroups[bS[0]], nOTPD, nrOfClubs[bS[2]], SubArray(WEEK_SCHEMES, nrOfWeekSchemes[bS[3]] * 2), portionOfTeamsWithDependencies[bS[4]], portionOfFixedAssignments[bS[5]]));
-                bw.ReportProgress(100 * ++testNo / totalNoOfTests);
             }
 
             foreach (int nOC in nrOfClubs)
             {
                 results.Add(runTest(nrOfGroups[bS[0]], nrOfTeamsPerDivision[bS[1]], nOC, SubArray(WEEK_SCHEMES, nrOfWeekSchemes[bS[3]] * 2), portionOfTeamsWithDependencies[bS[4]], portionOfFixedAssignments[bS[5]]));
-                bw.ReportProgress(100 * ++testNo / totalNoOfTests);
             }
 
             foreach (int nOWS in nrOfWeekSchemes)
             {
                 results.Add(runTest(nrOfGroups[bS[0]], nrOfTeamsPerDivision[bS[1]], nrOfClubs[bS[2]], SubArray(WEEK_SCHEMES, nOWS * 2), portionOfTeamsWithDependencies[bS[4]], portionOfFixedAssignments[bS[5]]));
-                bw.ReportProgress(100 * ++testNo / totalNoOfTests);
             }
 
             foreach (double pOTWD in portionOfTeamsWithDependencies)
             {
                 results.Add(runTest(nrOfGroups[bS[0]], nrOfTeamsPerDivision[bS[1]], nrOfClubs[bS[2]], SubArray(WEEK_SCHEMES, nrOfWeekSchemes[bS[3]] * 2), pOTWD, portionOfFixedAssignments[bS[5]]));
-                bw.ReportProgress(100 * ++testNo / totalNoOfTests);
             }
 
             foreach (double pOFA in portionOfFixedAssignments)
             {
                 results.Add(runTest(nrOfGroups[bS[0]], nrOfTeamsPerDivision[bS[1]], nrOfClubs[bS[2]], SubArray(WEEK_SCHEMES, nrOfWeekSchemes[bS[3]] * 2), portionOfTeamsWithDependencies[bS[4]], pOFA));
-                bw.ReportProgress(100 * ++testNo / totalNoOfTests);
             }
         }
 
@@ -91,6 +89,7 @@ namespace KeyGenerator
 
             Tuple<Group[], Club[]> data = generate(nOG, nOTPD, nOC, wS, pOTWD, pOFA);
             OptimizationModel om = new OptimizationModel(data.Item1, data.Item2, wS, field, timeout, km, nOTPD);
+            testNo++;
 
             DateTime start = DateTime.Now;
             om.findSolution(data.Item1, data.Item2, conflicts, bw);
@@ -190,6 +189,11 @@ namespace KeyGenerator
             }
 
             return new Tuple<Group[], Club[]>(group,club);
+        }
+
+        public void refreshStatusText(Label status)
+        {
+            status.Text = String.Format("{0,2}/{1,2}", testNo, totalNoOfTests);
         }
     }
 }

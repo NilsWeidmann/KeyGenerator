@@ -117,10 +117,11 @@ namespace KeyGenerator
             boxCapacity.Enabled = false;
 
             ComboBox[] boxes = { boxGroups, boxClubs };
-            foreach (ComboBox box in boxes) {
+            foreach (ComboBox box in boxes)
+            {
                 reset(box);
             }
-            
+
             if (Data.group != null)
                 for (int i = 0; i < Data.group.Length; i++)
                     boxGroups.Items.Add(Data.group[i].name);
@@ -137,7 +138,7 @@ namespace KeyGenerator
             Data.group = Group.getGroups(Data.club, groupFile, Data.notification);
             Data.getRelations(Data.group, relationshipFile);
             Data.allocateTeams(Data.club, Data.group);
-            
+
             if (Data.notification.Count > 0)
             {
                 buttonGenerate.Enabled = false;
@@ -176,7 +177,7 @@ namespace KeyGenerator
             boxGroups.Enabled = boxClubs.Enabled = boxFields.Enabled = boxWeekA.Enabled
                  = boxWeekB.Enabled = boxWeekX.Enabled = boxWeekY.Enabled = false;
 
-            boxGroups.Text = boxClubs.Text = boxFields.Text = boxWeekA.Text 
+            boxGroups.Text = boxClubs.Text = boxFields.Text = boxWeekA.Text
                 = boxWeekB.Text = boxWeekX.Text = boxWeekY.Text = "";
 
             if (buttonClubView.Checked)
@@ -307,7 +308,7 @@ namespace KeyGenerator
                         backgroundColor = Color.Yellow;
                     else if (!content[3].Equals(content[4]))
                         backgroundColor = Color.Orange;  // Conflict
-                    else 
+                    else
                         backgroundColor = Color.LightGreen;
 
                     for (int i = 0; i < 5; i++)
@@ -339,7 +340,7 @@ namespace KeyGenerator
 
         private void boxClubs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ComboBox[] boxes = { boxWeekA, boxWeekB, boxWeekX, boxWeekY};
+            ComboBox[] boxes = { boxWeekA, boxWeekB, boxWeekX, boxWeekY };
             if (buttonClubView.Checked && boxClubs.SelectedIndex != -1)
             {
                 boxCapacity.Enabled = buttonPartner.Enabled = true;
@@ -358,7 +359,7 @@ namespace KeyGenerator
                     cb.Enabled = false;
                     cb.Text = "";
                 }
-            }   
+            }
         }
 
         private void buttonBrowse_Click(object sender, EventArgs e)
@@ -383,7 +384,7 @@ namespace KeyGenerator
                 for (int i = 0; i < Data.group[boxGroups.SelectedIndex].nrOfTeams; i++)
                 {
                     boxFields.Items.Clear();
-                    
+
                     Group currentGroup = Data.group[boxGroups.SelectedIndex];
                     int start = currentGroup.nrOfTeams + currentGroup.nrOfTeams % 2;
                     start = start > Data.TEAM_MIN ? start : Data.TEAM_MIN;
@@ -422,13 +423,14 @@ namespace KeyGenerator
                 if (input.Equals("") || input.Equals(" "))
                     input = "-";
 
-                if (buttonClubView.Checked && club != null) {
+                if (buttonClubView.Checked && club != null)
+                {
                     // Vereinssicht
                     if (weeks.Contains(input) && e.RowIndex < club.team.Count)
                         club.team[e.RowIndex].week = input[0];
                 }
                 else if (buttonGroupView.Checked && boxGroups.SelectedIndex != -1)
-                    { 
+                {
                     // Staffelsicht
                     if (weeks.Contains(input) && e.RowIndex < Data.group[boxGroups.SelectedIndex].team.Length)
                         Data.group[boxGroups.SelectedIndex].team[e.RowIndex].week = input[0];
@@ -563,7 +565,7 @@ namespace KeyGenerator
             else
                 enableBoxesAndButtons();
         }
-        
+
         private void buttonGroupView_CheckedChanged(object sender, EventArgs e)
         {
             buttonClubView.Checked = !buttonGroupView.Checked;
@@ -582,7 +584,7 @@ namespace KeyGenerator
                 Data.group = new Group[0];
             if (Data.club == null)
                 Data.club = new Club[0];
-                    
+
             //Data.save(Data.group, Data.club, Club.file, Group.file, Team.file);
             DataInput d = new DataInput(this, Data.club, Data.group);
             d.Visible = true;
@@ -921,6 +923,16 @@ namespace KeyGenerator
             boxClubs.SelectedIndex = -1;
             Enabled = true;
             Focus();
+        }
+
+        private void boxRuntimeSeconds_TextChanged(object sender, EventArgs e)
+        {
+            Data.runtime = Util.toInt(boxRuntimeMinutes.Text) * 60 + Util.toInt(boxRuntimeSeconds.Text);
+        }
+
+        private void boxRuntimeMinutes_TextChanged(object sender, EventArgs e)
+        {
+            Data.runtime = Util.toInt(boxRuntimeMinutes.Text) * 60 + Util.toInt(boxRuntimeSeconds.Text);
         }
     }
 }

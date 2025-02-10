@@ -9,16 +9,15 @@ namespace KeyGenerator
     public partial class PleaseWait : Form
     {
         Form caller;
+        InstanceGenerator ig;
         Group[] bestGroup;
         Club[] bestClub;
         int[] conflicts;
-        bool testMode;
 
         public PleaseWait(Form caller)
         {
             this.caller = caller;
-            caller.Enabled = false;
-            testMode = caller is Miscellaneous; 
+            caller.Enabled = false; 
             bestGroup = new Group[Data.group.Length];
             bestClub = new Club[Data.club.Length];
             InitializeComponent();
@@ -120,7 +119,7 @@ namespace KeyGenerator
             }
             else if (caller is Miscellaneous m)
             {
-                InstanceGenerator ig = new InstanceGenerator((BackgroundWorker)sender);
+                ig = new InstanceGenerator((BackgroundWorker)sender, Data.runtime);
                 ig.runTests();
             }
         }
@@ -138,11 +137,11 @@ namespace KeyGenerator
         {
             progressBar.Value = e.ProgressPercentage * 10;
 
-            if (testMode)
+            if (caller is Miscellaneous m)
             {
                 label3.Text = "";
                 label1.Text = "Generator-Tests werden ausgeführt: ";
-                labelTime.Text = String.Format("{0,3}%", e.ProgressPercentage);
+                ig.refreshStatusText(labelTime);
                 labelNrOfConflicts.Text = "";
             }
             else
