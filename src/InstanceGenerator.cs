@@ -17,8 +17,8 @@ namespace KeyGenerator
         KeyMapper km;
         int timeout;
         const int TEAM_MIN = 6;
-        const int TEAM_MAX = 14;
-        char[] WEEK_SCHEMES = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+        const int TEAM_MAX = 20;
+        char[] WEEK_SCHEMES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".ToCharArray();
 
         // Test Configuration
         int[] nrOfGroups = [50, 100, 200, 500, 1000, 2000];
@@ -78,6 +78,55 @@ namespace KeyGenerator
             {
                 results.Add(runTest(nrOfGroups[bS[0]], nrOfTeamsPerDivision[bS[1]], nrOfClubs[bS[2]], SubArray(WEEK_SCHEMES, nrOfWeekSchemes[bS[3]] * 2), portionOfTeamsWithDependencies[bS[4]], pOFA));
             }
+        }
+
+        public void runTests(string path)
+        {
+            List<Tuple<double, int>> results = new List<Tuple<double, int>>();
+            
+            MLIParser parser = new MLIParser(path);
+            List<Tuple<Group[], Club[]>> parseResult = parser.parse();
+            totalNoOfTests = parseResult.Count;
+
+            foreach (Tuple<Group[],Club[]> data in parseResult)
+            {
+                int[] conflicts = [-1, -1];
+                int[] field = getField(data);
+                char[] wS = SubArray(WEEK_SCHEMES, field.Length * 2);
+                int nOTPD = field[0];
+
+                OptimizationModel om = new OptimizationModel(data.Item1, data.Item2, wS, field, timeout, km, nOTPD);
+                testNo++;
+
+                DateTime start = DateTime.Now;
+                om.findSolution(data.Item1, data.Item2, conflicts, bw);
+                DateTime stop = DateTime.Now;
+
+                results.Add(new Tuple<double, int>((stop - start).TotalMilliseconds, conflicts[1]));
+            }
+
+            
+        }
+
+        private int[] getField(Tuple<Group[], Club[]> data)
+        {
+            int maxFieldSize = 0;
+            int nrOfWeekSchemes = 0;
+
+            foreach (Group g in data.Item1)
+            {
+                if (g.field > maxFieldSize)
+                    maxFieldSize = g.field;
+                foreach (Team t in g.team)
+                    if (t.week - 'A' + 1 > nrOfWeekSchemes)
+                        nrOfWeekSchemes = t.week - 'A' + 1;
+            }
+
+            int[] result = new int[nrOfWeekSchemes / 2];
+            for (int i = 0; i < result.Length; i++)
+                result[i] = maxFieldSize;
+
+            return result;
         }
 
         private Tuple<double,int> runTest(int nOG, int nOTPD, int nOC, char[] wS, double pOTWD, double pOFA)

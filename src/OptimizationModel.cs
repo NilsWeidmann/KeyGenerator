@@ -118,7 +118,7 @@ namespace KeyGenerator
         private void fixAssignments(Club[] club)
         {
             for (int i = 0; i < club.Length; i++)
-                for (int j=0; j<week.Length; j++)
+                for (int j=0; j< club[i].keys.Count; j++)
                     if (club[i].keys[week[j]] != 0)
                         model.Add(c[i, j, club[i].keys[week[j]] - 1] == 1);
         }

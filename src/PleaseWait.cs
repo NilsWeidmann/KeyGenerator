@@ -120,7 +120,8 @@ namespace KeyGenerator
             else if (caller is Miscellaneous m)
             {
                 ig = new InstanceGenerator((BackgroundWorker)sender, Data.runtime);
-                ig.runTests();
+                //ig.runTests();
+                ig.runTests(m.caller.boxDirectory.Text);
             }
         }
 
