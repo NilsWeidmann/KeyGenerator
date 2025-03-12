@@ -202,7 +202,7 @@ namespace KeyGenerator
             return false;
         }
 
-        public static void save(Group[] l, Club[] c, TextFile clubs, TextFile groups, TextFile relations)
+        public static void save(Group[] l, Club[] c, TextFile clubs, TextFile groups, TextFile relations, string weeks = "ABXY")
         {
             String help;
             int line = 0;
@@ -221,8 +221,9 @@ namespace KeyGenerator
             clubs.WriteFile("", notification);
             for (int i = 0; i < c.Length; i++)
             {
-                help = c[i].name + ";" + c[i].keys['A'] + ";" + c[i].keys['B'] + ";" 
-                    + c[i].keys['X'] + ";" + c[i].keys['Y'] + ";";
+                help = c[i].name + ";";
+                foreach (char week in weeks.ToCharArray())
+                    help += c[i].keys[week] + ";";
                 if (c[i].capacity)
                     help += "X;";
                 else
@@ -243,7 +244,9 @@ namespace KeyGenerator
             {
                 content = "";
                 for (int j = 0; j < l.Length; j++)
-                    if (l[j].team[i] != null && l[j].team[i].key != 0)
+                    if (l[j].field <= i)
+                        content += ";";
+                    else if (l[j].team[i] != null && l[j].team[i].key != 0)
                         content += l[j].team[i].name + " [" + l[j].team[i].key + "];";
                     else if (l[j].team[i] != null && l[j].team[i].key == 0)
                         content += l[j].team[i].name + ";";

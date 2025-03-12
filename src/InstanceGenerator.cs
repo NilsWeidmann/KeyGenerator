@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Google.OrTools.Sat;
 
 namespace KeyGenerator
 {
@@ -14,32 +15,39 @@ namespace KeyGenerator
     {
         // Basic Configuration
         BackgroundWorker bw;
+        TextFile log;
+        string path;
+        List<string> messages;
         KeyMapper km;
         int timeout;
-        const int TEAM_MIN = 6;
+        const int TEAM_MIN = 4;
         const int TEAM_MAX = 20;
         char[] WEEK_SCHEMES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".ToCharArray();
+        int NR_OF_REPS = 10;
 
         // Test Configuration
-        int[] nrOfGroups = [50, 100, 200, 500, 1000, 2000];
+        int[] nrOfGroups = [20, 50, 100, 200, 500];
         int[] nrOfTeamsPerDivision = [6, 8, 10, 12, 14];
         int[] nrOfClubs = [20, 50, 100, 200, 500];
         int[] nrOfWeekSchemes = [1, 2, 3, 4, 5];
 
-        double[] portionOfTeamsWithDependencies = [0.3, 0.4, 0.5, 0.6, 0.7];
-        double[] portionOfFixedAssignments = [0.05, 0.10, 0.15, 0.20, 0.25];
+        double[] portionOfTeamsWithDependencies = [0.75, 0.80, 0.85, 0.9, 0.95];
+        double[] portionOfFixedAssignments = [0.10, 0.20, 0.30, 0.40, 0.50];
 
         // Base Scenario
-        int[] bS = [0, 2, 2, 1, 2, 2];
+        int[] bS = [1, 2, 2, 1, 0, 0];
 
         // Status
         int testNo;
         int totalNoOfTests;
 
-        public InstanceGenerator(BackgroundWorker bw, int timeout)
+        public InstanceGenerator(BackgroundWorker bw, int timeout, TextFile log, string path)
         {
             km = createKeyMapper();
             this.bw = bw;
+            this.log = log;
+            this.path = path;
+            messages = new List<string>();
             this.timeout = timeout;
             testNo = 0;
             totalNoOfTests = nrOfGroups.Length + nrOfTeamsPerDivision.Length + nrOfClubs.Length + nrOfWeekSchemes.Length + portionOfTeamsWithDependencies.Length + portionOfFixedAssignments.Length;
@@ -47,43 +55,46 @@ namespace KeyGenerator
 
         public void runTests()
         {
-            List<Tuple<double, int>> results = new List<Tuple<double, int>>();
-
-            foreach (int nOG in nrOfGroups)
+            for (int rep = 0; rep < NR_OF_REPS; rep++)
             {
-                results.Add(runTest(nOG, nrOfTeamsPerDivision[bS[1]], nrOfClubs[bS[2]], SubArray(WEEK_SCHEMES, nrOfWeekSchemes[bS[3]] * 2), portionOfTeamsWithDependencies[bS[4]], portionOfFixedAssignments[bS[5]]));
-            }
 
-            foreach (int nOTPD in nrOfTeamsPerDivision)
-            {
-                results.Add(runTest(nrOfGroups[bS[0]], nOTPD, nrOfClubs[bS[2]], SubArray(WEEK_SCHEMES, nrOfWeekSchemes[bS[3]] * 2), portionOfTeamsWithDependencies[bS[4]], portionOfFixedAssignments[bS[5]]));
-            }
+                foreach (int nOG in nrOfGroups)
+                {
+                    runTest(nOG, nrOfTeamsPerDivision[bS[1]], nrOfClubs[bS[2]], SubArray(WEEK_SCHEMES, nrOfWeekSchemes[bS[3]] * 2), portionOfTeamsWithDependencies[bS[4]], portionOfFixedAssignments[bS[5]], rep);
+                }
 
-            foreach (int nOC in nrOfClubs)
-            {
-                results.Add(runTest(nrOfGroups[bS[0]], nrOfTeamsPerDivision[bS[1]], nOC, SubArray(WEEK_SCHEMES, nrOfWeekSchemes[bS[3]] * 2), portionOfTeamsWithDependencies[bS[4]], portionOfFixedAssignments[bS[5]]));
-            }
+                foreach (int nOTPD in nrOfTeamsPerDivision)
+                {
+                    runTest(nrOfGroups[bS[0]], nOTPD, nrOfClubs[bS[2]], SubArray(WEEK_SCHEMES, nrOfWeekSchemes[bS[3]] * 2), portionOfTeamsWithDependencies[bS[4]], portionOfFixedAssignments[bS[5]], rep);
+                }
 
-            foreach (int nOWS in nrOfWeekSchemes)
-            {
-                results.Add(runTest(nrOfGroups[bS[0]], nrOfTeamsPerDivision[bS[1]], nrOfClubs[bS[2]], SubArray(WEEK_SCHEMES, nOWS * 2), portionOfTeamsWithDependencies[bS[4]], portionOfFixedAssignments[bS[5]]));
-            }
+                foreach (int nOC in nrOfClubs)
+                {
+                    runTest(nrOfGroups[bS[0]], nrOfTeamsPerDivision[bS[1]], nOC, SubArray(WEEK_SCHEMES, nrOfWeekSchemes[bS[3]] * 2), portionOfTeamsWithDependencies[bS[4]], portionOfFixedAssignments[bS[5]], rep);
+                }
 
-            foreach (double pOTWD in portionOfTeamsWithDependencies)
-            {
-                results.Add(runTest(nrOfGroups[bS[0]], nrOfTeamsPerDivision[bS[1]], nrOfClubs[bS[2]], SubArray(WEEK_SCHEMES, nrOfWeekSchemes[bS[3]] * 2), pOTWD, portionOfFixedAssignments[bS[5]]));
-            }
+                foreach (int nOWS in nrOfWeekSchemes)
+                {
+                    runTest(nrOfGroups[bS[0]], nrOfTeamsPerDivision[bS[1]], nrOfClubs[bS[2]], SubArray(WEEK_SCHEMES, nOWS * 2), portionOfTeamsWithDependencies[bS[4]], portionOfFixedAssignments[bS[5]], rep);
+                }
 
-            foreach (double pOFA in portionOfFixedAssignments)
-            {
-                results.Add(runTest(nrOfGroups[bS[0]], nrOfTeamsPerDivision[bS[1]], nrOfClubs[bS[2]], SubArray(WEEK_SCHEMES, nrOfWeekSchemes[bS[3]] * 2), portionOfTeamsWithDependencies[bS[4]], pOFA));
+                foreach (double pOTWD in portionOfTeamsWithDependencies)
+                {
+                    runTest(nrOfGroups[bS[0]], nrOfTeamsPerDivision[bS[1]], nrOfClubs[bS[2]], SubArray(WEEK_SCHEMES, nrOfWeekSchemes[bS[3]] * 2), pOTWD, portionOfFixedAssignments[bS[5]], rep);
+                }
+
+                foreach (double pOFA in portionOfFixedAssignments)
+                {
+                    runTest(nrOfGroups[bS[0]], nrOfTeamsPerDivision[bS[1]], nrOfClubs[bS[2]], SubArray(WEEK_SCHEMES, nrOfWeekSchemes[bS[3]] * 2), portionOfTeamsWithDependencies[bS[4]], pOFA, rep);
+                }
+
+                // Cool down
+                Thread.Sleep(120000);
             }
         }
 
         public void runTests(string path)
         {
-            List<Tuple<double, int>> results = new List<Tuple<double, int>>();
-            
             MLIParser parser = new MLIParser(path);
             List<Tuple<Group[], Club[]>> parseResult = parser.parse();
             totalNoOfTests = parseResult.Count;
@@ -95,17 +106,11 @@ namespace KeyGenerator
                 char[] wS = SubArray(WEEK_SCHEMES, field.Length * 2);
                 int nOTPD = field[0];
 
-                OptimizationModel om = new OptimizationModel(data.Item1, data.Item2, wS, field, timeout, km, nOTPD);
+                OptimizationModel om = new OptimizationModel(data.Item1, data.Item2, wS, field, timeout, km, nOTPD, log, bw, messages);
                 testNo++;
 
-                DateTime start = DateTime.Now;
-                om.findSolution(data.Item1, data.Item2, conflicts, bw);
-                DateTime stop = DateTime.Now;
-
-                results.Add(new Tuple<double, int>((stop - start).TotalMilliseconds, conflicts[1]));
-            }
-
-            
+                CpSolverStatus status = om.findSolution(data.Item1, data.Item2, conflicts);
+            } 
         }
 
         private int[] getField(Tuple<Group[], Club[]> data)
@@ -129,22 +134,26 @@ namespace KeyGenerator
             return result;
         }
 
-        private Tuple<double,int> runTest(int nOG, int nOTPD, int nOC, char[] wS, double pOTWD, double pOFA)
+        private void runTest(int nOG, int nOTPD, int nOC, char[] wS, double pOTWD, double pOFA, int rep)
         {
             int[] conflicts = [-1, -1];
             int[] field = new int[wS.Length / 2];
             for (int i = 0; i < wS.Length / 2; i++)
                 field[i] = nOTPD;
 
+            TextFile clubs = new TextFile(path + @"\clubs_" + nOG + "_" + nOTPD + "_" + nOC + "_" + (wS.Length / 2) + "_" + pOTWD + "_" + pOFA + "_" + rep + ".csv");
+            TextFile groups = new TextFile(path + @"\groups_" + nOG + "_" + nOTPD + "_" + nOC + "_" + (wS.Length / 2) + "_" + pOTWD + "_" + pOFA + "_" + rep + ".csv");
+            TextFile relations = new TextFile(path + @"\relations_" + nOG + "_" + nOTPD + "_" + nOC + "_" + (wS.Length / 2) + "_" + pOTWD + "_" + pOFA + "_" + rep + ".csv");
+
             Tuple<Group[], Club[]> data = generate(nOG, nOTPD, nOC, wS, pOTWD, pOFA);
-            OptimizationModel om = new OptimizationModel(data.Item1, data.Item2, wS, field, timeout, km, nOTPD);
+            Data.save(data.Item1, data.Item2, clubs, groups, relations, new string(wS));
+
+            OptimizationModel om = new OptimizationModel(data.Item1, data.Item2, wS, field, timeout, km, nOTPD, log, bw, messages);
             testNo++;
 
             DateTime start = DateTime.Now;
-            om.findSolution(data.Item1, data.Item2, conflicts, bw);
+            CpSolverStatus status = om.findSolution(data.Item1, data.Item2, conflicts);
             DateTime stop = DateTime.Now;
-
-            return new Tuple<double,int>((stop - start).TotalMilliseconds, conflicts[1]);
         }
 
         private static char[] SubArray(char[] data, int length)

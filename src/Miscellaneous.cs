@@ -121,7 +121,14 @@ namespace KeyGenerator
 
         private void generatorTests_Click(object sender, EventArgs e)
         {
-            PleaseWait pw = new PleaseWait(this);
+            PleaseWait pw = new PleaseWait(this, false);
+            this.Enabled = false;
+            pw.Visible = true;
+        }
+
+        private void testsFromFile_Click(object sender, EventArgs e)
+        {
+            PleaseWait pw = new PleaseWait(this, true);
             this.Enabled = false;
             pw.Visible = true;
         }

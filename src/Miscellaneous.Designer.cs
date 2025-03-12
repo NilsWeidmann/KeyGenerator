@@ -37,11 +37,12 @@
             buttonDeleteTeamDeleteDays = new System.Windows.Forms.Button();
             buttonDeleteTeamDeleteKeysForClubs = new System.Windows.Forms.Button();
             generatorTests = new System.Windows.Forms.Button();
+            testsFromFile = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // buttonDeleteTeamCancel
             // 
-            buttonDeleteTeamCancel.Location = new System.Drawing.Point(20, 458);
+            buttonDeleteTeamCancel.Location = new System.Drawing.Point(20, 508);
             buttonDeleteTeamCancel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             buttonDeleteTeamCancel.Name = "buttonDeleteTeamCancel";
             buttonDeleteTeamCancel.Size = new System.Drawing.Size(429, 44);
@@ -136,11 +137,22 @@
             generatorTests.UseVisualStyleBackColor = true;
             generatorTests.Click += generatorTests_Click;
             // 
+            // testsFromFile
+            // 
+            testsFromFile.Location = new System.Drawing.Point(20, 455);
+            testsFromFile.Name = "testsFromFile";
+            testsFromFile.Size = new System.Drawing.Size(429, 44);
+            testsFromFile.TabIndex = 12;
+            testsFromFile.Text = "Tests aus Datei";
+            testsFromFile.UseVisualStyleBackColor = true;
+            testsFromFile.Click += testsFromFile_Click;
+            // 
             // Miscellaneous
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(467, 515);
+            ClientSize = new System.Drawing.Size(467, 570);
+            Controls.Add(testsFromFile);
             Controls.Add(generatorTests);
             Controls.Add(buttonDeleteTeamDeleteKeysForClubs);
             Controls.Add(buttonDeleteTeamDeleteDays);
@@ -170,5 +182,6 @@
         private System.Windows.Forms.Button buttonDeleteTeamDeleteDays;
         private System.Windows.Forms.Button buttonDeleteTeamDeleteKeysForClubs;
         private System.Windows.Forms.Button generatorTests;
+        private System.Windows.Forms.Button testsFromFile;
     }
 }

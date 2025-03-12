@@ -13,11 +13,13 @@ namespace KeyGenerator
         Group[] bestGroup;
         Club[] bestClub;
         int[] conflicts;
+        bool fromFile;
 
-        public PleaseWait(Form caller)
+        public PleaseWait(Form caller, bool fromFile)
         {
             this.caller = caller;
-            caller.Enabled = false; 
+            caller.Enabled = false;
+            this.fromFile = fromFile;
             bestGroup = new Group[Data.group.Length];
             bestClub = new Club[Data.club.Length];
             InitializeComponent();
@@ -112,16 +114,19 @@ namespace KeyGenerator
                 int[] keys = new int[Data.club.Length * 2];
                 conflicts = [0, -1];
                 char[] week = { 'A', 'B', 'X', 'Y' };
-                OptimizationModel om = new OptimizationModel(Data.group, Data.club, week, Data.field, Data.runtime, Data.km, Data.TEAM_MAX);
-                om.findSolution(bestGroup, bestClub, conflicts, backgroundWorker);
+                OptimizationModel om = new OptimizationModel(Data.group, Data.club, week, Data.field, Data.runtime, Data.km, Data.TEAM_MAX, Data.log, backgroundWorker, Data.notification);
+                om.findSolution(bestGroup, bestClub, conflicts);
 
                 //Data.findSolution(Data.group, best_l, Data.club, best_c, conflicts, keys, backgroundWorker);
             }
             else if (caller is Miscellaneous m)
             {
-                ig = new InstanceGenerator((BackgroundWorker)sender, Data.runtime);
-                //ig.runTests();
-                ig.runTests(m.caller.boxDirectory.Text);
+                ig = new InstanceGenerator((BackgroundWorker)sender, Data.runtime, Data.log, m.caller.boxDirectory.Text);
+                if (fromFile)
+                    ig.runTests(m.caller.boxDirectory.Text);
+                else
+                    ig.runTests();
+
             }
         }
 

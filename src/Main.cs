@@ -100,7 +100,7 @@ namespace KeyGenerator
         {
             this.Enabled = false;
             Data.runtime = Util.toInt(boxRuntimeMinutes.Text) * 60 + Util.toInt(boxRuntimeSeconds.Text);
-            PleaseWait bw = new PleaseWait(this);
+            PleaseWait bw = new PleaseWait(this, true);
             bw.Visible = true;
         }
 
@@ -335,7 +335,7 @@ namespace KeyGenerator
             }
             Data.km = new KeyMapper(path);
             Data.log = new TextFile(path + @"\Log.csv");
-            Data.log.WriteFile("Uhrzeit;Laufzeit (in s);Anzahl Konflikte;", Data.notification);
+            Data.log.WriteFile("Uhrzeit;Laufzeit (in s);Anzahl Konflikte;Status;\n\n", Data.notification);
         }
 
         private void boxClubs_SelectedIndexChanged(object sender, EventArgs e)

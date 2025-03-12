@@ -4,13 +4,17 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
 using System.Windows.Forms;
+//using Google.OrTools.ConstraintSolver;
 using Google.OrTools.Graph;
 using Google.OrTools.Init;
 using Google.OrTools.Sat;
+using Google.Protobuf;
 using Google.Protobuf.WellKnownTypes;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace KeyGenerator
 {
@@ -31,8 +35,15 @@ namespace KeyGenerator
         private CpModel model;
         private CpSolver solver;
         private int runtime;
+        private KeyGeneratorSolutionCallback callback;
+        private CpSolverStatus status;
 
-        public OptimizationModel(Group[] group, Club[] club, char[] week, int[] field, int runtime, KeyMapper km, int TEAM_MAX)
+        // Status reporting
+        private TextFile log;
+        private BackgroundWorker bw;
+        private List<string> messages;
+
+        public OptimizationModel(Group[] group, Club[] club, char[] week, int[] field, int runtime, KeyMapper km, int TEAM_MAX, TextFile log, BackgroundWorker bw, List<string> messages)
         {
             this.week = week;
             this.field = field;
@@ -42,7 +53,11 @@ namespace KeyGenerator
             model = new CpModel();
             solver = new CpSolver();
             solver.StringParameters = "max_time_in_seconds:" + runtime + ".0";
+            solver.StringParameters = "num_workers:8";
             this.runtime = runtime;
+            this.log = log;
+            this.bw = bw;
+            this.messages = messages;
 
             if (model is null || solver is null)
             {
@@ -60,9 +75,6 @@ namespace KeyGenerator
             confllictDetection(group, club);
 
             setObjective(group);
-
-            //TODO Callback
-            //solver.SetTimeLimit(runtime * 1000);
         }
 
         private void createVariables(Group[] group, Club[] club)
@@ -237,12 +249,28 @@ namespace KeyGenerator
             model.Minimize(objective);
         }
 
-        public void findSolution(Group[] group, Club[] club, int[] conflicts, BackgroundWorker bw)
+        private void solve()
         {
-            KeyGeneratorSolutionCallback callback = new KeyGeneratorSolutionCallback(bw, runtime);
+            DateTime start = DateTime.Now;
+            status = solver.Solve(model, callback);
+            DateTime stop = DateTime.Now;
+
+            log.Append(stop.ToLongTimeString() + ";" + (((int)(stop - start).TotalMilliseconds) / 1000.0) + ";" + (int)solver.ObjectiveValue + ";" + status.ToString() + ";\n", messages);
+        }
+
+        public CpSolverStatus findSolution(Group[] group, Club[] club, int[] conflicts)
+        {
+            callback = new KeyGeneratorSolutionCallback(bw, runtime);
             bw.ReportProgress(0);
-            CpSolverStatus status = solver.Solve(model, callback);
-            
+
+            Thread solverThread = new Thread(solve);
+            solverThread.Start();
+            for (int i=0; i<runtime && solverThread.IsAlive; i++) 
+                Thread.Sleep(1000);
+            solverThread.Interrupt();
+            callback.StopSearch();
+            solverThread.Join();
+
             if (status != CpSolverStatus.Optimal && status != CpSolverStatus.Feasible)
                 conflicts[1] = -1;
             else
@@ -250,6 +278,7 @@ namespace KeyGenerator
                 convertSolution(group, club);
                 conflicts[1] = (int)solver.ObjectiveValue;
             }
+            return status;
         }
 
         class KeyGeneratorSolutionCallback : CpSolverSolutionCallback
@@ -271,7 +300,9 @@ namespace KeyGenerator
             {
                 double d = ObjectiveValue();
                 Data.currentConflicts = (int)d;
-                reportProgress(bw, runtime, start, progress);
+                progress = reportProgress(bw, runtime, start, progress);
+                if (progress >= 100)
+                    this.StopSearch();
             }
             private static int reportProgress(BackgroundWorker bw, int runtime, DateTime start, int progress)
             {
@@ -282,7 +313,7 @@ namespace KeyGenerator
                     if (progress >= 100)
                         bw.CancelAsync();
                 }
-                
+
                 return progress;
             }
         }
