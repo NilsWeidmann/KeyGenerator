@@ -534,7 +534,7 @@
         private System.Windows.Forms.Label label3;
         public System.Windows.Forms.ComboBox boxClubs;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        public System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button buttonBrowse;
         public System.Windows.Forms.ComboBox boxGroups;
         private System.Windows.Forms.Label label1;

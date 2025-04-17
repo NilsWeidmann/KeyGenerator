@@ -38,11 +38,12 @@
             buttonDeleteTeamDeleteKeysForClubs = new System.Windows.Forms.Button();
             generatorTests = new System.Windows.Forms.Button();
             testsFromFile = new System.Windows.Forms.Button();
+            buttonSaveWeekdays = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // buttonDeleteTeamCancel
             // 
-            buttonDeleteTeamCancel.Location = new System.Drawing.Point(20, 508);
+            buttonDeleteTeamCancel.Location = new System.Drawing.Point(18, 554);
             buttonDeleteTeamCancel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             buttonDeleteTeamCancel.Name = "buttonDeleteTeamCancel";
             buttonDeleteTeamCancel.Size = new System.Drawing.Size(429, 44);
@@ -129,7 +130,7 @@
             // 
             // generatorTests
             // 
-            generatorTests.Location = new System.Drawing.Point(20, 405);
+            generatorTests.Location = new System.Drawing.Point(18, 451);
             generatorTests.Name = "generatorTests";
             generatorTests.Size = new System.Drawing.Size(429, 44);
             generatorTests.TabIndex = 11;
@@ -139,7 +140,7 @@
             // 
             // testsFromFile
             // 
-            testsFromFile.Location = new System.Drawing.Point(20, 455);
+            testsFromFile.Location = new System.Drawing.Point(18, 501);
             testsFromFile.Name = "testsFromFile";
             testsFromFile.Size = new System.Drawing.Size(429, 44);
             testsFromFile.TabIndex = 12;
@@ -147,11 +148,22 @@
             testsFromFile.UseVisualStyleBackColor = true;
             testsFromFile.Click += testsFromFile_Click;
             // 
+            // buttonSaveWeekdays
+            // 
+            buttonSaveWeekdays.Location = new System.Drawing.Point(20, 405);
+            buttonSaveWeekdays.Name = "buttonSaveWeekdays";
+            buttonSaveWeekdays.Size = new System.Drawing.Size(427, 40);
+            buttonSaveWeekdays.TabIndex = 13;
+            buttonSaveWeekdays.Text = "Terminmeldung speichern";
+            buttonSaveWeekdays.UseVisualStyleBackColor = true;
+            buttonSaveWeekdays.Click += buttonSaveWeekdays_Click;
+            // 
             // Miscellaneous
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(467, 570);
+            ClientSize = new System.Drawing.Size(467, 617);
+            Controls.Add(buttonSaveWeekdays);
             Controls.Add(testsFromFile);
             Controls.Add(generatorTests);
             Controls.Add(buttonDeleteTeamDeleteKeysForClubs);
@@ -183,5 +195,6 @@
         private System.Windows.Forms.Button buttonDeleteTeamDeleteKeysForClubs;
         private System.Windows.Forms.Button generatorTests;
         private System.Windows.Forms.Button testsFromFile;
+        private System.Windows.Forms.Button buttonSaveWeekdays;
     }
 }

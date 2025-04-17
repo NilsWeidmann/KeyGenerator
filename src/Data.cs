@@ -114,7 +114,6 @@ namespace KeyGenerator
             for (int i = 0; i < nrOfClubs; i++)
             {
                 content = c.ReadLine(1 + i, false, notification).Replace("\r", "");
-                content = Util.clear(content);
                 help = content.Split(';');
                 v[i] = new Club
                 {

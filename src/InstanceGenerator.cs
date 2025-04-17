@@ -35,7 +35,7 @@ namespace KeyGenerator
         double[] portionOfFixedAssignments = [0.10, 0.20, 0.30, 0.40, 0.50];
 
         // Base Scenario
-        int[] bS = [1, 2, 2, 1, 0, 0];
+        int[] bS = [1, 2, 1, 1, 0, 0];
 
         // Status
         int testNo;
@@ -89,7 +89,7 @@ namespace KeyGenerator
                 }
 
                 // Cool down
-                Thread.Sleep(120000);
+                //Thread.Sleep(120000);
             }
         }
 
@@ -209,6 +209,7 @@ namespace KeyGenerator
             {
                 club[i] = new Club();
                 club[i].index = i;
+                club[i].name = "Club_" + i;
                 club[i].keys = new Dictionary<char, int>();
 
                 for (int j = 0; j < week.Length; j++)
@@ -227,6 +228,7 @@ namespace KeyGenerator
             {
                 group[i] = new Group();
                 group[i].index = i;
+                group[i].name = "Group_" + i;
                 group[i].field = nrOfTeamsPerGroup;
                 group[i].nrOfTeams = nrOfTeamsPerGroup;
                 group[i].team = new Team[nrOfTeamsPerGroup];
@@ -238,7 +240,7 @@ namespace KeyGenerator
                     group[i].team[j].group = group[i];
                     group[i].team[j].club = club[(int)(r.NextDouble() * nrOfClubs)];
                     group[i].team[j].club.team.Add(group[i].team[j]);
-
+                    group[i].team[j].name = group[i].team[j].club.name + " " + group[i].team[j].club.team.Count;
                     if (r.NextDouble() < portionOfDependentTeams)
                         group[i].team[j].week = week[(int)(r.NextDouble() * week.Length)];
                     else

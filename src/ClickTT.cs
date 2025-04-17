@@ -72,10 +72,10 @@ namespace KeyGenerator
                 foreach (HtmlNode node_s in group_table.Descendants())
                 {
                     if (node_s.Name.Equals("h2"))
-                        ageGroup = Util.clear(node_s.InnerText);
+                        ageGroup = node_s.InnerText;
                     if (node_s.Name.Equals("a") && !node_s.ParentNode.GetAttributeValue("class", "").Equals("matrix-relegation-more"))
                     {
-                        division = Util.clear(node_s.InnerText);
+                        division = node_s.InnerText;
                         Group l = new Group
                         {
                             name = ageGroup + " " + division,
@@ -108,7 +108,6 @@ namespace KeyGenerator
                                     t.name = node_t.InnerText.Replace("\n", "");
                                     t.name = t.name.TrimStart(trimChars);
                                     t.name = t.name.TrimEnd(trimChars);
-                                    t.name = Util.clear(t.name);
                                     t.group = l;
                                     l.nrOfTeams++;
                                     t.week = '-';

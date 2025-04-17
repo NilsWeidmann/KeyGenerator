@@ -18,6 +18,8 @@ namespace KeyGenerator
         public int nrOfOptions;
         public char week;
         public char[] day;
+        public String weekday;
+        public String weekday2;
 
         public Team(String name, Club club, String team, String ageGroup) : this()
         {
@@ -25,6 +27,8 @@ namespace KeyGenerator
             this.club = club;
             this.team = team;
             this.ageGroup = ageGroup;
+            this.weekday = "";
+            this.weekday2 = "";
         }
 
         public Team()
@@ -35,6 +39,8 @@ namespace KeyGenerator
             day = new char[Data.TEAM_MAX];
             for (int i = 0; i < Data.TEAM_MAX; i++)
                 day[i] = '-';
+            this.weekday = "";
+            this.weekday2 = "";
         }
 
         public void setNrOfOptions()
@@ -90,6 +96,8 @@ namespace KeyGenerator
             t.week = week;
             t.team = team;
             t.key = key;
+            t.weekday = weekday;
+            t.weekday2 = weekday2;
             return t;
         }
     }

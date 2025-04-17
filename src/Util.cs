@@ -89,8 +89,21 @@ namespace KeyGenerator
             return res;
         }
 
+        private static string replaceUmlauts(string input)
+        {
+            input = input.Replace("&#196;", "Ä");
+            input = input.Replace("&#228;", "ä");
+            input = input.Replace("&#214;", "Ö");
+            input = input.Replace("&#246;", "ö");
+            input = input.Replace("&#220;", "Ü");
+            input = input.Replace("&#252;", "ü");
+            input = input.Replace("&#223;", "ß");
+            return input;
+        }
+
         public static String clear(String s)
         {
+            s = replaceUmlauts(s);
             s = s.Replace("Ä", "Ae");
             s = s.Replace("Ö", "Oe");
             s = s.Replace("Ü", "Ue");

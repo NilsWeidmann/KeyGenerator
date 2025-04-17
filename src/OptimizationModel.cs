@@ -265,10 +265,10 @@ namespace KeyGenerator
 
             Thread solverThread = new Thread(solve);
             solverThread.Start();
-            for (int i=0; i<runtime && solverThread.IsAlive; i++) 
+            /*for (int i=0; i<runtime && solverThread.IsAlive; i++) 
                 Thread.Sleep(1000);
             solverThread.Interrupt();
-            callback.StopSearch();
+            callback.StopSearch();*/
             solverThread.Join();
 
             if (status != CpSolverStatus.Optimal && status != CpSolverStatus.Feasible)

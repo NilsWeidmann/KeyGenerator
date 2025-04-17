@@ -132,5 +132,28 @@ namespace KeyGenerator
             this.Enabled = false;
             pw.Visible = true;
         }
+
+        private void buttonSaveWeekdays_Click(object sender, EventArgs e)
+        {
+            this.Enabled = false;
+            try {
+                if (caller.folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = caller.folderBrowserDialog1.SelectedPath + "/Terminmeldung.csv";
+                    TextFile weekdayFile = new TextFile(filePath);
+                    weekdayFile.WriteFile("", Data.notification);
+                    weekdayFile.Append("Verein;Mannschaft;Spieltag;Ersatzspieltag\n", Data.notification);
+                    foreach (Club c in Data.club)
+                        foreach (Team t in c.team)
+                            weekdayFile.Append(c.name + ";" + t.ageGroup + " " + t.team + ";" + t.weekday + ";" + t.weekday2 + "\n", Data.notification);
+                }
+            }
+            catch (Exception ex)
+            {
+                Data.notification.Append(ex.ToString());
+                MessageBox.Show("Fehler beim Speichern der Terminmeldung!");
+            }
+            returnToCaller();
+        }
     }
 }

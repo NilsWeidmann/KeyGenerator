@@ -633,18 +633,6 @@ namespace KeyGenerator
             p.Visible = true;
         }
 
-        private string replaceUmlauts(string input)
-        {
-            input = input.Replace("&#196;", "Ä");
-            input = input.Replace("&#228;", "ä");
-            input = input.Replace("&#214;", "Ö");
-            input = input.Replace("&#246;", "ö");
-            input = input.Replace("&#220;", "Ü");
-            input = input.Replace("&#252;", "ü");
-            input = input.Replace("&#223;", "ß");
-            return input;
-        }
-
         private bool addWishes(Hashtable groups, Hashtable clubs)
         {
 
@@ -656,6 +644,7 @@ namespace KeyGenerator
             wishes.Load(file);
             // Regex clubNameAndID = new Regex("(\\w+\\s)+\\([0-9]{6}\\)");
             Regex clubIDPattern = new Regex(@"^[0-9]{5}$");
+            Regex timePattern = new Regex(@"[A-Z][a-z] [0-9]{2}:[0-9]{2}");
             HtmlNodeCollection divs = wishes.DocumentNode.SelectNodes("//div");
 
             if (divs == null)
@@ -677,11 +666,11 @@ namespace KeyGenerator
                 foreach (HtmlNode p in ps)
                 {
                     string[] lines = p.InnerHtml.Split(new string[] { "<br>", "<br/>", "<b>", "</b>" }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] data;
 
                     foreach (string line in lines)
                     {
-                        string parsedLine = replaceUmlauts(line);
-                        parsedLine = Util.clear(parsedLine);
+                        string parsedLine = Util.clear(line);
 
                         // Header vorbei?
                         if (parsedLine.Equals("Terminwuensche"))
@@ -714,14 +703,18 @@ namespace KeyGenerator
                         {
                             if (parsedLine.StartsWith(ageGroup))
                             {
-                                string team;
-                                if (parsedLine.Equals(ageGroup))
-                                    team = "I";
-                                else
-                                    team = parsedLine.Replace(ageGroup, "").Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                                parsedLine = parsedLine.Replace(ageGroup, "").TrimStart();
+                                data = parsedLine.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                if (data.Length == 0)
+                                    break;
+
+                                string team = data[0];
 
                                 if (!Util.isRomanNumber(team))
                                     team = "I";
+                                else
+                                    parsedLine = parsedLine.Remove(0, team.Length).TrimStart();
+
                                 bool found = false;
                                 foreach (Team t in currentClub.team)
                                     if (t.club.name.Equals(currentClub.name)
@@ -737,6 +730,21 @@ namespace KeyGenerator
                                     currentTeam = dummyTeam;
                             }
                         }
+                        // Festspieltag
+                        data = parsedLine.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+                        if (data.Length == 0)
+                            continue;
+
+                        string weekday = data[0];
+                        if (timePattern.IsMatch(weekday))
+                        {
+                            if (currentTeam.weekday.Equals(""))
+                                currentTeam.weekday = weekday;
+                            else
+                                currentTeam.weekday2 = weekday;
+                        }
+                        // Spielwoche
                         if (parsedLine.StartsWith("Spielwoche"))
                         {
                             currentTeam.week = parsedLine.ToCharArray()[11];
@@ -838,7 +846,6 @@ namespace KeyGenerator
             TextFile groupFile = new TextFile(openFileDialog1.FileName);
             List<String> notification = new List<string>();
             String content = groupFile.ReadFile(false, notification);
-            content = Util.clear(content);
             String[] row = content.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (row.Length == 0)
