@@ -15,7 +15,6 @@ namespace KeyGenerator
         public int key;
         public int index;
         public bool[] option;
-        public int nrOfOptions;
         public char week;
         public char[] day;
         public String weekday;
@@ -41,14 +40,6 @@ namespace KeyGenerator
                 day[i] = '-';
             this.weekday = "";
             this.weekday2 = "";
-        }
-
-        public void setNrOfOptions()
-        {
-            nrOfOptions = 0;
-            for (int k = 0; k < Data.TEAM_MAX; k++)
-                if (option[k])
-                    nrOfOptions++;
         }
 
         public void getKey()

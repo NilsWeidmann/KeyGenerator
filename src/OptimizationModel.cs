@@ -72,7 +72,7 @@ namespace KeyGenerator
             oppositeKeysForOppositeWeekSchemes(club);
             fixAssignments(club);
             keySimilarity(group, club);
-            confllictDetection(group, club);
+            confllictDetection(club);
 
             setObjective(group);
         }
@@ -106,22 +106,23 @@ namespace KeyGenerator
 
         private void convertSolution(Group[] group, Club[] club)
         {
-            for (int i = 0; i < club.Length; i++) { 
+            for (int i = 0; i < club.Length; i++)
+            {
                 for (int j = 0; j < week.Length; j++)
-                    for (int k = 0; k < field[j / 2]; k++) 
+                    for (int k = 0; k < field[j / 2]; k++)
                         if (solver.Value(c[i, j, k]) == 1)
                             club[i].keys[week[j]] = k + 1;
-
                 foreach (Team team in club[i].team)
                 {
-                    if (team.week != '-')
+                    if (team.week == '-')
+                        team.key = 0;
+                    else
                     {
                         int f = -1;
                         for (int w = 0; w < week.Length; w++)
                             if (week[w] == team.week)
                                 f = field[w / 2];
-                        int key = km.getParallel(f, team.group.field, club[i].keys[team.week]);
-                        team.key = key;
+                        team.key = km.getParallel(f, team.group.field, club[i].keys[team.week]).First();
                     }
                 }
             }
@@ -201,17 +202,20 @@ namespace KeyGenerator
 
                     for (int k=0; k<f; k++) {
 
-                        int p = km.getParallel(f, team.group.field, k + 1);
-                        Tuple<int, int> s = km.getSimilar(team.group.field, p);
+                        List<int> parallel = km.getParallel(f, team.group.field, k + 1);
+                        foreach (int p in parallel)
+                        {
+                            Tuple<int, int> s = km.getSimilar(team.group.field, p);
 
-                        model.Add(c[i, w, k] - t[team.group.index, team.index, p - 1] 
-                                             - t[team.group.index, team.index, s.Item1 - 1] 
-                                             - t[team.group.index, team.index, s.Item2 - 1] <= 0);
+                            model.Add(c[i, w, k] - t[team.group.index, team.index, p - 1]
+                                                 - t[team.group.index, team.index, s.Item1 - 1]
+                                                 - t[team.group.index, team.index, s.Item2 - 1] <= 0);
+                        }
                     }
                 }
             }
         }
-        private void confllictDetection(Group[] group, Club[] club)
+        private void confllictDetection(Club[] club)
         {
             for (int i = 0; i < club.Length; i++)
             {
@@ -229,11 +233,14 @@ namespace KeyGenerator
                             w = j;
                         }
 
+                    for (int k = 0; k < team.group.field; k++)
+                        foreach (int p in km.getParallel(team.group.field, f, k + 1))
+                            model.Add(t[team.group.index, team.index, k] - x[team.group.index, team.index] - c[i, w, p - 1] <= 0);
+                    
+
                     for (int k = 0; k < f; k++)
-                    {
-                        int p = km.getParallel(f, team.group.field, k + 1);
-                        model.Add(t[team.group.index, team.index, p - 1] - x[team.group.index, team.index] - c[i, w, k] <= 0);
-                    }
+                        foreach(int p in km.getParallel(f, team.group.field, k + 1))
+                            model.Add(t[team.group.index, team.index, p-1] - x[team.group.index, team.index] - c[i, w, k] <= 0);
                 }
             }
         }

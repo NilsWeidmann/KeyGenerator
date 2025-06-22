@@ -9,10 +9,14 @@ namespace KeyGenerator
     public partial class Miscellaneous : Form
     {
         public KeyGenerator caller;
+        private Group[] group;
+        private Club[] club;
 
-        public Miscellaneous(KeyGenerator caller)
+        public Miscellaneous(KeyGenerator caller, Group[] group, Club[] club)
         {
             this.caller = caller;
+            this.group = group;
+            this.club = club;
             InitializeComponent();
         }
 
@@ -46,17 +50,17 @@ namespace KeyGenerator
 
         private void deleteClubsWithoutTeams()
         {
-            List<Club> lv = Data.club.ToList();
+            List<Club> lv = club.ToList();
             List<Club> lv_d = new List<Club>();
             foreach (Club v in lv)
                 if (v.team == null || v.team.Count == 0)
                     lv_d.Add(v);
             foreach (Club v in lv_d)
                 lv.Remove(v);
-            Data.club = lv.ToArray();
+            club = lv.ToArray();
             caller.boxClubs.Items.Clear();
-            for (int i = 0; i < Data.club.Length; i++)
-                caller.boxClubs.Items.Add(Data.club[i].name);
+            for (int i = 0; i < club.Length; i++)
+                caller.boxClubs.Items.Add(club[i].name);
         }
 
         private void buttonDeleteTeamDeleteClubsWithoutTeams_Click(object sender, EventArgs e)
@@ -69,18 +73,18 @@ namespace KeyGenerator
         private void buttonDeleteTeamDeleteWeeks_Click(object sender, EventArgs e)
         {
             this.Enabled = false;
-            for (int i = 0; i < Data.group.Length; i++)
-                for (int j = 0; j < Data.group[i].nrOfTeams; j++)
-                    Data.group[i].team[j].week = '-';
+            for (int i = 0; i < group.Length; i++)
+                for (int j = 0; j < group[i].nrOfTeams; j++)
+                    group[i].team[j].week = '-';
             returnToCaller();
         }
 
         private void buttonDeleteTeamDeleteKeysForTeams_Click(object sender, EventArgs e)
         {
             this.Enabled = false;
-            for (int i = 0; i < Data.group.Length; i++)
-                for (int j = 0; j < Data.group[i].nrOfTeams; j++)
-                    Data.group[i].team[j].key = 0;
+            for (int i = 0; i < group.Length; i++)
+                for (int j = 0; j < group[i].nrOfTeams; j++)
+                    group[i].team[j].key = 0;
             returnToCaller();
         }
 
@@ -88,19 +92,19 @@ namespace KeyGenerator
         {
             this.Enabled = false;
             this.Enabled = false;
-            for (int i = 0; i < Data.club.Length; i++)
-                foreach (char c in Data.club[i].keys.Keys)
-                    Data.club[i].keys[c] = 0;
+            for (int i = 0; i < club.Length; i++)
+                foreach (char c in club[i].keys.Keys)
+                    club[i].keys[c] = 0;
             returnToCaller();
         }
 
         private void buttonDeleteTeamDeleteDays_Click(object sender, EventArgs e)
         {
             this.Enabled = false;
-            for (int i = 0; i < Data.group.Length; i++)
-                for (int j = 0; j < Data.group[i].nrOfTeams; j++)
+            for (int i = 0; i < group.Length; i++)
+                for (int j = 0; j < group[i].nrOfTeams; j++)
                     for (int k = 0; k < Data.TEAM_MAX; k++)
-                        Data.group[i].team[j].day[k] = '-';
+                        group[i].team[j].day[k] = '-';
             returnToCaller();
         }
 
@@ -121,14 +125,14 @@ namespace KeyGenerator
 
         private void generatorTests_Click(object sender, EventArgs e)
         {
-            PleaseWait pw = new PleaseWait(this, false);
+            PleaseWait pw = new PleaseWait(this, false, group, club);
             this.Enabled = false;
             pw.Visible = true;
         }
 
         private void testsFromFile_Click(object sender, EventArgs e)
         {
-            PleaseWait pw = new PleaseWait(this, true);
+            PleaseWait pw = new PleaseWait(this, true, group, club);
             this.Enabled = false;
             pw.Visible = true;
         }
@@ -143,7 +147,7 @@ namespace KeyGenerator
                     TextFile weekdayFile = new TextFile(filePath);
                     weekdayFile.WriteFile("", Data.notification);
                     weekdayFile.Append("Verein;Mannschaft;Spieltag;Ersatzspieltag\n", Data.notification);
-                    foreach (Club c in Data.club)
+                    foreach (Club c in club)
                         foreach (Team t in c.team)
                             weekdayFile.Append(c.name + ";" + t.ageGroup + " " + t.team + ";" + t.weekday + ";" + t.weekday2 + "\n", Data.notification);
                 }

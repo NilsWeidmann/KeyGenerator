@@ -113,7 +113,6 @@ namespace KeyGenerator
                 for (int j = 0; j < help.Length; j++)
                     if (!help[j].Equals(""))
                     {
-                        help[j] = Util.clear(help[j]);
                         if (help[j].Contains("Dummy"))
                             continue;
                         Group group = groupList.ElementAt(j);

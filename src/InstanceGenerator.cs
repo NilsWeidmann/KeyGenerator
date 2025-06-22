@@ -177,7 +177,7 @@ namespace KeyGenerator
                 for (int j = 1; j <= i; j++)
                     opposed[i-1, j-1] = (j-1 + i / 2) % i + 1;
 
-            int[,,] parallel = new int[TEAM_MAX, TEAM_MAX, TEAM_MAX];
+            List<int>[,,] parallel = new List<int>[TEAM_MAX, TEAM_MAX, TEAM_MAX];
 
             for (int i = TEAM_MIN; i <= TEAM_MAX; i += 2)
                 for (int j = i; j <= TEAM_MAX; j += 2)
@@ -186,12 +186,12 @@ namespace KeyGenerator
                         if (k < i / 2)
                         {
                             k++;
-                            parallel[i - 1, j - 1, k - 1] = l;
-                            parallel[i - 1, j - 1, opposed[i - 1, k - 1] - 1] = opposed[j - 1, l - 1];
+                            parallel[i - 1, j - 1, k - 1].Add(l);
+                            parallel[i - 1, j - 1, opposed[i - 1, k - 1] - 1].Add(opposed[j - 1, l - 1]);
                         }
 
-                        parallel[j - 1, i - 1, l - 1] = k;
-                        parallel[j - 1, i - 1, opposed[j - 1, l - 1] - 1] = opposed[i - 1, k - 1];
+                        parallel[j - 1, i - 1, l - 1].Add(k);
+                        parallel[j - 1, i - 1, opposed[j - 1, l - 1] - 1].Add(opposed[i - 1, k - 1]);
                     }
                         
 

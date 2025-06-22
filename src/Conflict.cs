@@ -1,4 +1,7 @@
-﻿namespace KeyGenerator
+﻿using System;
+using System.Collections.Generic;
+
+namespace KeyGenerator
 {
     public class Conflict
     {

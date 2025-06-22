@@ -6,13 +6,17 @@ namespace KeyGenerator
     public partial class Additional : Form
     {
         private ComboBox[] cb;
+        private Group[] groups;
+        private Club[] clubs;
         private Team t;
         private KeyGenerator caller;
         private static string[] weeks = { "-", "A", "B", "X", "Y" };
         private static string[] days = { "-", "Heimspiel", "Auswärtsspiel" };
 
-    public Additional(Team t, KeyGenerator caller)
+    public Additional(Group[] groups, Club[] clubs, Team t, KeyGenerator caller)
         {
+            this.groups = groups;
+            this.clubs = clubs;
             this.t = t;
             this.caller = caller;
             InitializeComponent();
@@ -68,7 +72,7 @@ namespace KeyGenerator
         private void Additional_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Enabled = false;
-            e.Cancel = !Util.confirm(caller, Data.group, Data.club);
+            e.Cancel = !Util.confirm(caller, groups, clubs);
             this.Enabled = true;
         }
 

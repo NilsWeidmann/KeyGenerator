@@ -9,10 +9,10 @@ namespace KeyGenerator
     {
         private Tuple<int,int>[,] similar;
         private int /*List<int>*/[,] opposed;
-        private int /*List<int>*/[,,] parallel;
+        private List<int>[,,] parallel;
         private char[,,] schedule;
 
-        public KeyMapper(Tuple<int, int>[,] similar, int[,] opposed, int[,,] parallel, char[,,] schedule)
+        public KeyMapper(Tuple<int, int>[,] similar, int[,] opposed, List<int>[,,] parallel, char[,,] schedule)
         {
             this.similar = similar;
             this.opposed = opposed;
@@ -37,17 +37,17 @@ namespace KeyGenerator
             // Parallel
             TextFile fileParallel = new TextFile(path + @"\Parallel.csv");
             int[,] fieldParallel = getField(fileParallel, 4);
-            parallel = new int /*List<int>*/[Data.TEAM_MAX, Data.TEAM_MAX, Data.TEAM_MAX];
-            /*for (int i = 0; i < Data.TEAM_MAX; i++)
+            parallel = new List<int>[Data.TEAM_MAX, Data.TEAM_MAX, Data.TEAM_MAX];
+            for (int i = 0; i < Data.TEAM_MAX; i++)
                 for (int j = 0; j < Data.TEAM_MAX; j++)
                     for (int k = 0; k < Data.TEAM_MAX; k++)
-                        parallel[i, j, k] = new List<int>();*/
+                        parallel[i, j, k] = new List<int>();
             for (int i = 0; i < fieldParallel.GetLength(0); i++)
                 if (fieldParallel[i, 0] != 0 && fieldParallel[i, 1] != 0 && fieldParallel[i, 2] != 0)
-                    parallel[fieldParallel[i, 0] - 1, fieldParallel[i, 1] - 1, fieldParallel[i, 2] - 1] = fieldParallel[i, 3];
+                    parallel[fieldParallel[i, 0] - 1, fieldParallel[i, 1] - 1, fieldParallel[i, 2] - 1].Add(fieldParallel[i, 3]);
             for (int i = Data.TEAM_MIN; i <= Data.TEAM_MAX; i++)
                 for (int j = 0; j < i; j++)
-                    parallel[i - 1, i - 1, j] = j + 1;
+                    parallel[i - 1, i - 1, j].Add(j + 1);
 
             // Ähnliche Zahlen
             TextFile fileSimilar = new TextFile(path + @"\Aehnlich.csv");
@@ -101,7 +101,7 @@ namespace KeyGenerator
             return schedule[field - 1, key - 1, weekNumber];
         }
 
-        public int getParallel(int fieldFrom, int fieldTo, int keyFrom)
+        public List<int> getParallel(int fieldFrom, int fieldTo, int keyFrom)
         {
             //if (parallel[fieldFrom - 1, fieldTo - 1, keyFrom - 1].Count == 1)
                 return parallel[fieldFrom - 1, fieldTo - 1, keyFrom - 1];//.First();

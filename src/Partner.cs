@@ -8,13 +8,15 @@ namespace KeyGenerator
     {
         KeyGenerator caller;
         Club[] clubs;
+        Group[] groups;
         int index;
 
-        public Partner(KeyGenerator caller, Club[] clubs, int index)
+        public Partner(KeyGenerator caller, Club[] clubs, Group[] groups, int index)
         {
             InitializeComponent();
             this.caller = caller;
             this.clubs = clubs;
+            this.groups = groups;
             this.index = index;
 
             dataGridView.Columns.Clear();
@@ -138,7 +140,7 @@ namespace KeyGenerator
         {
             updatePartners();
             this.Enabled = false;
-            if (Util.confirm(caller, Data.group, clubs))
+            if (Util.confirm(caller, groups, clubs))
                 caller.prepare();
             this.Enabled = true;
         }

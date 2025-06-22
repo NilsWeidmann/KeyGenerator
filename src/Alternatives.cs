@@ -33,7 +33,7 @@ namespace KeyGenerator
             int[] conflicts = new int[2];
             conflicts[0] = -1;
             conflicts[1] = -1;
-            int[] keys = new int[Data.club.Length * 2];
+            int[] keys = new int[club.Length * 2];
 
             foreach (Conflict conflict1 in this.conflicts)
                 foreach (Team team1 in conflict1.t)
@@ -80,14 +80,16 @@ namespace KeyGenerator
             {
                 if (box < conflict.t.Length)
                 {
+                    Team team = conflict.t[box];
                     keys[box].Items.Clear();
-                    keys[box].Text = conflict.t[box].key.ToString();
-                    wish[box].Text = conflict.wish.ToString();
+                    keys[box].Text = team.key.ToString();
+                    int field = team.week == 'A' || team.week == 'B' ? Data.field[0] : Data.field[1];
+                    wish[box].Text = Data.concatenate(Data.km.getParallel(field, team.group.field, team.club.keys[team.week]));
                     for (int j = 0; j < 3; j++)
                         if (conflict.key[j] != 0)
                         {
                             keys[box].Items.Add(conflict.key[j]);
-                            if (conflict.t[box].key == conflict.key[j])
+                            if (team.key == conflict.key[j])
                                 keys[box].SelectedIndex = j;
                         }
                     keys[box].Enabled = true;

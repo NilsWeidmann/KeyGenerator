@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -10,18 +11,23 @@ namespace KeyGenerator
     {
         Form caller;
         InstanceGenerator ig;
+        Group[] group;
+        Club[] club;
         Group[] bestGroup;
         Club[] bestClub;
         int[] conflicts;
         bool fromFile;
+        bool useCPSATSolver = true;
 
-        public PleaseWait(Form caller, bool fromFile)
+        public PleaseWait(Form caller, bool fromFile, Group[] group, Club[] club)
         {
             this.caller = caller;
             caller.Enabled = false;
             this.fromFile = fromFile;
-            bestGroup = new Group[Data.group.Length];
-            bestClub = new Club[Data.club.Length];
+            this.group = group;
+            this.club = club;
+            bestGroup = new Group[group.Length];
+            bestClub = new Club[club.Length];
             InitializeComponent();
             initProgressBar(progressBar);
             backgroundWorker.RunWorkerAsync();
@@ -93,31 +99,39 @@ namespace KeyGenerator
         {
             if (caller is KeyGenerator kg)
             {
-                Data.save(Data.group, Data.club, Club.backup, Group.backup, Team.backup);
+                Data.save(group, club, Club.backup, Group.backup, Team.backup);
                 if (Data.notification.Count > 0)
                 {
                     MessageBox.Show(Data.notification[0]);
                     return;
                 }
-                Data.setOptions();
-                Data.setWeeks();
-                Data.copyKeys();
-                Data.createPriority();
-                Data.copy(Data.group, bestGroup, Data.club, bestClub);
-                Data.checkPlausibility(Data.group, Data.notification);
-                Data.checkFatal(Data.group, Data.notification);
+                Data.setOptions(group);
+                Data.setWeeks(group);
+                Data.copyKeys(group, club);
+                Data.createPriority(club);
+                Data.copy(group, bestGroup, club, bestClub);
+                Data.checkPlausibility(group, club, Data.notification);
+                Data.checkFatal(group, Data.notification);
                 if (Data.notification.Count > 0)
                 {
                     MessageBox.Show(Data.notification[0]);
                     return;
                 }
-                int[] keys = new int[Data.club.Length * 2];
+                int[] keys = new int[club.Length * 2];
                 conflicts = [0, -1];
                 char[] week = { 'A', 'B', 'X', 'Y' };
-                OptimizationModel om = new OptimizationModel(Data.group, Data.club, week, Data.field, Data.runtime, Data.km, Data.TEAM_MAX, Data.log, backgroundWorker, Data.notification);
-                om.findSolution(bestGroup, bestClub, conflicts);
 
-                //Data.findSolution(Data.group, best_l, Data.club, best_c, conflicts, keys, backgroundWorker);
+                if (useCPSATSolver)
+                {
+                    OptimizationModel om = new OptimizationModel(group, club, week, Data.field, Data.runtime, Data.km, Data.TEAM_MAX, Data.log, backgroundWorker, Data.notification);
+                    om.findSolution(bestGroup, bestClub, conflicts);
+                }
+                else
+                {
+                    DFSSolver solver = new DFSSolver(Data.field, Data.prio, Data.currentConflicts, Data.runtime, Data.km, Data.log, Data.notification);
+                    solver.findSolution(group, bestGroup, club, bestClub, conflicts, keys, backgroundWorker);
+                }
+                
             }
             else if (caller is Miscellaneous m)
             {

@@ -22,7 +22,7 @@ namespace KeyGenerator
             {
                 if (File.Exists(sFilename))
                 {
-                    StreamReader myFile = new StreamReader(sFilename, System.Text.Encoding.Default);
+                    StreamReader myFile = new StreamReader(sFilename, System.Text.Encoding.UTF8);
                     sContent = myFile.ReadToEnd();
                     myFile.Close();
                 }
@@ -41,7 +41,7 @@ namespace KeyGenerator
                 m.Add(error);
                 m.Add(e.ToString());
             }
-            return sContent;
+            return Util.clear(sContent);
         }
 
         public void WriteFile(String sLines, List<string> m) /// Schreibt den übergebenen Inhalt in eine Textdatei.
@@ -82,7 +82,7 @@ namespace KeyGenerator
             {
                 if (File.Exists(sFilename))
                 {
-                    StreamReader myFile = new StreamReader(sFilename, System.Text.Encoding.Default);
+                    StreamReader myFile = new StreamReader(sFilename, System.Text.Encoding.UTF8);
                     while (!myFile.EndOfStream && fRow++ < iLine)
                         sContent = myFile.ReadLine();
                     myFile.Close();
@@ -104,7 +104,7 @@ namespace KeyGenerator
                 m.Add(error);
                 m.Add(e.ToString());
             }
-            return sContent;
+            return Util.clear(sContent);
         }
 
         public void WriteLine(int iLine, string sLines, bool bReplace, List<string> m) /// Schreibt den übergebenen Text in eine definierte Zeile.
@@ -115,7 +115,7 @@ namespace KeyGenerator
             {
                 if (File.Exists(sFilename))
                 {
-                    StreamReader myFile = new StreamReader(sFilename, System.Text.Encoding.Default);
+                    StreamReader myFile = new StreamReader(sFilename, System.Text.Encoding.UTF8);
                     sContent = myFile.ReadToEnd();
                     myFile.Close();
                 }
