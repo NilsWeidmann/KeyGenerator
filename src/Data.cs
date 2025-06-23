@@ -109,105 +109,6 @@ namespace KeyGenerator
                         group[i].team[j].week = '-';
         }
 
-        public static Club[] getClubs(TextFile c)
-        {
-            int nrOfClubs;
-            String content = c.ReadLine(1, false, notification).Replace("\r", "");
-            String[] help;
-            for (nrOfClubs = 0; !content.Equals(""); nrOfClubs++)
-                content = c.ReadLine(2 + nrOfClubs, false, notification).Replace("\r", "");
-            Club[] v = new Club[nrOfClubs];
-            
-            for (int i = 0; i < nrOfClubs; i++)
-            {
-                content = c.ReadLine(1 + i, false, notification).Replace("\r", "");
-                help = content.Split(';');
-                v[i] = new Club
-                {
-                    name = help[0],
-                    index = i,
-                    team = new List<Team>()
-                };
-                try
-                {
-                    v[i].keys['A'] = Util.toInt(help[1]);
-                    v[i].keys['B'] = Util.toInt(help[2]);
-                    v[i].keys['X'] = Util.toInt(help[3]);
-                    v[i].keys['Y'] = Util.toInt(help[4]);
-                    v[i].capacity = help[5] == "X";
-                    for (int j = 6; j < help.Length - 2; j += 3)
-                        v[i].partnerships.Add(new Partnership(v[i], help[j], v[Util.toInt(help[j + 1])], help[j + 2]));
-                }
-                catch (Exception e)
-                {
-                    notification.Append(e.ToString());
-                }
-            }
-            return v;
-        }
-
-        public static int nrOfKeys(Group[] group)
-        {
-            int keys = 0;
-            int teams = 0;
-
-            for (int i = 0; i < group.Length; i++)
-                for (int j = 0; j < group[i].nrOfTeams; j++)
-                {
-                    if (group[i].team[j].key != 0)
-                        keys++;
-                    teams++;
-                }
-            return keys;
-        }
-
-        public static int run(Group[] group)
-        {
-            foreach (Group l in group)
-                foreach (Team t in l.team)
-                {
-                    if (t == null)
-                        continue;
-                    if (t.key == 0)
-                        t.getKey();
-                    if (t.key != 0)
-                        l.removeOptions(t.key);
-                    l.checkOneOption();
-                }
-            return nrOfKeys(group);
-        }
-
-        public static bool isComplete(Group[] group)
-        {
-            foreach (Group l in group)
-                foreach (Team t in l.team)
-                    if (t == null)
-                        continue;
-                    else if (t.key == 0)
-                        return false;
-            return true;
-        }
-
-        public static bool hasError(Group[] group)
-        {
-            bool help;
-            foreach (Group l in group)
-                foreach (Team t in l.team)
-                {
-                    if (t == null)
-                        continue;
-                    help = false;
-                    for (int k = 0; k < TEAM_MAX; k++)
-                        help = help || t.option[k];
-                    if (!help)
-                    {
-                        notification.Add("Keine moegliche Schluesselzahl fuer " + t.name + " (" + l.name + ") gefunden!");
-                        return true;
-                    }
-                }
-            return false;
-        }
-
         public static void save(Group[] l, Club[] c, TextFile clubs, TextFile groups, TextFile relations, string weeks = "ABXY")
         {
             String help;
@@ -263,173 +164,16 @@ namespace KeyGenerator
             }
         }
 
-        public static void getRelations(Group[] l, TextFile relations)
+        public static void prepare(Group[] group, Club[] club, List<String> notification)
         {
-            String content;
-            String[] help;
-            String[] row;
-            content = relations.ReadFile(false, notification);
-
-            if (content.Equals(""))
-                return;
-            row = content.Split('\n');
-            for (int i = 0; i < row.Length; i++)
-            {
-                row[i] = row[i].Replace("\r", "");
-                help = row[i].Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                try
-                {
-                    Team t = l[Util.toInt(help[0])].team[Util.toInt(help[1])];
-                    t.week = help[2].ToCharArray()[0];
-                    for (int j = 3; j < help.Length && j < 16; j++)
-                        t.day[j - 3] = help[j].ToCharArray()[0];
-                }
-                catch (Exception e)
-                {
-                    notification.Append(e.ToString());
-                }
-            }
+            save(group, club, Club.backup, Group.backup, Team.backup);
+            setOptions(group);
+            setWeeks(group);
+            copyKeys(group, club);
+            createPriority(club);
+            checkPlausibility(group, club, notification);
+            checkFatal(group, notification);
         }
-
-        public static void solve(Group[] group, Club[] club)
-        {
-            int oldConflicts = 0;
-            int newConflicts = run(group);
-            while (oldConflicts != newConflicts)
-            {
-                oldConflicts = newConflicts;
-                newConflicts = run(group);
-                if (isComplete(group))
-                    return;
-            }
-        }
-
-        public static void generateKeys(Group[] group, Club[] club)
-        {
-            solve(group,club);
-            bool done = isComplete(group);
-            while (!done)
-                foreach (Group l in group)
-                    foreach (Team t in l.team)
-                    {
-                        if (t == null)
-                            continue;
-                        for (int k = 0; k < l.field; k++)
-                            if (t.option[k] && !done)
-                            {
-                                t.key = k + 1;
-                                for (int i = 0; i < l.field; i++)
-                                    if (i != k)
-                                        t.option[i] = false;
-                                foreach (Team t2 in l.team)
-                                    if (t2 == null)
-                                        continue;
-                                    else if (!t2.Equals(t))
-                                        t2.option[k] = false;
-                                solve(group,club);
-                                done = isComplete(group);
-                            }
-                    }
-            save(group, club, Club.file, Group.file, Team.file);
-            caller.initUI();
-            if (hasError(group))
-                notification.Add("Die Generierung ist aufgrund eines logischen Fehlers nicht moeglich!");
-            else
-                notification.Add("Die Schluesselzahlen wurden erfolgreich generiert!");
-        }
-
-        
-
-        public static List<Conflict> getConflicts(Group[] groups)
-        {
-            int[] allocation;
-            List<Conflict> conflicts = new List<Conflict>();
-            int team;
-            int number;
-            int index = 0;
-
-            foreach (Group group in groups)
-            {
-                allocation = new int[group.field];
-                for (int j = 0; j < group.nrOfTeams; j++)
-                    if (group.team[j].key > 0)
-                        allocation[group.team[j].key - 1]++;
-                for (int j = 0; j < group.field; j++)
-                    if (allocation[j] > 1)
-                    {
-                        team = 0;
-                        number = 0;
-                        Conflict conflict = new Conflict
-                        {
-                            wish = j + 1,
-                            t = new Team[allocation[j]],
-                            index = index++
-                        };
-                        for (int x = 0; x < group.nrOfTeams; x++)
-                            if (group.team[x].key == j + 1)
-                                conflict.t[team++] = group.team[x];
-
-                        int alt1 = km.getSimilar(group.field, j + 1).Item1;
-                        int alt2 = km.getSimilar(group.field, j + 1).Item2;
-                        conflict.key[number++] = j + 1;
-                        if (alt1 > 0 && allocation[alt1 - 1] == 0)
-                            conflict.key[number++] = alt1;
-                        if (alt2 > 0 && allocation[alt2 - 1] == 0)
-                            conflict.key[number++] = alt2;
-                        if (conflict.key[allocation[j] - 1] == 0)
-                        {
-                            conflict.key[1] = alt1;
-                            conflict.key[2] = alt2;
-                        }
-                        conflicts.Add(conflict);
-                    }
-            }
-            return conflicts;
-        }
-
-        public static bool partnerOK(Club[] club, int clubIndex, int partnerIndex, bool ab, int[] key)
-        {
-            int keyA = 0, keyB = 0, fieldA = 0, fieldB = 0;
-            bool okay = true;
-
-            if (ab)
-            {
-                club[clubIndex].keys['A'] = key[partnerIndex];
-                club[clubIndex].keys['B'] = km.getOpposed(field[0], key[partnerIndex]);
-            }
-            else
-            {
-                club[clubIndex].keys['X'] = key[partnerIndex];
-                club[clubIndex].keys['Y'] = km.getOpposed(field[1], key[partnerIndex]);
-            }
-            foreach (Partnership p in club[clubIndex].partnerships)
-            {
-                if (p.indexA != club[clubIndex].index && p.indexB != club[clubIndex].index)
-                    continue;
-                if (p.weekA != '-')
-                {
-                    keyA = club[p.indexA].keys[p.weekA];
-                    fieldA = p.weekA == 'A' || p.weekA == 'B' ? field[0] : field[1];
-                }
-                if (p.weekB != '-')
-                {
-                    keyB = club[p.indexB].keys[p.weekB];
-                    fieldB = p.weekB == 'A' || p.weekB == 'B' ? field[0] : field[1];
-                }
-
-                if (keyA == 0 || keyB == 0)
-                    continue;
-                if (km.getParallel(fieldA, fieldB, keyA).Contains(keyB))
-                    continue;
-                okay = false;
-                break;
-            }
-            if (ab)
-                club[clubIndex].keys['A'] = club[clubIndex].keys['B'] = 0;
-            else
-                club[clubIndex].keys['X'] = club[clubIndex].keys['Y'] = 0;
-            return okay;
-        }      
 
         public static void copyKeys(Group[] group, Club[] club)
         {
@@ -439,7 +183,8 @@ namespace KeyGenerator
                     if (team == null)
                         continue;
                     else if (team.key == 0)
-                        if (team.week == 'A' || team.week == 'B') { 
+                        if (team.week == 'A' || team.week == 'B')
+                        {
                             if (c.keys[team.week] > 0)
                                 team.key = km.getParallel(field[0], team.group.field, c.keys[team.week]).First();
                         }
@@ -451,6 +196,26 @@ namespace KeyGenerator
                         else
                             team.key = 0;
             }
+        }
+
+        public static void createPriority(Club[] club)
+        {
+            prio = new Tuple<int, bool>[club.Length * 2];
+            for (int i = 0; i < club.Length; i++)
+                club[i].setPrio();
+            int counter = 0;
+            int max_prio;
+
+            max_prio = 0;
+            for (int i = 0; i < club.Length; i++)
+                for (int p = 0; p < 2; p++)
+                    if (club[i].prio[p] > max_prio)
+                        max_prio = club[i].prio[p];
+            for (int j = max_prio; j >= 0; j--)
+                for (int i = 0; i < club.Length; i++)
+                    for (int p = 0; p < 2; p++)
+                        if (club[i].prio[p] == j)
+                            prio[counter++] = Tuple.Create(club[i].index, p == 0);
         }
 
         public static void allocateTeams(Club[] v, Group[] l)
@@ -468,27 +233,9 @@ namespace KeyGenerator
             }
         }
 
-        public static void createPriority(Club[] club)
-        {
-            prio = new Tuple<int, bool>[club.Length * 2];
-            for (int i = 0; i < club.Length; i++)
-                club[i].setPrio();
-            int counter = 0;
-            int max_prio;
+        
 
-            max_prio = 0;
-            for (int i = 0; i < club.Length; i++)
-                for (int p = 0; p<2; p++)
-                    if (club[i].prio[p] > max_prio)
-                        max_prio = club[i].prio[p];
-            for (int j = max_prio; j >= 0; j--)
-                for (int i = 0; i < club.Length; i++)
-                    for (int p = 0; p < 2; p++)
-                        if (club[i].prio[p] == j)
-                            prio[counter++] = Tuple.Create(club[i].index, p==0);
-        }
-
-        public static bool checkClub(Team t, Club c)
+        public static bool isTeamOfClub(Team t, Club c)
         {
             string teamName = t.name;
             string clubName = c.name;

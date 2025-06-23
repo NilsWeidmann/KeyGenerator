@@ -9,6 +9,8 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <Platforms>AnyCPU;x64</Platforms>
+	<ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
+    <ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -16,9 +18,6 @@
   <PropertyGroup>
     <StartupObject>KeyGenerator.Program</StartupObject>
   </PropertyGroup>
-  <ItemGroup>
-    <None Include=".vs\Schluesselzahlen\v16\.suo" />
-  </ItemGroup>
   <ItemGroup>
     <Content Include="HtmlAgilityPack.dll" />
     <Content Include="orLogo.png" />

@@ -126,7 +126,7 @@ namespace KeyGenerator
                         team.group = group;
                         team.index = i;
                         for (int k = 0; k < clubs.Length; k++)
-                            if (Data.checkClub(team, clubs[k]))
+                            if (Data.isTeamOfClub(team, clubs[k]))
                                 team.club = clubs[k];
                         if (team.club == null)
                         {
@@ -140,6 +140,34 @@ namespace KeyGenerator
                     }
             }
             return groupList.ToArray();
+        }
+
+        public static void getRelations(Group[] l, TextFile relations, List<string> notification)
+        {
+            String content;
+            String[] help;
+            String[] row;
+            content = relations.ReadFile(false, notification);
+
+            if (content.Equals(""))
+                return;
+            row = content.Split('\n');
+            for (int i = 0; i < row.Length; i++)
+            {
+                row[i] = row[i].Replace("\r", "");
+                help = row[i].Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                try
+                {
+                    Team t = l[Util.toInt(help[0])].team[Util.toInt(help[1])];
+                    t.week = help[2].ToCharArray()[0];
+                    for (int j = 3; j < help.Length && j < 16; j++)
+                        t.day[j - 3] = help[j].ToCharArray()[0];
+                }
+                catch (Exception e)
+                {
+                    notification.Append(e.ToString());
+                }
+            }
         }
 
         public int[] getAllocation()

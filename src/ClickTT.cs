@@ -1,8 +1,10 @@
 ﻿using HtmlAgilityPack;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace KeyGenerator
 {
@@ -10,38 +12,38 @@ namespace KeyGenerator
     {
         List<Group> ll;
         List<Club> lc;
+        Hashtable clubs;
+        Hashtable groups;
+        Club currentClub;
+        Group currentGroup;
         readonly KeyGenerator caller;
 
-        public ClickTT(Group[] l, Club[] c, KeyGenerator caller)
+        public ClickTT(KeyGenerator caller)
         {
             InitializeComponent();
             this.caller = caller;
+            ll = new List<Group>();
+            lc = new List<Club>();
+            clubs = new Hashtable();
+            groups = new Hashtable();
+            currentClub = null;
+            currentGroup = null;
             init();
-            ll = l.ToList();
-            foreach (Group group in ll)
-                dataGridViewGroups.Rows.Add(group.name);
-            lc = c.ToList();
-            foreach (Club club in lc)
-                dataGridViewClubs.Rows.Add(club.name);
         }
 
         private void init()
         {
             dataGridViewGroups.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewGroups.Columns.Clear();
-            dataGridViewGroups.Columns.Add("Liga", "Liga");
-            dataGridViewGroups.Rows.Clear();
-            dataGridViewGroups.ReadOnly = true;
+            Visualization.initGroupGrid(dataGridViewGroups, true);
+
             dataGridViewClubs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewClubs.Columns.Clear();
-            dataGridViewClubs.Columns.Add("Verein", "Verein");
-            dataGridViewClubs.Rows.Clear();
-            dataGridViewClubs.ReadOnly = true;
-            dataGridViewTeams.ReadOnly = true;
-            dataGridViewTeams.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewTeams.Columns.Clear();
-            dataGridViewTeams.Columns.Add("Team", "Team");
-            dataGridViewTeams.Rows.Clear();
+            Visualization.initClubGrid(dataGridViewClubs, true);
+
+            dataGridViewTeamsOfGroups.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            Visualization.initTeamGrid(dataGridViewTeamsOfGroups, false);
+
+            dataGridViewTeamsOfClubs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            Visualization.initTeamGrid(dataGridViewTeamsOfClubs, true);
         }
 
         private void webImportGroups()
@@ -113,7 +115,7 @@ namespace KeyGenerator
                                     t.week = '-';
                                     t.index = index_t++;
                                     for (int i = 0; i < lc.Count; i++)
-                                        if (Data.checkClub(t, lc.ElementAt(i)))
+                                        if (Data.isTeamOfClub(t, lc.ElementAt(i)))
                                             t.club = lc.ElementAt(i);
                                     if (t.club == null)
                                     {
@@ -200,7 +202,7 @@ namespace KeyGenerator
         {
             ll = new List<Group>();
             dataGridViewGroups.Rows.Clear();
-            dataGridViewTeams.Rows.Clear();
+            dataGridViewTeamsOfGroups.Rows.Clear();
             webImportGroups();
         }
 
@@ -215,32 +217,42 @@ namespace KeyGenerator
             groupBox2.Height = (this.Height - 95) / 2;
             dataGridViewGroups.Height = (this.Height - 200) / 2;
             dataGridViewClubs.Height = (this.Height - 200) / 2;
-            dataGridViewTeams.Height = (this.Height - 200) / 2;
-
+            dataGridViewTeamsOfGroups.Height = (this.Height - 200) / 2;
+            dataGridViewTeamsOfClubs.Height = (this.Height - 200) / 2;
             // Set proper widths
             dataGridViewGroups.Width = (this.Width - 68) / 2;
-            dataGridViewClubs.Width = this.Width - 56;
-            dataGridViewTeams.Width = (this.Width - 68) / 2;
+            dataGridViewClubs.Width = (this.Width - 68) / 2;
+            dataGridViewTeamsOfGroups.Width = (this.Width - 68) / 2;
+            dataGridViewTeamsOfClubs.Width = (this.Width - 68) / 2;
             groupBox1.Width = this.Width - 40;
             groupBox2.Width = this.Width - 40;
             boxLinkGroups.Width = this.Width - 250;
             boxLinkClubs.Width = this.Width - 250;
-            buttonDeleteTeamNewGroup.Left = groupBox1.Width - 80;
-            buttonDeleteTeamNewClub.Left = groupBox2.Width - 80;
             buttonDeleteTeamAddGroup.Left = groupBox1.Width - 160;
             buttonDeleteTeamAddClub.Left = groupBox2.Width - 160;
-            dataGridViewTeams.Left = dataGridViewGroups.Left + dataGridViewGroups.Width + 12;
+            dataGridViewTeamsOfGroups.Left = dataGridViewGroups.Left + dataGridViewGroups.Width + 12;
+            dataGridViewTeamsOfClubs.Left = dataGridViewGroups.Left + dataGridViewGroups.Width + 12;
             buttonDeleteTeamSave.Left = this.Width - 110;
             buttonDeleteTeamSave.Top = this.Height - 70;
         }
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridViewTeams.Rows.Clear();
+            dataGridViewTeamsOfGroups.Rows.Clear();
             if (ll != null && e.RowIndex < ll.Count)
             {
-                for (int i = 0; i < ll[e.RowIndex].nrOfTeams; i++)
-                    dataGridViewTeams.Rows.Add(ll[e.RowIndex].team[i].name);
+                Visualization.visualizeGroupData(ll[e.RowIndex], dataGridViewTeamsOfGroups);
+                currentGroup = ll[e.RowIndex];
+            }
+        }
+
+        private void dataGridViewClubs_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridViewTeamsOfClubs.Rows.Clear();
+            if (lc != null && e.RowIndex < lc.Count)
+            {
+                Visualization.visualizeClubData(lc[e.RowIndex], dataGridViewTeamsOfClubs);
+                currentClub = lc[e.RowIndex];
             }
         }
 
@@ -268,12 +280,71 @@ namespace KeyGenerator
 
         private void buttonDeleteTeamAddGroup_Click(object sender, EventArgs e)
         {
-            webImportGroups();
+            if (MessageBox.Show("Wählen Sie zunächst die exportierte CSV-Datei mit der Gruppeneinteilung aus!",
+                    "Gruppeneinteilung auswählen", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.Cancel)
+                return;
+            
+            clubs = new Hashtable();
+            groups = new Hashtable();
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                while (!Parser.parseGroupsAndClubs(groups, clubs, openFileDialog1))
+                {
+                    if (MessageBox.Show("Fehler beim Lesen der Datei, versuchen Sie es noch einmal!",
+                        "Fehler beim Lesen der Datei", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.Cancel
+                        || openFileDialog1.ShowDialog() != DialogResult.OK)
+                        return;
+                }
+            ll = new List<Group>();
+            lc = new List<Club>();
+            Parser.saveInData(groups, clubs, ll, lc);
+            Visualization.initGroupGrid(dataGridViewGroups, true);
+            Visualization.fillGroupGrid(dataGridViewGroups, ll.ToArray());
         }
 
         private void buttonDeleteTeamAddClub_Click(object sender, EventArgs e)
         {
-            webImportClubs();
+            if (MessageBox.Show("Wählen Sie nun die HTML-Datei mit den Terminwünschen aus!",
+                    "Terminwünsche auswählen", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.Cancel)
+                return;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                while (!Parser.addWishes(groups, clubs, openFileDialog1))
+                {
+                    if (MessageBox.Show("Fehler beim Lesen der Datei, versuchen Sie es noch einmal!",
+                        "Fehler beim Lesen der Datei", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.Cancel
+                        || openFileDialog1.ShowDialog() != DialogResult.OK)
+                        return;
+                }
+            else
+                return;
+            ll = new List<Group>();
+            lc = new List<Club>();
+            Parser.saveInData(groups, clubs, ll, lc);
+            Visualization.initClubGrid(dataGridViewClubs, true);
+            Visualization.fillClubGrid(dataGridViewClubs, lc.ToArray());
+        }
+
+        private void dataGridViewTeamsOfClubs_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (currentClub != null)
+                Visualization.changeWeek(dataGridViewTeamsOfClubs, e, true, null, currentClub);
+        }
+
+        private void dataGridViewTeamsOfGroups_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (currentGroup != null)
+                Visualization.changeWeek(dataGridViewTeamsOfGroups, e, false, currentGroup, null);
+        }
+
+        private void dataGridViewClubs_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            Visualization.changeClubData(e, dataGridViewClubs, lc);
+        }
+
+        private void dataGridViewGroups_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            Visualization.changeField(dataGridViewGroups, e, currentGroup);
         }
     }
 }

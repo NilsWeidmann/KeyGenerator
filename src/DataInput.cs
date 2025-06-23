@@ -26,7 +26,7 @@ namespace KeyGenerator
             teamIdent = new TextBox[Data.TEAM_MAX];
             reset = new Button[Data.TEAM_MAX];
             InitializeComponent();
-            initGrid();
+            Visualization.initClubGrid(dataGridViewClubsAndKeys, false);
             assignGUIElements();
             enableGUIElements();
             club = clubs.ToList();
@@ -34,41 +34,14 @@ namespace KeyGenerator
             loadData(clubs, groups);
         }
 
-        private void initGrid()
-        {
-            dataGridViewClubsAndKeys.Columns.Clear();
-            dataGridViewClubsAndKeys.Rows.Clear();
-            string[] values = { "Verein", "A", "B", "X", "Y", "Kap." };
-            foreach (string s in values)
-            {
-                dataGridViewClubsAndKeys.Columns.Add(s, s);
-            }
-            dataGridViewClubsAndKeys.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            foreach (DataGridViewColumn col in dataGridViewClubsAndKeys.Columns)
-                col.SortMode = DataGridViewColumnSortMode.NotSortable;
-            dataGridViewClubsAndKeys.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-        }
-
         private void loadData(Club[] clubArray, Group[] groupArray)
         {
             buttonSave.Enabled = false;
-            String[] values = new String[6];
             partnership = new List<Partnership>();
 
             // DataGridView füllen
-            initGrid();
-            for (int i = 0; i < clubArray.Length; i++)
-            {
-                Club v = clubArray[i];
-                values[0] = v.name;
-
-                int[] intValues = new int[] { v.keys['A'], v.keys['B'], v.keys['X'], v.keys['Y'] };
-                for (int j = 1; j < 5; j++)
-                    values[j] = intValues[j - 1].ToString() == "0" ? "" : intValues[j - 1].ToString();
-
-                values[5] = v.capacity ? "X" : "";
-                dataGridViewClubsAndKeys.Rows.Add(values);
-            }
+            Visualization.initClubGrid(dataGridViewClubsAndKeys, false);
+            Visualization.fillClubGrid(dataGridViewClubsAndKeys, clubArray);
 
             // Gruppenliste füllen
             club = clubArray.ToList<Club>();
@@ -259,79 +232,17 @@ namespace KeyGenerator
 
         private void dataGridView1_CellLeave(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridViewClubsAndKeys.Rows[e.RowIndex].IsNewRow && e.ColumnIndex != 0)
-                return;
-            String value = dataGridViewClubsAndKeys.Rows[e.RowIndex].Cells[e.ColumnIndex].EditedFormattedValue.ToString();
-            int zahl = Util.toInt(value);
-            switch (e.ColumnIndex)
-            {
-                case 0:
-                    if (value.Equals(""))
-                        break;
-                    club.ElementAt(e.RowIndex).name = Util.clear(value);
-                    dataGridViewClubsAndKeys.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = club.ElementAt(e.RowIndex).name;
-                    break;
-                case 1:
-                    assignValue('A', 'B', zahl, Data.field[0], e.RowIndex, 1, 2);
-                    break;
-                case 2:
-                    assignValue('B', 'A', zahl, Data.field[0], e.RowIndex, 2, 1);
-                    break;
-                case 3:
-                    assignValue('X', 'Y', zahl, Data.field[1], e.RowIndex, 3, 4);
-                    break;
-                case 4:
-                    assignValue('Y', 'X', zahl, Data.field[1], e.RowIndex, 4, 3);
-                    break;
-                case 5:
-                    if (value.Equals(""))
-                        club.ElementAt(e.RowIndex).capacity = false;
-                    else
-                        club.ElementAt(e.RowIndex).capacity = true;
-                    dataGridViewClubsAndKeys.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = club.ElementAt(e.RowIndex).capacity ? "X" : "";
-                    break;
-            }
-        }
-
-        private void assignValue(char week1, char week2, int key, int field, int rowIdx, int colIdx1, int colIdx2)
-        {
-            if (key > 0 && key <= field)
-            {
-                club.ElementAt(rowIdx).keys[week1] = key;
-                club.ElementAt(rowIdx).keys[week2] = Data.km.getOpposed(field, key);
-            }
-            else
-            {
-                club.ElementAt(rowIdx).keys[week1] = 0;
-                club.ElementAt(rowIdx).keys[week2] = 0;
-            }
-            if (club.ElementAt(rowIdx).keys[week1] == 0)
-                dataGridViewClubsAndKeys.Rows[rowIdx].Cells[colIdx1].Value = "";
-            else
-                dataGridViewClubsAndKeys.Rows[rowIdx].Cells[colIdx1].Value = club.ElementAt(rowIdx).keys[week1].ToString();
-            if (club.ElementAt(rowIdx).keys[week2] == 0)
-                dataGridViewClubsAndKeys.Rows[rowIdx].Cells[colIdx2].Value = "";
-            else
-                dataGridViewClubsAndKeys.Rows[rowIdx].Cells[colIdx2].Value = club.ElementAt(rowIdx).keys[week2].ToString();
+            Visualization.changeClubData(e, dataGridViewClubsAndKeys, club);
         }
 
         private void dataGridView1_UserAddedRow(object sender, DataGridViewRowEventArgs e)
         {
-            Club v = new Club();
-            v.index = e.Row.Index - 1;
-            for (int i = e.Row.Index - 1; i < club.Count; i++)
-                club.ElementAt(i).index++;
-            club.Insert(e.Row.Index - 1, v);
+            Visualization.addClub(e, club);
         }
 
         private void dataGridView1_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
-            foreach (Partnership p in partnership)
-                if (p.indexA == e.Row.Index - 1 || p.indexB == e.Row.Index - 1)
-                    partnership.Remove(p);
-            club.RemoveAt(e.Row.Index - 1);
-            for (int i = e.Row.Index - 1; i < club.Count; i++)
-                club.ElementAt(i).index--;
+            Visualization.deleteClub(e, club, partnership);
 
         }
 

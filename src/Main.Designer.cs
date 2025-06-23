@@ -73,10 +73,10 @@
             // 
             // buttonGenerate
             // 
-            buttonGenerate.Location = new System.Drawing.Point(27, 377);
-            buttonGenerate.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            buttonGenerate.Location = new System.Drawing.Point(15, 169);
+            buttonGenerate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             buttonGenerate.Name = "buttonGenerate";
-            buttonGenerate.Size = new System.Drawing.Size(143, 43);
+            buttonGenerate.Size = new System.Drawing.Size(100, 26);
             buttonGenerate.TabIndex = 10;
             buttonGenerate.Text = "Generieren";
             buttonGenerate.UseVisualStyleBackColor = true;
@@ -84,10 +84,10 @@
             // 
             // buttonInputFromFile
             // 
-            buttonInputFromFile.Location = new System.Drawing.Point(331, 465);
-            buttonInputFromFile.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            buttonInputFromFile.Location = new System.Drawing.Point(228, 222);
+            buttonInputFromFile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             buttonInputFromFile.Name = "buttonInputFromFile";
-            buttonInputFromFile.Size = new System.Drawing.Size(143, 43);
+            buttonInputFromFile.Size = new System.Drawing.Size(100, 26);
             buttonInputFromFile.TabIndex = 13;
             buttonInputFromFile.Text = "Aus Datei";
             buttonInputFromFile.UseVisualStyleBackColor = true;
@@ -96,20 +96,19 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(23, 178);
-            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label3.Location = new System.Drawing.Point(12, 50);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(73, 25);
+            label3.Size = new System.Drawing.Size(48, 15);
             label3.TabIndex = 19;
             label3.Text = "Vereine:";
             // 
             // boxClubs
             // 
             boxClubs.FormattingEnabled = true;
-            boxClubs.Location = new System.Drawing.Point(20, 210);
-            boxClubs.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            boxClubs.Location = new System.Drawing.Point(12, 66);
+            boxClubs.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             boxClubs.Name = "boxClubs";
-            boxClubs.Size = new System.Drawing.Size(300, 33);
+            boxClubs.Size = new System.Drawing.Size(211, 23);
             boxClubs.TabIndex = 20;
             boxClubs.SelectedIndexChanged += boxClubs_SelectedIndexChanged;
             // 
@@ -118,11 +117,11 @@
             dataGridView.AllowUserToAddRows = false;
             dataGridView.AllowUserToDeleteRows = false;
             dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView.Location = new System.Drawing.Point(510, 103);
-            dataGridView.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            dataGridView.Location = new System.Drawing.Point(353, 106);
+            dataGridView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             dataGridView.Name = "dataGridView";
             dataGridView.RowHeadersWidth = 62;
-            dataGridView.Size = new System.Drawing.Size(867, 617);
+            dataGridView.Size = new System.Drawing.Size(607, 269);
             dataGridView.TabIndex = 23;
             dataGridView.CellMouseClick += dataGridView_CellMouseClick;
             dataGridView.CellValueChanged += dataGridView_CellValueChanged;
@@ -130,27 +129,26 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(23, 73);
-            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label5.Location = new System.Drawing.Point(15, 8);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(102, 25);
+            label5.Size = new System.Drawing.Size(68, 15);
             label5.TabIndex = 24;
             label5.Text = "Verzeichnis:";
             // 
             // boxDirectory
             // 
-            boxDirectory.Location = new System.Drawing.Point(23, 103);
-            boxDirectory.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            boxDirectory.Location = new System.Drawing.Point(12, 27);
+            boxDirectory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             boxDirectory.Name = "boxDirectory";
-            boxDirectory.Size = new System.Drawing.Size(297, 31);
+            boxDirectory.Size = new System.Drawing.Size(731, 23);
             boxDirectory.TabIndex = 25;
             // 
             // buttonBrowse
             // 
-            buttonBrowse.Location = new System.Drawing.Point(331, 100);
-            buttonBrowse.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            buttonBrowse.Location = new System.Drawing.Point(748, 23);
+            buttonBrowse.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             buttonBrowse.Name = "buttonBrowse";
-            buttonBrowse.Size = new System.Drawing.Size(143, 43);
+            buttonBrowse.Size = new System.Drawing.Size(100, 26);
             buttonBrowse.TabIndex = 26;
             buttonBrowse.Text = "Durchsuchen";
             buttonBrowse.UseVisualStyleBackColor = true;
@@ -159,29 +157,28 @@
             // boxGroups
             // 
             boxGroups.FormattingEnabled = true;
-            boxGroups.Location = new System.Drawing.Point(23, 303);
-            boxGroups.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            boxGroups.Location = new System.Drawing.Point(12, 125);
+            boxGroups.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             boxGroups.Name = "boxGroups";
-            boxGroups.Size = new System.Drawing.Size(297, 33);
+            boxGroups.Size = new System.Drawing.Size(209, 23);
             boxGroups.TabIndex = 28;
             boxGroups.SelectedIndexChanged += boxGroups_SelectedIndexChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(23, 272);
-            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Location = new System.Drawing.Point(12, 106);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(58, 25);
+            label1.Size = new System.Drawing.Size(39, 15);
             label1.TabIndex = 27;
             label1.Text = "Ligen:";
             // 
             // buttonMiscellaneous
             // 
-            buttonMiscellaneous.Location = new System.Drawing.Point(331, 377);
-            buttonMiscellaneous.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            buttonMiscellaneous.Location = new System.Drawing.Point(228, 169);
+            buttonMiscellaneous.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             buttonMiscellaneous.Name = "buttonMiscellaneous";
-            buttonMiscellaneous.Size = new System.Drawing.Size(140, 43);
+            buttonMiscellaneous.Size = new System.Drawing.Size(98, 26);
             buttonMiscellaneous.TabIndex = 33;
             buttonMiscellaneous.Text = "Sonstiges";
             buttonMiscellaneous.UseVisualStyleBackColor = true;
@@ -189,10 +186,10 @@
             // 
             // buttonSave
             // 
-            buttonSave.Location = new System.Drawing.Point(177, 377);
-            buttonSave.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            buttonSave.Location = new System.Drawing.Point(120, 169);
+            buttonSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             buttonSave.Name = "buttonSave";
-            buttonSave.Size = new System.Drawing.Size(143, 43);
+            buttonSave.Size = new System.Drawing.Size(100, 26);
             buttonSave.TabIndex = 38;
             buttonSave.Text = "Speichern";
             buttonSave.UseVisualStyleBackColor = true;
@@ -202,10 +199,10 @@
             // 
             boxWeekA.Enabled = false;
             boxWeekA.FormattingEnabled = true;
-            boxWeekA.Location = new System.Drawing.Point(550, 53);
-            boxWeekA.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            boxWeekA.Location = new System.Drawing.Point(388, 68);
+            boxWeekA.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             boxWeekA.Name = "boxWeekA";
-            boxWeekA.Size = new System.Drawing.Size(81, 33);
+            boxWeekA.Size = new System.Drawing.Size(58, 23);
             boxWeekA.TabIndex = 42;
             boxWeekA.SelectedIndexChanged += boxWeekA_SelectedIndexChanged;
             // 
@@ -213,10 +210,10 @@
             // 
             boxWeekB.Enabled = false;
             boxWeekB.FormattingEnabled = true;
-            boxWeekB.Location = new System.Drawing.Point(683, 53);
-            boxWeekB.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            boxWeekB.Location = new System.Drawing.Point(481, 68);
+            boxWeekB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             boxWeekB.Name = "boxWeekB";
-            boxWeekB.Size = new System.Drawing.Size(81, 33);
+            boxWeekB.Size = new System.Drawing.Size(58, 23);
             boxWeekB.TabIndex = 43;
             boxWeekB.SelectedIndexChanged += boxWeekB_SelectedIndexChanged;
             // 
@@ -224,10 +221,10 @@
             // 
             boxWeekY.Enabled = false;
             boxWeekY.FormattingEnabled = true;
-            boxWeekY.Location = new System.Drawing.Point(950, 53);
-            boxWeekY.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            boxWeekY.Location = new System.Drawing.Point(668, 68);
+            boxWeekY.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             boxWeekY.Name = "boxWeekY";
-            boxWeekY.Size = new System.Drawing.Size(81, 33);
+            boxWeekY.Size = new System.Drawing.Size(58, 23);
             boxWeekY.TabIndex = 49;
             boxWeekY.SelectedIndexChanged += boxWeekY_SelectedIndexChanged;
             // 
@@ -235,110 +232,103 @@
             // 
             boxWeekX.Enabled = false;
             boxWeekX.FormattingEnabled = true;
-            boxWeekX.Location = new System.Drawing.Point(817, 53);
-            boxWeekX.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            boxWeekX.Location = new System.Drawing.Point(575, 68);
+            boxWeekX.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             boxWeekX.Name = "boxWeekX";
-            boxWeekX.Size = new System.Drawing.Size(81, 33);
+            boxWeekX.Size = new System.Drawing.Size(58, 23);
             boxWeekX.TabIndex = 48;
             boxWeekX.SelectedIndexChanged += boxWeekX_SelectedIndexChanged;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(917, 57);
-            label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label8.Location = new System.Drawing.Point(645, 71);
             label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(26, 25);
+            label8.Size = new System.Drawing.Size(17, 15);
             label8.TabIndex = 50;
             label8.Text = "Y:";
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new System.Drawing.Point(783, 57);
-            label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label9.Location = new System.Drawing.Point(551, 71);
             label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(27, 25);
+            label9.Size = new System.Drawing.Size(17, 15);
             label9.TabIndex = 51;
             label9.Text = "X:";
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new System.Drawing.Point(650, 57);
-            label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label11.Location = new System.Drawing.Point(458, 71);
             label11.Name = "label11";
-            label11.Size = new System.Drawing.Size(26, 25);
+            label11.Size = new System.Drawing.Size(17, 15);
             label11.TabIndex = 52;
             label11.Text = "B:";
             // 
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new System.Drawing.Point(517, 57);
-            label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label12.Location = new System.Drawing.Point(365, 71);
             label12.Name = "label12";
-            label12.Size = new System.Drawing.Size(28, 25);
+            label12.Size = new System.Drawing.Size(18, 15);
             label12.TabIndex = 53;
             label12.Text = "A:";
             // 
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new System.Drawing.Point(331, 272);
-            label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label13.Location = new System.Drawing.Point(228, 106);
             label13.Name = "label13";
-            label13.Size = new System.Drawing.Size(45, 25);
+            label13.Size = new System.Drawing.Size(29, 15);
             label13.TabIndex = 54;
             label13.Text = "Feld";
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(80, 535);
-            label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label7.Location = new System.Drawing.Point(52, 264);
             label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(233, 25);
+            label7.Size = new System.Drawing.Size(156, 15);
             label7.TabIndex = 56;
             label7.Text = "Referenzfeld für Woche A/B:";
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new System.Drawing.Point(80, 587);
-            label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label10.Location = new System.Drawing.Point(52, 295);
             label10.Name = "label10";
-            label10.Size = new System.Drawing.Size(232, 25);
+            label10.Size = new System.Drawing.Size(155, 15);
             label10.TabIndex = 57;
             label10.Text = "Referenzfeld für Woche X/Y:";
             // 
             // boxFieldAB
             // 
             boxFieldAB.FormattingEnabled = true;
-            boxFieldAB.Location = new System.Drawing.Point(331, 528);
-            boxFieldAB.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            boxFieldAB.Location = new System.Drawing.Point(228, 260);
+            boxFieldAB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             boxFieldAB.Name = "boxFieldAB";
-            boxFieldAB.Size = new System.Drawing.Size(137, 33);
+            boxFieldAB.Size = new System.Drawing.Size(97, 23);
             boxFieldAB.TabIndex = 58;
             boxFieldAB.SelectedIndexChanged += boxFieldAB_SelectedIndexChanged;
             // 
             // boxFieldXY
             // 
             boxFieldXY.FormattingEnabled = true;
-            boxFieldXY.Location = new System.Drawing.Point(331, 582);
-            boxFieldXY.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            boxFieldXY.Location = new System.Drawing.Point(228, 292);
+            boxFieldXY.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             boxFieldXY.Name = "boxFieldXY";
-            boxFieldXY.Size = new System.Drawing.Size(137, 33);
+            boxFieldXY.Size = new System.Drawing.Size(97, 23);
             boxFieldXY.TabIndex = 59;
             boxFieldXY.SelectedIndexChanged += boxFieldXY_SelectedIndexChanged;
             // 
             // boxCapacity
             // 
             boxCapacity.AutoSize = true;
-            boxCapacity.Location = new System.Drawing.Point(331, 213);
-            boxCapacity.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            boxCapacity.Location = new System.Drawing.Point(228, 66);
+            boxCapacity.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             boxCapacity.Name = "boxCapacity";
-            boxCapacity.Size = new System.Drawing.Size(171, 29);
+            boxCapacity.Size = new System.Drawing.Size(114, 19);
             boxCapacity.TabIndex = 60;
             boxCapacity.Text = "Kapazitätsgrenze";
             boxCapacity.UseVisualStyleBackColor = true;
@@ -348,10 +338,10 @@
             // 
             buttonClubView.AutoSize = true;
             buttonClubView.Enabled = false;
-            buttonClubView.Location = new System.Drawing.Point(27, 638);
-            buttonClubView.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            buttonClubView.Location = new System.Drawing.Point(15, 326);
+            buttonClubView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             buttonClubView.Name = "buttonClubView";
-            buttonClubView.Size = new System.Drawing.Size(129, 29);
+            buttonClubView.Size = new System.Drawing.Size(87, 19);
             buttonClubView.TabIndex = 62;
             buttonClubView.Text = "Vereinssicht";
             buttonClubView.UseVisualStyleBackColor = true;
@@ -361,10 +351,10 @@
             // 
             buttonGroupView.AutoSize = true;
             buttonGroupView.Enabled = false;
-            buttonGroupView.Location = new System.Drawing.Point(177, 638);
-            buttonGroupView.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            buttonGroupView.Location = new System.Drawing.Point(120, 326);
+            buttonGroupView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             buttonGroupView.Name = "buttonGroupView";
-            buttonGroupView.Size = new System.Drawing.Size(122, 29);
+            buttonGroupView.Size = new System.Drawing.Size(83, 19);
             buttonGroupView.TabIndex = 63;
             buttonGroupView.Text = "Staffelsicht";
             buttonGroupView.UseVisualStyleBackColor = true;
@@ -373,10 +363,10 @@
             // buttonManualInput
             // 
             buttonManualInput.Enabled = false;
-            buttonManualInput.Location = new System.Drawing.Point(27, 465);
-            buttonManualInput.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            buttonManualInput.Location = new System.Drawing.Point(15, 222);
+            buttonManualInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             buttonManualInput.Name = "buttonManualInput";
-            buttonManualInput.Size = new System.Drawing.Size(143, 43);
+            buttonManualInput.Size = new System.Drawing.Size(100, 26);
             buttonManualInput.TabIndex = 65;
             buttonManualInput.Text = "Manuell";
             buttonManualInput.UseVisualStyleBackColor = true;
@@ -385,68 +375,64 @@
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new System.Drawing.Point(20, 435);
-            label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label14.Location = new System.Drawing.Point(10, 204);
             label14.Name = "label14";
-            label14.Size = new System.Drawing.Size(117, 25);
+            label14.Size = new System.Drawing.Size(77, 15);
             label14.TabIndex = 66;
             label14.Text = "Datenimport:";
             // 
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new System.Drawing.Point(24, 693);
-            label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label15.Location = new System.Drawing.Point(13, 359);
             label15.Name = "label15";
-            label15.Size = new System.Drawing.Size(156, 25);
+            label15.Size = new System.Drawing.Size(105, 15);
             label15.TabIndex = 67;
             label15.Text = "Maximale Laufzeit:";
             // 
             // boxRuntimeMinutes
             // 
-            boxRuntimeMinutes.Location = new System.Drawing.Point(177, 688);
-            boxRuntimeMinutes.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            boxRuntimeMinutes.Location = new System.Drawing.Point(120, 356);
+            boxRuntimeMinutes.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             boxRuntimeMinutes.Name = "boxRuntimeMinutes";
-            boxRuntimeMinutes.Size = new System.Drawing.Size(87, 31);
+            boxRuntimeMinutes.Size = new System.Drawing.Size(62, 23);
             boxRuntimeMinutes.TabIndex = 73;
             boxRuntimeMinutes.TextChanged += boxRuntimeMinutes_TextChanged;
             // 
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new System.Drawing.Point(277, 693);
-            label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label16.Location = new System.Drawing.Point(190, 359);
             label16.Name = "label16";
-            label16.Size = new System.Drawing.Size(46, 25);
+            label16.Size = new System.Drawing.Size(31, 15);
             label16.TabIndex = 74;
             label16.Text = "Min.";
             // 
             // boxRuntimeSeconds
             // 
-            boxRuntimeSeconds.Location = new System.Drawing.Point(331, 688);
-            boxRuntimeSeconds.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            boxRuntimeSeconds.Location = new System.Drawing.Point(228, 356);
+            boxRuntimeSeconds.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             boxRuntimeSeconds.Name = "boxRuntimeSeconds";
-            boxRuntimeSeconds.Size = new System.Drawing.Size(80, 31);
+            boxRuntimeSeconds.Size = new System.Drawing.Size(57, 23);
             boxRuntimeSeconds.TabIndex = 75;
             boxRuntimeSeconds.TextChanged += boxRuntimeSeconds_TextChanged;
             // 
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new System.Drawing.Point(423, 693);
-            label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label17.Location = new System.Drawing.Point(292, 359);
             label17.Name = "label17";
-            label17.Size = new System.Drawing.Size(44, 25);
+            label17.Size = new System.Drawing.Size(28, 15);
             label17.TabIndex = 76;
             label17.Text = "Sek.";
             // 
             // buttonPartner
             // 
             buttonPartner.Enabled = false;
-            buttonPartner.Location = new System.Drawing.Point(1064, 48);
-            buttonPartner.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            buttonPartner.Location = new System.Drawing.Point(748, 65);
+            buttonPartner.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             buttonPartner.Name = "buttonPartner";
-            buttonPartner.Size = new System.Drawing.Size(143, 43);
+            buttonPartner.Size = new System.Drawing.Size(100, 26);
             buttonPartner.TabIndex = 77;
             buttonPartner.Text = "Partner";
             buttonPartner.UseVisualStyleBackColor = true;
@@ -454,9 +440,10 @@
             // 
             // buttonClickTTInput
             // 
-            buttonClickTTInput.Location = new System.Drawing.Point(181, 465);
+            buttonClickTTInput.Location = new System.Drawing.Point(122, 222);
+            buttonClickTTInput.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             buttonClickTTInput.Name = "buttonClickTTInput";
-            buttonClickTTInput.Size = new System.Drawing.Size(143, 43);
+            buttonClickTTInput.Size = new System.Drawing.Size(100, 26);
             buttonClickTTInput.TabIndex = 80;
             buttonClickTTInput.Text = "Aus Click-TT";
             buttonClickTTInput.UseVisualStyleBackColor = true;
@@ -469,17 +456,18 @@
             // boxFields
             // 
             boxFields.FormattingEnabled = true;
-            boxFields.Location = new System.Drawing.Point(331, 303);
+            boxFields.Location = new System.Drawing.Point(228, 125);
+            boxFields.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             boxFields.Name = "boxFields";
-            boxFields.Size = new System.Drawing.Size(135, 33);
+            boxFields.Size = new System.Drawing.Size(96, 23);
             boxFields.TabIndex = 81;
             boxFields.SelectedIndexChanged += boxFields_SelectedIndexChanged;
             // 
             // KeyGenerator
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1401, 748);
+            ClientSize = new System.Drawing.Size(981, 391);
             Controls.Add(boxFields);
             Controls.Add(buttonClickTTInput);
             Controls.Add(buttonPartner);
@@ -518,7 +506,7 @@
             Controls.Add(label3);
             Controls.Add(buttonInputFromFile);
             Controls.Add(buttonGenerate);
-            Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Name = "KeyGenerator";
             Text = "Schlüsselzahlen generieren";
             FormClosing += Schluesselzahlen_FormClosing;

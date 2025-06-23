@@ -27,9 +27,6 @@ namespace KeyGenerator
             TextFile fileOpposed = new TextFile(path + @"\Gegenlaeufig.csv");
             int[,] fieldOpposed = getField(fileOpposed, 4);
             opposed = new int /*List<int>*/[Data.TEAM_MAX, Data.TEAM_MAX];
-            /*for (int i = 0; i < Data.TEAM_MAX; i++)
-                for (int j = 0; j < Data.TEAM_MAX; j++)
-                    opposed[i, j] = new List<int>();*/
             for (int i = 0; i < fieldOpposed.GetLength(0); i++)
                 if (fieldOpposed[i, 0] != 0 && fieldOpposed[i, 1] != 0)
                     opposed[fieldOpposed[i, 0] - 1, fieldOpposed[i, 1] - 1] = fieldOpposed[i, 2];

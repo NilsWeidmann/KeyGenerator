@@ -147,7 +147,6 @@ namespace KeyGenerator
 
         private void Partner_Resize(object sender, EventArgs e)
         {
-            caller.WindowState = this.WindowState;
             this.Focus();
         }
 
@@ -158,7 +157,7 @@ namespace KeyGenerator
 
         private void dataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            for (int i = 0; i < dataGridView.Rows.Count; i++)
+            for (int i = 1; i < dataGridView.Rows.Count; i++)
                 if (dataGridView.Rows[i].Cells[0].Value.Equals(dataGridView.Rows[i].Cells[3].Value))
                 {
                     dataGridView.Rows[i].Cells[3].Value = null;

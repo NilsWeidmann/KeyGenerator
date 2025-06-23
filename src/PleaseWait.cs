@@ -99,19 +99,9 @@ namespace KeyGenerator
         {
             if (caller is KeyGenerator kg)
             {
-                Data.save(group, club, Club.backup, Group.backup, Team.backup);
-                if (Data.notification.Count > 0)
-                {
-                    MessageBox.Show(Data.notification[0]);
-                    return;
-                }
-                Data.setOptions(group);
-                Data.setWeeks(group);
-                Data.copyKeys(group, club);
-                Data.createPriority(club);
+                Data.prepare(group, club, Data.notification);
                 Data.copy(group, bestGroup, club, bestClub);
-                Data.checkPlausibility(group, club, Data.notification);
-                Data.checkFatal(group, Data.notification);
+
                 if (Data.notification.Count > 0)
                 {
                     MessageBox.Show(Data.notification[0]);
@@ -131,7 +121,6 @@ namespace KeyGenerator
                     DFSSolver solver = new DFSSolver(Data.field, Data.prio, Data.currentConflicts, Data.runtime, Data.km, Data.log, Data.notification);
                     solver.findSolution(group, bestGroup, club, bestClub, conflicts, keys, backgroundWorker);
                 }
-                
             }
             else if (caller is Miscellaneous m)
             {
