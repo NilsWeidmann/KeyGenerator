@@ -230,7 +230,7 @@ namespace KeyGenerator
                 Visualization.visualizeGroupData(group[boxGroups.SelectedIndex], dataGridView);
                 currentClub = null;
             }
-            dataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             caller.Focus();
         }
 

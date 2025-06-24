@@ -101,6 +101,7 @@ namespace KeyGenerator
         {
             dataGridView.Columns.Clear();
             dataGridView.Rows.Clear();
+            dataGridView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             string[] values = { "Staffel", "Feld"};
             foreach (string s in values)
             {
@@ -110,7 +111,7 @@ namespace KeyGenerator
             dataGridView.SelectionMode = DataGridViewSelectionMode.CellSelect;
             foreach (DataGridViewColumn col in dataGridView.Columns)
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
-            dataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         public static void fillGroupGrid(DataGridView dataGridView, Group[] groupArray)
@@ -130,16 +131,17 @@ namespace KeyGenerator
         {
             dataGridView.Columns.Clear();
             dataGridView.Rows.Clear();
+            dataGridView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             string[] values = { "Verein", "A", "B", "X", "Y", "Kap." };
             foreach (string s in values)
             {
                 dataGridView.Columns.Add(s, s);
             }
-            dataGridView.Columns[0].ReadOnly = true;
+            dataGridView.Columns[0].ReadOnly = readOnly;
             dataGridView.SelectionMode = DataGridViewSelectionMode.CellSelect;
             foreach (DataGridViewColumn col in dataGridView.Columns)
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
-            dataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         public static void fillClubGrid(DataGridView dataGridView, Club[] clubArray)
@@ -257,6 +259,7 @@ namespace KeyGenerator
         public static void initTeamGrid(DataGridView dataGridView, bool forClubs)
         {
             dataGridView.Rows.Clear();
+            dataGridView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridView.Columns.Clear();
             dataGridView.Columns.Add("Woche", "Woche");
             dataGridView.Columns.Add("Liga", "Liga");
