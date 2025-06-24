@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -133,6 +134,40 @@ namespace KeyGenerator
                         return false;
                 }
             return true;
+        }
+
+        public static Hashtable toHashtable(List<Club> clubs)
+        {
+            Hashtable ht = new Hashtable();
+            foreach (Club club in clubs)
+                ht.Add(club.name, club);
+            return ht;
+        }
+
+        public static Hashtable toHashtable(List<Group> groups)
+        {
+            Hashtable ht = new Hashtable();
+            foreach (Group group in groups)
+                ht.Add(group.name, group);
+            return ht;
+        }
+
+        public static Group[] toGroupArray(Hashtable groups)
+        {
+            List<Group> groupList = new List<Group>();
+            foreach (Group g in groups.Values)
+                groupList.Add(g);
+            groupList.Sort();
+            return groupList.ToArray();
+        }
+
+        public static Club[] toClubArray(Hashtable clubs)
+        {
+            List<Club> clubList = new List<Club>();
+            foreach (Club c in clubs.Values)
+                clubList.Add(c);
+            clubList.Sort();
+            return clubList.ToArray();
         }
     }
 }

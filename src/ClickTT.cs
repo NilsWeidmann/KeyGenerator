@@ -10,22 +10,22 @@ namespace KeyGenerator
 {
     public partial class ClickTT : Form
     {
-        List<Group> ll;
-        List<Club> lc;
+        //List<Group> ll;
+        //List<Club> lc;
         Hashtable clubs;
         Hashtable groups;
         Club currentClub;
         Group currentGroup;
         readonly KeyGenerator caller;
 
-        public ClickTT(KeyGenerator caller)
+        public ClickTT(KeyGenerator caller, Group[] group, Club[] club)
         {
             InitializeComponent();
             this.caller = caller;
-            ll = new List<Group>();
-            lc = new List<Club>();
-            clubs = new Hashtable();
-            groups = new Hashtable();
+            //ll = new List<Group>();
+            //lc = new List<Club>();
+            clubs = Util.toHashtable(club.ToList());
+            groups = Util.toHashtable(group.ToList());
             currentClub = null;
             currentGroup = null;
             init();
@@ -44,166 +44,9 @@ namespace KeyGenerator
 
             dataGridViewTeamsOfClubs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             Visualization.initTeamGrid(dataGridViewTeamsOfClubs, true);
-        }
 
-        private void webImportGroups()
-        {
-            this.Enabled = false;
-            HtmlAgilityPack.HtmlWeb web = new HtmlAgilityPack.HtmlWeb();
-            HtmlAgilityPack.HtmlDocument groups;
-            HtmlAgilityPack.HtmlDocument teams;
-            string ageGroup = "";
-            string division;
-            int index_l = ll.Count;
-            int index_t;
-
-            try
-            {
-                string[] seperators = { "/" };
-                string protocol = boxLinkGroups.Text.Split(seperators, StringSplitOptions.RemoveEmptyEntries)[0];
-                string domain = boxLinkGroups.Text.Split(seperators, StringSplitOptions.RemoveEmptyEntries)[1];
-                HtmlNodeCollection tables = null;
-                HtmlNode group_table = null;
-                HtmlNode team_table = null;
-
-                groups = web.Load(boxLinkGroups.Text);
-                tables = groups.DocumentNode.SelectNodes("//table");
-                foreach (HtmlNode tab in tables)
-                    if (tab.GetAttributeValue("class", "").Equals("matrix"))
-                        group_table = tab;
-                foreach (HtmlNode node_s in group_table.Descendants())
-                {
-                    if (node_s.Name.Equals("h2"))
-                        ageGroup = node_s.InnerText;
-                    if (node_s.Name.Equals("a") && !node_s.ParentNode.GetAttributeValue("class", "").Equals("matrix-relegation-more"))
-                    {
-                        division = node_s.InnerText;
-                        Group l = new Group
-                        {
-                            name = ageGroup + " " + division,
-                            index = index_l++
-                        };
-                        index_t = 0;
-                        List<Team> lt = new List<Team>();
-
-                        string reference = node_s.GetAttributeValue("href", "");
-                        reference = reference.Replace("&amp;", "&");
-                        string uri = protocol + "//" + domain + reference;
-                        teams = web.Load(uri);
-                        tables = teams.DocumentNode.SelectNodes("//table");
-                        if (tables == null)
-                            continue;
-                        foreach (HtmlNode tab in tables)
-                            if (tab.GetAttributeValue("class", "").Equals("result-set"))
-                            {
-                                team_table = tab;
-                                break;
-                            }
-                        if (team_table == null)
-                            continue;
-                        foreach (HtmlNode node_t in team_table.Descendants())
-                            if (node_t.Name.Equals("td"))
-                                if (node_t.GetAttributeValue("nowrap", "").Equals("nowrap"))
-                                {
-                                    Team t = new Team();
-                                    char[] trimChars = { ' ' };
-                                    t.name = node_t.InnerText.Replace("\n", "");
-                                    t.name = t.name.TrimStart(trimChars);
-                                    t.name = t.name.TrimEnd(trimChars);
-                                    t.group = l;
-                                    l.nrOfTeams++;
-                                    t.week = '-';
-                                    t.index = index_t++;
-                                    for (int i = 0; i < lc.Count; i++)
-                                        if (Data.isTeamOfClub(t, lc.ElementAt(i)))
-                                            t.club = lc.ElementAt(i);
-                                    if (t.club == null)
-                                    {
-                                        t.club = new Club
-                                        {
-                                            name = t.name,
-                                            index = -1
-                                        };
-                                        t.week = '-';
-                                    }
-                                    lt.Add(t);
-                                }
-                        while (lt.Count < 14)
-                            lt.Add(null);
-                        l.team = lt.ToArray();
-                        l.field = l.nrOfTeams + l.nrOfTeams % 2;
-                        ll.Add(l);
-                        dataGridViewGroups.Rows.Add(l.name);
-                    }
-                }
-                this.Enabled = true;
-            }
-            catch (Exception ex)
-            {
-                Data.notification.Append(ex.ToString());
-                MessageBox.Show("Beim Dateninport ist ein Fehler aufgetreten. Bitte den Link überprüfen!");
-                this.Enabled = true;
-                return;
-            }
-        }
-
-        private void webImportClubs()
-        {
-            HtmlAgilityPack.HtmlWeb web = new HtmlAgilityPack.HtmlWeb();
-            HtmlAgilityPack.HtmlDocument clubs;
-
-            try
-            {
-                clubs = web.Load(boxLinkClubs.Text);
-                HtmlNode club_table = null;
-
-                string[] seperators = { "/" };
-                string domain = boxLinkClubs.Text.Split(seperators, StringSplitOptions.RemoveEmptyEntries)[1];
-                int index = lc.Count;
-
-                HtmlNodeCollection tables = clubs.DocumentNode.SelectNodes("//table");
-
-                foreach (HtmlNode tab in tables)
-                    if (tab.Attributes["class"].Value.ToString().Equals("result-set"))
-                        club_table = tab;
-                foreach (HtmlNode link in club_table.Descendants())
-                {
-                    if (link.Name.Equals("a"))
-                    {
-                        Club club = new Club
-                        {
-                            name = Util.clear(link.InnerText),
-                            index = index++
-                        };
-                        lc.Add(club);
-                        dataGridViewClubs.Rows.Add(club.name);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Data.notification.Append(ex.ToString());
-                MessageBox.Show("Beim Dateninport ist ein Fehler aufgetreten. Bitte den Link überprüfen!");
-                return;
-            }
-        }
-
-        private void buttonDeleteTeamNewClub_Click(object sender, EventArgs e)
-        {
-            lc = new List<Club>();
-            dataGridViewClubs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewClubs.Columns.Clear();
-            dataGridViewClubs.Columns.Add("Verein", "Verein");
-            dataGridViewClubs.Rows.Clear();
-            webImportClubs();
-        }
-
-        private void buttonDeleteTeamNewGroup_Click(object sender, EventArgs e)
-        {
-            ll = new List<Group>();
-            dataGridViewGroups.Rows.Clear();
-            dataGridViewTeamsOfGroups.Rows.Clear();
-            webImportGroups();
+            Visualization.fillGroupGrid(dataGridViewGroups, Util.toGroupArray(groups));
+            Visualization.fillClubGrid(dataGridViewClubs, Util.toClubArray(clubs));
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -239,27 +82,29 @@ namespace KeyGenerator
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             dataGridViewTeamsOfGroups.Rows.Clear();
-            if (ll != null && e.RowIndex < ll.Count)
+            if (groups != null && e.RowIndex < groups.Count)
             {
-                Visualization.visualizeGroupData(ll[e.RowIndex], dataGridViewTeamsOfGroups);
-                currentGroup = ll[e.RowIndex];
+                string groupname = dataGridViewGroups.Rows[e.RowIndex].Cells[0].Value.ToString();
+                Visualization.visualizeGroupData((Group)groups[groupname], dataGridViewTeamsOfGroups);
+                currentGroup = (Group)groups[groupname];
             }
         }
 
         private void dataGridViewClubs_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             dataGridViewTeamsOfClubs.Rows.Clear();
-            if (lc != null && e.RowIndex < lc.Count)
+            if (clubs != null && e.RowIndex < clubs.Count)
             {
-                Visualization.visualizeClubData(lc[e.RowIndex], dataGridViewTeamsOfClubs);
-                currentClub = lc[e.RowIndex];
+                string clubname = dataGridViewClubs.Rows[e.RowIndex].Cells[0].Value.ToString();
+                Visualization.visualizeClubData((Club)clubs[clubname], dataGridViewTeamsOfClubs);
+                currentClub = (Club)clubs[clubname];
             }
         }
 
         private void buttonDeleteTeamSave_Click(object sender, EventArgs e)
         {
             buttonDeleteTeamSave.Enabled = false;
-            Data.save(ll.ToArray(), lc.ToArray(), Club.file, Group.file, Team.file);
+            Data.save(Util.toGroupArray(groups), Util.toClubArray(clubs), Club.file, Group.file, Team.file);
             caller.loadFromFile(Club.file, Group.file, Team.file);
             buttonDeleteTeamSave.Enabled = true;
         }
@@ -268,7 +113,7 @@ namespace KeyGenerator
         {
             if (buttonDeleteTeamSave.Enabled)
             {
-                e.Cancel = !Util.confirm(caller, ll.ToArray(), lc.ToArray());
+                e.Cancel = !Util.confirm(caller, Util.toGroupArray(groups), Util.toClubArray(clubs));
             }
             else
             {
@@ -295,11 +140,17 @@ namespace KeyGenerator
                         || openFileDialog1.ShowDialog() != DialogResult.OK)
                         return;
                 }
-            ll = new List<Group>();
-            lc = new List<Club>();
-            Parser.saveInData(groups, clubs, ll, lc);
-            Visualization.initGroupGrid(dataGridViewGroups, true);
-            Visualization.fillGroupGrid(dataGridViewGroups, ll.ToArray());
+            else
+                return;
+
+            boxLinkGroups.Text = openFileDialog1.FileName;
+
+            // Feld ermitteln. Default: so klein wie möglich
+            foreach (Group g in groups.Values)
+                if (g.field == 0)
+                    g.field = g.nrOfTeams < Data.TEAM_MIN ? Data.TEAM_MIN : g.nrOfTeams + (g.nrOfTeams % 2);
+
+            init();
         }
 
         private void buttonDeleteTeamAddClub_Click(object sender, EventArgs e)
@@ -318,11 +169,9 @@ namespace KeyGenerator
                 }
             else
                 return;
-            ll = new List<Group>();
-            lc = new List<Club>();
-            Parser.saveInData(groups, clubs, ll, lc);
-            Visualization.initClubGrid(dataGridViewClubs, true);
-            Visualization.fillClubGrid(dataGridViewClubs, lc.ToArray());
+
+            boxLinkClubs.Text = openFileDialog1.FileName;
+            init();
         }
 
         private void dataGridViewTeamsOfClubs_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -339,7 +188,7 @@ namespace KeyGenerator
 
         private void dataGridViewClubs_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            Visualization.changeClubData(e, dataGridViewClubs, lc);
+            Visualization.changeClubData(e, dataGridViewClubs, Util.toClubArray(clubs).ToList());
         }
 
         private void dataGridViewGroups_CellValueChanged(object sender, DataGridViewCellEventArgs e)

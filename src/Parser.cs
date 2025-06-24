@@ -63,12 +63,12 @@ namespace KeyGenerator
                 String[] data = row[i].Split(new char[] { ';' }, StringSplitOptions.None);
 
                 // Verein ermitteln oder anlegen
-                if (clubs.ContainsKey(data[idx.clubId]))
-                    currentClub = (Club)clubs[data[idx.clubId]];
+                if (clubs.ContainsKey(data[idx.clubName]))
+                    currentClub = (Club)clubs[data[idx.clubName]];
                 else
                 {
                     currentClub = new Club(data[idx.clubName], Util.toInt(data[idx.clubId]), clubs.Count);
-                    clubs.Add(data[idx.clubId], currentClub);
+                    clubs.Add(data[idx.clubName], currentClub);
                 }
 
                 // Gruppe ermitteln oder anlegen
@@ -141,8 +141,8 @@ namespace KeyGenerator
                                 string clubID = clubNameAndID[1];
                                 string clubName = clubNameAndID[0].TrimEnd(' ');
 
-                                if (clubs.ContainsKey(clubID))
-                                    currentClub = (Club)clubs[clubID];
+                                if (clubs.ContainsKey(clubName))
+                                    currentClub = (Club)clubs[clubName];
                                 else
                                     currentClub = dummyClub;
                                 currentTeam = dummyTeam;
@@ -214,22 +214,6 @@ namespace KeyGenerator
                 }
             }
             return true;
-        }
-
-        public static void saveInData(Hashtable groups, Hashtable clubs, List<Group> group, List<Club> club)
-        {
-            foreach (Club c in clubs.Values)
-                club.Add(c);
-            club.Sort();
-
-            foreach (Group g in groups.Values)
-            {
-                // Feld ermitteln. Default: so klein wie möglich
-                if (g.field == 0)
-                    g.field = g.nrOfTeams < Data.TEAM_MIN ? Data.TEAM_MIN : g.nrOfTeams + (g.nrOfTeams % 2);
-                group.Add(g);
-            }
-            group.Sort();
         }
     }
 }

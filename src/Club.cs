@@ -158,7 +158,7 @@ namespace KeyGenerator
 
         public override int GetHashCode()
         {
-            return id;
+            return index;
         }
 
         public int CompareTo(object obj)
@@ -166,7 +166,7 @@ namespace KeyGenerator
             if ((obj == null) || !obj.GetType().Equals(this.GetType()))
                 return 0;
             else
-                return id - ((Club)obj).id;
+                return index - ((Club)obj).index;
         }
     }
 }

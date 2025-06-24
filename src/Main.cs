@@ -576,7 +576,7 @@ namespace KeyGenerator
 
         private void buttonClickTTInput_Click(object sender, EventArgs e)
         {
-            ClickTT clickTT = new ClickTT(this);
+            ClickTT clickTT = new ClickTT(this,group,club);
             this.Enabled = false;
             clickTT.Visible = true;
         }      
