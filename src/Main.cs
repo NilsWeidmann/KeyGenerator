@@ -533,8 +533,10 @@ namespace KeyGenerator
 
         private void Schluesselzahlen_Resize(object sender, EventArgs e)
         {
+            SuspendLayout();
             dataGridView.Height = this.Height - 100;
             dataGridView.Width = this.Width - 350;
+            ResumeLayout();
         }
 
         private void Schluesselzahlen_FormClosing(object sender, FormClosingEventArgs e)

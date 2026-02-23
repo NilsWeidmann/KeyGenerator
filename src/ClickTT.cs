@@ -10,8 +10,6 @@ namespace KeyGenerator
 {
     public partial class ClickTT : Form
     {
-        //List<Group> ll;
-        //List<Club> lc;
         Hashtable clubs;
         Hashtable groups;
         Club currentClub;
@@ -22,8 +20,6 @@ namespace KeyGenerator
         {
             InitializeComponent();
             this.caller = caller;
-            //ll = new List<Group>();
-            //lc = new List<Club>();
             clubs = Util.toHashtable(club.ToList());
             groups = Util.toHashtable(group.ToList());
             currentClub = null;
@@ -54,6 +50,7 @@ namespace KeyGenerator
             caller.WindowState = this.WindowState;
             this.Focus();
 
+            SuspendLayout();
             // Set proper heights
             groupBox2.Top = (this.Height - 95) / 2 + 20;
             groupBox1.Height = (this.Height - 95) / 2;
@@ -77,6 +74,7 @@ namespace KeyGenerator
             dataGridViewTeamsOfClubs.Left = dataGridViewGroups.Left + dataGridViewGroups.Width + 12;
             buttonDeleteTeamSave.Left = this.Width - 110;
             buttonDeleteTeamSave.Top = this.Height - 70;
+            ResumeLayout();
         }
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -125,10 +123,10 @@ namespace KeyGenerator
 
         private void buttonDeleteTeamAddGroup_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Wählen Sie zunächst die exportierte CSV-Datei mit der Gruppeneinteilung aus!",
-                    "Gruppeneinteilung auswählen", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.Cancel)
-                return;
-            
+            //if (MessageBox.Show("Wählen Sie zunächst die exportierte CSV-Datei mit der Gruppeneinteilung aus!",
+            //        "Gruppeneinteilung auswählen", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.Cancel)
+            //    return;
+
             clubs = new Hashtable();
             groups = new Hashtable();
 
@@ -155,9 +153,9 @@ namespace KeyGenerator
 
         private void buttonDeleteTeamAddClub_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Wählen Sie nun die HTML-Datei mit den Terminwünschen aus!",
-                    "Terminwünsche auswählen", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.Cancel)
-                return;
+            //if (MessageBox.Show("Wählen Sie nun die HTML-Datei mit den Terminwünschen aus!",
+            //        "Terminwünsche auswählen", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.Cancel)
+            //    return;
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 while (!Parser.addWishes(groups, clubs, openFileDialog1))
@@ -194,6 +192,16 @@ namespace KeyGenerator
         private void dataGridViewGroups_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             Visualization.changeField(dataGridViewGroups, e, currentGroup);
+        }
+
+        private void ClickTT_SizeChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ClickTT_MouseUp(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }
