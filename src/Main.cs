@@ -175,7 +175,8 @@ namespace KeyGenerator
                 boxClubs.Enabled = true;
                 if (boxClubs.SelectedItem != null)
                 {
-                    boxCapacity.Enabled = boxWeekA.Enabled = boxWeekB.Enabled = boxWeekX.Enabled = boxWeekY.Enabled = true;
+                    boxCapacity.Enabled = false; 
+                    boxWeekA.Enabled = boxWeekB.Enabled = boxWeekX.Enabled = boxWeekY.Enabled = true;
                     boxClubs.Text = boxClubs.SelectedItem.ToString();
                     boxWeekA.Text = boxWeekA.SelectedItem.ToString();
                     boxWeekB.Text = boxWeekB.SelectedItem.ToString();
@@ -212,7 +213,7 @@ namespace KeyGenerator
                 else
                 {
                     boxCapacity.Checked = currentClub.capacity;
-                    buttonPartner.Enabled = true;
+                    //buttonPartner.Enabled = true;
                 }
                 if (boxWeekA.Items.Count > currentClub.keys['A'])
                     boxWeekA.SelectedIndex = currentClub.keys['A'];
@@ -257,7 +258,8 @@ namespace KeyGenerator
             ComboBox[] boxes = { boxWeekA, boxWeekB, boxWeekX, boxWeekY };
             if (buttonClubView.Checked && boxClubs.SelectedIndex != -1)
             {
-                boxCapacity.Enabled = buttonPartner.Enabled = true;
+                //boxCapacity.Enabled = true;
+                buttonPartner.Enabled = false;
                 foreach (ComboBox cb in boxes)
                 {
                     cb.Enabled = true;

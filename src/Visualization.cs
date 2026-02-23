@@ -262,7 +262,7 @@ namespace KeyGenerator
             dataGridView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridView.Columns.Clear();
             dataGridView.Columns.Add("Woche", "Woche");
-            dataGridView.Columns.Add("Liga", "Liga");
+            dataGridView.Columns.Add("Gruppe", "Gruppe");
             dataGridView.Columns.Add("Team", "Team");
             dataGridView.Columns.Add("Schlüssel", "Schlüssel");
             dataGridView.Columns.Add("Wunsch", "Wunsch");

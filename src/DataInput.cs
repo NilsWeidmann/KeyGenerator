@@ -278,14 +278,14 @@ namespace KeyGenerator
         {
             if (boxGroup.Text.Equals("")) 
             { 
-                MessageBox.Show("Geben Sie zunächst einen Namen für die neue Liga an!", "Liga anlegen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Geben Sie zunächst einen Namen für die neue Gruppe an!", "Gruppe anlegen", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             else
                 foreach (Group l in this.group)
                     if (l.name.Equals(boxGroup.Text))
                     {
-                        MessageBox.Show("Der Name " + boxGroup.Text + " ist bereits vergeben!", "Liga anlegen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Der Name " + boxGroup.Text + " ist bereits vergeben!", "Gruppe anlegen", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
             Group group = new Group();
@@ -303,7 +303,7 @@ namespace KeyGenerator
         private void buttonDeleteGroup_Click(object sender, EventArgs e)
         {
             if (boxGroup.SelectedIndex != -1)
-                switch (MessageBox.Show("Wollen Sie die " + group[boxGroup.SelectedIndex].name + " löschen?", "Liga löschen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
+                switch (MessageBox.Show("Wollen Sie die " + group[boxGroup.SelectedIndex].name + " löschen?", "Gruppe löschen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
                 {
                     case DialogResult.No:
                         break;

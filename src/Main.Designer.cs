@@ -169,9 +169,9 @@
             label1.AutoSize = true;
             label1.Location = new System.Drawing.Point(12, 106);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(39, 15);
+            label1.Size = new System.Drawing.Size(56, 15);
             label1.TabIndex = 27;
-            label1.Text = "Ligen:";
+            label1.Text = "Gruppen:";
             // 
             // buttonMiscellaneous
             // 
@@ -354,9 +354,9 @@
             buttonGroupView.Location = new System.Drawing.Point(120, 326);
             buttonGroupView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             buttonGroupView.Name = "buttonGroupView";
-            buttonGroupView.Size = new System.Drawing.Size(83, 19);
+            buttonGroupView.Size = new System.Drawing.Size(96, 19);
             buttonGroupView.TabIndex = 63;
-            buttonGroupView.Text = "Staffelsicht";
+            buttonGroupView.Text = "Gruppensicht";
             buttonGroupView.UseVisualStyleBackColor = true;
             buttonGroupView.CheckedChanged += buttonGroupView_CheckedChanged;
             // 
@@ -441,7 +441,7 @@
             // buttonClickTTInput
             // 
             buttonClickTTInput.Location = new System.Drawing.Point(122, 222);
-            buttonClickTTInput.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            buttonClickTTInput.Margin = new System.Windows.Forms.Padding(2);
             buttonClickTTInput.Name = "buttonClickTTInput";
             buttonClickTTInput.Size = new System.Drawing.Size(100, 26);
             buttonClickTTInput.TabIndex = 80;
@@ -457,7 +457,7 @@
             // 
             boxFields.FormattingEnabled = true;
             boxFields.Location = new System.Drawing.Point(228, 125);
-            boxFields.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            boxFields.Margin = new System.Windows.Forms.Padding(2);
             boxFields.Name = "boxFields";
             boxFields.Size = new System.Drawing.Size(96, 23);
             boxFields.TabIndex = 81;

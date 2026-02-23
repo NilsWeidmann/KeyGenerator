@@ -29,414 +29,398 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.boxTeam = new System.Windows.Forms.TextBox();
-            this.boxDay01 = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.boxDay02 = new System.Windows.Forms.ComboBox();
-            this.boxDay03 = new System.Windows.Forms.ComboBox();
-            this.boxDay04 = new System.Windows.Forms.ComboBox();
-            this.boxDay05 = new System.Windows.Forms.ComboBox();
-            this.boxDay06 = new System.Windows.Forms.ComboBox();
-            this.boxDay07 = new System.Windows.Forms.ComboBox();
-            this.boxDay08 = new System.Windows.Forms.ComboBox();
-            this.boxDay09 = new System.Windows.Forms.ComboBox();
-            this.boxDay10 = new System.Windows.Forms.ComboBox();
-            this.boxDay11 = new System.Windows.Forms.ComboBox();
-            this.boxDay12 = new System.Windows.Forms.ComboBox();
-            this.boxDay13 = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.boxGroup = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.buttonDeleteTeamOkay = new System.Windows.Forms.Button();
-            this.buttonDeleteTeamCancel = new System.Windows.Forms.Button();
-            this.boxWeek = new System.Windows.Forms.ComboBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            boxTeam = new System.Windows.Forms.TextBox();
+            boxDay01 = new System.Windows.Forms.ComboBox();
+            label1 = new System.Windows.Forms.Label();
+            boxDay02 = new System.Windows.Forms.ComboBox();
+            boxDay03 = new System.Windows.Forms.ComboBox();
+            boxDay04 = new System.Windows.Forms.ComboBox();
+            boxDay05 = new System.Windows.Forms.ComboBox();
+            boxDay06 = new System.Windows.Forms.ComboBox();
+            boxDay07 = new System.Windows.Forms.ComboBox();
+            boxDay08 = new System.Windows.Forms.ComboBox();
+            boxDay09 = new System.Windows.Forms.ComboBox();
+            boxDay10 = new System.Windows.Forms.ComboBox();
+            boxDay11 = new System.Windows.Forms.ComboBox();
+            boxDay12 = new System.Windows.Forms.ComboBox();
+            boxDay13 = new System.Windows.Forms.ComboBox();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
+            label7 = new System.Windows.Forms.Label();
+            label8 = new System.Windows.Forms.Label();
+            label9 = new System.Windows.Forms.Label();
+            label10 = new System.Windows.Forms.Label();
+            label11 = new System.Windows.Forms.Label();
+            label12 = new System.Windows.Forms.Label();
+            label13 = new System.Windows.Forms.Label();
+            label14 = new System.Windows.Forms.Label();
+            boxGroup = new System.Windows.Forms.TextBox();
+            label15 = new System.Windows.Forms.Label();
+            buttonDeleteTeamOkay = new System.Windows.Forms.Button();
+            buttonDeleteTeamCancel = new System.Windows.Forms.Button();
+            boxWeek = new System.Windows.Forms.ComboBox();
+            label16 = new System.Windows.Forms.Label();
+            SuspendLayout();
             // 
             // boxTeam
             // 
-            this.boxTeam.Enabled = false;
-            this.boxTeam.Location = new System.Drawing.Point(112, 20);
-            this.boxTeam.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.boxTeam.Name = "boxTeam";
-            this.boxTeam.Size = new System.Drawing.Size(294, 26);
-            this.boxTeam.TabIndex = 0;
+            boxTeam.Enabled = false;
+            boxTeam.Location = new System.Drawing.Point(87, 15);
+            boxTeam.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            boxTeam.Name = "boxTeam";
+            boxTeam.Size = new System.Drawing.Size(230, 23);
+            boxTeam.TabIndex = 0;
             // 
             // boxDay01
             // 
-            this.boxDay01.FormattingEnabled = true;
-            this.boxDay01.Location = new System.Drawing.Point(518, 20);
-            this.boxDay01.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.boxDay01.Name = "boxDay01";
-            this.boxDay01.Size = new System.Drawing.Size(156, 28);
-            this.boxDay01.TabIndex = 1;
+            boxDay01.FormattingEnabled = true;
+            boxDay01.Location = new System.Drawing.Point(403, 15);
+            boxDay01.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            boxDay01.Name = "boxDay01";
+            boxDay01.Size = new System.Drawing.Size(122, 23);
+            boxDay01.TabIndex = 1;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(423, 25);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 20);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "1. Spieltag";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(329, 19);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(61, 15);
+            label1.TabIndex = 2;
+            label1.Text = "1. Spieltag";
             // 
             // boxDay02
             // 
-            this.boxDay02.FormattingEnabled = true;
-            this.boxDay02.Location = new System.Drawing.Point(518, 62);
-            this.boxDay02.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.boxDay02.Name = "boxDay02";
-            this.boxDay02.Size = new System.Drawing.Size(156, 28);
-            this.boxDay02.TabIndex = 3;
+            boxDay02.FormattingEnabled = true;
+            boxDay02.Location = new System.Drawing.Point(403, 46);
+            boxDay02.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            boxDay02.Name = "boxDay02";
+            boxDay02.Size = new System.Drawing.Size(122, 23);
+            boxDay02.TabIndex = 3;
             // 
             // boxDay03
             // 
-            this.boxDay03.FormattingEnabled = true;
-            this.boxDay03.Location = new System.Drawing.Point(518, 103);
-            this.boxDay03.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.boxDay03.Name = "boxDay03";
-            this.boxDay03.Size = new System.Drawing.Size(156, 28);
-            this.boxDay03.TabIndex = 4;
+            boxDay03.FormattingEnabled = true;
+            boxDay03.Location = new System.Drawing.Point(403, 77);
+            boxDay03.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            boxDay03.Name = "boxDay03";
+            boxDay03.Size = new System.Drawing.Size(122, 23);
+            boxDay03.TabIndex = 4;
             // 
             // boxDay04
             // 
-            this.boxDay04.FormattingEnabled = true;
-            this.boxDay04.Location = new System.Drawing.Point(518, 145);
-            this.boxDay04.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.boxDay04.Name = "boxDay04";
-            this.boxDay04.Size = new System.Drawing.Size(156, 28);
-            this.boxDay04.TabIndex = 5;
+            boxDay04.FormattingEnabled = true;
+            boxDay04.Location = new System.Drawing.Point(403, 109);
+            boxDay04.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            boxDay04.Name = "boxDay04";
+            boxDay04.Size = new System.Drawing.Size(122, 23);
+            boxDay04.TabIndex = 5;
             // 
             // boxDay05
             // 
-            this.boxDay05.FormattingEnabled = true;
-            this.boxDay05.Location = new System.Drawing.Point(518, 186);
-            this.boxDay05.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.boxDay05.Name = "boxDay05";
-            this.boxDay05.Size = new System.Drawing.Size(156, 28);
-            this.boxDay05.TabIndex = 6;
+            boxDay05.FormattingEnabled = true;
+            boxDay05.Location = new System.Drawing.Point(403, 140);
+            boxDay05.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            boxDay05.Name = "boxDay05";
+            boxDay05.Size = new System.Drawing.Size(122, 23);
+            boxDay05.TabIndex = 6;
             // 
             // boxDay06
             // 
-            this.boxDay06.FormattingEnabled = true;
-            this.boxDay06.Location = new System.Drawing.Point(518, 228);
-            this.boxDay06.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.boxDay06.Name = "boxDay06";
-            this.boxDay06.Size = new System.Drawing.Size(156, 28);
-            this.boxDay06.TabIndex = 7;
+            boxDay06.FormattingEnabled = true;
+            boxDay06.Location = new System.Drawing.Point(403, 171);
+            boxDay06.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            boxDay06.Name = "boxDay06";
+            boxDay06.Size = new System.Drawing.Size(122, 23);
+            boxDay06.TabIndex = 7;
             // 
             // boxDay07
             // 
-            this.boxDay07.FormattingEnabled = true;
-            this.boxDay07.Location = new System.Drawing.Point(518, 269);
-            this.boxDay07.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.boxDay07.Name = "boxDay07";
-            this.boxDay07.Size = new System.Drawing.Size(156, 28);
-            this.boxDay07.TabIndex = 8;
+            boxDay07.FormattingEnabled = true;
+            boxDay07.Location = new System.Drawing.Point(403, 202);
+            boxDay07.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            boxDay07.Name = "boxDay07";
+            boxDay07.Size = new System.Drawing.Size(122, 23);
+            boxDay07.TabIndex = 8;
             // 
             // boxDay08
             // 
-            this.boxDay08.FormattingEnabled = true;
-            this.boxDay08.Location = new System.Drawing.Point(518, 311);
-            this.boxDay08.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.boxDay08.Name = "boxDay08";
-            this.boxDay08.Size = new System.Drawing.Size(156, 28);
-            this.boxDay08.TabIndex = 9;
+            boxDay08.FormattingEnabled = true;
+            boxDay08.Location = new System.Drawing.Point(403, 233);
+            boxDay08.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            boxDay08.Name = "boxDay08";
+            boxDay08.Size = new System.Drawing.Size(122, 23);
+            boxDay08.TabIndex = 9;
             // 
             // boxDay09
             // 
-            this.boxDay09.FormattingEnabled = true;
-            this.boxDay09.Location = new System.Drawing.Point(518, 352);
-            this.boxDay09.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.boxDay09.Name = "boxDay09";
-            this.boxDay09.Size = new System.Drawing.Size(156, 28);
-            this.boxDay09.TabIndex = 10;
+            boxDay09.FormattingEnabled = true;
+            boxDay09.Location = new System.Drawing.Point(403, 264);
+            boxDay09.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            boxDay09.Name = "boxDay09";
+            boxDay09.Size = new System.Drawing.Size(122, 23);
+            boxDay09.TabIndex = 10;
             // 
             // boxDay10
             // 
-            this.boxDay10.FormattingEnabled = true;
-            this.boxDay10.Location = new System.Drawing.Point(518, 394);
-            this.boxDay10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.boxDay10.Name = "boxDay10";
-            this.boxDay10.Size = new System.Drawing.Size(156, 28);
-            this.boxDay10.TabIndex = 11;
+            boxDay10.FormattingEnabled = true;
+            boxDay10.Location = new System.Drawing.Point(403, 296);
+            boxDay10.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            boxDay10.Name = "boxDay10";
+            boxDay10.Size = new System.Drawing.Size(122, 23);
+            boxDay10.TabIndex = 11;
             // 
             // boxDay11
             // 
-            this.boxDay11.FormattingEnabled = true;
-            this.boxDay11.Location = new System.Drawing.Point(518, 435);
-            this.boxDay11.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.boxDay11.Name = "boxDay11";
-            this.boxDay11.Size = new System.Drawing.Size(156, 28);
-            this.boxDay11.TabIndex = 12;
+            boxDay11.FormattingEnabled = true;
+            boxDay11.Location = new System.Drawing.Point(403, 326);
+            boxDay11.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            boxDay11.Name = "boxDay11";
+            boxDay11.Size = new System.Drawing.Size(122, 23);
+            boxDay11.TabIndex = 12;
             // 
             // boxDay12
             // 
-            this.boxDay12.FormattingEnabled = true;
-            this.boxDay12.Location = new System.Drawing.Point(518, 477);
-            this.boxDay12.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.boxDay12.Name = "boxDay12";
-            this.boxDay12.Size = new System.Drawing.Size(156, 28);
-            this.boxDay12.TabIndex = 13;
+            boxDay12.FormattingEnabled = true;
+            boxDay12.Location = new System.Drawing.Point(403, 358);
+            boxDay12.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            boxDay12.Name = "boxDay12";
+            boxDay12.Size = new System.Drawing.Size(122, 23);
+            boxDay12.TabIndex = 13;
             // 
             // boxDay13
             // 
-            this.boxDay13.FormattingEnabled = true;
-            this.boxDay13.Location = new System.Drawing.Point(518, 518);
-            this.boxDay13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.boxDay13.Name = "boxDay13";
-            this.boxDay13.Size = new System.Drawing.Size(156, 28);
-            this.boxDay13.TabIndex = 14;
+            boxDay13.FormattingEnabled = true;
+            boxDay13.Location = new System.Drawing.Point(403, 388);
+            boxDay13.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            boxDay13.Name = "boxDay13";
+            boxDay13.Size = new System.Drawing.Size(122, 23);
+            boxDay13.TabIndex = 14;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(423, 66);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 20);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "2. Spieltag";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(329, 50);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(61, 15);
+            label2.TabIndex = 15;
+            label2.Text = "2. Spieltag";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(423, 108);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 20);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "3. Spieltag";
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(329, 81);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(61, 15);
+            label3.TabIndex = 16;
+            label3.Text = "3. Spieltag";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(423, 149);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(84, 20);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "4. Spieltag";
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(329, 112);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(61, 15);
+            label4.TabIndex = 17;
+            label4.Text = "4. Spieltag";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(423, 191);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(84, 20);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "5. Spieltag";
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(329, 143);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(61, 15);
+            label5.TabIndex = 18;
+            label5.Text = "5. Spieltag";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(423, 232);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(84, 20);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "6. Spieltag";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(329, 174);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(61, 15);
+            label6.TabIndex = 19;
+            label6.Text = "6. Spieltag";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(423, 274);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(84, 20);
-            this.label7.TabIndex = 20;
-            this.label7.Text = "7. Spieltag";
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(329, 206);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(61, 15);
+            label7.TabIndex = 20;
+            label7.Text = "7. Spieltag";
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(423, 315);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(84, 20);
-            this.label8.TabIndex = 21;
-            this.label8.Text = "8. Spieltag";
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(329, 236);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(61, 15);
+            label8.TabIndex = 21;
+            label8.Text = "8. Spieltag";
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(423, 357);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(84, 20);
-            this.label9.TabIndex = 22;
-            this.label9.Text = "9. Spieltag";
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(329, 268);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(61, 15);
+            label9.TabIndex = 22;
+            label9.Text = "9. Spieltag";
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(414, 398);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(93, 20);
-            this.label10.TabIndex = 23;
-            this.label10.Text = "10. Spieltag";
+            label10.AutoSize = true;
+            label10.Location = new System.Drawing.Point(322, 298);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(67, 15);
+            label10.TabIndex = 23;
+            label10.Text = "10. Spieltag";
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(414, 440);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(93, 20);
-            this.label11.TabIndex = 24;
-            this.label11.Text = "11. Spieltag";
+            label11.AutoSize = true;
+            label11.Location = new System.Drawing.Point(322, 330);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(67, 15);
+            label11.TabIndex = 24;
+            label11.Text = "11. Spieltag";
             // 
             // label12
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(414, 482);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(93, 20);
-            this.label12.TabIndex = 25;
-            this.label12.Text = "12. Spieltag";
+            label12.AutoSize = true;
+            label12.Location = new System.Drawing.Point(322, 362);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(67, 15);
+            label12.TabIndex = 25;
+            label12.Text = "12. Spieltag";
             // 
             // label13
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(414, 523);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(93, 20);
-            this.label13.TabIndex = 26;
-            this.label13.Text = "13. Spieltag";
+            label13.AutoSize = true;
+            label13.Location = new System.Drawing.Point(322, 392);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(67, 15);
+            label13.TabIndex = 26;
+            label13.Text = "13. Spieltag";
             // 
             // label14
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(52, 25);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(49, 20);
-            this.label14.TabIndex = 27;
-            this.label14.Text = "Team";
+            label14.AutoSize = true;
+            label14.Location = new System.Drawing.Point(40, 19);
+            label14.Name = "label14";
+            label14.Size = new System.Drawing.Size(36, 15);
+            label14.TabIndex = 27;
+            label14.Text = "Team";
             // 
             // boxGroup
             // 
-            this.boxGroup.Enabled = false;
-            this.boxGroup.Location = new System.Drawing.Point(112, 60);
-            this.boxGroup.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.boxGroup.Name = "boxGroup";
-            this.boxGroup.Size = new System.Drawing.Size(294, 26);
-            this.boxGroup.TabIndex = 28;
+            boxGroup.Enabled = false;
+            boxGroup.Location = new System.Drawing.Point(87, 45);
+            boxGroup.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            boxGroup.Name = "boxGroup";
+            boxGroup.Size = new System.Drawing.Size(230, 23);
+            boxGroup.TabIndex = 28;
             // 
             // label15
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(63, 65);
-            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(39, 20);
-            this.label15.TabIndex = 29;
-            this.label15.Text = "Liga";
+            label15.AutoSize = true;
+            label15.Location = new System.Drawing.Point(29, 49);
+            label15.Name = "label15";
+            label15.Size = new System.Drawing.Size(46, 15);
+            label15.TabIndex = 29;
+            label15.Text = "Gruppe";
             // 
             // buttonDeleteTeamOkay
             // 
-            this.buttonDeleteTeamOkay.Location = new System.Drawing.Point(174, 100);
-            this.buttonDeleteTeamOkay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.buttonDeleteTeamOkay.Name = "buttonDeleteTeamOkay";
-            this.buttonDeleteTeamOkay.Size = new System.Drawing.Size(112, 35);
-            this.buttonDeleteTeamOkay.TabIndex = 30;
-            this.buttonDeleteTeamOkay.Text = "OK";
-            this.buttonDeleteTeamOkay.UseVisualStyleBackColor = true;
-            this.buttonDeleteTeamOkay.Click += new System.EventHandler(this.buttonDeleteTeamOkay_Click);
-            this.buttonDeleteTeamOkay.Resize += new System.EventHandler(this.buttonDeleteTeamOkay_Resize);
+            buttonDeleteTeamOkay.Location = new System.Drawing.Point(135, 75);
+            buttonDeleteTeamOkay.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            buttonDeleteTeamOkay.Name = "buttonDeleteTeamOkay";
+            buttonDeleteTeamOkay.Size = new System.Drawing.Size(87, 26);
+            buttonDeleteTeamOkay.TabIndex = 30;
+            buttonDeleteTeamOkay.Text = "OK";
+            buttonDeleteTeamOkay.UseVisualStyleBackColor = true;
+            buttonDeleteTeamOkay.Click += buttonDeleteTeamOkay_Click;
+            buttonDeleteTeamOkay.Resize += buttonDeleteTeamOkay_Resize;
             // 
             // buttonDeleteTeamCancel
             // 
-            this.buttonDeleteTeamCancel.Location = new System.Drawing.Point(296, 100);
-            this.buttonDeleteTeamCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.buttonDeleteTeamCancel.Name = "buttonDeleteTeamCancel";
-            this.buttonDeleteTeamCancel.Size = new System.Drawing.Size(112, 35);
-            this.buttonDeleteTeamCancel.TabIndex = 31;
-            this.buttonDeleteTeamCancel.Text = "Abbrechen";
-            this.buttonDeleteTeamCancel.UseVisualStyleBackColor = true;
-            this.buttonDeleteTeamCancel.Click += new System.EventHandler(this.buttonDeleteTeamCancel_Click);
+            buttonDeleteTeamCancel.Location = new System.Drawing.Point(230, 75);
+            buttonDeleteTeamCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            buttonDeleteTeamCancel.Name = "buttonDeleteTeamCancel";
+            buttonDeleteTeamCancel.Size = new System.Drawing.Size(87, 26);
+            buttonDeleteTeamCancel.TabIndex = 31;
+            buttonDeleteTeamCancel.Text = "Abbrechen";
+            buttonDeleteTeamCancel.UseVisualStyleBackColor = true;
+            buttonDeleteTeamCancel.Click += buttonDeleteTeamCancel_Click;
             // 
             // boxWeek
             // 
-            this.boxWeek.FormattingEnabled = true;
-            this.boxWeek.Location = new System.Drawing.Point(112, 103);
-            this.boxWeek.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.boxWeek.Name = "boxWeek";
-            this.boxWeek.Size = new System.Drawing.Size(50, 28);
-            this.boxWeek.TabIndex = 32;
+            boxWeek.FormattingEnabled = true;
+            boxWeek.Location = new System.Drawing.Point(87, 77);
+            boxWeek.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            boxWeek.Name = "boxWeek";
+            boxWeek.Size = new System.Drawing.Size(40, 23);
+            boxWeek.TabIndex = 32;
             // 
             // label16
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(40, 108);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(59, 20);
-            this.label16.TabIndex = 33;
-            this.label16.Text = "Woche";
+            label16.AutoSize = true;
+            label16.Location = new System.Drawing.Point(31, 81);
+            label16.Name = "label16";
+            label16.Size = new System.Drawing.Size(44, 15);
+            label16.TabIndex = 33;
+            label16.Text = "Woche";
             // 
             // Additional
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(692, 566);
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.boxWeek);
-            this.Controls.Add(this.buttonDeleteTeamCancel);
-            this.Controls.Add(this.buttonDeleteTeamOkay);
-            this.Controls.Add(this.label15);
-            this.Controls.Add(this.boxGroup);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.boxDay13);
-            this.Controls.Add(this.boxDay12);
-            this.Controls.Add(this.boxDay11);
-            this.Controls.Add(this.boxDay10);
-            this.Controls.Add(this.boxDay09);
-            this.Controls.Add(this.boxDay08);
-            this.Controls.Add(this.boxDay07);
-            this.Controls.Add(this.boxDay06);
-            this.Controls.Add(this.boxDay05);
-            this.Controls.Add(this.boxDay04);
-            this.Controls.Add(this.boxDay03);
-            this.Controls.Add(this.boxDay02);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.boxDay01);
-            this.Controls.Add(this.boxTeam);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "Additional";
-            this.Text = "Zusatz";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Additional_FormClosing);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(538, 424);
+            Controls.Add(label16);
+            Controls.Add(boxWeek);
+            Controls.Add(buttonDeleteTeamCancel);
+            Controls.Add(buttonDeleteTeamOkay);
+            Controls.Add(label15);
+            Controls.Add(boxGroup);
+            Controls.Add(label14);
+            Controls.Add(label13);
+            Controls.Add(label12);
+            Controls.Add(label11);
+            Controls.Add(label10);
+            Controls.Add(label9);
+            Controls.Add(label8);
+            Controls.Add(label7);
+            Controls.Add(label6);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(boxDay13);
+            Controls.Add(boxDay12);
+            Controls.Add(boxDay11);
+            Controls.Add(boxDay10);
+            Controls.Add(boxDay09);
+            Controls.Add(boxDay08);
+            Controls.Add(boxDay07);
+            Controls.Add(boxDay06);
+            Controls.Add(boxDay05);
+            Controls.Add(boxDay04);
+            Controls.Add(boxDay03);
+            Controls.Add(boxDay02);
+            Controls.Add(label1);
+            Controls.Add(boxDay01);
+            Controls.Add(boxTeam);
+            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Name = "Additional";
+            Text = "Zusatz";
+            FormClosing += Additional_FormClosing;
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
