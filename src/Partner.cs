@@ -11,7 +11,7 @@ namespace KeyGenerator
         Group[] groups;
         int index;
 
-        public Partner(KeyGenerator caller, Club[] clubs, Group[] groups, int index)
+        public Partner(KeyGenerator caller, Club[] clubs, Group[] groups, int index, string[] weeks)
         {
             InitializeComponent();
             this.caller = caller;
@@ -20,28 +20,44 @@ namespace KeyGenerator
             this.index = index;
 
             dataGridView.Columns.Clear();
-            dataGridView.Columns.Add("Verein A", "Verein A");
-            dataGridView.Columns[0].ReadOnly = true;
-            DataGridViewColumn dgvc = new DataGridViewComboBoxColumn();
-            dgvc.HeaderText = "Woche";
+            DataGridViewComboBoxColumn dgvc = new DataGridViewComboBoxColumn();
+            dgvc.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            foreach (Club club in clubs)
+                dgvc.Items.Add(club.name);
+
+            dgvc.HeaderText = "Verein A";
             dataGridView.Columns.Add(dgvc);
+
+            dgvc = new DataGridViewComboBoxColumn();
+            dgvc.HeaderText = "Woche";
+            dgvc.Items.AddRange(weeks);
+            dataGridView.Columns.Add(dgvc);
+
             dataGridView.Columns.Add(" ", " ");
             dataGridView.Columns[2].ReadOnly = true;
+
             dgvc = new DataGridViewComboBoxColumn();
+            dgvc.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            foreach (Club club in clubs)
+                dgvc.Items.Add(club.name);
+
             dgvc.HeaderText = "Verein B";
             dataGridView.Columns.Add(dgvc);
+
             dgvc = new DataGridViewComboBoxColumn();
             dgvc.HeaderText = "Woche";
+            dgvc.Items.AddRange(weeks);
             dataGridView.Columns.Add(dgvc);
 
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dataGridView.Rows.Clear();
 
             foreach (Club c in clubs)
-                foreach (Partnership p in c.partnerships) 
-                    if (p.indexA == index || p.indexB == index) {  
+                foreach (Partnership p in c.partnerships)
+                    if (p.indexA == index || p.indexB == index)
+                    {
                         DataGridViewRow row = new DataGridViewRow();
-                        fillRow(row,p);
+                        fillRow(row, p);
                         dataGridView.Rows.Add(row);
                     }
         }
@@ -74,7 +90,7 @@ namespace KeyGenerator
                 case 'X': dgvcbc.Value = dgvcbc.Items[2]; break;
                 case 'Y': dgvcbc.Value = dgvcbc.Items[3]; break;
             }
-            
+
             row.Cells[1] = dgvcbc;
 
             // Gleichheitszeichen
@@ -96,7 +112,7 @@ namespace KeyGenerator
             dgvcbc.Items.Add("B");
             dgvcbc.Items.Add("X");
             dgvcbc.Items.Add("Y");
-            
+
             switch (otherWeek)
             {
                 case 'A': dgvcbc.Value = dgvcbc.Items[0]; break;
@@ -104,7 +120,7 @@ namespace KeyGenerator
                 case 'X': dgvcbc.Value = dgvcbc.Items[2]; break;
                 case 'Y': dgvcbc.Value = dgvcbc.Items[3]; break;
             }
-            
+
             row.Cells[4] = dgvcbc;
 
             // AutoResizeColumns
@@ -158,20 +174,42 @@ namespace KeyGenerator
         private void dataGridView_SelectionChanged(object sender, EventArgs e)
         {
             for (int i = 1; i < dataGridView.Rows.Count; i++)
-                if (dataGridView.Rows[i].Cells[0].Value.Equals(dataGridView.Rows[i].Cells[3].Value))
-                {
-                    dataGridView.Rows[i].Cells[3].Value = null;
-                    MessageBox.Show("Partnerschaften mit sich selbst sind unzulässig!");
-                    return;
-                }
+                if (dataGridView.Rows[i].Cells[0].Value != null && dataGridView.Rows[i].Cells[3].Value != null)
+                    if (dataGridView.Rows[i].Cells[0].Value.Equals(dataGridView.Rows[i].Cells[3].Value))
+                    {
+                        dataGridView.Rows[i].Cells[3].Value = null;
+                        MessageBox.Show("Partnerschaften mit sich selbst sind unzulässig!");
+                        return;
+                    }
         }
 
         private int getIndex(string name)
         {
-            for (int i=0; i<clubs.Length; i++)
+            for (int i = 0; i < clubs.Length; i++)
                 if (clubs[i].name.Equals(name))
                     return i;
             return -1;
+        }
+
+        private void dataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+
+        }
+
+        private void dataGridView_UserAddedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            DataGridViewComboBoxCell dgvcbc = (DataGridViewComboBoxCell)(e.Row.Cells[0]);
+            foreach (Club c in clubs)
+                dgvcbc.Items.Add(c.name);
+
+            dgvcbc = (DataGridViewComboBoxCell)(e.Row.Cells[3]);
+            foreach (Club c in clubs)
+                dgvcbc.Items.Add(c.name);
+        }
+
+        private void dataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            
         }
     }
 }

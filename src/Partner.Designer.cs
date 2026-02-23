@@ -28,36 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            this.SuspendLayout();
+            dataGridView = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
+            SuspendLayout();
             // 
             // dataGridView
             // 
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.RowHeadersWidth = 62;
-            this.dataGridView.Size = new System.Drawing.Size(1228, 402);
-            this.dataGridView.TabIndex = 0;
-            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
-            this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
+            dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            dataGridView.Location = new System.Drawing.Point(0, 0);
+            dataGridView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            dataGridView.Name = "dataGridView";
+            dataGridView.RowHeadersWidth = 62;
+            dataGridView.Size = new System.Drawing.Size(955, 302);
+            dataGridView.TabIndex = 0;
+            dataGridView.CellContentClick += dataGridView_CellContentClick;
+            dataGridView.CellValueChanged += dataGridView_CellValueChanged;
+            dataGridView.RowsAdded += dataGridView_RowsAdded;
+            dataGridView.SelectionChanged += dataGridView_SelectionChanged;
+            dataGridView.UserAddedRow += dataGridView_UserAddedRow;
             // 
             // Partner
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1228, 402);
-            this.Controls.Add(this.dataGridView);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "Partner";
-            this.Text = "Partner";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Partner_FormClosing);
-            this.Resize += new System.EventHandler(this.Partner_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(955, 302);
+            Controls.Add(dataGridView);
+            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Name = "Partner";
+            Text = "Partner";
+            FormClosing += Partner_FormClosing;
+            Resize += Partner_Resize;
+            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
+            ResumeLayout(false);
 
         }
 

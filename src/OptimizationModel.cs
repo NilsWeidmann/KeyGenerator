@@ -24,6 +24,7 @@ namespace KeyGenerator
         private KeyMapper km;
         private int TEAM_MAX;
         private char[] week;
+        private Dictionary<char, int> weekToIndex;
         private int[] field;
 
         // Binary Variables
@@ -46,6 +47,9 @@ namespace KeyGenerator
         public OptimizationModel(Group[] group, Club[] club, char[] week, int[] field, int runtime, KeyMapper km, int TEAM_MAX, TextFile log, BackgroundWorker bw, List<string> messages)
         {
             this.week = week;
+            this.weekToIndex = new Dictionary<char, int>();
+            for (int i=0; i<week.Length; i++) 
+                weekToIndex[week[i]] = i;
             this.field = field;
             this.km = km;
             this.TEAM_MAX = TEAM_MAX;
@@ -74,6 +78,8 @@ namespace KeyGenerator
             keySimilarity(group, club);
             confllictDetection(club);
             additionalRestrictions(group);
+            partnerships(club);
+
             setObjective(group);
         }
 
@@ -253,6 +259,15 @@ namespace KeyGenerator
                         if (!group[i].team[j].keyOK(l + 1))
                             model.Add(t[i, j, l] <= 0);
         }
+
+        private void partnerships(Club[] club)
+        {
+            for (int i = 0; i < club.Length; i++)
+                foreach (Partnership p in club[i].partnerships)
+                    for (int j=0; j<TEAM_MAX; j++)
+                        model.Add(c[p.indexA, weekToIndex[p.weekA],j] == c[p.indexB, weekToIndex[p.weekB], j]);
+        }
+
         private void setObjective(Group[] group)
         {
             List<LinearExpr> summands = new List<LinearExpr>();

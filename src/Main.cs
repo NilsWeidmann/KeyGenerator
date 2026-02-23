@@ -569,7 +569,7 @@ namespace KeyGenerator
 
         private void buttonPartner_Click(object sender, EventArgs e)
         {
-            Partner p = new Partner(this, club, group, boxClubs.SelectedIndex);
+            Partner p = new Partner(this, club, group, boxClubs.SelectedIndex, new string[]{ "A", "B", "X", "Y"});
             this.Enabled = false;
             p.Visible = true;
         }
