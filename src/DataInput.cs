@@ -62,7 +62,9 @@ namespace KeyGenerator
 
         private void splitContainer1_Resize(object sender, EventArgs e)
         {
-            splitContainer1.SplitterDistance = splitContainer1.Width - 400;
+            SuspendLayout();
+            splitContainer1.SplitterDistance = splitContainer1.Width - 480;
+            ResumeLayout();
         }
 
         private void buttonSave_Click(object sender, EventArgs e)

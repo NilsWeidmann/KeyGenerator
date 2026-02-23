@@ -221,6 +221,8 @@
             Name = "ClickTT";
             Text = "click-tt Import";
             FormClosing += ClickTT_FormClosing;
+            SizeChanged += ClickTT_SizeChanged;
+            MouseUp += ClickTT_MouseUp;
             Resize += Form1_Resize;
             ((System.ComponentModel.ISupportInitialize)dataGridViewGroups).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewClubs).EndInit();
