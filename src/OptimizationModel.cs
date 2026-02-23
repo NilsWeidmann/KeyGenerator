@@ -73,7 +73,7 @@ namespace KeyGenerator
             fixAssignments(club);
             keySimilarity(group, club);
             confllictDetection(club);
-
+            additionalRestrictions(group);
             setObjective(group);
         }
 
@@ -243,6 +243,15 @@ namespace KeyGenerator
                             model.Add(t[team.group.index, team.index, p-1] - x[team.group.index, team.index] - c[i, w, k] <= 0);
                 }
             }
+        }
+
+        private void additionalRestrictions(Group[] group)
+        {
+            for (int i = 0; i < group.Length; i++)
+                for (int j = 0; j < group[i].nrOfTeams; j++)
+                    for (int l = 0; l < group[i].field; l++)
+                        if (!group[i].team[j].keyOK(l + 1))
+                            model.Add(t[i, j, l] <= 0);
         }
         private void setObjective(Group[] group)
         {
