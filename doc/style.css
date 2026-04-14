@@ -1,0 +1,186 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #24292e;
+  background: #f6f8fa;
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+header {
+  background: #0969da;
+  padding: 12px 28px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 4px rgba(0,0,0,.25);
+}
+header a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1em;
+  letter-spacing: .01em;
+}
+header a:hover { text-decoration: underline; }
+
+/* ── Page nav ───────────────────────────────────────────────── */
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-bottom: 1px solid #d0d7de;
+  padding: 9px 28px;
+  font-size: .88em;
+  gap: 16px;
+}
+.page-nav a {
+  color: #0969da;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.page-nav a:hover { text-decoration: underline; }
+.page-nav .nav-center { color: #57606a; }
+.page-nav span { min-width: 1px; }
+main + .page-nav { border-bottom: none; border-top: 1px solid #d0d7de; }
+
+/* ── Main content ───────────────────────────────────────────── */
+main {
+  max-width: 900px;
+  margin: 28px auto;
+  background: #fff;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 36px 44px;
+}
+
+/* ── Typography ─────────────────────────────────────────────── */
+h1 {
+  font-size: 1.75em;
+  border-bottom: 2px solid #0969da;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+h2 {
+  font-size: 1.3em;
+  border-bottom: 1px solid #d0d7de;
+  padding-bottom: 6px;
+  margin-top: 36px;
+  margin-bottom: 14px;
+}
+h3 {
+  font-size: 1.1em;
+  margin-top: 24px;
+  margin-bottom: 10px;
+}
+h4 {
+  font-size: 1em;
+  font-weight: 700;
+  margin-top: 18px;
+  margin-bottom: 6px;
+}
+p { margin: 10px 0; }
+a { color: #0969da; }
+a:hover { text-decoration: underline; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+
+code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: .875em;
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+/* ── Lists ──────────────────────────────────────────────────── */
+ul, ol {
+  padding-left: 26px;
+  margin: 8px 0;
+}
+li { margin: 4px 0; }
+li > ul, li > ol { margin: 2px 0; }
+
+/* ── Tables ─────────────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: .92em;
+}
+th {
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  padding: 8px 13px;
+  text-align: left;
+  font-weight: 600;
+}
+td {
+  border: 1px solid #d0d7de;
+  padding: 7px 13px;
+  vertical-align: top;
+}
+
+/* ── Week / status colours ──────────────────────────────────── */
+.week-a  { background: #ffff96; }
+.week-b  { background: #ffc864; }
+.week-x  { background: #add8e6; }
+.week-y  { background: #90ee90; }
+.week-none { background: #fff; }
+.color-valid    { background: #90ee90; }
+.color-missing  { background: #ffff96; }
+.color-extra    { background: #add8e6; }
+.color-conflict { background: #ffa500; }
+.color-none     { background: #fff; }
+
+/* ── Example boxes ──────────────────────────────────────────── */
+.example {
+  border: 1px solid #54aeff;
+  border-left: 4px solid #0969da;
+  background: #ddf4ff;
+  border-radius: 4px;
+  padding: 14px 18px;
+  margin: 18px 0;
+}
+.example-title {
+  font-weight: 700;
+  color: #0550ae;
+  margin-bottom: 10px;
+}
+.example table { font-size: .87em; }
+
+/* ── Note / warning / important boxes ──────────────────────── */
+.note {
+  background: #fff8c5;
+  border-left: 4px solid #d4a72c;
+  padding: 8px 14px;
+  margin: 12px 0;
+  border-radius: 0 4px 4px 0;
+}
+.important {
+  background: #fff0f0;
+  border-left: 4px solid #cf222e;
+  padding: 8px 14px;
+  margin: 12px 0;
+  border-radius: 0 4px 4px 0;
+}
+.note strong, .important strong { font-weight: 700; }
+
+hr { border: none; border-top: 1px solid #d0d7de; margin: 24px 0; }
+
+/* ── Rendered markdown (via viewer.js) ──────────────────────── */
+#content blockquote {
+  border: 1px solid #54aeff;
+  border-left: 4px solid #0969da;
+  background: #ddf4ff;
+  border-radius: 0 4px 4px 0;
+  padding: 12px 18px;
+  margin: 16px 0;
+}
+#content blockquote p { margin: 6px 0; }
+#content blockquote > p:first-child > strong { color: #0550ae; }
+#content blockquote table { font-size: .87em; }
