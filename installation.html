@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Installation – KeyGenerator</title>
+  <link rel="stylesheet" href="doc/style.css">
+  <style>
+    .download-btn {
+      display: inline-block;
+      margin: 16px 0 8px;
+      padding: 11px 26px;
+      background: #0969da;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1em;
+    }
+    .download-btn:hover { background: #0550ae; text-decoration: none; }
+
+    .step-list { padding-left: 0; list-style: none; margin: 12px 0; }
+    .step-list li {
+      display: flex;
+      gap: 14px;
+      align-items: baseline;
+      margin: 12px 0;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      background: #0969da;
+      color: #fff;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: .85em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <header><a href="index.html">KeyGenerator – Schlüsselzahlen-Generierungstool</a></header>
+  <main>
+    <h1>Installation</h1>
+
+    <h2>Voraussetzungen</h2>
+    <p>Für die Installation und den Betrieb des KeyGenerators wird benötigt:</p>
+    <ul>
+      <li>Windows 10 oder neuer (64-Bit)</li>
+      <li><a href="https://dotnet.microsoft.com/en-us/download/dotnet/8.0" target="_blank">.NET&nbsp;8.0 Desktop Runtime</a> oder neuer</li>
+    </ul>
+    <p>
+      Falls .NET&nbsp;8.0 noch nicht installiert ist, wird es während der Installation des
+      KeyGenerators automatisch nachgeladen.
+    </p>
+
+    <h2>Installationsschritte</h2>
+    <p>Den Installer kann hier heruntergeladen werden:</p>
+    <a class="download-btn"
+       href="https://github.com/NilsWeidmann/KeyGenerator/releases/latest/download/KeyGeneratorInstaller.msi">
+      KeyGenerator Installer herunterladen
+    </a>
+
+    <ol class="step-list" style="margin-top: 24px;">
+      <li>
+        <span class="step-num">1</span>
+        <span>Die heruntergeladene Datei <strong>KeyGeneratorInstaller.msi</strong> ausführen.</span>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <span>
+          Den Anweisungen des Installationsassistenten folgen und einen Installationsordner
+          auswählen.
+        </span>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <span>
+          Nach abgeschlossener Installation kann der KeyGenerator über das Startmenü oder
+          die erzeugte Desktop-Verknüpfung gestartet werden.
+        </span>
+      </li>
+    </ol>
+
+    <h2>Hinweis: Windows SmartScreen</h2>
+    <div class="important">
+      <strong>Wichtig – Testversion:</strong> Der KeyGenerator ist aktuell eine
+      Testversion und daher nicht mit einem kostenpflichtigen Zertifikat signiert.
+      Windows SmartScreen stuft die Quelle der Installationsdatei deshalb als unbekannt ein 
+      und zeigt eine Sicherheitswarnung an. Dies ist zu erwarten und kein Anzeichen für
+      Schadsoftware.
+    </div>
+    <p>
+      Beim Ausführen des Installers erscheint möglicherweise folgendes Fenster:
+    </p>
+    <blockquote>
+      <strong>„Windows hat den PC geschützt"</strong><br>
+      Der Start von <em>KeyGeneratorInstaller.msi</em> wurde verhindert, da die App
+      von einem unbekannten Herausgeber stammt.
+    </blockquote>
+    <p>Vorgehen zum Fortfahren:</p>
+    <ol>
+      <li>Im Warnfenster auf <strong>„Weitere Informationen"</strong> klicken.</li>
+      <li>Anschließend auf <strong>„Trotzdem ausführen"</strong> klicken.</li>
+      <li>Die Installation läuft danach normal weiter.</li>
+    </ol>
+    <div class="note">
+      <strong>Hinweis:</strong> Dieselbe Warnung kann auch beim ersten Start der Anwendung
+      erscheinen. Auch dort kann sie mit „Weitere Informationen" → „Trotzdem ausführen"
+      übergangen werden.
+    </div>
+
+    <hr>
+
+    <p><a href="index.html">← Zurück zur Startseite</a></p>
+  </main>
+</body>
+</html>
