@@ -172,6 +172,12 @@ td {
 
 hr { border: none; border-top: 1px solid #d0d7de; margin: 24px 0; }
 
+/* ── Anchor offset (compensate for sticky header) ──────────── */
+#content h1, #content h2, #content h3,
+#content h4, #content h5, #content h6 {
+  scroll-margin-top: 65px;
+}
+
 /* ── Rendered markdown (via viewer.js) ──────────────────────── */
 #content blockquote {
   border: 1px solid #54aeff;

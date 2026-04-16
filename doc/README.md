@@ -1,4 +1,4 @@
-# Schlüsselzahlen-Generierungstool – Dokumentation
+# KeyGenerator – Dokumentation
 
 *Windows-Desktopanwendung (.NET 8.0)*
 

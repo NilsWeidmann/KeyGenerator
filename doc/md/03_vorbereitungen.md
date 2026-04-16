@@ -5,7 +5,7 @@
 # 3. Vorbereitungen
 
 Starten Sie die Anwendung `KeyGenerator.exe`.
-Es erscheint der Startbildschirm (siehe [05_startbildschirm.md](05_startbildschirm.md)).
+Es erscheint der Startbildschirm (siehe [5. Startbildschirm](05_startbildschirm.md)).
 Bevor Sie mit dem Import oder der Eingabe von Daten beginnen können, müssen zunächst die grundlegenden Einstellungen vorgenommen werden.
 
 ## 3.1 Verzeichnis einstellen

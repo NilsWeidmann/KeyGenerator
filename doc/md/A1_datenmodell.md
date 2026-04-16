@@ -32,7 +32,7 @@ Eine Mannschaft gehört zu genau einem Verein und genau einer Gruppe:
 ## A.4 Schlüsselzahlen und Spielplan
 
 Die Schlüsselzahl eines Teams bestimmt dessen Spielplan, d.h. an welchen Spieltagen Heim- und Auswärtsspiele stattfinden.
-Die Zuordnung zwischen Schlüsselzahlen und Spielplänen sowie die gültigen Rastergrößen und Referenzraster sind in einer voreingestellten Konfiguration hinterlegt, können aber angepasst werden (siehe [07_sonstige_funktionen.md](07_sonstige_funktionen.md)).
+Die Zuordnung zwischen Schlüsselzahlen und Spielplänen sowie die gültigen Rastergrößen und Referenzraster sind in einer voreingestellten Konfiguration hinterlegt, können aber angepasst werden (siehe [7.5 Konfiguration exportieren und importieren](07_sonstige_funktionen.md#75-konfiguration-exportieren-und-importieren)).
 
 Zentrale Konzepte:
 - **Gegenläufige Schlüsselzahlen**: Zwei Schlüsselzahlen Z1 und Z2 sind gegenläufig, wenn für jede Spielwoche gilt: Z1 hat genau dann ein Heimspiel, wenn Z2 ein Auswärtsspiel hat, und umgekehrt. A und B bzw. X und Y eines Vereins erhalten immer gegenläufige Schlüsselzahlen.

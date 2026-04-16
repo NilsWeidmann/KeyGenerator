@@ -135,7 +135,7 @@ Die rechte Tabelle zeigt Mannschaftsdaten in zwei alternativen Anzeigemodi:
 
 Die Spalten der Tabelle entsprechen denen der Hauptansicht (Woche, Gruppe, Team, Schlüssel, Wunsch). Die Spalten Gruppe, Schlüssel und Wunsch sind stets nur zur Anzeige.
 
-Ein **Rechtsklick** auf eine Mannschaft in der Tabelle öffnet den Zusatz-Dialog (siehe [05_startbildschirm.md – Abschnitt 5.3](05_startbildschirm.md)), in dem feste Vorgaben für Heim- und Auswärtsspiele in bestimmten Spielwochen eingetragen werden können.
+Ein **Rechtsklick** auf eine Mannschaft in der Tabelle öffnet den Zusatz-Dialog (siehe [5.3 Zusätzliche Einstellungen für einzelne Teams](05_startbildschirm.md#53-zusaetzliche-einstellungen-fuer-einzelne-teams)), in dem feste Vorgaben für Heim- und Auswärtsspiele in bestimmten Spielwochen eingetragen werden können.
 
 **Mannschaften anlegen:**
 Wählen Sie zunächst in der Gruppentabelle (links) die gewünschte Gruppe aus.

@@ -14,9 +14,9 @@ Er ist wie folgt aufgebaut:
 Zwischen zwei Ansichten kann über die Radiobuttons **Vereinssicht** und **Gruppensicht** unten links gewechselt werden.
 
 Die drei Hauptbuttons sind:
-- **Generieren**: Startet die automatische Schlüsselzahlgenerierung (siehe [06_generierung.md](06_generierung.md)).
+- **Generieren**: Startet die automatische Schlüsselzahlgenerierung (siehe [6. Schlüsselzahlen generieren](06_generierung.md)).
 - **Speichern** (oder **Strg+S**): Speichert den aktuellen Stand als JSON-Datei. Falls noch kein Dateiname und Speicherort ausgewählt wurde, öffnet sich ein entsprechendes Dialogfenster.
-- **Sonstiges**: Öffnet das Fenster für zusätzliche Funktionen (siehe [07_sonstige_funktionen.md](07_sonstige_funktionen.md)).
+- **Sonstiges**: Öffnet das Fenster für zusätzliche Funktionen (siehe [7. Sonstige Funktionen](07_sonstige_funktionen.md)).
 
 ## 5.1 Vereinssicht
 
@@ -49,7 +49,7 @@ Die Zeilen werden je nach Spielwoche farblich hervorgehoben:
 ### Schlüsselzahlen auf Vereinsebene
 
 Oberhalb der Tabelle befinden sich vier Dropdown-Menüs (**A**, **B**, **X**, **Y**).
-Hier können Sie die Schlüsselzahlen auf Vereinsebene einstellen (deutlich komfortabler geht dies über das Fenster zur manuellen Dateneingabe, Abschnitt [04_datenimport.md – Vereinstabelle](04_datenimport.md)).
+Hier können Sie die Schlüsselzahlen auf Vereinsebene einstellen (deutlich komfortabler geht dies über das Fenster zur manuellen Dateneingabe, Abschnitt [Mittlere Seite: Vereinstabelle](04_datenimport.md#mittlere-seite-vereinstabelle)).
 Die Werte A und B bzw. X und Y sind jeweils aneinander gekoppelt: Wenn Sie eine Schlüsselzahl für A eingeben, wird die entgegengesetzte Schlüsselzahl für B automatisch berechnet (und umgekehrt).
 
 ### Spielwochenzuordnung
@@ -85,7 +85,7 @@ Groß- und Kleinschreibung wird toleriert.
 Die Gruppensicht gibt einen Überblick über alle Teams einer Gruppe.
 Wählen Sie dazu im Dropdown-Menü "Gruppen" die gewünschte Gruppe aus.
 
-Neben dem Dropdown-Menü erscheint das Feld **Raster**, in dem die Rastergröße der Gruppe angezeigt und geändert werden kann (eine komfortablere Alternative bietet dafür die manuelle Dateneingabe, Abschnitt [04_datenimport.md](04_datenimport.md)).
+Neben dem Dropdown-Menü erscheint das Feld **Raster**, in dem die Rastergröße der Gruppe angezeigt und geändert werden kann (eine komfortablere Alternative bietet dafür die manuelle Dateneingabe, Abschnitt [Linke Seite: Gruppentabelle](04_datenimport.md#linke-seite-gruppentabelle)).
 Die Rastergröße muss mindestens so groß sein wie die Anzahl der Mannschaften in der Gruppe (aufgerundet auf eine gerade Zahl) und darf maximal 14 betragen.
 
 ### Tabellenspalten in der Gruppensicht
@@ -112,7 +112,7 @@ In der Gruppensicht werden die Zeilen nach dem Zuweisungsstatus eingefärbt:
 | Weiß | Team hat keine Spielwoche und keine besonderen Vorgaben |
 
 Die Gruppensicht eignet sich besonders zur **Kontrolle nach der Generierung**, da hier auf einen Blick alle Schlüsselzahlen einer Gruppe sichtbar sind.
-Orange eingefärbte Zeilen weisen auf Konflikte hin, die auch im Nachgang über **Sonstiges** → **Konflikte neu auflösen** (siehe [07_sonstige_funktionen.md](07_sonstige_funktionen.md)) behoben werden können.
+Orange eingefärbte Zeilen weisen auf Konflikte hin, die auch im Nachgang über **Sonstiges** → **Konflikte neu auflösen** (siehe [7.4 Konflikte neu auflösen](07_sonstige_funktionen.md#74-konflikte-neu-aufloesen)) behoben werden können.
 
 > **Beispiel: Gruppensicht – Bezirksoberliga Erwachsene vor der Generierung**
 >
@@ -147,7 +147,7 @@ Hier können Sie folgende Einstellungen vornehmen:
 ### Spielwoche festlegen
 
 Im Dropdown-Menü "Woche" können Sie die Spielwoche des Teams auswählen (`-`, `A`, `B`, `X`, `Y`).
-Die Einstellung kann genauso über die Vereinssicht auf dem Startbildschirm (Abschnitt 5.1) oder über die manuelle Dateneingabe (Abschnitt [04_datenimport.md](04_datenimport.md)) vorgenommen werden.
+Die Einstellung kann genauso über die Vereinssicht auf dem Startbildschirm (Abschnitt 5.1) oder über die manuelle Dateneingabe (Abschnitt [Rechte Seite: Mannschaftstabelle](04_datenimport.md#rechte-seite-mannschaftstabelle)) vorgenommen werden.
 
 ### Heim- und Auswärtsspieltage festlegen
 
@@ -186,7 +186,7 @@ Manuelle Änderungen können sowohl in der Hauptansicht als auch im Dateninput-F
 
 Die Buttons **Rückgängig** und **Wiederherstellen** sind jeweils nur aktiv, wenn entsprechende Operationen in der Historie vorhanden sind.
 Die Änderungshistorie wird beim Laden neuer Daten sowie beim Start einer neuen Generierung automatisch zurückgesetzt.
-Um auf den Stand vor der Generierung zurückzukehren, wird automatisch ein Backup angelegt (siehe [07_sonstige_funktionen.md – Abschnitt 7.1](07_sonstige_funktionen.md)).
+Um auf den Stand vor der Generierung zurückzukehren, wird automatisch ein Backup angelegt (siehe [7.1 Backup laden](07_sonstige_funktionen.md#71-backup-laden)).
 
 ---
 

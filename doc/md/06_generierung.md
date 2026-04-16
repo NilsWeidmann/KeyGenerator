@@ -8,7 +8,7 @@ Nachdem alle Daten eingegeben und alle Wünsche der Vereine berücksichtigt word
 
 1. Klicken Sie im Startbildschirm auf den Button **Generieren**.
 2. Es erscheint das Fenster "Bitte Warten" mit einem Fortschrittsbalken und der verbleibenden Zeit.
-3. Vor der Generierung wird automatisch eine Sicherheitskopie des aktuellen Standes angelegt, die Sie bei Bedarf später wiederherstellen können (siehe [07_sonstige_funktionen.md – Abschnitt 7.1](07_sonstige_funktionen.md)).
+3. Vor der Generierung wird automatisch eine Sicherheitskopie des aktuellen Standes angelegt, die Sie bei Bedarf später wiederherstellen können (siehe [7.1 Backup laden](07_sonstige_funktionen.md#71-backup-laden)).
 4. Sie können die Generierung jederzeit über den Button **Abbrechen** vorzeitig beenden.
 
 **Hinweis:** Vor der Generierung wird eine Plausibilitätsprüfung durchgeführt.
@@ -34,7 +34,7 @@ Zur Auswahl stehen die ursprünglich gewünschte Schlüsselzahl sowie bis zu zwe
 Klicken Sie auf **OK**, nachdem Sie jeden Konflikt gelöst haben.
 Falls ein Konflikt noch nicht aufgelöst ist oder für eine Mannschaft keine Schlüsselzahl vergeben wurde, erscheint eine entsprechende Fehlermeldung.
 Sie können die Konfliktauflösung beenden, indem Sie auf den Button **Abbrechen** klicken oder das Fenster schließen und die Sicherheitsabfrage bestätigen.
-Die verbliebenen Konflikte können zu einem späteren Zeitpunkt über **Sonstiges** → **Konflikte neu auflösen** (siehe [07_sonstige_funktionen.md](07_sonstige_funktionen.md)) aufgelöst werden.
+Die verbliebenen Konflikte können zu einem späteren Zeitpunkt über **Sonstiges** → **Konflikte neu auflösen** (siehe [7.4 Konflikte neu auflösen](07_sonstige_funktionen.md#74-konflikte-neu-aufloesen)) aufgelöst werden.
 
 ## 6.2 Abschluss der Generierung
 
@@ -49,7 +49,7 @@ Falls die Generierung nicht erfolgreich war, kann dies folgende Ursachen haben:
 
 ## 6.3 Kontrolle und Übergabe
 
-Nach der Generierung empfiehlt es sich, die Ergebnisse in der **Gruppensicht** (siehe [05_startbildschirm.md – Abschnitt 5.2](05_startbildschirm.md)) zu kontrollieren.
+Nach der Generierung empfiehlt es sich, die Ergebnisse in der **Gruppensicht** (siehe [5.2 Gruppensicht](05_startbildschirm.md#52-gruppensicht)) zu kontrollieren.
 Da nun alle Teams eine Schlüsselzahl haben sollten, sind alle Zeilen grün oder orange (im Konfliktfall) eingefärbt.
 Mithilfe dieser Übersicht können Sie die Schlüsselzahlen in Click-TT oder Ihr Verwaltungssystem übertragen.
 
@@ -106,7 +106,7 @@ Mithilfe dieser Übersicht können Sie die Schlüsselzahlen in Click-TT oder Ihr
 > - Alle Teams in Woche Y erhalten Schlüsselzahl **10** – die gegenläufige Zahl zu 5 im 10er-Raster.
 > - **Ausnahme**: Borussia Düsseldorf II in der Jugend 13 hat Schlüsselzahl **4** statt 5, obwohl es in Woche X spielt. Das liegt daran, dass zwei Teams desselben Vereins in derselben Gruppe spielen und daher nicht dieselbe Schlüsselzahl erhalten können. Die Zahl 4 ist im 10er-Raster eine *ähnliche* Schlüsselzahl zu 5.
 
-Zusätzlich können Sie die Ergebnisse über das Menü **Sonstiges** → **Ergebnisse exportieren** als CSV-Datei abspeichern (siehe [07_sonstige_funktionen.md](07_sonstige_funktionen.md)).
+Zusätzlich können Sie die Ergebnisse über das Menü **Sonstiges** → **Ergebnisse exportieren** als CSV-Datei abspeichern (siehe [7.2 Ergebnisse exportieren](07_sonstige_funktionen.md#72-ergebnisse-exportieren)).
 
 ---
 

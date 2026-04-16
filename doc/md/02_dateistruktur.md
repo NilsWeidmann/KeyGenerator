@@ -17,7 +17,7 @@ Beim Arbeiten mit dem Tool werden folgende Dateien erzeugt bzw. verwendet:
 | `Results.csv` | Exportierte Ergebnisse der Schlüsselzahlgenerierung |
 
 Die Daten werden im JSON-Format gespeichert und geladen.
-Ein älteres CSV-Format wird weiterhin unter "Sonstiges" unterstützt (siehe [07_sonstige_funktionen.md](07_sonstige_funktionen.md)).
+Ein älteres CSV-Format wird weiterhin unter "Sonstiges" unterstützt (siehe [7. Sonstige Funktionen](07_sonstige_funktionen.md)).
 
 ---
 

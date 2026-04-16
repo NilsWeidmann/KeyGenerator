@@ -78,7 +78,7 @@ Sie kann gespeichert und auf einem anderen Rechner oder in einer anderen Saison 
 3. Wählen Sie im Dateidialog die gewünschte JSON-Konfigurationsdatei aus.
 
 Beim Import werden alle bestehenden Einstellungen (Spielpläne, Referenzraster, Rastergrößen, Altersklassen) vollständig durch die Werte aus der importierten Datei ersetzt.
-Falls die Datei ungültige Werte enthält, erscheint eine Fehlermeldung mit einer Auflistung der konkreten Verstöße (siehe auch [09_fehlerbehebung.md](09_fehlerbehebung.md)).
+Falls die Datei ungültige Werte enthält, erscheint eine Fehlermeldung mit einer Auflistung der konkreten Verstöße (siehe auch [9. Fehlerbehebung](09_fehlerbehebung.md)).
 
 ## 7.6 CSV exportieren und importieren (historisches Format)
 
@@ -95,7 +95,7 @@ Für den Austausch mit älteren Versionen des Programms steht ein CSV-basiertes 
 3. Wählen Sie im Verzeichnisdialog den Speicherort der jeweiligen CSV-Dateien aus.
 
 Beachten Sie, dass dieses Format nur für die Kompatibilität mit älteren Programmversionen vorgesehen ist.
-Für die normale Nutzung empfiehlt sich das JSON-basierte Speicherformat (siehe [04_datenimport.md – Abschnitt 4.3](04_datenimport.md)).
+Für die normale Nutzung empfiehlt sich das JSON-basierte Speicherformat (siehe [4.3 Laden aus Datei](04_datenimport.md#43-laden-aus-datei)).
 
 ---
 
