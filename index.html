@@ -1,12 +1,148 @@
-<h1>Download KeyGenerator</h1>
-<p>Get the latest version of our KeyGenerator tool below:</p>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KeyGenerator – Schlüsselzahlen-Generierungstool</title>
+  <link rel="stylesheet" href="doc/style.css">
+  <style>
+    .download-btn {
+      display: inline-block;
+      margin: 20px 0 8px;
+      padding: 11px 26px;
+      background: #0969da;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1em;
+    }
+    .download-btn:hover { background: #0550ae; text-decoration: none; }
 
-<a href="https://github.com/NilsWeidmann/KeyGenerator/releases/latest/download/KeyGeneratorInstaller.msi"
-   style="padding: 10px 20px; background: blue; color: white; text-decoration: none;">
-   Download KeyGenerator Installer
-</a>
+    .step-list { padding-left: 0; list-style: none; margin: 12px 0; }
+    .step-list li {
+      display: flex;
+      gap: 14px;
+      align-items: baseline;
+      margin: 10px 0;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      background: #0969da;
+      color: #fff;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: .85em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <header><a href="index.html">KeyGenerator – Schlüsselzahlen-Generierungstool</a></header>
+  <main>
+    <h1>Schlüsselzahlen-Generierungstool</h1>
+    <p><em>Optimierte Schlüsselzahlenzuweisung für die Spielplanung im Amateursport</em></p>
 
-<h2>Dokumentation</h2>
-<p>
-  <a href="doc/index.html">Benutzerdokumentation öffnen</a>
-</p>
+    <h2>Hintergrund und Motivation</h2>
+    <p>
+      Jedes Jahr müssen für tausende Amateur- und Profisportmannschaften Spielpläne erstellt
+      werden. Üblicherweise spielt in Vor- und Rückrunde jede Mannschaft zwei mal gegen jede 
+      andere Mannschaft, einmal zu Hause und einmal auswärts. Mannschaften werden nach
+      Leistungsniveau und regionalen Gesichtspunkten in Ligen und Gruppen eingeteilt.
+    </p>
+    <p>
+      Die Spielplanung wird besonders anspruchsvoll, wenn mehrere Mannschaften desselben
+      Vereins eine gemeinsame Infrastruktur nutzen – etwa eine Sporthalle, Spielmaterial
+      oder Personal. Da die Kapazitäten begrenzt sind, entstehen <strong>Abhängigkeiten</strong> 
+      zwischen den Mannschaften eines Vereins bezüglich ihrer Heimspieltermine. Mannschaften
+      eines Vereins sollen beispielsweise abwechselnd zu Hause spielen, damit
+      die gemeinsame Infrastruktur gleichmäßig ausgelastet wird – oder aber am selben
+      Wochentag, damit Zuschauer die Spiele beider Teams besuchen können.
+    </p>
+    <p>
+      Die Spielplanerstellung ist außerdem eine verteilte Aufgabe: Spielplaner sind jeweils
+      für alle Gruppen einer bestimmten Region zuständig und müssen dabei auch übergeordnete
+      Planungsvorgaben (z.B. von der Verbandsebene) berücksichtigen.
+    </p>
+
+    <h2>Das Konzept der Schlüsselzahlenzuweisung</h2>
+    <p>
+      Um die Spielplanung zu vereinfachen und zu vereinheitlichen, werden Begegnungen nicht
+      individuell, sondern auf Basis von <strong>Rastern</strong> eingeplant. Ein Raster legt
+      fest, in welcher Reihenfolge Heim- und Auswärtsspiele über eine Saison verteilt werden.
+      Die Nummern in einem Raster werden als <strong>Schlüsselzahlen</strong> bezeichnet.
+    </p>
+    <p>
+      Die Aufgabe des Spielplaners besteht darin, jeder Mannschaft einer Gruppe eine
+      Schlüsselzahl zuzuweisen. Zwei Mannschaften desselben Vereins müssen dabei Schlüssel
+      erhalten, die sicherstellen, dass die vereinsseitig definierten Abhängigkeiten eingehalten werden. 
+      Eine <strong>Konfliktsituation</strong> tritt auf, wenn die zugewiesene Schlüsselzahl von der
+      eigentlich erforderlichen abweicht. In solchen Fällen sollte eine <strong>ähnliche</strong> 
+      Schlüsselzahl vergeben werden, die nur an wenigen Spieltagen zu Abweichungen vom gewünschten 
+      Ergebnisführt. In der Praxis wird diese Zuweisung bislang manuell
+      vorgenommen – mit erheblichem Aufwand und häufig suboptimalen Ergebnissen.
+    </p>
+
+    <h2>Der KeyGenerator</h2>
+    <p>
+      Der <strong>KeyGenerator</strong> automatisiert die Schlüsselzuweisung. Das Werkzeug
+      formalisiert das Problem als kombinatorisches Optimierungsproblem, um die Anzahl von
+      Konfliktsituationen zu minimieren. Die endgültige Entscheidung darüber, wie verbleibende
+      Konflikte aufgelöst werden, verbleibt beim Spielplaner – der KeyGenerator liefert dafür
+      eine optimale Ausgangsbasis und reduziert den manuellen Aufwand erheblich.
+    </p>
+
+    <h3>Ablauf der Spielplanung</h3>
+    <ol class="step-list">
+      <li>
+        <span class="step-num">1</span>
+        <span><strong>Abhängigkeiten definieren:</strong> Vereinsverantwortliche erfassen reguläre Heimspieltage 
+        sowie Startzeiten für alle Mannschaften, und legen Abhängigkeiten zwischen Mannschaften fest.</span>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <span><strong>Schlüsselzahlen bestimmen:</strong> Der KeyGenerator weist den
+        Mannschaften Schlüsselzahlen zu und hält dabei Abhängigkeiten so weit wie möglich
+        ein.</span>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <span><strong>Konflikte auflösen:</strong> Der Spielplaner überprüft die vorgeschlagenen 
+        Zuweisungen und löst verbleibende Konfliktsituationen auf, um einen fairen Ausgleich zwischen den 
+        betroffenen Vereinen herzustellen.</span>
+      </li>
+      <li>
+        <span class="step-num">4</span>
+        <span><strong>Spielpläne generieren:</strong> Basierend auf den Schlüsselzahlen und
+        den Rastern werden die endgültigen Spielpläne automatisch erstellt.</span>
+      </li>
+    </ol>
+
+    <h3>Praktische Anwendung</h3>
+    <p>
+      Der KeyGenerator wird bereits erfolgreich zur Spielplanung des Bezirks Ostwestfalen-Nord im Westdeutschen
+      Tischtennis Verband (WTTV) eingesetzt, was die praktische Anwendbarkeit des Optimierungsansatzes aufzeigt.
+    </p>
+
+    <hr>
+
+    <h2>Download</h2>
+    <p>Die aktuelle Version des KeyGenerators steht hier zum Download bereit:</p>
+    <a class="download-btn"
+       href="https://github.com/NilsWeidmann/KeyGenerator/releases/latest/download/KeyGeneratorInstaller.msi">
+      KeyGenerator Installer herunterladen
+    </a>
+
+    <h2>Dokumentation</h2>
+    <p>
+      Die Benutzerdokumentation beschreibt Installation, Dateistruktur, Datenimport und alle
+      Funktionen des Tools im Detail:
+    </p>
+    <p><a href="doc/index.html">Benutzerdokumentation öffnen</a></p>
+  </main>
+</body>
+</html>
