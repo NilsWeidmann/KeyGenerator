@@ -17,11 +17,12 @@ Nach der Ermittlung einer optimalen Lösung wird der/dem Spielplaner(in) eine Li
 
 ## 1.1 Durchgängiges Beispiel
 
-Um die Konzepte dieser Dokumentation anschaulich zu machen, verwenden wir ein durchgängiges fiktives Beispiel mit den Bundesligisten der Saison 2025/26.
-In diesem Beispiel hat Borussia Düsseldorf 14 Mannschaften in 13 verschiedenen Gruppen und 5 Altersklassen (Erwachsene, Damen, Jugend 19, Jugend 15, Jugend 13), und deckt damit ein breites Spektrum an Anwendungsfällen ab.
+Um die Konzepte dieser Dokumentation anschaulich zu machen, verwenden wir ein durchgängiges fiktives Beispiel mit Vereinen der 1., 2. und 3. Bundesliga, sowie der Regionalliga (Damen + Erwachsene) aus der Saison 2025/26.
+In diesem Beispiel hat z.B. Borussia Düsseldorf 14 Mannschaften in 13 verschiedenen Gruppen und 5 Altersklassen (Erwachsene, Damen, Jugend 19, Jugend 15, Jugend 13), und deckt damit ein breites Spektrum an Anwendungsfällen ab.
 Die oberste Liga ist die Bezirksoberliga Erwachsene, eine vollbesetzte Gruppe mit Rastergröße 12, in der alle 12 Schlüsselzahlen genau einmal vergeben wurden.
 
 In der Dokumentation sind Abschnitte, die sich auf dieses Beispiel beziehen, mit dem Vermerk *"Beispiel"* gekennzeichnet.
+Das Beispiel kann <a href="../../data/Example.json" download>hier</a> heruntergeladen und in den KeyGenerator importiert werden (siehe [4.3 Laden aus Datei](04_datenimport.md#43-laden-aus-datei)).
 
 ---
 

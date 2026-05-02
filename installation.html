@@ -60,14 +60,14 @@
     <h2>Installationsschritte</h2>
     <p>Den Installer kann hier heruntergeladen werden:</p>
     <a class="download-btn"
-       href="https://github.com/NilsWeidmann/KeyGenerator/releases/latest/download/KeyGeneratorInstaller.msi">
+       href="https://github.com/NilsWeidmann/KeyGenerator/releases/latest/download/KeyGenerator.msi">
       KeyGenerator Installer herunterladen
     </a>
 
     <ol class="step-list" style="margin-top: 24px;">
       <li>
         <span class="step-num">1</span>
-        <span>Die heruntergeladene Datei <strong>KeyGeneratorInstaller.msi</strong> ausführen.</span>
+        <span>Die heruntergeladene Datei <strong>KeyGenerator.msi</strong> ausführen.</span>
       </li>
       <li>
         <span class="step-num">2</span>
@@ -85,11 +85,31 @@
       </li>
     </ol>
 
+    <h2>Integrität der Installationsdatei prüfen (optional)</h2>
+    <p>
+      Zu jeder Version wird neben dem Installer auch eine Prüfsummendatei
+      (<strong>checksum.txt</strong>) veröffentlicht. Sie enthält einen SHA-256-Hash der
+      <em>KeyGenerator.msi</em> und ermöglicht es zu verifizieren, dass die heruntergeladene
+      Datei vollständig und unverändert ist – also weder während des Downloads beschädigt
+      noch nachträglich manipuliert wurde.
+    </p>
+    <p>
+      Die Prüfsummendatei kann auf der
+      <a href="https://github.com/NilsWeidmann/KeyGenerator/releases/latest" target="_blank">Releases-Seite</a>
+      heruntergeladen werden. Zur Überprüfung beide Dateien in denselben Ordner legen und in
+      PowerShell folgenden Befehl ausführen:
+    </p>
+    <pre style="background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:12px 16px;font-size:.9em;overflow-x:auto;">(Get-FileHash KeyGenerator.msi -Algorithm SHA256).Hash</pre>
+    <p>
+      Der angezeigte Wert muss mit dem Hashwert in <em>checksum.txt</em> übereinstimmen.
+      Weichen sie voneinander ab, sollte die Datei erneut heruntergeladen werden.
+    </p>
+
     <h2>Hinweis: Windows SmartScreen</h2>
     <div class="important">
       <strong>Wichtig – Testversion:</strong> Der KeyGenerator ist aktuell eine
       Testversion und daher nicht mit einem kostenpflichtigen Zertifikat signiert.
-      Windows SmartScreen stuft die Quelle der Installationsdatei deshalb als unbekannt ein 
+      Windows SmartScreen stuft die Quelle der Installationsdatei deshalb als unbekannt ein
       und zeigt eine Sicherheitswarnung an. Dies ist zu erwarten und kein Anzeichen für
       Schadsoftware.
     </div>
@@ -98,7 +118,7 @@
     </p>
     <blockquote>
       <strong>„Windows hat den PC geschützt"</strong><br>
-      Der Start von <em>KeyGeneratorInstaller.msi</em> wurde verhindert, da die App
+      Der Start von <em>KeyGenerator.msi</em> wurde verhindert, da die App
       von einem unbekannten Herausgeber stammt.
     </blockquote>
     <p>Vorgehen zum Fortfahren:</p>

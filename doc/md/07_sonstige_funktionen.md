@@ -9,16 +9,22 @@
 | Funktion | Beschreibung |
 |----------|--------------|
 | Backup laden | Lädt eine zuvor gespeicherte Sicherheitskopie (z.B. den Stand vor der letzten Generierung). Siehe Abschnitt 7.1. |
-| Ergebnisse exportieren | Exportiert die generierten Schlüsselzahlen als CSV-Datei mit Gruppen, Mannschaften, Schlüsselzahlen, Wunsch-Schlüsselzahlen, Spielwochen und Zusatz-Vorgaben. Falls die zugewiesene Schlüsselzahl nicht in der Wunschliste enthalten ist (Konflikt), wird dies in der Spalte "Wunsch" sichtbar. |
 | Terminmeldung speichern | Exportiert eine CSV-Datei mit Spieltag (Wochentag + Uhrzeit) und Ersatzspieltag je Mannschaft. Nützlich, um die Vollständigkeit der Terminmeldung zu überprüfen. |
-| Konflikte neu auflösen | Setzt alle Mannschafts-Schlüsselzahlen auf die aus dem Vereinswochenschema abgeleiteten Werte zurück und startet die Konflikterkennung/-auflösung erneut. Nützlich, wenn die Konfliktauflösung unterbrochen wurde, oder die Konflikte neu bewertet werden sollen. |
-| Generator-Tests | Startet automatisierte Tests des Generierungsalgorithmus (für die normale Anwendung nicht notwendig). |
-| Tests aus Datei | Führt Tests aus einer Datei aus (für die normale Anwendung nicht notwendig). |
 | Konfiguration exportieren | Exportiert die aktuelle Konfiguration an einen gewählten Speicherort. Die Konfiguration enthält Heim- und Auswärtsspieltage je Raster, die Referenzrastergrößen, die minimale/maximale Rastergröße sowie die unterstützten Altersklassen. |
 | Konfiguration importieren | Importiert eine Konfiguration aus einer JSON-Datei und ersetzt damit alle oben genannten Einstellungen (Spielpläne, Referenzraster, Rastergrößen, Altersklassen). |
 | CSV exportieren (histor.) | Exportiert die Daten in ein älteres CSV-Format. |
 | CSV importieren (histor.) | Importiert Daten aus einem älteren CSV-Format. |
+| Konflikte neu auflösen | Setzt alle Mannschafts-Schlüsselzahlen auf die aus dem Vereinswochenschema abgeleiteten Werte zurück und startet die Konflikterkennung/-auflösung erneut. Nützlich, wenn die Konfliktauflösung unterbrochen wurde, oder die Konflikte neu bewertet werden sollen. |
+| Ergebnisse exportieren | Exportiert die generierten Schlüsselzahlen als CSV-Datei mit Gruppen, Mannschaften, Schlüsselzahlen, Wunsch-Schlüsselzahlen, Spielwochen und Zusatz-Vorgaben. Falls die zugewiesene Schlüsselzahl nicht in der Wunschliste enthalten ist (Konflikt), wird dies in der Spalte "Wunsch" sichtbar. |
+| Generator-Tests | Startet automatisierte Tests des Generierungsalgorithmus (für die normale Anwendung nicht notwendig). |
+| Tests aus Datei | Führt Tests aus einer Datei aus (für die normale Anwendung nicht notwendig). |
 | Abbrechen | Schließt das Fenster und kehrt zum Startbildschirm zurück. |
+
+> **Ansicht: Fenster „Sonstiges"**
+>
+> Das Fenster „Sonstiges" mit der Auflistung aller Zusatzfunktionen, erreichbar über den gleichnamigen Button auf dem Startbildschirm.
+>
+> ![Fenster „Sonstiges" – Übersicht der Zusatzfunktionen](../png/07-zusatzfunktionen.png)
 
 ## 7.1 Backup laden
 
@@ -32,7 +38,7 @@ Falls Sie nach der Generierung einen Fehler bemerken, können Sie den vorherigen
 
 ## 7.2 Ergebnisse exportieren
 
-Nach der Generierung können Sie die Ergebnisse als CSV-Datei speichern:
+Nach der Generierung können Sie die Ergebnisse als CSV-Datei speichern, um die Ergebnisse in einer übersichtlichen Form ansehen (z.B. mit Microsoft Excel) und anschließend in Click-TT übertragen zu können:
 
 1. Klicken Sie auf **Sonstiges** im Startbildschirm.
 2. Klicken Sie auf **Ergebnisse exportieren**.
@@ -50,7 +56,8 @@ Mit dieser Funktion können Sie die eingegebenen Terminmeldungen zur Überprüfu
 3. Wählen Sie im Dateidialog den gewünschten Speicherort und Dateinamen.
 
 Die erzeugte CSV-Datei enthält je Mannschaft den gemeldeten Spieltag (Wochentag und Uhrzeit) sowie den Ersatzspieltag.
-Sie eignet sich dazu, die Vollständigkeit der Terminmeldung zu überprüfen.
+Sie eignet sich dazu, die Vollständigkeit der Terminmeldung zu überprüfen. 
+Mit der Schlüsselzahlen-Generierung im engeren Sinne hat diese Zusatzfunktion nichts zu tun.
 
 ## 7.4 Konflikte neu auflösen
 
@@ -58,6 +65,7 @@ Falls die Konfliktauflösung unterbrochen wurde oder die Ergebnisse neu bewertet
 
 1. Klicken Sie auf **Sonstiges** im Startbildschirm.
 2. Klicken Sie auf **Konflikte neu auflösen**.
+3. Es erscheint ein Dialogfenster zur Auflösung von Konflikten (siehe [6.1 Konflikte beheben](06_generierung.md#61-konflikte-beheben))
 
 Dabei werden alle Mannschafts-Schlüsselzahlen auf die aus dem Vereinswochenschema abgeleiteten Ausgangswerte zurückgesetzt und die Konflikterkennung sowie -auflösung werden erneut durchgeführt.
 Bereits vorgenommene Anpassungen an den Schlüsselzahlen gehen dabei verloren.

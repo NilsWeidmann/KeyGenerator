@@ -1,4 +1,4 @@
-[← 10. Fensternavigation](10_navigation.md) | [Inhaltsverzeichnis](README.md)
+[← 10. Fensternavigation](10_navigation.md) | [Inhaltsverzeichnis](README.md) | [B. Download aus Click-TT →](B_download_aus_click-tt.md)
 
 ---
 
@@ -43,6 +43,8 @@ Zentrale Konzepte:
 >
 > Am Beispiel Borussia Düsseldorf lassen sich diese Konzepte gut veranschaulichen:
 >
+> ![Vereinssicht nach der Generierung](../png/063-vereinssicht-nach-generierung.png)
+>
 > **Gegenläufige Schlüsselzahlen:** Der Verein hat Schlüsselzahl A=5 und B=11 (Referenzraster 12). Die Zahl 11 ist die gegenläufige Zahl zu 5 im 12er-Raster: Wenn Schlüsselzahl 5 an einem bestimmten Spieltag ein Heimspiel vorsieht, hat Schlüsselzahl 11 an diesem Spieltag ein Auswärtsspiel und umgekehrt. Ebenso gilt: X=5 und Y=10 sind gegenläufig im 10er-Raster.
 >
 > **Parallele Schlüsselzahlen:** Borussia Düsseldorf I spielt in der Bezirksoberliga (Rastergröße 12) mit Vereins-Schlüsselzahl A=5 und erhält die Mannschafts-Schlüsselzahl 5. Die Damen-Mannschaft spielt dagegen in einer Gruppe mit Rastergröße 10. Auch sie ist in Woche A und erhält ebenfalls Schlüsselzahl 5 – in diesem Fall ist die parallele Schlüsselzahl im 10er-Raster zufällig identisch. Wäre die Damen-Mannschaft der Woche B zugeordnet, würde sie die Schlüsselzahl 10 bekommen, da die Zahl 10 im 10er-Raster parallel zu den Zahlen 11 und 12 im 12er-Raster ist.
@@ -70,4 +72,4 @@ Für jede Mannschaft, die einer Spielwoche S zugeordnet ist, ist garantiert, das
 
 ---
 
-[← 10. Fensternavigation](10_navigation.md) | [Inhaltsverzeichnis](README.md)
+[← 10. Fensternavigation](10_navigation.md) | [Inhaltsverzeichnis](README.md) | [B. Download aus Click-TT →](B_download_aus_click-tt.md)

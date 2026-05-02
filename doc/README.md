@@ -19,4 +19,5 @@
 
 **Anhang**
 
-- [A1. Datenmodell](md/A1_datenmodell.md)
+- [A. Datenmodell](md/A_datenmodell.md)
+- [B. Download aus Click-TT](md/B_download_aus_click-tt.md)

@@ -1,10 +1,10 @@
-[← 9. Fehlerbehebung](09_fehlerbehebung.md) | [Inhaltsverzeichnis](README.md) | [A1. Datenmodell →](A1_datenmodell.md)
+[← 9. Fehlerbehebung](09_fehlerbehebung.md) | [Inhaltsverzeichnis](README.md) | [A. Datenmodell →](A_datenmodell.md)
 
 ---
 
 # 10. Übersicht der Fenster und Navigation
 
-Die folgende Übersicht zeigt alle Fenster der Anwendung und wie diese erreichbar sind:
+Die folgende Übersicht zeigt alle Fenster der Anwendung und wie diese vom Startbildschirm aus erreichbar sind:
 
 - **[Manuell]** → Dateninput
   - Gruppentabelle (links)
@@ -32,4 +32,4 @@ Die folgende Übersicht zeigt alle Fenster der Anwendung und wie diese erreichba
 
 ---
 
-[← 9. Fehlerbehebung](09_fehlerbehebung.md) | [Inhaltsverzeichnis](README.md) | [A1. Datenmodell →](A1_datenmodell.md)
+[← 9. Fehlerbehebung](09_fehlerbehebung.md) | [Inhaltsverzeichnis](README.md) | [A. Datenmodell →](A_datenmodell.md)

@@ -4,19 +4,7 @@
 
 # 5. Startbildschirm
 
-Nach dem Laden oder Importieren von Daten wird der Startbildschirm zur zentralen Arbeitsfläche.
-Er ist wie folgt aufgebaut:
-
-- **Oberer Bereich**: Verzeichnisauswahl und Navigationsleiste.
-- **Linke Seite**: Steuerelemente für Vereins-/Gruppenauswahl, Aktionsbuttons und Einstellungen.
-- **Rechte Seite**: Datentabelle zur Anzeige und Bearbeitung der Mannschaftsdaten.
-
-Zwischen zwei Ansichten kann über die Radiobuttons **Vereinssicht** und **Gruppensicht** unten links gewechselt werden.
-
-Die drei Hauptbuttons sind:
-- **Generieren**: Startet die automatische Schlüsselzahlgenerierung (siehe [6. Schlüsselzahlen generieren](06_generierung.md)).
-- **Speichern** (oder **Strg+S**): Speichert den aktuellen Stand als JSON-Datei. Falls noch kein Dateiname und Speicherort ausgewählt wurde, öffnet sich ein entsprechendes Dialogfenster.
-- **Sonstiges**: Öffnet das Fenster für zusätzliche Funktionen (siehe [7. Sonstige Funktionen](07_sonstige_funktionen.md)).
+Die folgenden Abschnitte beschreiben die beiden Ansichten der Datentabelle sowie die Möglichkeit, zusätzliche Einstellungen für einzelne Teams vorzunehmen.
 
 ## 5.1 Vereinssicht
 
@@ -32,7 +20,7 @@ Die Spielwoche kann bearbeitet werden, alle anderen Spalten sind nur zur Anzeige
 | Gruppe | Name der Gruppe, in der die Mannschaft spielt |
 | Team | Name der Mannschaft |
 | Schlüssel | Zugewiesene Schlüsselzahl nach der Generierung |
-| Wunsch | Mögliche Schlüsselzahlen basierend auf dem Wochenschema des Vereins |
+| Wunsch | Mögliche Schlüsselzahlen basierend auf der Spielwochenvorgabe des Vereins |
 
 ### Farbcodierung in der Vereinssicht
 
@@ -48,9 +36,11 @@ Die Zeilen werden je nach Spielwoche farblich hervorgehoben:
 
 ### Schlüsselzahlen auf Vereinsebene
 
-Oberhalb der Tabelle befinden sich vier Dropdown-Menüs (**A**, **B**, **X**, **Y**).
-Hier können Sie die Schlüsselzahlen auf Vereinsebene einstellen (deutlich komfortabler geht dies über das Fenster zur manuellen Dateneingabe, Abschnitt [Mittlere Seite: Vereinstabelle](04_datenimport.md#mittlere-seite-vereinstabelle)).
+Oberhalb der Tabelle befinden sich vier Dropdown-Menüs (`A`, `B`, `X`, `Y`).
+Hier können Sie die Schlüsselzahlen auf Vereinsebene einstellen (deutlich komfortabler geht dies über das Fenster zur manuellen Dateneingabe, Abschnitt [4.2 Manueller Datenimport](04_datenimport.md#mittlere-seite-vereinstabelle)).
 Die Werte A und B bzw. X und Y sind jeweils aneinander gekoppelt: Wenn Sie eine Schlüsselzahl für A eingeben, wird die entgegengesetzte Schlüsselzahl für B automatisch berechnet (und umgekehrt).
+
+
 
 ### Spielwochenzuordnung
 
@@ -58,34 +48,25 @@ Um einem Team eine Spielwoche zuzuordnen, klicken Sie in der Spalte "Woche" in d
 Um die Zuordnung zu entfernen, geben Sie `-` ein oder lassen das Feld leer.
 Groß- und Kleinschreibung wird toleriert.
 
-> **Beispiel: Vereinssicht – Borussia Düsseldorf vor der Generierung**
+> **Beispiel: Vereinssicht ohne Schlüsselzahlen-Vorgabe**
 >
-> Die folgende Tabelle zeigt alle 14 Mannschaften von Borussia Düsseldorf mit entsprechender farblicher Codierung für die Spielwoche.
+> Der folgende Screenshot zeigt alle Mannschaften von Borussia Düsseldorf mit entsprechender farblicher Codierung für die Spielwoche.
 > Vor der Generierung sind sowohl die Spalte "Schlüssel" als auch die Spalte "Wunsch" leer, da der Verein keine Schlüsselzahlenvorgabe von einer höheren Gliederungsebene hat:
 >
-> | Woche | Gruppe | Team | Schlüssel | Wunsch |
-> |-------|--------|------|-----------|--------|
-> | A | Erw. Bezirksoberliga | Borussia Düsseldorf I | | |
-> | A | Erw. 1. Bezirksliga 2 | Borussia Düsseldorf II | | |
-> | B | Erw. 2. Bezirksliga 2 | Borussia Düsseldorf III | | |
-> | B | Erw. 1. Bezirksklasse 4 | Borussia Düsseldorf IV | | |
-> | B | Erw. 2. Bezirksklasse 5 | Borussia Düsseldorf V | | |
-> | A | Damen Bezirksoberliga | Borussia Düsseldorf I | | |
-> | X | Jgd. 19 Bezirksoberliga | Borussia Düsseldorf I | | |
-> | Y | Jgd. 19 1. Bezirksliga 1 | Borussia Düsseldorf II | | |
-> | X | Jgd. 19 1. Bezirksliga 2 | Borussia Düsseldorf III | | |
-> | Y | Jgd. 19 2. Bezirksliga 3 | Borussia Düsseldorf IV | | |
-> | X | Jgd. 15 1. Bezirksliga | Borussia Düsseldorf I | | |
-> | Y | Jgd. 15 2. Bezirksliga 3 | Borussia Düsseldorf II | | |
-> | X | Jgd. 13 2. Bezirksliga 3 | Borussia Düsseldorf I | | |
-> | X | Jgd. 13 2. Bezirksliga 3 | Borussia Düsseldorf II | | |
+> ![Vereinssicht ohne Schlüsselzahlvorgaben](../png/051-vereinssicht-ohne-vorgabe.png)
+
+> **Beispiel: Vereinssicht mit Schlüsselzahlen-Vorgabe**
+>
+> Der folgende Screenshot zeigt die Mannschaften von SV Werder Bremen. Oberhalb der Tabelle sind die Dropdown-Menüs A, B, X und Y zu sehen, in denen die Vorgabewerte eingestellt sind. Die Zeilen sind entsprechend ihrer Spielwoche farblich hervorgehoben. Die Spalte "Schlüssel" ist auch bei diesem Verein leer, die Spalte "Wunsch" blendet die Schlüsselzahl(en) vor, die bei der entsprechenden Spielwoche benötigt werden.
+>
+> ![Vereinssicht mit vorgegebenen Schlüsselzahlen](../png/051-vereinssicht-mit-vorgabe.png)
 
 ## 5.2 Gruppensicht
 
 Die Gruppensicht gibt einen Überblick über alle Teams einer Gruppe.
 Wählen Sie dazu im Dropdown-Menü "Gruppen" die gewünschte Gruppe aus.
 
-Neben dem Dropdown-Menü erscheint das Feld **Raster**, in dem die Rastergröße der Gruppe angezeigt und geändert werden kann (eine komfortablere Alternative bietet dafür die manuelle Dateneingabe, Abschnitt [Linke Seite: Gruppentabelle](04_datenimport.md#linke-seite-gruppentabelle)).
+Neben dem Dropdown-Menü erscheint das Feld **Raster**, in dem die Rastergröße der Gruppe angezeigt und geändert werden kann (eine komfortablere Alternative bietet dafür die manuelle Dateneingabe, Abschnitt [4.2 Manueller Datenimport](04_datenimport.md#linke-seite-gruppentabelle)).
 Die Rastergröße muss mindestens so groß sein wie die Anzahl der Mannschaften in der Gruppe (aufgerundet auf eine gerade Zahl) und darf maximal 14 betragen.
 
 ### Tabellenspalten in der Gruppensicht
@@ -97,7 +78,7 @@ Die Tabelle zeigt folgende Spalten (die Spalte "Woche" ist in der Gruppensicht *
 | Gruppe | Name der Gruppe |
 | Team | Name der Mannschaft |
 | Schlüssel | Zugewiesene oder vorgegebene Schlüsselzahl |
-| Wunsch | Mögliche Schlüsselzahlen |
+| Wunsch | Benötigte Schlüsselzahl(en) |
 
 ### Farbcodierung in der Gruppensicht
 
@@ -107,37 +88,24 @@ In der Gruppensicht werden die Zeilen nach dem Zuweisungsstatus eingefärbt:
 |-------|-----------|
 | Grün | Gültige Schlüsselzahl zugewiesen, die den Wunsch-Schlüsselzahlen entspricht und in der Gruppe eindeutig ist |
 | Blau | Team hat eine Spielwoche und Wunsch-Schlüsselzahlen (Vorgabe durch höhere Ebene), aber noch keine zugewiesene Schlüsselzahl |
-| Gelb | Team hat eine Spielwoche, aber weder Schlüsselzahl noch Wunsch-Schlüsselzahlen (d.h. keine Vorgabe durch höhere Ebene); *oder*: Team hat keine Spielwoche, aber Vorgaben für Heim- oder Auswärtsspiele |
+| Gelb | Team hat eine Spielwochen-Vorgabe, der Verein hat aber keine Schlüsselzahlen-Vorgabe durch eine höhere Ebene; *oder*: Team hat keine Spielwochen-Vorgabe, aber Vorgaben für Heim- oder Auswärtsspiele |
 | Orange | Schlüsselzahl stimmt nicht mit den Wunsch-Schlüsselzahlen überein; *oder*: die zugewiesene Schlüsselzahl ist in der Gruppe doppelt vergeben (ungelöster Konflikt) |
-| Weiß | Team hat keine Spielwoche und keine besonderen Vorgaben |
+| Weiß | Team hat keine Spielwoche und keine sonstigen Vorgaben |
 
 Die Gruppensicht eignet sich besonders zur **Kontrolle nach der Generierung**, da hier auf einen Blick alle Schlüsselzahlen einer Gruppe sichtbar sind.
 Orange eingefärbte Zeilen weisen auf Konflikte hin, die auch im Nachgang über **Sonstiges** → **Konflikte neu auflösen** (siehe [7.4 Konflikte neu auflösen](07_sonstige_funktionen.md#74-konflikte-neu-aufloesen)) behoben werden können.
 
 > **Beispiel: Gruppensicht – Bezirksoberliga Erwachsene vor der Generierung**
 >
-> Die folgende Tabelle zeigt die Bezirksoberliga Erwachsene (Rastergröße 12, 12 Teams) im Zustand *vor* der Generierung.
+> Der folgende Screenshot zeigt die Bezirksoberliga Erwachsene (Rastergröße 12, 12 Teams) im Zustand *vor* der Generierung.
 > Zu diesem Zeitpunkt waren viele Spielwochen bereits zugeordnet, aber die Schlüsselzahlen noch nicht vergeben:
 >
-> | Farbe | Gruppe | Team | Schlüssel | Wunsch |
-> |-------|--------|------|-----------|--------|
-> | Gelb | Erw. BOL | TTC Schwalbe Bergneustadt I | | |
-> | Weiß | Erw. BOL | 1. FC Saarbrücken-TT I | | |
-> | Blau | Erw. BOL | SV Werder Bremen III | | 10 |
-> | Blau | Erw. BOL | TTF Liebherr Ochsenhausen II | | 12 |
-> | Blau | Erw. BOL | TTC RöhnSprudel Fulda-Maberzell II | | 8 |
-> | Gelb | Erw. BOL | BV Borussia Dortmund I | | |
-> | Blau | Erw. BOL | Post SV Mühlhausen II | | 11 |
-> | Gelb | Erw. BOL | Borussia Düsseldorf I | | |
-> | Blau | Erw. BOL | TTC Zugbrücke Grenzau II | | 9 |
-> | Gelb | Erw. BOL | TTC Bad Homburg I | | |
-> | Gelb | Erw. BOL | TSV Bad Königshofen I | | |
-> | Blau | Erw. BOL | ASC Grünwettersbach e.V. II | | 1 |
+> ![Gruppensicht – Übersicht](../png/052-gruppensicht.png)
 >
 > Hier sind drei Farben zu erkennen:
 > - **Blau**: Teams, deren Verein bereits eine vorgegebene Schlüsselzahl hat (z.B. SV Werder Bremen mit A=10). Die Wunsch-Schlüsselzahlen können berechnet werden, aber die Mannschafts-Schlüsselzahl fehlt noch.
 > - **Gelb**: Teams, deren Verein noch keine Schlüsselzahl hat (z.B. Borussia Düsseldorf, BV Borussia Dortmund). Es können weder Wunsch noch Schlüsselzahl angezeigt werden.
-> - **Weiß**: 1. FC Saarbrücken-TT I hat keine Spielwoche (Woche = `-`) und somit auch keinen Wunsch.
+> - **Weiß**: 1. FC Saarbrücken-TT I hat keine Spielwoche (Woche = `-`) und somit auch keine Wunsch-Schlüsselzahl.
 
 ## 5.3 Zusätzliche Einstellungen für einzelne Teams
 
@@ -165,28 +133,11 @@ Bestätigen Sie Ihre Eingaben mit **OK** oder verwerfen Sie sie mit **Abbrechen*
 
 **Hinweis:** Verwenden Sie diese Funktion sparsam, da sie die Schlüsselzahlfindung erheblich erschwert und unter Umständen eine gute Lösung verhindern kann.
 
-## 5.4 Begrenzung der Laufzeit
-
-Da die Ermittlung der Schlüsselzahlen ein komplexes Optimierungsproblem darstellt, kann die maximale Laufzeit für die Generierung begrenzt werden.
-Wenn die maximale Laufzeit erreicht ist, wird die beste bis dahin gefundene Lösung angezeigt.
-Die Einstellung befindet sich unten links auf dem Startbildschirm:
-
-- **Maximale Laufzeit**: Geben Sie die Laufzeit in Minuten und Sekunden ein.
-
-Der Standardwert beträgt **2 Minuten 0 Sekunden**, was im Normalfall für eine gute Lösung ausreicht.
-Sie können den Zeitraum verlängern, um eventuell eine noch bessere Lösung zu erhalten.
-Wenn das Programm vor Ablauf der Zeit die optimale Lösung findet, wird die Suche automatisch vorzeitig beendet.
-
-## 5.5 Rückgängig und Wiederherstellen
-
-Manuelle Änderungen können sowohl in der Hauptansicht als auch im Dateninput-Fenster rückgängig gemacht und wiederhergestellt werden:
-
-- **Strg+Z** oder Button **Rückgängig**: Letzte Änderung rückgängig machen.
-- **Strg+Y** oder Button **Wiederherstellen**: Rückgängig gemachte Änderung wiederherstellen.
-
-Die Buttons **Rückgängig** und **Wiederherstellen** sind jeweils nur aktiv, wenn entsprechende Operationen in der Historie vorhanden sind.
-Die Änderungshistorie wird beim Laden neuer Daten sowie beim Start einer neuen Generierung automatisch zurückgesetzt.
-Um auf den Stand vor der Generierung zurückzukehren, wird automatisch ein Backup angelegt (siehe [7.1 Backup laden](07_sonstige_funktionen.md#71-backup-laden)).
+> **Ansicht: Fenster „Zusatz"**
+>
+> Das Fenster „Zusatz" mit der Spielwochenauswahl oben und der Tabelle für Heim-/Auswärtsvorgaben je Spieltag darunter. Die Anzahl der Spieltage richtet sich nach der Rastergröße der Gruppe.
+>
+> ![Fenster „Zusatz" – Zusätzliche Einstellungen für ein Team](../png/053-zusatzvorgaben.png)
 
 ---
 

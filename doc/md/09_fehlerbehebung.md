@@ -4,6 +4,8 @@
 
 # 9. Fehlerbehebung
 
+Die folgende Tabelle enthält eine Übersicht über häufig auftretende Fehler und ihre Behebung:
+
 | Problem | Lösung |
 |---------|--------|
 | "Es konnten keine Schlüsselzahlen ermittelt werden!" | Widersprüchliche Vorgaben überprüfen. Laufzeit erhöhen. Feste Vorgaben reduzieren. |
