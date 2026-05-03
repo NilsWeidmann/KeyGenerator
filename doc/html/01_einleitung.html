@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>1. Einleitung – Schlüsselzahlen-Generierungstool</title>
+  <link rel="icon" type="image/x-icon" href="../../data/icon.ico">
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-  <header><a href="../index.html">KeyGenerator – Dokumentation</a></header>
+  <header><a href="../index.html"><img src="../../data/icon.jpg" alt="KeyGenerator Logo" class="header-logo">KeyGenerator – Dokumentation</a></header>
   <nav class="page-nav">
     <span></span>
     <a href="../index.html" class="nav-center">☰ Inhaltsverzeichnis</a>
@@ -23,5 +24,6 @@
   <script src="../viewer.js"></script>
 
   <script type="application/json" id="md-source">"[← Inhaltsverzeichnis](README.md) | [2. Dateistruktur →](02_dateistruktur.md)\n\n---\n\n# 1. Einleitung\n\nDas Schlüsselzahlen-Generierungstool dient der automatischen Zuweisung von Schlüsselzahlen für Mannschaften in Sportarten mit Liga-Spielbetrieb (z.B. Tischtennis).\nSchlüsselzahlen bestimmen den Spielplan einer Mannschaft, d.h. an welchen Spieltagen Heim- bzw. Auswärtsspiele stattfinden.\nDie Anwendung löst ein komplexes Zuordnungsproblem unter Berücksichtigung zahlreicher Nebenbedingungen, etwa:\n\n- Vereine mit mehreren Mannschaften benötigen zueinander kompatible Schlüsselzahlen (gegenläufig, parallel, ähnlich).\n- Vorgegebene Schlüsselzahlen von höheren Gliederungsebenen (Bezirk/Verband) müssen respektiert werden.\n- Einzelne Spieltage können als Heim- oder Auswärtsspiel vorgegeben werden.\n\nDiese Nebenbedingungen werden von den Vereinen einer Gliederung im Vorfeld formuliert, und durch das Tool in ein Optimierungsproblem übersetzt.\nNach der Ermittlung einer optimalen Lösung wird der/dem Spielplaner(in) eine Liste von Interessenskonflikten präsentiert, die im letzten Schritt manuell aufgelöst werden können, um einen fairen Ausgleich zwischen den betroffenen Vereinen herzustellen.\n\n## 1.1 Durchgängiges Beispiel\n\nUm die Konzepte dieser Dokumentation anschaulich zu machen, verwenden wir ein durchgängiges fiktives Beispiel mit Vereinen der 1., 2. und 3. Bundesliga, sowie der Regionalliga (Damen + Erwachsene) aus der Saison 2025/26.\nIn diesem Beispiel hat z.B. Borussia Düsseldorf 14 Mannschaften in 13 verschiedenen Gruppen und 5 Altersklassen (Erwachsene, Damen, Jugend 19, Jugend 15, Jugend 13), und deckt damit ein breites Spektrum an Anwendungsfällen ab.\nDie oberste Liga ist die Bezirksoberliga Erwachsene, eine vollbesetzte Gruppe mit Rastergröße 12, in der alle 12 Schlüsselzahlen genau einmal vergeben wurden.\n\nIn der Dokumentation sind Abschnitte, die sich auf dieses Beispiel beziehen, mit dem Vermerk *\"Beispiel\"* gekennzeichnet.\nDas Beispiel kann <a href=\"../../data/Example.json\" download>hier<\/a> heruntergeladen und in den KeyGenerator importiert werden (siehe [4.3 Laden aus Datei](04_datenimport.md#43-laden-aus-datei)).\n\n---\n\n[← Inhaltsverzeichnis](README.md) | [2. Dateistruktur →](02_dateistruktur.md)\n"</script>
+  <script src="../../data/footer.js"></script>
 </body>
 </html>

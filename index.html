@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KeyGenerator – Das Schlüsselzahlen-Generierungstool</title>
+  <link rel="icon" type="image/x-icon" href="data/icon.ico">
   <link rel="stylesheet" href="doc/style.css">
   <style>
     .download-btn {
@@ -17,15 +19,25 @@
       font-weight: 600;
       font-size: 1em;
     }
-    .download-btn:hover { background: #0550ae; text-decoration: none; }
 
-    .step-list { padding-left: 0; list-style: none; margin: 12px 0; }
+    .download-btn:hover {
+      background: #0550ae;
+      text-decoration: none;
+    }
+
+    .step-list {
+      padding-left: 0;
+      list-style: none;
+      margin: 12px 0;
+    }
+
     .step-list li {
       display: flex;
       gap: 14px;
       align-items: baseline;
       margin: 10px 0;
     }
+
     .step-num {
       flex-shrink: 0;
       width: 26px;
@@ -41,8 +53,10 @@
     }
   </style>
 </head>
+
 <body>
-  <header><a href="index.html">KeyGenerator – Das Schlüsselzahlen-Generierungstool</a></header>
+  <header><a href="index.html"><img src="data/icon.jpg" alt="KeyGenerator Logo" class="header-logo">KeyGenerator – Das
+      Schlüsselzahlen-Generierungstool</a></header>
   <main>
     <h1>KeyGenerator – Das Schlüsselzahlen-Generierungstool</h1>
     <p><em>Optimierte Schlüsselzahlenzuweisung für die Spielplanung im Amateursport</em></p>
@@ -50,14 +64,14 @@
     <h2>Hintergrund und Motivation</h2>
     <p>
       Jedes Jahr müssen für tausende Amateur- und Profisportmannschaften Spielpläne erstellt
-      werden. Üblicherweise spielt in Vor- und Rückrunde jede Mannschaft zwei mal gegen jede 
+      werden. Üblicherweise spielt in Vor- und Rückrunde jede Mannschaft zwei mal gegen jede
       andere Mannschaft, einmal zu Hause und einmal auswärts. Mannschaften werden nach
       Leistungsniveau und regionalen Gesichtspunkten in Ligen und Gruppen eingeteilt.
     </p>
     <p>
       Die Spielplanung wird besonders anspruchsvoll, wenn mehrere Mannschaften desselben
       Vereins eine gemeinsame Infrastruktur nutzen – etwa eine Sporthalle, Spielmaterial
-      oder Personal. Da die Kapazitäten begrenzt sind, entstehen <strong>Abhängigkeiten</strong> 
+      oder Personal. Da die Kapazitäten begrenzt sind, entstehen <strong>Abhängigkeiten</strong>
       zwischen den Mannschaften eines Vereins bezüglich ihrer Heimspieltermine. Mannschaften
       eines Vereins sollen beispielsweise abwechselnd zu Hause spielen, damit
       die gemeinsame Infrastruktur gleichmäßig ausgelastet wird – oder aber am selben
@@ -79,10 +93,10 @@
     <p>
       Die Aufgabe des Spielplaners besteht darin, jeder Mannschaft einer Gruppe eine
       Schlüsselzahl zuzuweisen. Zwei Mannschaften desselben Vereins müssen dabei Schlüssel
-      erhalten, die sicherstellen, dass die vereinsseitig definierten Abhängigkeiten eingehalten werden. 
+      erhalten, die sicherstellen, dass die vereinsseitig definierten Abhängigkeiten eingehalten werden.
       Eine <strong>Konfliktsituation</strong> tritt auf, wenn die zugewiesene Schlüsselzahl von der
-      eigentlich erforderlichen abweicht. In solchen Fällen sollte eine <strong>ähnliche</strong> 
-      Schlüsselzahl vergeben werden, die nur an wenigen Spieltagen zu Abweichungen vom gewünschten 
+      eigentlich erforderlichen abweicht. In solchen Fällen sollte eine <strong>ähnliche</strong>
+      Schlüsselzahl vergeben werden, die nur an wenigen Spieltagen zu Abweichungen vom gewünschten
       Ergebnisführt. In der Praxis wird diese Zuweisung bislang manuell
       vorgenommen – mit erheblichem Aufwand und häufig suboptimalen Ergebnissen.
     </p>
@@ -100,25 +114,25 @@
     <ol class="step-list">
       <li>
         <span class="step-num">1</span>
-        <span><strong>Abhängigkeiten definieren:</strong> Vereinsverantwortliche erfassen reguläre Heimspieltage 
-        sowie Startzeiten für alle Mannschaften, und legen Abhängigkeiten zwischen Mannschaften fest.</span>
+        <span><strong>Abhängigkeiten definieren:</strong> Vereinsverantwortliche erfassen reguläre Heimspieltage
+          sowie Startzeiten für alle Mannschaften, und legen Abhängigkeiten zwischen Mannschaften fest.</span>
       </li>
       <li>
         <span class="step-num">2</span>
         <span><strong>Schlüsselzahlen bestimmen:</strong> Der KeyGenerator weist den
-        Mannschaften Schlüsselzahlen zu und hält dabei Abhängigkeiten so weit wie möglich
-        ein.</span>
+          Mannschaften Schlüsselzahlen zu und hält dabei Abhängigkeiten so weit wie möglich
+          ein.</span>
       </li>
       <li>
         <span class="step-num">3</span>
-        <span><strong>Konflikte auflösen:</strong> Der Spielplaner überprüft die vorgeschlagenen 
-        Zuweisungen und löst verbleibende Konfliktsituationen auf, um einen fairen Ausgleich zwischen den 
-        betroffenen Vereinen herzustellen.</span>
+        <span><strong>Konflikte auflösen:</strong> Der Spielplaner überprüft die vorgeschlagenen
+          Zuweisungen und löst verbleibende Konfliktsituationen auf, um einen fairen Ausgleich zwischen den
+          betroffenen Vereinen herzustellen.</span>
       </li>
       <li>
         <span class="step-num">4</span>
         <span><strong>Spielpläne generieren:</strong> Basierend auf den Schlüsselzahlen und
-        den Rastern werden die endgültigen Spielpläne automatisch erstellt.</span>
+          den Rastern werden die endgültigen Spielpläne automatisch erstellt.</span>
       </li>
     </ol>
 
@@ -131,17 +145,29 @@
     <hr>
 
     <h2>Download</h2>
-    <p>Die aktuelle Testversion des KeyGenerators steht zum kostenlosen Download bereit und kann <a href="installation.html">hier</a> 
-      heruntergeladen werden. Bitte beachten Sie die Installationsanleitung und die dort genannten Voraussetzungen, um den 
-      KeyGenerator korrekt zu installieren. Weitere Informationen zur Installation finden Sie auf der Installationsseite.
+    <p>Die aktuelle Testversion des KeyGenerators steht zum kostenlosen Download bereit.
+      Bitte beachten Sie die Installationsanleitung und die dort genannten Voraussetzungen, um den
+      <a href="installation.html">KeyGenerator</a> korrekt zu installieren. Weitere Informationen zur Installation
+      finden Sie auf der
+      Installationsseite.
     </p>
 
     <h2>Dokumentation</h2>
     <p>
-      Die Benutzerdokumentation beschreibt Installation, Dateistruktur, Datenimport und alle
-      Funktionen des Tools im Detail:
+      Die <a href="doc/index.html">Benutzerdokumentation</a> beschreibt Installation, Dateistruktur, Datenimport und
+      alle
+      Funktionen des Tools im Detail.
     </p>
-    <p><a href="doc/index.html">Benutzerdokumentation öffnen</a></p>
+
+    <h2>Beispiel</h2>
+    <p>
+      In der Benutzerdokumentation wird ein fiktives <a href="data/Example.json" download>Beispiel</a> verwendet,
+      welches die Funktionsweise des KeyGenerators
+      demonstriert.
+    </p>
   </main>
+
+  <script src="data/footer.js"></script>
 </body>
+
 </html>
