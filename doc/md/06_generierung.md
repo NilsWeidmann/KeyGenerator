@@ -78,7 +78,7 @@ Mithilfe dieser Übersicht können Sie die Schlüsselzahlen in Click-TT oder in 
 >
 > ![Gruppensicht mit Konflikt (orange markierte Zeilen)](../png/063-gruppensicht-mit-konflikt.png)
 
-> **Beispiel: Vereinssicht – Borussia Düsseldorf nach der Generierung**
+> **Beispiel: Vereinssicht – Vergabe von parallelen und gegenläufigen Schlüsselzahlen**
 >
 > Der folgende Screenshot zeigt die ermittelten Schlüsselzahlen für die Mannschaften von Borussia Düsseldorf.
 > Durch die Generierung wurden die Vereins-Schlüsselzahlen **A=5, B=11, X=5, Y=10** ermittelt:

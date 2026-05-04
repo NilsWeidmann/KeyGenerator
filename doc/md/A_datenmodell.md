@@ -57,9 +57,9 @@ Die Spielwochen bestimmen, in welchem Rhythmus eine Mannschaft ihre Heimspiele a
 Auf Vereinsebene wird pro Spielwoche eine Schlüsselzahl ermittelt, wobei für die jeweiligen Spielwochenpaare gegenläufige Schlüsselzahlen vergeben werden.
 Für jede Mannschaft, die einer Spielwoche S zugeordnet ist, ist garantiert, dass sie eine Schlüsselzahl erhält, die zu derjenigen Schlüsselzahl ähnlich ist, die für ihren Verein für Spielwoche S vergeben wurde, oder mit dieser exakt übereinstimmt.
 
-> **Beispiel: Spielwochen am Beispiel Borussia Düsseldorf**
+> **Beispiel: Spielwochenpaare A/B und X/Y **
 >
-> Borussia Düsseldorf nutzt alle vier Spielwochen:
+> Der Verein Borussia Düsseldorf nutzt alle vier Spielwochen:
 >
 > | Woche | Altersklassen | Ref.-Raster | Vereins-SZ | Anz. Teams |
 > |-------|---------------|-------------|------------|------------|
