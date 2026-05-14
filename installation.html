@@ -39,6 +39,25 @@
       margin: 12px 0;
     }
 
+    .download-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      margin: 4px 0;
+      padding: 0px 12px;
+      background: #fff;
+      color: #0969da;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1em;
+      border: 2px solid #0969da;
+    }
+
+    .download-btn-secondary:hover {
+      background: #dbeafe;
+      text-decoration: none;
+    }
+
     .step-num {
       flex-shrink: 0;
       width: 26px;
@@ -73,17 +92,39 @@
     </p>
 
     <h2>Installationsschritte</h2>
-    <p>Den Installer kann hier heruntergeladen werden:</p>
-    <a class="download-btn"
-      href="https://github.com/NilsWeidmann/KeyGenerator/releases/latest/download/KeyGenerator.msi">
-      <img src="data/icon.jpg" alt="" style="height: 24px; width: 24px; margin-right: 12px; border-radius: 1px;">
-      KeyGenerator Installer herunterladen
-    </a>
+    <div style="display: flex; gap: 0; margin: 16px 0; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 200px; padding-right: 24px;">
+        <p style="margin-top: 0;">Der Installer kann hier heruntergeladen werden:</p>
+        <a class="download-btn"
+          href="https://github.com/NilsWeidmann/KeyGenerator/releases/latest/download/KeyGenerator.msi">
+          <img src="data/icon.jpg" alt="" style="height: 24px; width: 24px; margin-right: 12px; border-radius: 1px;">
+          KeyGenerator Installer herunterladen (.msi)
+        </a>
+      </div>
+      <div style="flex: 1; min-width: 200px; border-left: 1px solid #d0d7de; padding-left: 24px;">
+        <p style="margin-top: 0;">
+          Alternative Downloadmöglichkeit als ZIP-Archiv:
+        </p>
+        <a class="download-btn-secondary"
+          href="https://github.com/NilsWeidmann/KeyGenerator/releases/latest/download/KeyGenerator.zip">
+          <img src="data/icon.jpg" alt="" style="height: 24px; width: 24px; margin-right: 12px; border-radius: 1px;">
+          KeyGenerator Installer herunterladen (.zip)
+        </a>
+      </div>
+    </div>
+    <div class="note" style="margin-top: 12px;">
+      <strong>Hinweis zum ZIP-Download:</strong> Falls der Browser den direkten Download von MSI-Dateien blockiert, steht der Installer
+          alternativ als ZIP-Archiv zur Verfügung. Das Archiv enthält die Installationsdatei <strong>KeyGenerator.msi</strong>. 
+          Bitte das Archiv zuerst entpacken und anschließend die enthaltene Datei ausführen.
+    </div>
 
     <ol class="step-list" style="margin-top: 24px;">
       <li>
         <span class="step-num">1</span>
-        <span>Die heruntergeladene Datei <strong>KeyGenerator.msi</strong> ausführen.</span>
+        <span>
+          Die heruntergeladene Datei <strong>KeyGenerator.msi</strong> ausführen.
+          (Bei ZIP-Download: das Archiv zuerst entpacken, dann die enthaltene MSI-Datei ausführen.)
+        </span>
       </li>
       <li>
         <span class="step-num">2</span>
@@ -143,22 +184,26 @@
     <h2>Integrität der Installationsdatei prüfen (optional)</h2>
     <p>
       Zu jeder Version wird neben dem Installer auch eine Prüfsummendatei
-      (<strong>checksum.txt</strong>) veröffentlicht. Sie enthält einen SHA-256-Hash der
-      <em>KeyGenerator.msi</em> und ermöglicht es zu verifizieren, dass die heruntergeladene
-      Datei vollständig und unverändert ist – also weder während des Downloads beschädigt
-      noch nachträglich manipuliert wurde.
+      (<strong>checksum.txt</strong>) veröffentlicht. Sie enthält SHA-256-Hashes für
+      <em>KeyGenerator.msi</em> und <em>KeyGenerator.zip</em> und ermöglicht es zu
+      verifizieren, dass die heruntergeladene Datei vollständig und unverändert ist –
+      also weder während des Downloads beschädigt noch nachträglich manipuliert wurde.
     </p>
     <p>
       Die Prüfsummendatei kann auf der
       <a href="https://github.com/NilsWeidmann/KeyGenerator/releases/latest" target="_blank">Releases-Seite</a>
       heruntergeladen werden. Zur Überprüfung beide Dateien in denselben Ordner legen und in
-      PowerShell folgenden Befehl ausführen:
+      PowerShell folgenden Befehl ausführen (je nach heruntergeladener Datei):
     </p>
     <pre
-      style="background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:12px 16px;font-size:.9em;overflow-x:auto;">(Get-FileHash KeyGenerator.msi -Algorithm SHA256).Hash</pre>
+      style="background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:12px 16px;font-size:.9em;overflow-x:auto;"># Für die MSI-Datei:
+(Get-FileHash KeyGenerator.msi -Algorithm SHA256).Hash
+
+# Für die ZIP-Datei:
+(Get-FileHash KeyGenerator.zip -Algorithm SHA256).Hash</pre>
     <p>
-      Der angezeigte Wert muss mit dem Hashwert in <em>checksum.txt</em> übereinstimmen.
-      Weichen sie voneinander ab, sollte die Datei erneut heruntergeladen werden.
+      Der angezeigte Wert muss mit dem entsprechenden Hashwert in <em>checksum.txt</em>
+      übereinstimmen. Weichen sie voneinander ab, sollte die Datei erneut heruntergeladen werden.
     </p>
 
     <h2>Deinstallation</h2>
