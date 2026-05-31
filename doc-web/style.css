@@ -1,0 +1,6 @@
+@import url('../doc/style.css');
+
+main img {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
