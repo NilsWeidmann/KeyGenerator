@@ -6,7 +6,7 @@
 
 Nachdem alle Daten eingegeben und alle Wünsche der Vereine berücksichtigt worden sind, kann die eigentliche Generierung der Schlüsselzahlen beginnen.
 
-1. Klicken Sie in der Übersicht auf den Button **Generieren**.
+1. Klicken Sie in der [Übersicht](05_startbildschirm.md) auf den Button **Generieren**.
 2. Vor der Generierung wird automatisch eine Sicherheitskopie des aktuellen Standes angelegt, die Sie bei Bedarf später wiederherstellen können (siehe [7.1 Backup laden](07_sonstige_funktionen.md#71-backup-laden)).
 3. Die Anwendung wechselt auf die Seite **Optimierung**, die einen Fortschrittsbalken und den aktuellen Status anzeigt.
 4. Sie können die Generierung jederzeit über den Button **Abbrechen** vorzeitig beenden.
@@ -47,7 +47,7 @@ Falls ein Konflikt noch nicht aufgelöst ist oder für eine Mannschaft keine Sch
 Sie können die Konfliktauflösung abbrechen, indem Sie über die Seitenleiste zur Übersicht navigieren.
 Die verbliebenen Konflikte können zu einem späteren Zeitpunkt über den Link **Konflikte auflösen** in der Seitenleiste erneut aufgelöst werden (siehe [6.2 Konflikte auflösen](#62-konflikte-aufloesen)).
 
-## 6.2 Konflikte auflösen {#62-konflikte-aufloesen}
+## 6.2 Konflikte auflösen
 
 Nach dem Abschluss einer Generierung erscheint in der Seitenleiste der Link **Konflikte auflösen**.
 Über diesen Link gelangen Sie jederzeit zurück auf die Seite zur Konfliktauflösung (wie in [6.1 Konflikte beheben](#61-konflikte-beheben) beschrieben), um Konflikte erneut zu bearbeiten.

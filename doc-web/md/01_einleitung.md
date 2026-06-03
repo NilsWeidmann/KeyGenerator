@@ -17,7 +17,7 @@ Nach der Ermittlung einer optimalen Lösung wird der/dem Spielplaner(in) eine Li
 
 ## 1.1 Durchgängiges Beispiel
 
-Um die Konzepte dieser Dokumentation anschaulich zu machen, verwenden wir ein durchgängiges fiktives Beispiel mit Vereinen der 1., 2. und 3. Bundesliga, sowie der Regionalliga (Damen + Erwachsene) aus der Saison 2025/26.
+Um die Konzepte dieser Dokumentation anschaulich zu machen, verwenden wir ein durchgängiges fiktives Beispiel mit den Vereinen der 1., 2. und 3. Tischtennis-Bundesliga, sowie der Regionalliga (Damen + Erwachsene) aus der Saison 2025/26.
 Das Beispiel beinhaltet insgesamt 49 Gruppen mit je 8-12 Mannschaften aus über 100 Vereinen.
 
 In der Dokumentation sind Abschnitte, die sich auf dieses Beispiel beziehen, mit dem Vermerk *"Beispiel"* gekennzeichnet.

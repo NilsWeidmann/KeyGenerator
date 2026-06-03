@@ -7,7 +7,7 @@
 Die Seite **Manuelle Eingabe** ermöglicht die manuelle Eingabe und Bearbeitung von Gruppen, Vereinen und Mannschaften.
 Sie ist über den gleichnamigen Link in der Seitenleiste erreichbar.
 
-Am oberen Rand der Seite befinden sich drei Schaltflächen: **↶ Rückgängig**, **↷ Wiederherstellen** und **Speichern** (blau). Die Schaltfläche **Speichern** sichert den aktuellen Bearbeitungsstand, ohne die Seite zu verlassen.
+Am oberen Rand der Seite befinden sich drei Schaltflächen: **↶ Rückgängig** (oder **Strg+Z**), **↷ Wiederherstellen** (oder **Strg+Y**) und **Speichern** (blau, oder **Strg+S**). Die Schaltfläche **Speichern** sichert den aktuellen Bearbeitungsstand, ohne die Seite zu verlassen.
 
 Die Seite ist in zwei nebeneinander angeordnete Bereiche unterteilt: eine linke Spalte mit Gruppen- und Vereinstabelle sowie eine rechte Spalte mit der Mannschaftstabelle.
 
@@ -99,7 +99,7 @@ Ein Klick auf das Bearbeiten-Symbol (Stift) in der Spalte **Zusatz** öffnet den
 **Mannschaften anlegen:**
 Wählen Sie zunächst in der Gruppentabelle (links oben) die gewünschte Gruppe aus.
 In der oberen rechten Ecke der rechten Spalte erscheint dann die Schaltfläche **+ Team**.
-Klicken Sie darauf, um ein Formular zum Hinzufügen einer neuen Mannschaft zu öffnen.
+Klicken Sie darauf, um die Daten für eine neue Mannschaft einzugeben.
 Wählen Sie dort den Verein aus und tragen Sie ggf. die Mannschaftsnummer ein.
 Klicken Sie auf **Hinzufügen**, um die Mannschaft der Gruppe hinzuzufügen, sofern noch Platz vorhanden ist (Rastergröße nicht überschritten).
 

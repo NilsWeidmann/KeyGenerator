@@ -15,7 +15,7 @@ Sobald Daten geladen sind, stehen in der **Seitenleiste** folgende Exportfunktio
 | CSV exportieren (historisch) | Exportiert die Daten in ein älteres CSV-Format. |
 | CSV importieren (historisch) | Importiert Daten aus einem älteren CSV-Format. |
 
-## 7.1 Backup laden {#71-backup-laden}
+## 7.1 Backup laden
 
 Vor jeder Generierung wird automatisch eine Sicherheitskopie des aktuellen Datenstands in der laufenden Sitzung erstellt.
 Falls Sie nach der Generierung einen Fehler bemerken, können Sie den vorherigen Zustand auf der **Übersicht** wiederherstellen:
@@ -34,7 +34,7 @@ Das Laden eines Backups deaktiviert außerdem den Link **Konflikte auflösen** i
 
 **Hinweis:** Sicherheitskopien werden nur für die Dauer der aktuellen Browser-Sitzung gespeichert. Beim Schließen des Browser-Tabs gehen sie verloren. Um den aktuellen Stand dauerhaft zu sichern, laden Sie die Daten über den Button **Speichern** als `Data.json` herunter.
 
-## 7.2 Ergebnisse exportieren {#72-ergebnisse-exportieren}
+## 7.2 Ergebnisse exportieren
 
 Nach der Generierung können Sie die Ergebnisse als CSV-Datei herunterladen, um diese in einer übersichtlichen Form anzusehen (z.B. mit Microsoft Excel) und anschließend in Click-TT zu übertragen:
 

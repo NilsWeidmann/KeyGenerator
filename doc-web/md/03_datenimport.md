@@ -10,9 +10,7 @@ Die Anwendung ist wie folgt aufgebaut:
 - **Linke Seite (Seitenleiste)**: Navigationsmenü mit Links zu den einzelnen Seiten sowie Export- und Importfunktionen.
 - **Rechte Seite (Hauptbereich)**: Zeigt den Inhalt der aktuell geöffneten Seite.
 
-Beim ersten Öffnen enthält die Seitenleiste nur den Link **Datenimport**.
-Sobald Daten geladen wurden, erscheinen die Links **Übersicht** und **Manuelle Eingabe** sowie — unterhalb eines Trennstrichs — die Export- und Importfunktionen.
-Der Link **Konflikte auflösen** erscheint erst nach dem Abschluss einer Generierung und verschwindet wieder, wenn ein Backup geladen oder ein neuer Datenimport durchgeführt wird.
+> **Hinweis:** Beim ersten Öffnen enthält die Seitenleiste nur den Link **Datenimport**. Sobald Daten geladen wurden, erscheinen die Links **Übersicht** und **Manuelle Eingabe** sowie — unterhalb eines Trennstrichs — die Import- und Exportfunktionen. Der Link **Konflikte auflösen** erscheint erst nach dem Abschluss einer Generierung und verschwindet wieder, wenn ein Backup geladen oder ein neuer Datenimport durchgeführt wird.
 
 > **Ansicht: Startseite der Web-Anwendung**
 >
@@ -77,11 +75,10 @@ Er ist erst verfügbar, nachdem Schritt 1 abgeschlossen wurde.
 3. Nach dem Import erscheint eine grüne Bestätigung mit der Anzahl der geladenen Vereine.
 
 Nach erfolgreichem Import beider Dateien wird die Schaltfläche **Zur Übersicht →** am unteren Rand der Seite aktiv; alternativ können Sie auch über den Link **Übersicht** in der Seitenleiste zur zentralen Arbeitsfläche wechseln.
-Die Daten werden automatisch im Browser-Speicher gesichert.
 
 ## 3.3 Laden aus Datei
 
-Wenn Sie bereits zu einem früheren Zeitpunkt Daten gespeichert haben, können Sie diese über den dritten Schritt ("3. Zwischenstand aus Datei laden (JSON)") wiederherstellen.
+Wenn Sie bereits zu einem früheren Zeitpunkt einen Zwischenstand gespeichert haben, können Sie diese über den dritten Schritt ("3. Zwischenstand aus Datei laden (JSON)") wiederherstellen.
 Dieser Schritt ist unabhängig von den anderen Schritten und kann auch ohne vorherigen CSV-Import verwendet werden.
 
 1. Klicken Sie auf **Durchsuchen...** im dritten Schritt.

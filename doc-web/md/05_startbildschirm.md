@@ -41,7 +41,7 @@ Die Werte A und B bzw. X und Y sind jeweils aneinander gekoppelt: Wenn Sie eine 
 | Gruppe | Name der Gruppe, in der die Mannschaft spielt |
 | Wunsch | Mögliche Schlüsselzahlen basierend auf der Spielwochenvorgabe des Vereins |
 | Schlüssel | Zugewiesene Schlüsselzahl nach der Generierung |
-| Zusatz | Schaltfläche zum Öffnen des Zusatz-Dialogs (siehe [5.3](#53-zusaetzliche-einstellungen-fuer-einzelne-teams)) |
+| Zusatz | Schaltfläche zum Öffnen des Zusatz-Dialogs (siehe [5.3 Zusätzliche Einstellungen für einzelne Teams](#53-zusaetzliche-einstellungen-fuer-einzelne-teams)) |
 
 ### Farbcodierung in der Vereinsansicht
 
@@ -82,6 +82,7 @@ Jeder Listeneintrag zeigt den Gruppennamen sowie die Teamanzahl und die Rastergr
 
 Oberhalb der Tabelle erscheint das Feld **Raster**, in dem die Rastergröße der Gruppe geändert werden kann (eine komfortablere Alternative bietet die Seite [4. Manuelle Eingabe: Gruppentabelle](04_manuelle_eingabe.md#linke-spalte-gruppentabelle)).
 Die Rastergröße muss mindestens so groß sein wie die Anzahl der Mannschaften in der Gruppe (aufgerundet auf eine gerade Zahl) und darf maximal 14 betragen.
+Die maximale Rastergröße gilt nur für die Standard-Konfiguration. Durch das Laden einer anderen Konfiguration (siehe [7.4 Konfiguration exportieren und importieren](07_sonstige_funktionen.md#74-konfiguration-exportieren-und-importieren)) können beliebig große Raster verwendet werden.
 
 ### Tabellenspalten in der Gruppenansicht
 
