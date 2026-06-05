@@ -139,6 +139,64 @@ Bestätigen Sie Ihre Eingaben mit **OK** oder verwerfen Sie sie mit **Abbrechen*
 >
 > ![Fenster „Zusatz" – Zusätzliche Einstellungen für ein Team](../png/053-zusatzvorgaben.png)
 
+## 5.4 Partnerschaften
+
+Eine **Partnerschaft** legt fest, dass Abhängigkeiten zwischen Spielwochen unterschiedlicher Vereine bestehen.
+Solche Vorgaben entstehen typischerweise durch gemeinsam genutzte Hallenzeiten oder organisatorische Abhängigkeiten zwischen zwei Vereinen.
+
+Die Partnerschaftsfunktion ist in der **Vereinssicht** verfügbar.
+Wählen Sie zunächst im Dropdown-Menü „Vereine" den gewünschten Verein aus.
+Dadurch wird die Schaltfläche **Partner** aktiviert.
+Nach einem Klick darauf öffnet sich das Fenster **Partnerschaften**.
+
+### Aufbau des Fensters
+
+Das Fenster zeigt eine Tabelle mit allen Partnerschaften des ausgewählten Vereins.
+Jede Zeile beschreibt eine Partnerschaft nach dem Schema:
+
+> *Verein A in Woche X* = *Verein B in Woche Y*
+
+Die Spalten im Einzelnen:
+
+| Spalte | Bedeutung |
+|--------|-----------|
+| Verein A | Immer der ausgewählte Verein (schreibgeschützt) |
+| Woche | Spielwoche des ausgewählten Vereins (`A`, `B`, `X` oder `Y`) |
+| Verein B | Partnerverein (Dropdown-Menü mit allen anderen Vereinen) |
+| Woche | Spielwoche des Partnervereins (`A`, `B`, `X` oder `Y`) |
+| ✕ | Löscht die Zeile |
+
+Der ausgewählte Verein erscheint unabhängig davon, auf welcher Seite die Partnerschaft ursprünglich angelegt wurde, immer in der Spalte „Verein A".
+
+> **Hinweis:** Es ist nicht möglich, einen Verein mit sich selbst als Partner einzutragen.
+
+### Partnerschaft hinzufügen
+
+Klicken Sie auf die Schaltfläche **+ Partnerschaft hinzufügen** am unteren Rand des Fensters.
+Eine neue Zeile wird eingefügt, in der der ausgewählte Verein bereits als Verein A eingetragen ist und beide Wochen auf `A` voreingestellt sind.
+Wählen Sie den gewünschten Partnerverein im Dropdown-Menü der Spalte „Verein B" aus und passen Sie die Spielwochen bei Bedarf an.
+
+### Partnerschaft entfernen
+
+Klicken Sie in der entsprechenden Zeile auf die Schaltfläche **✕** in der letzten Spalte.
+Die Zeile wird sofort entfernt.
+
+### Änderungen speichern
+
+Die Partnerschaften werden automatisch gespeichert, wenn Sie das Fenster **Partnerschaften** schließen.
+
+> **Beispiel: Partnerschaft zwischen DJK Franz-Sales-Haus Essen und SV Union Velbert**
+>
+> DJK Franz-Sales-Haus Essen und SV Union Velbert teilen sich eine Halle, sodass Abhängigkeiten zwischen den Mannschaften beider Vereine berücksichtigt werden müssen.
+> In der Vereinssicht wird DJK Franz-Sales-Haus Essen ausgewählt und die Schaltfläche **Partner** angeklickt.
+> Das Fenster „Partnerschaften" zeigt daraufhin die folgende Zeile:
+>
+> | Verein A | Woche | Verein B | Woche | |
+> |----------|-------|----------|-------|-|
+> | DJK Franz-Sales-Haus Essen | A | SV Union Velbert | B | ✕ |
+>
+> ![Fenster „Partnerschaften" – DJK Franz-Sales-Haus Essen und SV Union Velbert](../png/054-partnerschaften.png)
+
 ---
 
 [← 4. Datenimport](04_datenimport.md) | [Inhaltsverzeichnis](README.md) | [6. Schlüsselzahlen generieren →](06_generierung.md)
