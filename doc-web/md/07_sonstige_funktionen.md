@@ -10,8 +10,8 @@ Sobald Daten geladen sind, stehen in der **Seitenleiste** folgende Exportfunktio
 |----------|--------------|
 | Ergebnisse exportieren | Exportiert die generierten Schlüsselzahlen als CSV-Datei mit Gruppen, Mannschaften, Schlüsselzahlen, Wunsch-Schlüsselzahlen, Spielwochen und Zusatz-Vorgaben. Falls die zugewiesene Schlüsselzahl nicht in der Wunschliste enthalten ist (Konflikt), wird dies in der Spalte "Wunsch" sichtbar. |
 | Terminmeldung exportieren | Exportiert eine CSV-Datei mit Spieltag (Wochentag + Uhrzeit) und Ersatzspieltag je Mannschaft. Nützlich, um die Vollständigkeit der Terminmeldung zu überprüfen. |
-| Konfiguration exportieren | Exportiert die aktuelle Konfiguration als JSON-Datei. Die Konfiguration enthält Heim- und Auswärtsspieltage je Raster, die Referenzrastergrößen, die minimale/maximale Rastergröße sowie die unterstützten Altersklassen. |
-| Konfiguration importieren | Importiert eine Konfiguration aus einer JSON-Datei und ersetzt damit alle oben genannten Einstellungen (Spielpläne, Referenzraster, Rastergrößen, Altersklassen). |
+| Konfiguration exportieren | Exportiert die aktuelle Konfiguration als JSON-Datei. Die Konfiguration enthält Heim- und Auswärtsspieltage je Raster, die Referenzrastergrößen, die minimale/maximale Rastergröße, die unterstützten Altersklassen, die Anzahl der bevorzugten internen Spielwochen sowie die maximal tolerierte Abweichung bei ähnlichen Schlüsselzahlen. |
+| Konfiguration importieren | Importiert eine Konfiguration aus einer JSON-Datei und ersetzt damit alle oben genannten Einstellungen (Spielpläne, Referenzraster, Rastergrößen, Altersklassen, interne Spielwochen, max. Abweichung). |
 | CSV exportieren (historisch) | Exportiert die Daten in ein älteres CSV-Format. |
 | CSV importieren (historisch) | Importiert Daten aus einem älteren CSV-Format. |
 
@@ -57,7 +57,7 @@ Mit der Schlüsselzahlen-Generierung im engeren Sinne hat diese Zusatzfunktion n
 
 ## 7.4 Konfiguration exportieren und importieren
 
-Die Konfiguration legt fest, welche Spielpläne (Heim-/Auswärtsspieltage je Raster), Referenzrastergrößen, minimale und maximale Rastergrößen sowie Altersklassen unterstützt werden.
+Die Konfiguration legt fest, welche Spielpläne (Heim-/Auswärtsspieltage je Raster), Referenzrastergrößen, minimale und maximale Rastergrößen sowie Altersklassen unterstützt werden. Sie enthält außerdem die Anzahl der Spielwochen, in denen interne Begegnungen bevorzugt werden sollen (`internalWeeks`, Standard: 3), sowie die maximale Schrittweite, innerhalb derer eine Schlüsselzahl noch als „ähnlich" gilt (`maxDeviation`, Standard: 2).
 Sie kann gespeichert und auf einem anderen Rechner oder in einer anderen Saison wiederverwendet werden.
 
 **Konfiguration exportieren:**

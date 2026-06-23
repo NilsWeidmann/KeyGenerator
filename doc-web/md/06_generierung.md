@@ -8,7 +8,7 @@ Nachdem alle Daten eingegeben und alle Wünsche der Vereine berücksichtigt word
 
 1. Klicken Sie in der [Übersicht](05_startbildschirm.md) auf den Button **Generieren**.
 2. Vor der Generierung wird automatisch eine Sicherheitskopie des aktuellen Standes angelegt, die Sie bei Bedarf später wiederherstellen können (siehe [7.1 Backup laden](07_sonstige_funktionen.md#71-backup-laden)).
-3. Die Anwendung wechselt auf die Seite **Optimierung**, die einen Fortschrittsbalken und den aktuellen Status anzeigt.
+3. Die Anwendung wechselt auf die Seite **Optimierung**, die einen Fortschrittsbalken, den aktuellen Status sowie die laufend aktualisierte Anzahl an Konflikten und internen Begegnungen anzeigt.
 4. Sie können die Generierung jederzeit über den Button **Abbrechen** vorzeitig beenden.
 
 **Hinweis:** Vor der Generierung wird eine Plausibilitätsprüfung durchgeführt.
@@ -50,7 +50,8 @@ Die verbliebenen Konflikte können zu einem späteren Zeitpunkt über den Link *
 ## 6.2 Konflikte auflösen
 
 Nach dem Abschluss einer Generierung erscheint in der Seitenleiste der Link **Konflikte auflösen**.
-Über diesen Link gelangen Sie jederzeit zurück auf die Seite zur Konfliktauflösung (wie in [6.1 Konflikte beheben](#61-konflikte-beheben) beschrieben), um Konflikte erneut zu bearbeiten.
+Über diesen Link gelangen Sie jederzeit zurück auf die Seite zur Konfliktauflösung, um Konflikte erneut zu bearbeiten.
+Dabei werden zusätzlich Konflikte erkannt, die sich aus Spielplan-Einschränkungen ergeben (Heim-/Auswärtsspielvorgaben sowie Spielfreiwünsche); bestehende Schlüsselzahlzuweisungen bleiben erhalten.
 
 Der Link bleibt sichtbar, bis ein Backup geladen oder ein neuer Datenimport durchgeführt wird.
 

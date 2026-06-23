@@ -31,7 +31,7 @@ Der obere Bereich ("Gruppen") dient dem Import der Gruppen und ihrer Mannschafte
 1. Klicken Sie auf den Button **Durchsuchen** rechts oben.
 2. Wählen Sie eine CSV-Datei aus, die die Gruppeninformationen enthält (z.B. `Tabellen.csv`). Diese muss zuvor aus Click-TT heruntergeladen worden sein (Abschnitt [B.1](B_download_aus_click-tt.md#b1-gruppenstruktur-als-csv-datei-herunterladen)).
 3. Nach dem Import erscheinen links die Gruppen und rechts die Mannschaften der jeweils ausgewählten Gruppe.
-4. Die Rastergrößen der Gruppen werden automatisch anhand der Teamanzahl ermittelt, und können ggf. manuell angepasst werden (Abschnitt 4.2).
+4. Die Rastergrößen der Gruppen werden automatisch anhand der Teamanzahl ermittelt; als Minimum gilt dabei die eingestellte Referenzrastergröße für die Spielwochen A/B. Sie können ggf. manuell angepasst werden (Abschnitt 4.2).
 
 > **Ansicht: Fenster „click-tt Import" nach dem Gruppenimport**
 >
@@ -45,7 +45,7 @@ Der untere Bereich ("Terminmeldung") dient dem Import der Vereinsinformationen u
 
 1. Klicken Sie auf den Button **Durchsuchen** rechts.
 2. Wählen Sie eine HTML-Datei aus, die die Terminmeldungen enthält. Diese muss zuvor wie in den Abschnitten [B.2](B_download_aus_click-tt.md#b2-terminmeldung-als-pdf-datei-herunterladen) – [B.4](B_download_aus_click-tt.md#b4-terminmeldung-in-eine-html-datei-konvertieren) beschrieben erstellt worden sein. Wir hoffen, dass in naher Zukunft ein direkter Download der Terminmeldung in Click-TT zur Verfügung steht. 
-3. Nach dem Import erscheinen links die Vereine und rechts die Mannschaften des jeweils ausgewählten Vereins. In den Spalten A,B,X und Y können Schlüsselzahlen basierend auf Vorgaben einer höheren Ebene eingetragen werden. 
+3. Nach dem Import erscheinen links die Vereine und rechts die Mannschaften des jeweils ausgewählten Vereins. In den Spalten A,B,X und Y können Schlüsselzahlen basierend auf Vorgaben einer höheren Ebene eingetragen werden. Spielfreiwünsche aus der Terminmeldung werden automatisch erkannt und bei der Generierung berücksichtigt. 
 
 Klicken Sie abschließend auf **Speichern**, um die Daten in eine JSON-Datei zu exportieren.
 Der Button befindet sich unten rechts im Fenster.

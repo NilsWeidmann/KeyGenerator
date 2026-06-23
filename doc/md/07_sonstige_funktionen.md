@@ -10,11 +10,12 @@
 |----------|--------------|
 | Backup laden | Lädt eine zuvor gespeicherte Sicherheitskopie (z.B. den Stand vor der letzten Generierung). Siehe Abschnitt 7.1. |
 | Terminmeldung speichern | Exportiert eine CSV-Datei mit Spieltag (Wochentag + Uhrzeit) und Ersatzspieltag je Mannschaft. Nützlich, um die Vollständigkeit der Terminmeldung zu überprüfen. |
-| Konfiguration exportieren | Exportiert die aktuelle Konfiguration an einen gewählten Speicherort. Die Konfiguration enthält Heim- und Auswärtsspieltage je Raster, die Referenzrastergrößen, die minimale/maximale Rastergröße sowie die unterstützten Altersklassen. |
-| Konfiguration importieren | Importiert eine Konfiguration aus einer JSON-Datei und ersetzt damit alle oben genannten Einstellungen (Spielpläne, Referenzraster, Rastergrößen, Altersklassen). |
+| Konfiguration exportieren | Exportiert die aktuelle Konfiguration an einen gewählten Speicherort. Die Konfiguration enthält Heim- und Auswärtsspieltage je Raster, die Referenzrastergrößen, die minimale/maximale Rastergröße, die unterstützten Altersklassen, die Anzahl der bevorzugten internen Spielwochen sowie die maximal tolerierte Abweichung bei ähnlichen Schlüsselzahlen. |
+| Konfiguration importieren | Importiert eine Konfiguration aus einer JSON-Datei und ersetzt damit alle oben genannten Einstellungen (Spielpläne, Referenzraster, Rastergrößen, Altersklassen, interne Spielwochen, max. Abweichung). |
 | CSV exportieren (histor.) | Exportiert die Daten in ein älteres CSV-Format. |
 | CSV importieren (histor.) | Importiert Daten aus einem älteren CSV-Format. |
-| Konflikte neu auflösen | Setzt alle Mannschafts-Schlüsselzahlen auf die aus dem Vereinswochenschema abgeleiteten Werte zurück und startet die Konflikterkennung/-auflösung erneut. Nützlich, wenn die Konfliktauflösung unterbrochen wurde, oder die Konflikte neu bewertet werden sollen. |
+| Konflikte neu auflösen | Erkennt Konflikte, die sich aus Spielplan-Einschränkungen (Heim-/Auswärts- und Spielfreivorgaben) ergeben, und ermöglicht deren Auflösung. Bestehende Schlüsselzahlzuweisungen bleiben dabei erhalten. |
+| Alle Schlüssel löschen | Löscht alle zugewiesenen Mannschafts- und Vereins-Schlüsselzahlen. Diese Aktion kann über **Rückgängig** rückgängig gemacht werden. Siehe Abschnitt 7.7. |
 | Ergebnisse exportieren | Exportiert die generierten Schlüsselzahlen als CSV-Datei mit Gruppen, Mannschaften, Schlüsselzahlen, Wunsch-Schlüsselzahlen, Spielwochen und Zusatz-Vorgaben. Falls die zugewiesene Schlüsselzahl nicht in der Wunschliste enthalten ist (Konflikt), wird dies in der Spalte "Wunsch" sichtbar. |
 | Generator-Tests | Startet automatisierte Tests des Generierungsalgorithmus (für die normale Anwendung nicht notwendig). |
 | Tests aus Datei | Führt Tests aus einer Datei aus (für die normale Anwendung nicht notwendig). |
@@ -61,18 +62,18 @@ Mit der Schlüsselzahlen-Generierung im engeren Sinne hat diese Zusatzfunktion n
 
 ## 7.4 Konflikte neu auflösen
 
-Falls die Konfliktauflösung unterbrochen wurde oder die Ergebnisse neu bewertet werden sollen, kann sie erneut gestartet werden:
+Diese Funktion ermöglicht es, nach einer erfolgten Generierung Konflikte erneut zu erkennen und zu beheben, die sich aus den Spielplan-Einschränkungen ergeben (Heim-/Auswärtsspielvorgaben sowie Spielfreiwünsche):
 
 1. Klicken Sie auf **Sonstiges** im Startbildschirm.
 2. Klicken Sie auf **Konflikte neu auflösen**.
 3. Es erscheint ein Dialogfenster zur Auflösung von Konflikten (siehe [6.1 Konflikte beheben](06_generierung.md#61-konflikte-beheben))
 
-Dabei werden alle Mannschafts-Schlüsselzahlen auf die aus dem Vereinswochenschema abgeleiteten Ausgangswerte zurückgesetzt und die Konflikterkennung sowie -auflösung werden erneut durchgeführt.
-Bereits vorgenommene Anpassungen an den Schlüsselzahlen gehen dabei verloren.
+Im Gegensatz zu einer vollständigen Neu-Generierung bleiben dabei die bereits vorgenommenen Schlüsselzahlzuweisungen erhalten.
+Nur die erkannten Konflikte bezüglich der Spielplan-Einschränkungen werden zur Auflösung angeboten.
 
 ## 7.5 Konfiguration exportieren und importieren
 
-Die Konfiguration legt fest, welche Spielpläne (Heim-/Auswärtsspieltage je Raster), Referenzrastergrößen, minimale und maximale Rastergrößen sowie Altersklassen unterstützt werden.
+Die Konfiguration legt fest, welche Spielpläne (Heim-/Auswärtsspieltage je Raster), Referenzrastergrößen, minimale und maximale Rastergrößen sowie Altersklassen unterstützt werden. Sie enthält außerdem die Anzahl der Spielwochen, in denen interne Begegnungen bevorzugt werden sollen (`internalWeeks`, Standard: 3), sowie die maximale Schrittweite, innerhalb derer eine Schlüsselzahl noch als „ähnlich" gilt (`maxDeviation`, Standard: 2).
 Sie kann gespeichert und auf einem anderen Rechner oder in einer anderen Saison wiederverwendet werden.
 
 **Konfiguration exportieren:**
@@ -104,6 +105,16 @@ Für den Austausch mit älteren Versionen des Programms steht ein CSV-basiertes 
 
 Beachten Sie, dass dieses Format nur für die Kompatibilität mit älteren Programmversionen vorgesehen ist.
 Für die normale Nutzung empfiehlt sich das JSON-basierte Speicherformat (siehe [4.3 Laden aus Datei](04_datenimport.md#43-laden-aus-datei)).
+
+## 7.7 Alle Schlüssel löschen
+
+Mit dieser Funktion werden alle zugewiesenen Mannschafts- und Vereins-Schlüsselzahlen auf einmal entfernt:
+
+1. Klicken Sie auf **Sonstiges** im Startbildschirm.
+2. Klicken Sie auf **Alle Schlüssel löschen**.
+3. Es erscheint eine Sicherheitsabfrage. Bestätigen Sie die Aktion.
+
+Die Löschung kann über **Strg+Z** (Rückgängig) jederzeit rückgängig gemacht werden.
 
 ---
 

@@ -6,8 +6,10 @@
 
 Nachdem alle Daten eingegeben und alle Wünsche der Vereine berücksichtigt worden sind, kann die eigentliche Generierung der Schlüsselzahlen beginnen.
 
+Das Kontrollkästchen **Interne Begegnungen möglichst vorziehen** (unterhalb der Haupttabelle) steuert, ob der Optimierungsalgorithmus versucht, Begegnungen zwischen zwei Teams desselben Vereins innerhalb derselben Gruppe in die ersten Spielwochen zu legen. Die Option ist standardmäßig aktiviert; deaktivieren Sie sie, um keine entsprechende Präferenz zu verwenden.
+
 1. Klicken Sie im Startbildschirm auf den Button **Generieren**.
-2. Es erscheint das Fenster "Bitte Warten" mit einem Fortschrittsbalken und der verbleibenden Zeit.
+2. Es erscheint das Fenster "Bitte Warten" mit einem Fortschrittsbalken, der verbleibenden Zeit sowie der laufend aktualisierten Anzahl an Konflikten und internen Begegnungen.
 3. Vor der Generierung wird automatisch eine Sicherheitskopie des aktuellen Standes angelegt, die Sie bei Bedarf später wiederherstellen können (siehe [7.1 Backup laden](07_sonstige_funktionen.md#71-backup-laden)).
 4. Sie können die Generierung jederzeit über den Button **Abbrechen** vorzeitig beenden.
 

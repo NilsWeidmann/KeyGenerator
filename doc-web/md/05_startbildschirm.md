@@ -11,6 +11,7 @@ Im oberen Bereich der Übersicht befinden sich links drei Kennzahlen-Kacheln (An
 
 - **Generieren**: Startet die automatische Schlüsselzahlgenerierung (siehe [6. Schlüsselzahlen generieren](06_generierung.md)).
 - **Backup laden**: Öffnet ein Dropdown-Menü mit den verfügbaren Sicherheitskopien der aktuellen Sitzung (siehe [7.1 Backup laden](07_sonstige_funktionen.md#71-backup-laden)).
+- **Schlüssel löschen**: Löscht alle zugewiesenen Mannschafts- und Vereins-Schlüsselzahlen. Diese Aktion kann über **Rückgängig** rückgängig gemacht werden.
 - **↶ Rückgängig** (oder **Strg+Z**): Letzte Änderung rückgängig machen.
 - **↷ Wiederherstellen** (oder **Strg+Y**): Rückgängig gemachte Änderung wiederherstellen.
 - **Speichern** (oder **Strg+S**): Lädt die aktuellen Daten als `Data.json` herunter.
