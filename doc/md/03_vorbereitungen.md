@@ -54,7 +54,7 @@ Diese Referenzraster bestimmen, welche Schlüsselzahlen für die jeweiligen Spie
 **Wichtig:** Alle drei Buttons für den Datenimport (**Manuell**, **Aus Click-TT**, **Aus Datei**) werden erst aktiviert, sobald beide Referenzraster ausgewählt sind.
 Da die Standardwerte aus der Konfiguration vorbelegt werden, sind die Buttons beim Start in der Regel sofort verfügbar.
 
-Wenn Sie die Referenzraster nachträglich ändern, werden alle Vereins-Schlüsselzahlen, die den neuen Bereich überschreiten, automatisch zurückgesetzt.
+Wenn Sie die Referenzraster nachträglich ändern, werden alle Vereins-Schlüsselzahlen, die den neuen Bereich überschreiten, automatisch auf 0 zurückgesetzt. Eine Meldung nennt die betroffenen Vereine.
 
 > **Beispiel: Referenzraster**
 >

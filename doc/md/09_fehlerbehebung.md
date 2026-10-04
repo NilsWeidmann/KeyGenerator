@@ -10,10 +10,11 @@ Die folgende Tabelle enthält eine Übersicht über häufig auftretende Fehler u
 |---------|--------|
 | "Es konnten keine Schlüsselzahlen ermittelt werden!" | Widersprüchliche Vorgaben überprüfen. Laufzeit erhöhen. Feste Vorgaben reduzieren. |
 | "Inkonsistenter Spielplan"-Meldung | Heim-/Auswärtsspielvorgaben für das genannte Team überprüfen. Sicherstellen, dass Teams desselben Vereins in derselben Spielwoche kompatible Vorgaben haben. |
-| Schlüsselzahlen bei Referenzrasteränderung zurückgesetzt | Das ist erwartetes Verhalten. Schlüsselzahlen, die den neuen Bereich überschreiten, werden automatisch auf 0 zurückgesetzt. |
+| Schlüsselzahlen bei Referenzrasteränderung zurückgesetzt | Das ist erwartetes Verhalten. Schlüsselzahlen, die den neuen Bereich überschreiten, werden automatisch auf 0 zurückgesetzt; eine Meldung nennt die betroffenen Vereine. Tragen Sie dort bei Bedarf neue Schlüsselzahlen ein. |
+| "Ungültige Rastergröße" | Die eingegebene Rastergröße ist für die Gruppe nicht zulässig und wurde zurückgesetzt. Die Meldung nennt die zulässigen Rastergrößen (siehe [5.2 Gruppensicht](05_startbildschirm.md#52-gruppensicht)). |
 | Button "Generieren" ist nicht aktiviert | Stellen Sie sicher, dass Daten geladen oder importiert wurden. |
 | Buttons für Datenimport sind nicht aktiviert | Stellen Sie sicher, dass beide Referenzraster eingestellt sind. |
-| Fehlermeldung "Config validation failed" beim Programmstart oder Konfigurationsimport | Die geladene Konfigurationsdatei enthält ungültige Werte (z.B. leere Altersklassen, widersprüchliche Rastergrößen oder fehlerhafte Spielplan-Einträge). Die Fehlermeldung listet die konkreten Verstöße auf. Exportieren Sie über **Sonstiges** → **Konfiguration exportieren** eine gültige Konfiguration und verwenden Sie diese als Vorlage. |
+| Fehlermeldung "Die Konfiguration ist ungültig" beim Programmstart oder Konfigurationsimport | Die geladene Konfigurationsdatei enthält ungültige Werte (z.B. leere Altersklassen, widersprüchliche Rastergrößen oder fehlerhafte Spielplan-Einträge). Die Fehlermeldung listet die konkreten Verstöße auf. Exportieren Sie über **Sonstiges** → **Konfiguration exportieren** eine gültige Konfiguration und verwenden Sie diese als Vorlage. |
 
 ---
 

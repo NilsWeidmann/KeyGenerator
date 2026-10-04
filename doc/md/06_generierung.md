@@ -19,19 +19,20 @@ Wenn widersprüchliche Vorgaben erkannt werden (z.B. inkonsistente Spieltagsvorg
 ## 6.1 Konflikte beheben
 
 Nach Ablauf der Laufzeit oder wenn die optimale Lösung gefunden wurde, erscheint das Fenster "Alternativen", falls Konflikte aufgetreten sind (was der Normalfall sein sollte).
-Ein Konflikt liegt vor, wenn mehrere Teams einer Gruppe dieselbe Schlüsselzahl beanspruchen.
+Da jede Schlüsselzahl in einer Gruppe nur einmal vergeben wird, kann nicht jedes Team immer seine Wunsch-Schlüsselzahl erhalten. Ein Konflikt liegt vor, wenn die zugewiesene Schlüsselzahl eines Teams nicht zu seinen Wunsch-Schlüsselzahlen gehört. Zu einem Konflikt gehören alle Teams der Gruppe, die dieselbe Wunsch-Schlüsselzahl beanspruchen, sowie das Team, das diese Schlüsselzahl derzeit hat.
 
 Das Fenster zeigt folgende Informationen:
 
 - **Konflikt**: Dropdown-Menü zur Auswahl des zu bearbeitenden Konflikts.
 - **Gruppe**: Die betroffene Gruppe.
-- **Team 1–3**: Die betroffenen Mannschaften (maximal drei pro Konflikt).
-- **Wunsch**: Die eigentlich gewünschten Schlüsselzahlen der Mannschaften.
-- **Schlüssel**: Dropdown-Menüs, über die Sie den Mannschaften jeweils eine andere Schlüsselzahl zuweisen können.
+- **Tabelle der Mannschaften**: Alle betroffenen Mannschaften des Konflikts, je Zeile mit folgenden Spalten:
+  - **Team**: Name der Mannschaft.
+  - **Wunsch**: Die eigentlich gewünschten Schlüsselzahlen der Mannschaft.
+  - **Schlüssel**: Dropdown-Menü, über das Sie der Mannschaft eine andere Schlüsselzahl zuweisen können.
 
-Zur Auswahl stehen die ursprünglich gewünschte Schlüsselzahl sowie bis zu zwei ähnliche Schlüsselzahlen, die noch frei sind.
+Zur Auswahl stehen die ursprünglich gewünschte Schlüsselzahl sowie bis zu zwei ähnliche Schlüsselzahlen, die noch frei sind und zu den Heim-/Auswärtsvorgaben der Mannschaft passen. Die aktuell zugewiesene Schlüsselzahl bleibt ebenfalls auswählbar.
 
-**Vorschlag:** Über den Button **Vorschlag** können Sie einen automatischen Lösungsvorschlag generieren lassen, bei dem die Konflikte zufällig aufgelöst werden. Dies sollten Sie im Interesse der betroffenen Vereine nur zu Testzwecken tun, und nicht zur Ermittlung der finalen Schlüsselzahlen!
+**Vorschlag:** Über den Button **Vorschlag** können Sie einen automatischen Lösungsvorschlag generieren lassen, der alle Konflikte nach einem festen Verfahren auflöst (bei gleichen Daten ergibt sich stets derselbe Vorschlag). Vorher erscheint ein Warnhinweis: Dies sollten Sie im Interesse der betroffenen Vereine nur zu Testzwecken tun, und nicht zur Ermittlung der finalen Schlüsselzahlen!
 
 > **Ansicht: Fenster „Alternativen" – Konflikte beheben**
 >
@@ -40,7 +41,7 @@ Zur Auswahl stehen die ursprünglich gewünschte Schlüsselzahl sowie bis zu zwe
 > ![Fenster „Alternativen" – Konflikte beheben](../png/061-konflikte-auflösen.png)
 
 Klicken Sie auf **OK**, nachdem Sie jeden Konflikt gelöst haben.
-Falls ein Konflikt noch nicht aufgelöst ist oder für eine Mannschaft keine Schlüsselzahl vergeben wurde, erscheint eine entsprechende Fehlermeldung.
+Falls eine Schlüsselzahl in einer Gruppe noch mehrfach vergeben ist (auch an eine Mannschaft außerhalb des Konflikts) oder für eine Mannschaft keine Schlüsselzahl vergeben wurde, erscheint eine entsprechende Fehlermeldung.
 Sie können die Konfliktauflösung beenden, indem Sie auf den Button **Abbrechen** klicken oder das Fenster schließen und die Sicherheitsabfrage bestätigen.
 Die verbliebenen Konflikte können zu einem späteren Zeitpunkt über **Sonstiges** → **Konflikte neu auflösen** (siehe [7.4 Konflikte neu auflösen](07_sonstige_funktionen.md#74-konflikte-neu-aufloesen)) aufgelöst werden.
 

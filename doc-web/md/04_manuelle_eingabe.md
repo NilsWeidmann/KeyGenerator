@@ -30,6 +30,7 @@ Die obere Tabelle in der linken Spalte zeigt alle Gruppen mit folgenden Spalten:
 Klicken Sie auf die Schaltfläche **+ Gruppe**.
 Die neue Gruppe wird mit dem Standard-Referenzraster der Spielwochen A/B und dem Standardnamen "Neue Gruppe" angelegt.
 Name und Rastergröße können direkt in der Tabelle bearbeitet werden.
+Eine ungültige Rastergröße (siehe [5.2 Gruppenansicht](05_startbildschirm.md#52-gruppenansicht)) wird zurückgesetzt; eine Meldung nennt die für die Gruppe zulässigen Rastergrößen.
 
 **Gruppe auswählen:**
 Klicken Sie auf eine Zeile in der Gruppentabelle, um die zugehörigen Mannschaften in der rechten Spalte anzuzeigen (Gruppenansicht).
@@ -59,6 +60,7 @@ Die untere Tabelle in der linken Spalte zeigt alle Vereine mit folgenden Spalten
 **Vereine anlegen:**
 Klicken Sie auf die Schaltfläche **+ Verein**.
 Der neue Verein wird mit einem Standardnamen angelegt; Name und Schlüsselzahlen können direkt in der Tabelle bearbeitet werden.
+Umlaute im Vereinsnamen werden dabei automatisch ersetzt.
 Legen Sie zunächst alle Vereine an, bevor Sie mit der Zuordnung von Mannschaften zu den Gruppen beginnen.
 
 **Verein auswählen:**
@@ -69,6 +71,10 @@ In dieser Ansicht ist auch die Spielwochenzuordnung der Mannschaften sichtbar un
 Wenn vom Verband oder Bezirk bereits Schlüsselzahlen für bestimmte Vereine vorgegeben sind, tragen Sie diese in der entsprechenden Spalte (A, B, X oder Y) ein.
 Die gegenläufige Schlüsselzahl (also B zu A, Y zu X usw.) wird automatisch berechnet.
 Es können nur Zahlen eingetragen werden, die für das eingestellte Referenzraster gültig sind.
+
+**Vereine umbenennen:**
+Ändern Sie den Vereinsnamen in der Vereinstabelle.
+Die Umbenennung wird automatisch auf die Teamnamen aller Mannschaften des Vereins übertragen.
 
 **Vereine löschen:**
 Klicken Sie auf das Lösch-Symbol (Papierkorb) in der entsprechenden Zeile.

@@ -82,7 +82,7 @@ Wählen Sie dazu in der linken Spalte die gewünschte Gruppe aus der Liste aus.
 Jeder Listeneintrag zeigt den Gruppennamen sowie die Teamanzahl und die Rastergröße.
 
 Oberhalb der Tabelle erscheint das Feld **Raster**, in dem die Rastergröße der Gruppe geändert werden kann (eine komfortablere Alternative bietet die Seite [4. Manuelle Eingabe: Gruppentabelle](04_manuelle_eingabe.md#linke-spalte-gruppentabelle)).
-Die Rastergröße muss mindestens so groß sein wie die Anzahl der Mannschaften in der Gruppe (aufgerundet auf eine gerade Zahl) und darf maximal 14 betragen.
+Die Rastergröße muss mindestens so groß sein wie die Anzahl der Mannschaften in der Gruppe (aufgerundet auf eine gerade Zahl) und darf maximal 14 betragen. Eine ungültige Eingabe wird zurückgesetzt; eine Meldung nennt die zulässigen Rastergrößen.
 Die maximale Rastergröße gilt nur für die Standard-Konfiguration. Durch das Laden einer anderen Konfiguration (siehe [7.4 Konfiguration exportieren und importieren](07_sonstige_funktionen.md#74-konfiguration-exportieren-und-importieren)) können beliebig große Raster verwendet werden.
 
 ### Tabellenspalten in der Gruppenansicht
@@ -142,10 +142,12 @@ Unterhalb der Spielwochenauswahl befindet sich eine Tabelle mit zwei Spalten:
 | Spalte | Bedeutung |
 |--------|-----------|
 | Spieltag | Nummer des Spieltags (1, 2, 3, …) |
-| Heim / Auswärts | Dropdown-Menü mit den Optionen `-` (keine Vorgabe), `Heimspiel` oder `Auswärtsspiel` |
+| Heim / Auswärts | Dropdown-Menü mit den Optionen `-` (keine Vorgabe), `Heimspiel`, `Auswärtsspiel` oder `Spielfrei` |
 
 Die Anzahl der angezeigten Spieltage wird dynamisch anhand der Rastergröße der Gruppe bestimmt.
 Bei einer Gruppe mit Rastergröße 12 werden beispielsweise 11 Spieltage angezeigt, bei Rastergröße 10 entsprechend 9.
+
+Mit `Spielfrei` tragen Sie einen Spielfreiwunsch ein: Die Generierung versucht dann, dem Team an diesem Spieltag kein Spiel zuzuweisen, sie garantiert es aber nicht. Spielfreiwünsche werden nicht aus der Terminmeldung übernommen, sondern ausschließlich hier eingetragen.
 
 Bestätigen Sie Ihre Eingaben mit **Speichern** oder verwerfen Sie sie mit **Abbrechen**.
 

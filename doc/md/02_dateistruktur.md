@@ -11,7 +11,7 @@ Beim Arbeiten mit dem Tool werden folgende Dateien erzeugt bzw. verwendet:
 | Name | Bedeutung |
 |------|-----------|
 | `KeyGenerator.exe` | Eigentliche Anwendung |
-| `Data.json` | Arbeitsdatei mit allen Gruppen-, Vereins- und Mannschaftsdaten |
+| `Data.json` | Arbeitsdatei mit allen Gruppen-, Vereins- und Mannschaftsdaten einschließlich der Partnerschaften |
 | `Log.csv` | Protokolldatei der Generierungsläufe (Zeitstempel, Laufzeit, Konflikte, Status) |
 | `Terminmeldung.csv` | Exportierte Spieltagsinformationen je Mannschaft |
 | `Results.csv` | Exportierte Ergebnisse der Schlüsselzahlgenerierung |

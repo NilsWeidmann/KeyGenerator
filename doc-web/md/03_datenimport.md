@@ -30,6 +30,7 @@ Die Referenzrastergrößen legen fest, welche Schlüsselzahlen auf Vereinsebene 
 - **Referenzraster für Woche X/Y**: Bestimmt die Rastergröße für die Spielwochen X und Y.
 
 Die möglichen Rastergrößen sind **6, 8, 10, 12** und **14**.
+Wenn Sie die Referenzraster nachträglich ändern, werden alle Vereins-Schlüsselzahlen, die den neuen Bereich überschreiten, automatisch auf 0 zurückgesetzt. Ein Hinweis nennt die betroffenen Vereine.
 Die Voreinstellungen (standardmäßig 12 für A/B und 10 für X/Y) sind in der eingebetteten Konfiguration hinterlegt und werden beim Start automatisch geladen.
 
 Falls abweichende Referenzraster benötigt werden, kann eine angepasste Konfigurationsdatei über den Link **Konfiguration importieren** in der Seitenleiste eingelesen werden (siehe [7.4 Konfiguration exportieren und importieren](07_sonstige_funktionen.md#74-konfiguration-exportieren-und-importieren)).
@@ -77,7 +78,7 @@ Er ist erst verfügbar, nachdem Schritt 1 abgeschlossen wurde.
 
 1. Klicken Sie auf **Durchsuchen...** im zweiten Schritt.
 2. Wählen Sie eine HTML-Datei aus, die die Terminmeldungen enthält. Diese muss zuvor wie in den Abschnitten [B.2](B_download_aus_click-tt.md#b2-terminmeldung-als-pdf-datei-herunterladen) – [B.4](B_download_aus_click-tt.md#b4-terminmeldung-in-eine-html-datei-konvertieren) beschrieben erstellt worden sein. Wir hoffen, dass in naher Zukunft ein direkter Download der Terminmeldung in Click-TT zur Verfügung steht.
-3. Nach dem Import erscheint eine grüne Bestätigung mit der Anzahl der geladenen Vereine. Spielfreiwünsche aus der Terminmeldung werden automatisch erkannt und bei der Generierung berücksichtigt.
+3. Nach dem Import erscheint eine grüne Bestätigung mit der Anzahl der geladenen Vereine. Spielfreiwünsche werden aus der Terminmeldung nicht übernommen; tragen Sie sie bei Bedarf im Dialog „Zusatz" als **Spielfrei** ein (siehe [5.3 Zusätzliche Einstellungen für einzelne Teams](05_startbildschirm.md#53-zusaetzliche-einstellungen-fuer-einzelne-teams)).
 
 Nach erfolgreichem Import beider Dateien wird die Schaltfläche **Zur Übersicht →** am unteren Rand der Seite aktiv; alternativ können Sie auch über den Link **Übersicht** in der Seitenleiste zur zentralen Arbeitsfläche wechseln.
 

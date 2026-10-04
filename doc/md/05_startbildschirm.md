@@ -124,10 +124,12 @@ Unterhalb der Spielwochenauswahl befindet sich eine Tabelle mit zwei Spalten:
 | Spalte | Bedeutung |
 |--------|-----------|
 | Spieltag | Nummer des Spieltags (1, 2, 3, …) |
-| Heim/Auswärts | Dropdown-Menü mit den Optionen `-` (keine Vorgabe), `Heimspiel` oder `Auswärtsspiel` |
+| Heim/Auswärts | Dropdown-Menü mit den Optionen `-` (keine Vorgabe), `Heimspiel`, `Auswärtsspiel` oder `Spielfrei` |
 
 Die Anzahl der angezeigten Spieltage wird dynamisch anhand der Rastergröße der Gruppe bestimmt.
 Bei einer Gruppe mit Rastergröße 12 werden beispielsweise 11 Spieltage angezeigt, bei Rastergröße 10 entsprechend 9.
+
+Mit `Spielfrei` tragen Sie einen Spielfreiwunsch ein: Die Generierung versucht dann, dem Team an diesem Spieltag kein Spiel zuzuweisen, sie garantiert es aber nicht. Spielfreiwünsche werden nicht aus der Terminmeldung übernommen, sondern ausschließlich hier eingetragen.
 
 Bestätigen Sie Ihre Eingaben mit **OK** oder verwerfen Sie sie mit **Abbrechen**.
 
