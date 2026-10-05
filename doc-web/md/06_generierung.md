@@ -71,7 +71,7 @@ Eine Liste mit häufigen Fehlerquellen und deren Auflösung finden Sie in Abschn
 ## 6.4 Kontrolle und Übergabe
 
 Nach der Generierung empfiehlt es sich, die Ergebnisse in der **Gruppenansicht** (siehe [5.2 Gruppenansicht](05_startbildschirm.md#52-gruppenansicht)) zu kontrollieren.
-Da nun alle Teams eine Schlüsselzahl haben sollten, sind alle Zeilen grün, orange (im Konfliktfall) oder weiß (bei Mannschaften ohne Vorgaben) eingefärbt.
+Da nun alle Teams eine Schlüsselzahl haben sollten, sind alle Zeilen grün, orange (im Konfliktfall oder wenn eine Mannschaft ohne Spielwoche ihre Heim-/Auswärts- bzw. Spielfrei-Vorgaben nicht erfüllt bekommt) oder weiß (bei Mannschaften ohne Spielwoche und ohne Vorgaben) eingefärbt.
 Mithilfe dieser Übersicht können Sie die Schlüsselzahlen in Click-TT oder in ein sonstiges Verwaltungssystem übertragen.
 
 > **Beispiel: Gruppenansicht – Bezirksoberliga Erwachsene nach der Generierung**

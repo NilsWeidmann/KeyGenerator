@@ -17,10 +17,10 @@ Die Spielwoche kann bearbeitet werden, alle anderen Spalten sind nur zur Anzeige
 | Spalte | Bedeutung |
 |--------|-----------|
 | Woche | Zugeordnete Spielwoche (A, B, X, Y oder leer). Bearbeitung: Klicken Sie in die Zelle und geben Sie die gewünschte Woche ein. |
-| Gruppe | Name der Gruppe, in der die Mannschaft spielt |
 | Team | Name der Mannschaft |
-| Schlüssel | Zugewiesene Schlüsselzahl nach der Generierung |
+| Gruppe | Name der Gruppe, in der die Mannschaft spielt |
 | Wunsch | Mögliche Schlüsselzahlen basierend auf der Spielwochenvorgabe des Vereins |
+| Schlüssel | Zugewiesene Schlüsselzahl nach der Generierung |
 
 ### Farbcodierung in der Vereinssicht
 
@@ -75,10 +75,10 @@ Die Tabelle zeigt folgende Spalten (die Spalte "Woche" ist in der Gruppensicht *
 
 | Spalte | Bedeutung |
 |--------|-----------|
-| Gruppe | Name der Gruppe |
 | Team | Name der Mannschaft |
-| Schlüssel | Zugewiesene oder vorgegebene Schlüsselzahl |
+| Gruppe | Name der Gruppe |
 | Wunsch | Benötigte Schlüsselzahl(en) |
+| Schlüssel | Zugewiesene oder vorgegebene Schlüsselzahl |
 
 ### Farbcodierung in der Gruppensicht
 
@@ -86,11 +86,11 @@ In der Gruppensicht werden die Zeilen nach dem Zuweisungsstatus eingefärbt:
 
 | Farbe | Bedeutung |
 |-------|-----------|
-| Grün | Gültige Schlüsselzahl zugewiesen, die den Wunsch-Schlüsselzahlen entspricht und in der Gruppe eindeutig ist |
+| Grün | Gültige Schlüsselzahl zugewiesen, die den Wunsch-Schlüsselzahlen entspricht und in der Gruppe eindeutig ist; *oder*: Team hat keine Spielwochen-Vorgabe, aber Spieltag-Vorgaben (Heimspiel, Auswärtsspiel, Spielfrei), und die zugewiesene Schlüsselzahl erfüllt alle diese Vorgaben |
 | Blau | Team hat eine Spielwoche und Wunsch-Schlüsselzahlen (Vorgabe durch höhere Ebene), aber noch keine zugewiesene Schlüsselzahl |
-| Gelb | Team hat eine Spielwochen-Vorgabe, der Verein hat aber keine Schlüsselzahlen-Vorgabe durch eine höhere Ebene; *oder*: Team hat keine Spielwochen-Vorgabe, aber Vorgaben für Heim- oder Auswärtsspiele |
-| Orange | Schlüsselzahl stimmt nicht mit den Wunsch-Schlüsselzahlen überein; *oder*: die zugewiesene Schlüsselzahl ist in der Gruppe doppelt vergeben (ungelöster Konflikt) |
-| Weiß | Team hat keine Spielwoche und keine sonstigen Vorgaben |
+| Gelb | Team hat eine Spielwochen-Vorgabe, der Verein hat aber keine Schlüsselzahlen-Vorgabe durch eine höhere Ebene; *oder*: Team hat keine Spielwochen-Vorgabe, aber Spieltag-Vorgaben (Heimspiel, Auswärtsspiel, Spielfrei) und noch keine Schlüsselzahl |
+| Orange | Schlüsselzahl stimmt nicht mit den Wunsch-Schlüsselzahlen überein; *oder*: die zugewiesene Schlüsselzahl ist in der Gruppe doppelt vergeben (ungelöster Konflikt); *oder*: Team hat keine Spielwochen-Vorgabe, und die zugewiesene Schlüsselzahl verletzt eine seiner Spieltag-Vorgaben (Heim-/Auswärtsspiel nicht eingehalten oder Spiel an einem Spielfrei-Tag) |
+| Weiß | Team hat keine Spielwoche und keine Spieltag-Vorgaben |
 
 Die Gruppensicht eignet sich besonders zur **Kontrolle nach der Generierung**, da hier auf einen Blick alle Schlüsselzahlen einer Gruppe sichtbar sind.
 Orange eingefärbte Zeilen weisen auf Konflikte hin, die auch im Nachgang über **Sonstiges** → **Konflikte neu auflösen** (siehe [7.4 Konflikte neu auflösen](07_sonstige_funktionen.md#74-konflikte-neu-aufloesen)) behoben werden können.

@@ -17,7 +17,7 @@ Sobald Daten geladen sind, stehen in der **Seitenleiste** folgende Exportfunktio
 
 ## 7.1 Backup laden
 
-Vor jeder Generierung wird automatisch eine Sicherheitskopie des aktuellen Datenstands in der laufenden Sitzung erstellt.
+Vor jeder Generierung wird automatisch eine Sicherheitskopie des aktuellen Datenstands im Browser-Speicher erstellt.
 Falls Sie nach der Generierung einen Fehler bemerken, können Sie den vorherigen Zustand auf der **Übersicht** wiederherstellen:
 
 1. Klicken Sie in der Übersicht auf das Dropdown-Menü **Backup laden**.
@@ -32,7 +32,7 @@ Das Laden eines Backups deaktiviert außerdem den Link **Konflikte auflösen** i
 >
 > ![Dropdown-Menü „Backup laden"](../png/07-zusatzfunktionen.png)
 
-**Hinweis:** Sicherheitskopien werden nur für die Dauer der aktuellen Browser-Sitzung gespeichert. Beim Schließen des Browser-Tabs gehen sie verloren. Um den aktuellen Stand dauerhaft zu sichern, laden Sie die Daten über den Button **Speichern** als `Data.json` herunter.
+**Hinweis:** Sicherheitskopien werden nur im Speicher dieses Browsers abgelegt und bleiben auch nach dem Neuladen der Seite erhalten. Ist der Speicher voll, werden die ältesten Sicherheitskopien zuerst entfernt. Beim Löschen der Browserdaten gehen sie verloren. Um den aktuellen Stand dauerhaft zu sichern, laden Sie die Daten regelmäßig über den Button **Speichern** als `Data.json` herunter.
 
 ## 7.2 Ergebnisse exportieren
 

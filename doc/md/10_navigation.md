@@ -24,7 +24,7 @@ Die folgende Übersicht zeigt alle Fenster der Anwendung und wie diese vom Start
   - Konflikte neu auflösen
   - Generator-Tests / Tests aus Datei
   - Konfiguration exportieren/importieren
-  - CSV exportieren/importieren (historisch)
+  - CSV exportieren/importieren (histor.)
   - Abbrechen
 - **[Vereinssicht]** → Liste mit Teams des Vereins
 - **[Gruppensicht]** → Liste mit Teams der Gruppe

@@ -138,7 +138,7 @@ Die rechte Tabelle zeigt Mannschaftsdaten in zwei alternativen Anzeigemodi:
 - **Gruppenansicht**: Wird aktiviert durch Klick auf eine Zeile in der **Gruppentabelle** (links). Zeigt alle Mannschaften der ausgewählten Gruppe. Die Spalte "Woche" ist ausgeblendet. Der Teamname (Spalte "Team") ist direkt bearbeitbar.
 - **Vereinsansicht**: Wird aktiviert durch Klick auf eine Zeile in der **Vereinstabelle** (Mitte). Zeigt alle Mannschaften des ausgewählten Vereins gruppenübergreifend. Die Spalte "Woche" ist sichtbar und bearbeitbar (`A`, `B`, `X`, `Y` oder leer für keine Zuordnung). Der Teamname ist in diesem Modus nicht bearbeitbar.
 
-Die Spalten der Tabelle entsprechen denen der Hauptansicht (Woche, Gruppe, Team, Schlüssel, Wunsch). Die Spalten Gruppe, Schlüssel und Wunsch sind stets nur zur Anzeige.
+Die Spalten der Tabelle entsprechen denen der Hauptansicht (Woche, Team, Gruppe, Wunsch, Schlüssel). Die Spalten Gruppe, Schlüssel und Wunsch sind stets nur zur Anzeige.
 
 Ein **Rechtsklick** auf eine Mannschaft in der Tabelle öffnet den Zusatz-Dialog (siehe [5.3 Zusätzliche Einstellungen für einzelne Teams](05_startbildschirm.md#53-zusaetzliche-einstellungen-fuer-einzelne-teams)), in dem feste Vorgaben für Heim- und Auswärtsspiele in bestimmten Spielwochen eingetragen werden können.
 

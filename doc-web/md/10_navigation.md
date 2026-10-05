@@ -34,7 +34,7 @@ Die folgende Übersicht zeigt alle Seiten der Web-Anwendung und wie diese von de
   - Rechte Spalte: Betroffene Teams mit Schlüsselzahl-Dropdowns
   - Schaltfläche **Vorschlag** → automatischer Lösungsvorschlag
   - Schaltfläche **Anwenden & zur Übersicht** → Übersicht
-- **Seitenleiste → Ergebnisse exportieren** → Download `Ergebnisse.csv`
+- **Seitenleiste → Ergebnisse exportieren** → Download `Results.csv`
 - **Seitenleiste → Terminmeldung exportieren** → Download `Terminmeldung.csv`
 - **Seitenleiste → Konfiguration exportieren** → Download Konfiguration (JSON)
 - **Seitenleiste → Konfiguration importieren** → Dateiauswahl-Dialog

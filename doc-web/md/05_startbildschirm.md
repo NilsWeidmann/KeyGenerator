@@ -10,7 +10,7 @@ Sie ist erst erreichbar, nachdem Daten geladen wurden.
 Im oberen Bereich der Übersicht befinden sich links drei Kennzahlen-Kacheln (Anzahl der Gruppen, Teams und Vereine) und rechts die folgenden Schaltflächen:
 
 - **Generieren**: Startet die automatische Schlüsselzahlgenerierung (siehe [6. Schlüsselzahlen generieren](06_generierung.md)).
-- **Backup laden**: Öffnet ein Dropdown-Menü mit den verfügbaren Sicherheitskopien der aktuellen Sitzung (siehe [7.1 Backup laden](07_sonstige_funktionen.md#71-backup-laden)).
+- **Backup laden**: Öffnet ein Dropdown-Menü mit den verfügbaren Sicherheitskopien (siehe [7.1 Backup laden](07_sonstige_funktionen.md#71-backup-laden)).
 - **Schlüssel löschen**: Löscht alle zugewiesenen Mannschafts- und Vereins-Schlüsselzahlen. Diese Aktion kann über **Rückgängig** rückgängig gemacht werden.
 - **↶ Rückgängig** (oder **Strg+Z**): Letzte Änderung rückgängig machen.
 - **↷ Wiederherstellen** (oder **Strg+Y**): Rückgängig gemachte Änderung wiederherstellen.
@@ -103,11 +103,11 @@ In der Gruppenansicht werden die Zeilen nach dem Zuweisungsstatus eingefärbt:
 
 | Farbe | Bedeutung |
 |-------|-----------|
-| Grün | Gültige Schlüsselzahl zugewiesen, die den Wunsch-Schlüsselzahlen entspricht und in der Gruppe eindeutig ist |
+| Grün | Gültige Schlüsselzahl zugewiesen, die den Wunsch-Schlüsselzahlen entspricht und in der Gruppe eindeutig ist; *oder*: Team hat keine Spielwochen-Vorgabe, aber Spieltag-Vorgaben (Heimspiel, Auswärtsspiel, Spielfrei), und die zugewiesene Schlüsselzahl erfüllt alle diese Vorgaben |
 | Blau | Team hat eine Spielwoche und Wunsch-Schlüsselzahlen (Vorgabe durch höhere Ebene), aber noch keine zugewiesene Schlüsselzahl |
-| Gelb | Team hat eine Spielwochen-Vorgabe, der Verein hat aber keine Schlüsselzahlen-Vorgabe durch eine höhere Ebene; *oder*: Team hat keine Spielwochen-Vorgabe, aber Vorgaben für Heim- oder Auswärtsspiele |
-| Orange | Schlüsselzahl stimmt nicht mit den Wunsch-Schlüsselzahlen überein; *oder*: die zugewiesene Schlüsselzahl ist in der Gruppe doppelt vergeben (ungelöster Konflikt) |
-| Weiß | Team hat keine Spielwoche und keine sonstigen Vorgaben |
+| Gelb | Team hat eine Spielwochen-Vorgabe, der Verein hat aber keine Schlüsselzahlen-Vorgabe durch eine höhere Ebene; *oder*: Team hat keine Spielwochen-Vorgabe, aber Spieltag-Vorgaben (Heimspiel, Auswärtsspiel, Spielfrei) und noch keine Schlüsselzahl |
+| Orange | Schlüsselzahl stimmt nicht mit den Wunsch-Schlüsselzahlen überein; *oder*: die zugewiesene Schlüsselzahl ist in der Gruppe doppelt vergeben (ungelöster Konflikt); *oder*: Team hat keine Spielwochen-Vorgabe, und die zugewiesene Schlüsselzahl verletzt eine seiner Spieltag-Vorgaben (Heim-/Auswärtsspiel nicht eingehalten oder Spiel an einem Spielfrei-Tag) |
+| Weiß | Team hat keine Spielwoche und keine Spieltag-Vorgaben |
 
 Die Gruppenansicht eignet sich besonders zur **Kontrolle nach der Generierung**, da hier auf einen Blick alle Schlüsselzahlen einer Gruppe sichtbar sind.
 Orange eingefärbte Zeilen weisen auf Konflikte hin, die auch im Nachgang über den Link **Konflikte auflösen** in der Seitenleiste (siehe [6.2 Konflikte auflösen](06_generierung.md#62-konflikte-aufloesen)) behoben werden können.

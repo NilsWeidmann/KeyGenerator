@@ -95,12 +95,12 @@ Für den Austausch mit älteren Versionen des Programms steht ein CSV-basiertes 
 
 **CSV exportieren:**
 1. Klicken Sie auf **Sonstiges** im Startbildschirm.
-2. Klicken Sie auf **CSV exportieren (historisch)**.
+2. Klicken Sie auf **CSV exportieren (histor.)**.
 3. Wählen Sie im Verzeichnisdialog den gewünschten Speicherort aus.
 
 **CSV importieren:**
 1. Klicken Sie auf **Sonstiges** im Startbildschirm.
-2. Klicken Sie auf **CSV importieren (historisch)**.
+2. Klicken Sie auf **CSV importieren (histor.)**.
 3. Wählen Sie im Verzeichnisdialog den Speicherort der jeweiligen CSV-Dateien aus.
 
 Beachten Sie, dass dieses Format nur für die Kompatibilität mit älteren Programmversionen vorgesehen ist.

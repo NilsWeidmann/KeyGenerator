@@ -48,13 +48,13 @@ Im unteren linken Bereich des Startbildschirms befinden sich zwei Dropdown-Menü
 - **Referenzraster für Woche X/Y**: Legt die Rastergröße für die Spielwochen X und Y fest.
 
 Die möglichen Rastergrößen sind **6, 8, 10, 12** und **14**.
-Die Voreinstellungen (standardmäßig 12 für A/B und 10 für X/Y) werden beim Programmstart automatisch aus der eingebetteten Konfiguration geladen.
+Die Voreinstellungen werden beim Programmstart automatisch aus der Konfigurationsdatei geladen: zunächst aus der mitgelieferten Standardkonfiguration (12 für A/B und 10 für X/Y), nach einem Import über **Sonstiges** → **Konfiguration importieren** aus der zuletzt importierten Konfiguration (siehe [7.5 Konfiguration exportieren und importieren](07_sonstige_funktionen.md#75-konfiguration-exportieren-und-importieren)).
 Diese Referenzraster bestimmen, welche Schlüsselzahlen für die jeweiligen Spielwochen auf Vereinsebene maximal vergeben werden können.
 
 **Wichtig:** Alle drei Buttons für den Datenimport (**Manuell**, **Aus Click-TT**, **Aus Datei**) werden erst aktiviert, sobald beide Referenzraster ausgewählt sind.
 Da die Standardwerte aus der Konfiguration vorbelegt werden, sind die Buttons beim Start in der Regel sofort verfügbar.
 
-Wenn Sie die Referenzraster nachträglich ändern, werden alle Vereins-Schlüsselzahlen, die den neuen Bereich überschreiten, automatisch auf 0 zurückgesetzt. Eine Meldung nennt die betroffenen Vereine.
+Wenn Sie die Referenzraster nachträglich ändern, wird jedes Schlüsselzahlen-Paar (A/B bzw. X/Y) eines Vereins, bei dem eine Schlüsselzahl den neuen Bereich überschreitet, automatisch vollständig auf 0 zurückgesetzt – die beiden Schlüsselzahlen eines Paars sind gegenläufig und gehören daher zusammen. Eine Meldung nennt die betroffenen Vereine.
 
 > **Beispiel: Referenzraster**
 >
@@ -83,7 +83,7 @@ Manuelle Änderungen können sowohl in der Hauptansicht als auch im Dateninput-F
 - **Strg+Z** oder Button **Rückgängig**: Letzte Änderung rückgängig machen.
 - **Strg+Y** oder Button **Wiederherstellen**: Rückgängig gemachte Änderung wiederherstellen.
 
-Die Änderungshistorie wird beim Laden neuer Daten sowie beim Start einer neuen Generierung automatisch zurückgesetzt.
+Die Änderungshistorie wird beim Laden neuer Daten sowie bei der Übernahme des Ergebnisses einer Generierung automatisch zurückgesetzt. Wird eine Generierung abgebrochen, bevor eine Lösung gefunden wurde, oder schlägt sie fehl, bleibt die Historie erhalten.
 Um auf den Stand vor der Generierung zurückzukehren, wird automatisch ein Backup angelegt (siehe [7.1 Backup laden](07_sonstige_funktionen.md#71-backup-laden)).
 
 ---

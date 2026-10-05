@@ -30,7 +30,7 @@ Die Referenzrastergrößen legen fest, welche Schlüsselzahlen auf Vereinsebene 
 - **Referenzraster für Woche X/Y**: Bestimmt die Rastergröße für die Spielwochen X und Y.
 
 Die möglichen Rastergrößen sind **6, 8, 10, 12** und **14**.
-Wenn Sie die Referenzraster nachträglich ändern, werden alle Vereins-Schlüsselzahlen, die den neuen Bereich überschreiten, automatisch auf 0 zurückgesetzt. Ein Hinweis nennt die betroffenen Vereine.
+Wenn Sie die Referenzraster nachträglich ändern, wird jedes Schlüsselzahlen-Paar (A/B bzw. X/Y) eines Vereins, bei dem eine Schlüsselzahl den neuen Bereich überschreitet, automatisch vollständig auf 0 zurückgesetzt – die beiden Schlüsselzahlen eines Paars sind gegenläufig und gehören daher zusammen. Ein Hinweis nennt die betroffenen Vereine.
 Die Voreinstellungen (standardmäßig 12 für A/B und 10 für X/Y) sind in der eingebetteten Konfiguration hinterlegt und werden beim Start automatisch geladen.
 
 Falls abweichende Referenzraster benötigt werden, kann eine angepasste Konfigurationsdatei über den Link **Konfiguration importieren** in der Seitenleiste eingelesen werden (siehe [7.4 Konfiguration exportieren und importieren](07_sonstige_funktionen.md#74-konfiguration-exportieren-und-importieren)).
@@ -99,7 +99,7 @@ Auf beiden Seiten stehen dafür folgende Schaltflächen bereit:
 - **↶ Rückgängig** (oder **Strg+Z**): Letzte Änderung rückgängig machen.
 - **↷ Wiederherstellen** (oder **Strg+Y**): Rückgängig gemachte Änderung wiederherstellen.
 
-Die Änderungshistorie wird beim Laden neuer Daten sowie beim Start einer neuen Generierung automatisch zurückgesetzt.
+Die Änderungshistorie wird beim Laden neuer Daten sowie bei der Übernahme des Ergebnisses einer Generierung automatisch zurückgesetzt. Wird eine Generierung abgebrochen, bevor eine Lösung gefunden wurde, oder schlägt sie fehl, bleibt die Historie erhalten.
 Um auf den Stand vor der Generierung zurückzukehren, wird automatisch ein Backup angelegt (siehe [7.1 Backup laden](07_sonstige_funktionen.md#71-backup-laden)).
 
 ---

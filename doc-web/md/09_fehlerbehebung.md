@@ -15,7 +15,7 @@ Die folgende Tabelle enthält eine Übersicht über häufig auftretende Fehler u
 | Schaltfläche "Generieren" ist nicht aktiviert | Stellen Sie sicher, dass Daten geladen oder importiert wurden und die Übersicht geöffnet ist. |
 | Schaltflächen für Datenimport sind nicht aktiviert | Stellen Sie sicher, dass zunächst eine CSV-Datei mit der Gruppenstruktur geladen wurde (Schritt 1 auf der Datenimport-Seite). Alternativ kann auch ein gespeicherter Zwischenstand über Schritt 3 ("Zwischenstand aus Datei laden") geladen werden, ohne dass Schritt 1 abgeschlossen sein muss. |
 | Fehlermeldung "Die Konfiguration ist ungültig" beim Konfigurationsimport | Die geladene Konfigurationsdatei enthält ungültige Werte (z.B. leere Altersklassen, widersprüchliche Rastergrößen oder fehlerhafte Spielplan-Einträge). Die Fehlermeldung listet die konkreten Verstöße auf. Exportieren Sie über die Seitenleiste → **Konfiguration exportieren** eine gültige Konfiguration und verwenden Sie diese als Vorlage. |
-| Daten nach Seiten-Neuladen verloren | Die Browser-Sitzung wurde zurückgesetzt. Laden Sie künftig regelmäßig einen Zwischenstand über **Speichern** als `Data.json` herunter, damit die Daten dauerhaft gesichert sind. |
+| Daten nach Seiten-Neuladen verloren | Die Browserdaten wurden gelöscht (oder ein anderer Browser bzw. ein privates Fenster verwendet). Laden Sie künftig regelmäßig einen Zwischenstand über **Speichern** als `Data.json` herunter, damit die Daten dauerhaft gesichert sind. |
 
 ---
 
