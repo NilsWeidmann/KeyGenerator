@@ -8,7 +8,7 @@ Nachdem alle Daten eingegeben und alle Wünsche der Vereine berücksichtigt word
 
 1. Klicken Sie in der [Übersicht](05_startbildschirm.md) auf den Button **Generieren**.
 2. Vor der Generierung wird automatisch eine Sicherheitskopie des aktuellen Standes angelegt, die Sie bei Bedarf später wiederherstellen können (siehe [7.1 Backup laden](07_sonstige_funktionen.md#71-backup-laden)).
-3. Die Anwendung wechselt auf die Seite **Optimierung**, die einen Fortschrittsbalken, den aktuellen Status sowie die laufend aktualisierte Anzahl an Konflikten und internen Begegnungen anzeigt.
+3. Die Anwendung wechselt auf die Seite **Optimierung**, die einen Fortschrittsbalken, den aktuellen Status sowie die laufend aktualisierten Kennzahlen der bisher besten Lösung anzeigt. Angezeigt werden die Anzahl der **Konflikte**, die **Abweichungen bei Heim-/Auswärtsspielen** (die Summe der Spieltage, an denen die Heim-/Auswärtsfolge der Teams mit Konflikt von ihrer Wunsch-Schlüsselzahl abweicht), die vorgezogenen **internen Begegnungen** (x von y, sofern möglich) sowie die **nicht erfüllten Spielfrei-Wünsche** (x von y, sofern vorhanden).
 4. Sie können die Generierung jederzeit über den Button **Abbrechen** vorzeitig beenden.
 
 **Hinweis:** Vor der Generierung wird eine Plausibilitätsprüfung durchgeführt.
