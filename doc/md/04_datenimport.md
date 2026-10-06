@@ -165,7 +165,7 @@ Wurden keine Änderungen vorgenommen, schließt das Fenster ohne Rückfrage.
 
 Wenn Sie bereits zu einem früheren Zeitpunkt Daten gespeichert haben, können Sie diese über den Button **Aus Datei** laden.
 Es öffnet sich ein Dateiauswahldialog, in dem Sie eine JSON-Datei auswählen können (z.B. `Data.json`).
-Nach dem Laden werden alle Vereine, Gruppen und Mannschaften in der Anwendung wiederhergestellt.
+Nach dem Laden werden alle Vereine, Gruppen und Mannschaften in der Anwendung wiederhergestellt, und die in der Datei gespeicherten Referenzraster werden eingestellt (siehe [3.2 Referenzraster einstellen](03_vorbereitungen.md#32-referenzraster-einstellen)).
 
 ---
 

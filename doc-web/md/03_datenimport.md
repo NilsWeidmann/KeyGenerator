@@ -31,9 +31,9 @@ Die Referenzrastergrößen legen fest, welche Schlüsselzahlen auf Vereinsebene 
 
 Die möglichen Rastergrößen sind **6, 8, 10, 12** und **14**.
 Wenn Sie die Referenzraster nachträglich ändern, wird jedes Schlüsselzahlen-Paar (A/B bzw. X/Y) eines Vereins, bei dem eine Schlüsselzahl den neuen Bereich überschreitet, automatisch vollständig auf 0 zurückgesetzt – die beiden Schlüsselzahlen eines Paars sind gegenläufig und gehören daher zusammen. Ein Hinweis nennt die betroffenen Vereine.
-Die Voreinstellungen (standardmäßig 12 für A/B und 10 für X/Y) sind in der eingebetteten Konfiguration hinterlegt und werden beim Start automatisch geladen.
+Die Referenzraster gehören zu den Daten, denn die Schlüsselzahlen der Vereine beziehen sich auf sie: Beim Speichern werden sie in `Data.json` mitgespeichert, und beim Laden eines Zwischenstands (Schritt 3) werden die dort gespeicherten Referenzraster eingestellt. Wählen Sie die Referenzraster vor dem Laden der Gruppeneinteilung (Schritt 1), gelten sie für die neu geladenen Daten.
 
-Falls abweichende Referenzraster benötigt werden, kann eine angepasste Konfigurationsdatei über den Link **Konfiguration importieren** in der Seitenleiste eingelesen werden (siehe [7.4 Konfiguration exportieren und importieren](07_sonstige_funktionen.md#74-konfiguration-exportieren-und-importieren)).
+Die Voreinstellungen für neue Daten (standardmäßig 12 für A/B und 10 für X/Y) sind in der Konfiguration hinterlegt; sie gelten auch für Dateien älterer Programmversionen, die noch keine Referenzraster enthalten. Um sie zu ändern, stellen Sie die gewünschten Referenzraster ein, laden die Konfiguration über **Konfiguration exportieren** herunter und lesen sie über **Konfiguration importieren** in der Seitenleiste wieder ein (siehe [7.4 Konfiguration exportieren und importieren](07_sonstige_funktionen.md#74-konfiguration-exportieren-und-importieren)).
 
 > **Beispiel: Referenzraster**
 >
@@ -89,7 +89,7 @@ Dieser Schritt ist unabhängig von den anderen Schritten und kann auch ohne vorh
 
 1. Klicken Sie auf **Durchsuchen...** im dritten Schritt.
 2. Wählen Sie eine JSON-Datei aus (z.B. `Data.json`).
-3. Nach dem Laden werden alle Vereine, Gruppen und Mannschaften in der Anwendung wiederhergestellt.
+3. Nach dem Laden werden alle Vereine, Gruppen und Mannschaften in der Anwendung wiederhergestellt, und die in der Datei gespeicherten Referenzraster werden eingestellt.
 
 ## 3.4 Rückgängig und Wiederherstellen
 

@@ -12,7 +12,7 @@ Beim Arbeiten mit dem Tool werden folgende Dateien erzeugt bzw. verwendet:
 
 | Name | Bedeutung |
 |------|-----------|
-| `Data.json` | Arbeitsdatei mit allen Gruppen-, Vereins- und Mannschaftsdaten einschließlich der Partnerschaften. Kann über den Button **Speichern** heruntergeladen und über die Datenimport-Seite wieder geladen werden. |
+| `Data.json` | Arbeitsdatei mit allen Gruppen-, Vereins- und Mannschaftsdaten einschließlich der Partnerschaften und der Referenzraster. Kann über den Button **Speichern** heruntergeladen und über die Datenimport-Seite wieder geladen werden. |
 | `Terminmeldung.csv` | Exportierte Spieltagsinformationen je Mannschaft. Wird über die Seitenleiste als Download bereitgestellt. |
 | `Results.csv` | Exportierte Ergebnisse der Schlüsselzahlgenerierung. Wird über die Seitenleiste als Download bereitgestellt. |
 

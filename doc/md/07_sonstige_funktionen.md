@@ -10,8 +10,8 @@
 |----------|--------------|
 | Backup laden | Lädt eine zuvor gespeicherte Sicherheitskopie (z.B. den Stand vor der letzten Generierung). Siehe Abschnitt 7.1. |
 | Terminmeldung speichern | Exportiert eine CSV-Datei mit Spieltag (Wochentag + Uhrzeit) und Ersatzspieltag je Mannschaft. Nützlich, um die Vollständigkeit der Terminmeldung zu überprüfen. |
-| Konfiguration exportieren | Exportiert die aktuelle Konfiguration an einen gewählten Speicherort. Die Konfiguration enthält Heim- und Auswärtsspieltage je Raster, die Referenzrastergrößen, die minimale/maximale Rastergröße, die unterstützten Altersklassen, die Anzahl der bevorzugten internen Spielwochen sowie die maximal tolerierte Abweichung bei ähnlichen Schlüsselzahlen. |
-| Konfiguration importieren | Importiert eine Konfiguration aus einer JSON-Datei und ersetzt damit alle oben genannten Einstellungen (Spielpläne, Referenzraster, Rastergrößen, Altersklassen, interne Spielwochen, max. Abweichung). |
+| Konfiguration exportieren | Exportiert die aktuelle Konfiguration an einen gewählten Speicherort. Die Konfiguration enthält Heim- und Auswärtsspieltage je Raster, die aktuell eingestellten Referenzraster (als Voreinstellung für neue Daten), die minimale/maximale Rastergröße, die unterstützten Altersklassen, die Anzahl der bevorzugten internen Spielwochen sowie die maximal tolerierte Abweichung bei ähnlichen Schlüsselzahlen. |
+| Konfiguration importieren | Importiert eine Konfiguration aus einer JSON-Datei und ersetzt damit alle oben genannten Einstellungen (Spielpläne, Voreinstellungen der Referenzraster, Rastergrößen, Altersklassen, interne Spielwochen, max. Abweichung). Die Referenzraster bereits geladener Daten bleiben erhalten. |
 | CSV exportieren (histor.) | Exportiert die Daten in ein älteres CSV-Format. |
 | CSV importieren (histor.) | Importiert Daten aus einem älteren CSV-Format. |
 | Konflikte neu auflösen | Erkennt Konflikte, die sich aus Spielplan-Einschränkungen (Heim-/Auswärts- und Spielfreivorgaben) ergeben, und ermöglicht deren Auflösung. Bestehende Schlüsselzahlzuweisungen bleiben dabei erhalten. |
@@ -73,20 +73,22 @@ Nur die erkannten Konflikte bezüglich der Spielplan-Einschränkungen werden zur
 
 ## 7.5 Konfiguration exportieren und importieren
 
-Die Konfiguration legt fest, welche Spielpläne (Heim-/Auswärtsspieltage je Raster), Referenzrastergrößen, minimale und maximale Rastergrößen sowie Altersklassen unterstützt werden. Sie enthält außerdem die Anzahl der Spielwochen, in denen interne Begegnungen bevorzugt werden sollen (`internalWeeks`, Standard: 3), sowie die maximale Schrittweite, innerhalb derer eine Schlüsselzahl noch als „ähnlich" gilt (`maxDeviation`, Standard: 2).
+Die Konfiguration legt fest, welche Spielpläne (Heim-/Auswärtsspieltage je Raster), Voreinstellungen der Referenzraster für neue Daten, minimale und maximale Rastergrößen sowie Altersklassen unterstützt werden. Sie enthält außerdem die Anzahl der Spielwochen, in denen interne Begegnungen bevorzugt werden sollen (`internalWeeks`, Standard: 3), sowie die maximale Schrittweite, innerhalb derer eine Schlüsselzahl noch als „ähnlich" gilt (`maxDeviation`, Standard: 2).
 Sie kann gespeichert und auf einem anderen Rechner oder in einer anderen Saison wiederverwendet werden.
 
 **Konfiguration exportieren:**
 1. Klicken Sie auf **Sonstiges** im Startbildschirm.
 2. Klicken Sie auf **Konfiguration exportieren**.
 3. Wählen Sie im Dateidialog den gewünschten Speicherort und Dateinamen. Die Konfiguration wird als JSON-Datei gespeichert.
+Als Voreinstellung der Referenzraster enthält die exportierte Datei die aktuell eingestellten Referenzraster. Um die Voreinstellungen für neue Daten zu ändern, stellen Sie also die gewünschten Referenzraster ein, exportieren die Konfiguration und importieren sie anschließend wieder.
 
 **Konfiguration importieren:**
 1. Klicken Sie auf **Sonstiges** im Startbildschirm.
 2. Klicken Sie auf **Konfiguration importieren**.
 3. Wählen Sie im Dateidialog die gewünschte JSON-Konfigurationsdatei aus.
 
-Beim Import werden alle bestehenden Einstellungen (Spielpläne, Referenzraster, Rastergrößen, Altersklassen) vollständig durch die Werte aus der importierten Datei ersetzt.
+Beim Import werden alle bestehenden Einstellungen (Spielpläne, Voreinstellungen der Referenzraster, Rastergrößen, Altersklassen) vollständig durch die Werte aus der importierten Datei ersetzt.
+Die Referenzraster bereits geladener Daten bleiben dabei erhalten. Nur wenn die neue Konfiguration für eines davon keinen Spielplan enthält, gilt ihre Voreinstellung; Schlüsselzahlen-Paare außerhalb des neuen Bereichs werden dann zurückgesetzt, und eine Meldung nennt die betroffenen Vereine.
 Falls die Datei ungültige Werte enthält, erscheint eine Fehlermeldung mit einer Auflistung der konkreten Verstöße (siehe auch [9. Fehlerbehebung](09_fehlerbehebung.md)).
 
 ## 7.6 CSV exportieren und importieren (historisches Format)
@@ -104,6 +106,7 @@ Für den Austausch mit älteren Versionen des Programms steht ein CSV-basiertes 
 3. Wählen Sie im Verzeichnisdialog den Speicherort der jeweiligen CSV-Dateien aus.
 
 Beachten Sie, dass dieses Format nur für die Kompatibilität mit älteren Programmversionen vorgesehen ist.
+Es enthält keine Referenzraster; beim Import gelten die Voreinstellungen der Konfiguration.
 Für die normale Nutzung empfiehlt sich das JSON-basierte Speicherformat (siehe [4.3 Laden aus Datei](04_datenimport.md#43-laden-aus-datei)).
 
 ## 7.7 Alle Schlüssel löschen

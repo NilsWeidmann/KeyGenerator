@@ -56,6 +56,8 @@ Da die Standardwerte aus der Konfiguration vorbelegt werden, sind die Buttons be
 
 Wenn Sie die Referenzraster nachträglich ändern, wird jedes Schlüsselzahlen-Paar (A/B bzw. X/Y) eines Vereins, bei dem eine Schlüsselzahl den neuen Bereich überschreitet, automatisch vollständig auf 0 zurückgesetzt – die beiden Schlüsselzahlen eines Paars sind gegenläufig und gehören daher zusammen. Eine Meldung nennt die betroffenen Vereine.
 
+Die Referenzraster gehören zu den Daten, denn die Schlüsselzahlen der Vereine beziehen sich auf sie: Beim Speichern werden sie in `Data.json` mitgespeichert, und beim Laden einer Datei (**Aus Datei**) werden die dort gespeicherten Referenzraster eingestellt. Die Werte aus der Konfiguration sind nur Voreinstellungen für neue Daten und für Dateien älterer Programmversionen, die noch keine Referenzraster enthalten. Um sie zu ändern, exportieren Sie die Konfiguration mit den gewünschten Referenzrastern und importieren sie wieder (siehe [7.5 Konfiguration exportieren und importieren](07_sonstige_funktionen.md#75-konfiguration-exportieren-und-importieren)).
+
 > **Beispiel: Referenzraster**
 >
 > In unserem Beispiel sind die Referenzraster wie folgt eingestellt:
