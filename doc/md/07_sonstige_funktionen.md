@@ -12,8 +12,8 @@
 | Terminmeldung speichern | Exportiert eine CSV-Datei mit Spieltag (Wochentag + Uhrzeit) und Ersatzspieltag je Mannschaft. Nützlich, um die Vollständigkeit der Terminmeldung zu überprüfen. |
 | Konfiguration exportieren | Exportiert die aktuelle Konfiguration an einen gewählten Speicherort. Die Konfiguration enthält Heim- und Auswärtsspieltage je Raster, die aktuell eingestellten Referenzraster (als Voreinstellung für neue Daten), die minimale/maximale Rastergröße, die unterstützten Altersklassen, die Anzahl der bevorzugten internen Spielwochen sowie die maximal tolerierte Abweichung bei ähnlichen Schlüsselzahlen. |
 | Konfiguration importieren | Importiert eine Konfiguration aus einer JSON-Datei und ersetzt damit alle oben genannten Einstellungen (Spielpläne, Voreinstellungen der Referenzraster, Rastergrößen, Altersklassen, interne Spielwochen, max. Abweichung). Die Referenzraster bereits geladener Daten bleiben erhalten. |
-| CSV exportieren (histor.) | Exportiert die Daten in ein älteres CSV-Format. |
-| CSV importieren (histor.) | Importiert Daten aus einem älteren CSV-Format. |
+| CSV exportieren (historisch) | Exportiert die Daten in ein älteres CSV-Format. |
+| CSV importieren (historisch) | Importiert Daten aus einem älteren CSV-Format. |
 | Konflikte neu auflösen | Erkennt Konflikte, die sich aus Spielplan-Einschränkungen (Heim-/Auswärts- und Spielfreivorgaben) ergeben, und ermöglicht deren Auflösung. Bestehende Schlüsselzahlzuweisungen bleiben dabei erhalten. |
 | Alle Schlüssel löschen | Löscht alle zugewiesenen Mannschafts- und Vereins-Schlüsselzahlen. Diese Aktion kann über **Rückgängig** rückgängig gemacht werden. Siehe Abschnitt 7.7. |
 | Ergebnisse exportieren | Exportiert die generierten Schlüsselzahlen als CSV-Datei mit Gruppen, Mannschaften, Schlüsselzahlen, Wunsch-Schlüsselzahlen, Spielwochen und Zusatz-Vorgaben. Falls die zugewiesene Schlüsselzahl nicht in der Wunschliste enthalten ist (Konflikt), wird dies in der Spalte "Wunsch" sichtbar. |
@@ -45,7 +45,7 @@ Nach der Generierung können Sie die Ergebnisse als CSV-Datei speichern, um die 
 2. Klicken Sie auf **Ergebnisse exportieren**.
 3. Wählen Sie im Dateidialog den gewünschten Speicherort und Dateinamen.
 
-Die exportierte CSV-Datei enthält je Mannschaft: Gruppe, Mannschaftsname, zugewiesene Schlüsselzahl, Wunsch-Schlüsselzahlen, Spielwochen sowie Zusatzvorgaben zu Heim- und Auswärtsspieltagen.
+Die exportierte CSV-Datei enthält je Mannschaft: Gruppe, Mannschaftsname, zugewiesene Schlüsselzahl, Wunsch-Schlüsselzahlen, Spielwochen sowie Zusatzvorgaben je Spieltag. Die Spalte „Zusatz-Vorgaben" ist nur bei Mannschaften gefüllt, die an mindestens einem Spieltag eine Heimspiel-, Auswärtsspiel- oder Spielfrei-Vorgabe haben.
 Falls die zugewiesene Schlüsselzahl nicht in der Wunschliste enthalten ist (Konflikt), wird dies in der Spalte "Wunsch" kenntlich gemacht.
 
 ## 7.3 Terminmeldung speichern
@@ -97,12 +97,12 @@ Für den Austausch mit älteren Versionen des Programms steht ein CSV-basiertes 
 
 **CSV exportieren:**
 1. Klicken Sie auf **Sonstiges** im Startbildschirm.
-2. Klicken Sie auf **CSV exportieren (histor.)**.
+2. Klicken Sie auf **CSV exportieren (historisch)**.
 3. Wählen Sie im Verzeichnisdialog den gewünschten Speicherort aus.
 
 **CSV importieren:**
 1. Klicken Sie auf **Sonstiges** im Startbildschirm.
-2. Klicken Sie auf **CSV importieren (histor.)**.
+2. Klicken Sie auf **CSV importieren (historisch)**.
 3. Wählen Sie im Verzeichnisdialog den Speicherort der jeweiligen CSV-Dateien aus.
 
 Beachten Sie, dass dieses Format nur für die Kompatibilität mit älteren Programmversionen vorgesehen ist.
@@ -117,7 +117,7 @@ Mit dieser Funktion werden alle zugewiesenen Mannschafts- und Vereins-Schlüssel
 2. Klicken Sie auf **Alle Schlüssel löschen**.
 3. Es erscheint eine Sicherheitsabfrage. Bestätigen Sie die Aktion.
 
-Die Löschung kann über **Strg+Z** (Rückgängig) jederzeit rückgängig gemacht werden.
+Die Löschung kann über **Strg+Z** (Rückgängig) jederzeit rückgängig gemacht und über **Strg+Y** (Wiederherstellen) wiederhergestellt werden.
 
 ---
 

@@ -10,7 +10,7 @@ Die folgende Tabelle enthält eine Übersicht über häufig auftretende Fehler u
 |---------|--------|
 | "Es konnten keine Schlüsselzahlen ermittelt werden!" | Widersprüchliche Vorgaben überprüfen. Laufzeit erhöhen. Feste Vorgaben reduzieren. |
 | "Inkonsistenter Spielplan"-Meldung | Heim-/Auswärtsspielvorgaben für das genannte Team überprüfen. Sicherstellen, dass Teams desselben Vereins in derselben Spielwoche kompatible Vorgaben haben. |
-| Schlüsselzahlen bei Referenzrasteränderung zurückgesetzt | Das ist erwartetes Verhalten. Schlüsselzahlen, die den neuen Bereich überschreiten, werden automatisch auf 0 zurückgesetzt; eine Meldung nennt die betroffenen Vereine. Tragen Sie dort bei Bedarf neue Schlüsselzahlen ein. |
+| Schlüsselzahlen bei Referenzrasteränderung zurückgesetzt | Das ist erwartetes Verhalten. Die Schlüsselzahlen der Spielwochen, deren Referenzraster geändert wurde, passen nicht mehr zum Raster und werden bei allen Vereinen auf 0 zurückgesetzt; eine Meldung nennt die betroffenen Vereine. Tragen Sie dort bei Bedarf neue Schlüsselzahlen ein. |
 | "Ungültige Rastergröße" | Die eingegebene Rastergröße ist für die Gruppe nicht zulässig und wurde zurückgesetzt. Die Meldung nennt die zulässigen Rastergrößen (siehe [5.2 Gruppensicht](05_startbildschirm.md#52-gruppensicht)). |
 | Button "Generieren" ist nicht aktiviert | Stellen Sie sicher, dass Daten geladen oder importiert wurden. |
 | Buttons für Datenimport sind nicht aktiviert | Stellen Sie sicher, dass beide Referenzraster eingestellt sind. |

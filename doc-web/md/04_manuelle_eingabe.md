@@ -29,7 +29,7 @@ Die obere Tabelle in der linken Spalte zeigt alle Gruppen mit folgenden Spalten:
 **Gruppen anlegen:**
 Klicken Sie auf die Schaltfläche **+ Gruppe**.
 Die neue Gruppe wird mit dem Standard-Referenzraster der Spielwochen A/B und dem Standardnamen "Neue Gruppe" angelegt.
-Name und Rastergröße können direkt in der Tabelle bearbeitet werden.
+Name und Rastergröße können direkt in der Tabelle bearbeitet werden; Umlaute im Gruppennamen werden automatisch ersetzt.
 Eine ungültige Rastergröße (siehe [5.2 Gruppenansicht](05_startbildschirm.md#52-gruppenansicht)) wird zurückgesetzt; eine Meldung nennt die für die Gruppe zulässigen Rastergrößen.
 
 **Gruppe auswählen:**
@@ -78,7 +78,7 @@ Die Umbenennung wird automatisch auf die Teamnamen aller Mannschaften des Verein
 
 **Vereine löschen:**
 Klicken Sie auf das Lösch-Symbol (Papierkorb) in der entsprechenden Zeile.
-Ein Verein kann nur gelöscht werden, wenn keine seiner Mannschaften noch einer Gruppe zugeordnet ist; andernfalls erscheint eine Fehlermeldung.
+Ein Verein kann nur gelöscht werden, wenn keine seiner Mannschaften noch einer Gruppe zugeordnet ist; andernfalls erscheint eine Fehlermeldung mit den betroffenen Gruppen.
 
 > **Beispiel: Vorgegebene Schlüsselzahlen**
 >
@@ -110,7 +110,7 @@ Wählen Sie dort den Verein aus und tragen Sie ggf. die Mannschaftsnummer ein.
 Klicken Sie auf **Hinzufügen**, um die Mannschaft der Gruppe hinzuzufügen, sofern noch Platz vorhanden ist (Rastergröße nicht überschritten).
 
 **Mannschaften löschen:**
-Klicken Sie auf das Lösch-Symbol (Papierkorb) in der Spalte **Zusatz** der entsprechenden Zeile.
+Klicken Sie auf das Lösch-Symbol (Papierkorb) in der letzten Spalte der entsprechenden Zeile.
 
 **Speichern:**
 Am unteren Rand der Seite befinden sich die Schaltflächen **Speichern & zur Übersicht** und **Abbrechen**.

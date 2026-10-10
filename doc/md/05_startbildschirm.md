@@ -86,10 +86,10 @@ In der Gruppensicht werden die Zeilen nach dem Zuweisungsstatus eingefärbt:
 
 | Farbe | Bedeutung |
 |-------|-----------|
-| Grün | Gültige Schlüsselzahl zugewiesen, die den Wunsch-Schlüsselzahlen entspricht und in der Gruppe eindeutig ist; *oder*: Team hat keine Spielwochen-Vorgabe, aber Spieltag-Vorgaben (Heimspiel, Auswärtsspiel, Spielfrei), und die zugewiesene Schlüsselzahl erfüllt alle diese Vorgaben |
+| Grün | Gültige Schlüsselzahl zugewiesen, die den Wunsch-Schlüsselzahlen entspricht und in der Gruppe eindeutig ist; *oder*: Team hat keine Spielwochen-Vorgabe, aber Spieltag-Vorgaben (Heimspiel, Auswärtsspiel, Spielfrei), und die zugewiesene Schlüsselzahl erfüllt alle Heim- und Auswärtsvorgaben |
 | Blau | Team hat eine Spielwoche und Wunsch-Schlüsselzahlen (Vorgabe durch höhere Ebene), aber noch keine zugewiesene Schlüsselzahl |
 | Gelb | Team hat eine Spielwochen-Vorgabe, der Verein hat aber keine Schlüsselzahlen-Vorgabe durch eine höhere Ebene; *oder*: Team hat keine Spielwochen-Vorgabe, aber Spieltag-Vorgaben (Heimspiel, Auswärtsspiel, Spielfrei) und noch keine Schlüsselzahl |
-| Orange | Schlüsselzahl stimmt nicht mit den Wunsch-Schlüsselzahlen überein; *oder*: die zugewiesene Schlüsselzahl ist in der Gruppe doppelt vergeben (ungelöster Konflikt); *oder*: Team hat keine Spielwochen-Vorgabe, und die zugewiesene Schlüsselzahl verletzt eine seiner Spieltag-Vorgaben (Heim-/Auswärtsspiel nicht eingehalten oder Spiel an einem Spielfrei-Tag) |
+| Orange | Schlüsselzahl stimmt nicht mit den Wunsch-Schlüsselzahlen überein; *oder*: die zugewiesene Schlüsselzahl ist in der Gruppe doppelt vergeben (ungelöster Konflikt); *oder*: Team hat keine Spielwochen-Vorgabe, und die zugewiesene Schlüsselzahl verletzt eine seiner Heim- oder Auswärtsvorgaben. Ein nicht erfüllter Spielfreiwunsch färbt die Zeile nicht orange, da Spielfreiwünsche nur möglichst berücksichtigt werden |
 | Weiß | Team hat keine Spielwoche und keine Spieltag-Vorgaben |
 
 Die Gruppensicht eignet sich besonders zur **Kontrolle nach der Generierung**, da hier auf einen Blick alle Schlüsselzahlen einer Gruppe sichtbar sind.
@@ -129,7 +129,7 @@ Unterhalb der Spielwochenauswahl befindet sich eine Tabelle mit zwei Spalten:
 Die Anzahl der angezeigten Spieltage wird dynamisch anhand der Rastergröße der Gruppe bestimmt.
 Bei einer Gruppe mit Rastergröße 12 werden beispielsweise 11 Spieltage angezeigt, bei Rastergröße 10 entsprechend 9.
 
-Mit `Spielfrei` tragen Sie einen Spielfreiwunsch ein: Die Generierung versucht dann, dem Team an diesem Spieltag kein Spiel zuzuweisen, sie garantiert es aber nicht. Spielfreiwünsche werden nicht aus der Terminmeldung übernommen, sondern ausschließlich hier eingetragen.
+Mit `Spielfrei` tragen Sie einen Spielfreiwunsch ein: Die Generierung versucht dann, dem Team an diesem Spieltag kein Spiel zuzuweisen, sie garantiert es aber nicht. Feste Heim- und Auswärtsspiele hält die Generierung dagegen in jedem Fall ein. Weder Spielfrei- noch Heim-/Auswärtswünsche werden aus der Terminmeldung übernommen; sie werden ausschließlich hier eingetragen.
 
 Bestätigen Sie Ihre Eingaben mit **OK** oder verwerfen Sie sie mit **Abbrechen**.
 
@@ -171,6 +171,7 @@ Die Spalten im Einzelnen:
 Der ausgewählte Verein erscheint unabhängig davon, auf welcher Seite die Partnerschaft ursprünglich angelegt wurde, immer in der Spalte „Verein A".
 
 > **Hinweis:** Es ist nicht möglich, einen Verein mit sich selbst als Partner einzutragen.
+> Ebenso sind zwei Partnerschaften mit demselben Partnerverein unzulässig, die sich nur in einer der beiden Spielwochen unterscheiden (z.B. *A = A* und *A = B*): Sie widersprächen sich, weil die gegenläufigen Schlüsselzahlen eines Vereins dann gleich sein müssten. In diesem Fall erscheint eine Fehlermeldung, und der Dialog bleibt geöffnet, bis Sie die Partnerschaften korrigiert haben.
 
 ### Partnerschaft hinzufügen
 

@@ -45,7 +45,7 @@ Der untere Bereich ("Terminmeldung") dient dem Import der Vereinsinformationen u
 
 1. Klicken Sie auf den Button **Durchsuchen** rechts.
 2. Wählen Sie eine HTML-Datei aus, die die Terminmeldungen enthält. Diese muss zuvor wie in den Abschnitten [B.2](B_download_aus_click-tt.md#b2-terminmeldung-als-pdf-datei-herunterladen) – [B.4](B_download_aus_click-tt.md#b4-terminmeldung-in-eine-html-datei-konvertieren) beschrieben erstellt worden sein. Wir hoffen, dass in naher Zukunft ein direkter Download der Terminmeldung in Click-TT zur Verfügung steht. 
-3. Nach dem Import erscheinen links die Vereine und rechts die Mannschaften des jeweils ausgewählten Vereins. In den Spalten A,B,X und Y können Schlüsselzahlen basierend auf Vorgaben einer höheren Ebene eingetragen werden. Spielfreiwünsche werden aus der Terminmeldung nicht übernommen; tragen Sie sie bei Bedarf im Fenster „Zusatz" als **Spielfrei** ein (siehe [5.3 Zusätzliche Einstellungen für einzelne Teams](05_startbildschirm.md#53-zusaetzliche-einstellungen-fuer-einzelne-teams)). 
+3. Nach dem Import erscheinen links die Vereine und rechts die Mannschaften des jeweils ausgewählten Vereins. In den Spalten A,B,X und Y können Schlüsselzahlen basierend auf Vorgaben einer höheren Ebene eingetragen werden. Spielfreiwünsche und Heim-/Auswärtswünsche werden aus der Terminmeldung nicht übernommen, da sie dort nur als Freitext-Bemerkungen stehen; tragen Sie sie bei Bedarf im Fenster „Zusatz" als **Spielfrei**, **Heimspiel** bzw. **Auswärtsspiel** ein (siehe [5.3 Zusätzliche Einstellungen für einzelne Teams](05_startbildschirm.md#53-zusaetzliche-einstellungen-fuer-einzelne-teams)). 
 
 Klicken Sie abschließend auf **Speichern**, um die Daten in eine JSON-Datei zu exportieren.
 Der Button befindet sich unten rechts im Fenster.
@@ -68,7 +68,7 @@ Die linke Tabelle zeigt alle Gruppen mit folgenden Spalten:
 **Gruppen anlegen:**
 Tragen Sie in der untersten (leeren) Zeile einen Gruppennamen ein.
 Die neue Gruppe wird mit dem Standard-Referenzraster der Spielwochen A/B und dem Standardnamen "Neue Gruppe" angelegt.
-Name und Rastergröße können direkt in der Tabelle bearbeitet werden.
+Name und Rastergröße können direkt in der Tabelle bearbeitet werden; Umlaute im Gruppennamen werden automatisch ersetzt.
 Eine ungültige Rastergröße (siehe [5.2 Gruppensicht](05_startbildschirm.md#52-gruppensicht)) wird zurückgesetzt; eine Meldung nennt die für die Gruppe zulässigen Rastergrößen.
 
 **Gruppe auswählen:**

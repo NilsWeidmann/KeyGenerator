@@ -6,7 +6,7 @@
 
 Nachdem alle Daten eingegeben und alle Wünsche der Vereine berücksichtigt worden sind, kann die eigentliche Generierung der Schlüsselzahlen beginnen.
 
-Das Kontrollkästchen **Interne Begegnungen möglichst vorziehen** (unterhalb der Haupttabelle) steuert, ob der Optimierungsalgorithmus versucht, Begegnungen zwischen zwei Teams desselben Vereins innerhalb derselben Gruppe in die ersten Spielwochen zu legen. Die Option ist standardmäßig aktiviert; deaktivieren Sie sie, um keine entsprechende Präferenz zu verwenden.
+Das Kontrollkästchen **Interne Begegnungen möglichst vorziehen** (unterhalb der Auswahl **Vereinssicht**/**Gruppensicht**) steuert, ob der Optimierungsalgorithmus versucht, Begegnungen zwischen zwei Teams desselben Vereins innerhalb derselben Gruppe in die ersten Spielwochen zu legen. Die Option ist standardmäßig aktiviert; deaktivieren Sie sie, um keine entsprechende Präferenz zu verwenden.
 
 1. Klicken Sie im Startbildschirm auf den Button **Generieren**.
 2. Es erscheint das Fenster "Bitte Warten" mit einem Fortschrittsbalken, der verbleibenden Zeit sowie den laufend aktualisierten Kennzahlen der bisher besten Lösung. Angezeigt werden die Anzahl der **Konflikte**, die **Abweichungen bei Heim-/Auswärtsspielen** (die Summe der Spieltage, an denen die Heim-/Auswärtsfolge der Teams mit Konflikt von ihrer Wunsch-Schlüsselzahl abweicht), die vorgezogenen **internen Begegnungen** (x von y, sofern möglich) sowie die **nicht erfüllten Spielfrei-Wünsche** (x von y, sofern vorhanden).
@@ -61,7 +61,7 @@ Eine Liste mit häufigen Fehlerquellen und deren Auflösung finden Sie in Abschn
 ## 6.3 Kontrolle und Übergabe
 
 Nach der Generierung empfiehlt es sich, die Ergebnisse in der **Gruppensicht** (siehe [5.2 Gruppensicht](05_startbildschirm.md#52-gruppensicht)) zu kontrollieren.
-Da nun alle Teams eine Schlüsselzahl haben sollten, sind alle Zeilen grün, orange (im Konfliktfall oder wenn eine Mannschaft ohne Spielwoche ihre Heim-/Auswärts- bzw. Spielfrei-Vorgaben nicht erfüllt bekommt) oder weiß (bei Mannschaften ohne Spielwoche und ohne Vorgaben) eingefärbt.
+Da nun alle Teams eine Schlüsselzahl haben sollten, sind alle Zeilen grün, orange (im Konfliktfall oder wenn eine Mannschaft ohne Spielwoche ihre Heim-/Auswärtsvorgaben nicht erfüllt bekommt; nicht erfüllte Spielfreiwünsche färben nicht orange) oder weiß (bei Mannschaften ohne Spielwoche und ohne Vorgaben) eingefärbt.
 Mithilfe dieser Übersicht können Sie die Schlüsselzahlen in Click-TT oder in ein sonstiges Verwaltungssystem übertragen.
 
 > **Beispiel: Gruppensicht – Bezirksoberliga Erwachsene nach der Generierung**
