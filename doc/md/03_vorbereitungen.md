@@ -25,7 +25,7 @@ Die drei Hauptbuttons sind:
 
 > **Ansicht: Startbildschirm**
 >
-> Der Startbildschirm nach dem Programmstart: Links befinden sich die Datenimport-Buttons, die Referenzraster-Dropdowns, die Laufzeitbegrenzung sowie die Rückgängig/Wiederherstellen-Buttons; rechts ist die noch leere Datentabelle zu sehen.
+> Der Startbildschirm nach dem Programmstart: Links befinden sich die Datenimport-Buttons, die Referenzraster-Dropdowns, das Kontrollkästchen „Interne Begegnungen möglichst vorziehen", die Laufzeitbegrenzung sowie die Rückgängig/Wiederherstellen-Buttons; rechts ist die noch leere Datentabelle zu sehen.
 >
 > ![Startbildschirm – Übersicht](../png/03-startbildschirm.png)
 

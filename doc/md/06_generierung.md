@@ -64,36 +64,36 @@ Nach der Generierung empfiehlt es sich, die Ergebnisse in der **Gruppensicht** (
 Da nun alle Teams eine Schlüsselzahl haben sollten, sind alle Zeilen grün, orange (im Konfliktfall oder wenn eine Mannschaft ohne Spielwoche ihre Heim-/Auswärtsvorgaben nicht erfüllt bekommt; nicht erfüllte Spielfreiwünsche färben nicht orange) oder weiß (bei Mannschaften ohne Spielwoche und ohne Vorgaben) eingefärbt.
 Mithilfe dieser Übersicht können Sie die Schlüsselzahlen in Click-TT oder in ein sonstiges Verwaltungssystem übertragen.
 
-> **Beispiel: Gruppensicht – Bezirksoberliga Erwachsene nach der Generierung**
+> **Beispiel: Gruppensicht – Erwachsene Bezirksoberliga nach der Generierung**
 >
 > Nach der Generierung hat jedes Team eine Schlüsselzahl erhalten.
-> Alle Zeilen sind nun **grün** (oder **orange**, falls Konflikte auftreten):
+> Alle Zeilen sind nun **grün** (oder **orange**, falls Konflikte auftreten, bzw. **weiß** bei Mannschaften ohne Spielwoche und ohne Vorgaben):
 >
 > ![Gruppensicht nach der Generierung](../png/063-gruppensicht-nach-generierung.png)
 >
 > Alle 12 Schlüsselzahlen (1–12) sind genau einmal vergeben – es gibt keine Konflikte.
 > Die Spalte "Wunsch" zeigt die aus der Vereins-Schlüsselzahl abgeleiteten Wunschzahlen.
-> Beim 1. FC Saarbrücken-TT I ist kein Wunsch eingetragen, da der Verein keine vorgegebene Schlüsselzahl und auch keine Spielwoche hatte – die Zahl 3 wurde frei zugewiesen.
+> Beim 1. FC Saarbrücken-TT I ist kein Wunsch eingetragen, da der Verein keine vorgegebene Schlüsselzahl und auch keine Spielwoche hatte – die Zeile ist daher weiß, und die Zahl 4 wurde frei zugewiesen.
 
 > **Beispiel: Gruppensicht 1. Bezirksliga 3 Erwachsene nach der Generierung**
 >
-> Die 1. Bezirksliga 3 enthält nach der Generierung einen aufgelösten Konflikt: Die orange markierte Zeile kennzeichnet ein Team, bei dem die zugewiesene Schlüsselzahl von der Wunsch-Schlüsselzahl abweicht. Im Vorfeld wurde ein Konflikt zwischen SV Werder Bremen IV und TTS Borsum II dahingehend aufgelöst, dass Bremen die Schlüsselzahl 4, und Borsum die ähnliche Schlüsselzahl 3 zugewiesen wurde (Abschnitt 6.1 Konflikte beheben).
+> Die 1. Bezirksliga 3 enthält nach der Generierung einen aufgelösten Konflikt: Die orange markierte Zeile kennzeichnet ein Team, bei dem die zugewiesene Schlüsselzahl von der Wunsch-Schlüsselzahl abweicht. Im Vorfeld wurde ein Konflikt zwischen SV Werder Bremen IV und TTS Borsum II dahingehend aufgelöst, dass Bremen die Schlüsselzahl 4, und Borsum die ähnliche Schlüsselzahl 5 zugewiesen wurde (Abschnitt 6.1 Konflikte beheben).
 >
 > ![Gruppensicht mit Konflikt (orange markierte Zeilen)](../png/063-gruppensicht-mit-konflikt.png)
 
 > **Beispiel: Vereinssicht – Vergabe von parallelen und gegenläufigen Schlüsselzahlen**
 >
-> Der folgende Screenshot zeigt die ermittelten Schlüsselzahlen für die Mannschaften von Borussia Düsseldorf.
-> Durch die Generierung wurden die Vereins-Schlüsselzahlen **A=5, B=11, X=5, Y=10** ermittelt:
+> Der folgende Screenshot zeigt die ermittelten Schlüsselzahlen für die Mannschaften von Borussia Duesseldorf.
+> Durch die Generierung wurden die Vereins-Schlüsselzahlen **A=7, B=1, X=1, Y=6** ermittelt:
 >
 > ![Vereinssicht nach der Generierung](../png/063-vereinssicht-nach-generierung.png)
 >
 > An diesem Beispiel lassen sich mehrere Aspekte ablesen:
-> - Alle Teams in Woche A erhalten Schlüsselzahl **5** (die Vereins-Schlüsselzahl für Spielwoche A).
-> - Alle Teams in Woche B erhalten Schlüsselzahl **11** – die gegenläufige Zahl zu 5 im 12er-Raster.
-> - Alle Teams in Woche X erhalten Schlüsselzahl **5** (Vereins-Schlüsselzahl für Spielwoche X im 10er-Raster).
-> - Alle Teams in Woche Y erhalten Schlüsselzahl **10** – die gegenläufige Zahl zu 5 im 10er-Raster.
-> - **Ausnahme**: Borussia Düsseldorf II in der Jugend 13 hat Schlüsselzahl **4** statt 5, obwohl es in Woche X spielt. Das liegt daran, dass zwei Teams desselben Vereins in derselben Gruppe spielen und daher nicht dieselbe Schlüsselzahl erhalten können. Die Zahl 4 ist im 10er-Raster eine *ähnliche* Schlüsselzahl zu 5.
+> - Alle Erwachsenen-Teams in Woche A erhalten Schlüsselzahl **7** (die Vereins-Schlüsselzahl für Spielwoche A). Die Damen-Mannschaft spielt ebenfalls in Woche A, aber in einer Gruppe mit Rastergröße 10, und erhält daher die *parallele* Schlüsselzahl **6**.
+> - Alle Teams in Woche B erhalten Schlüsselzahl **1** – die gegenläufige Zahl zu 7 im 12er-Raster.
+> - Alle Teams in Woche X erhalten Schlüsselzahl **1** (Vereins-Schlüsselzahl für Spielwoche X im 10er-Raster).
+> - Alle Teams in Woche Y erhalten Schlüsselzahl **6** – die gegenläufige Zahl zu 1 im 10er-Raster.
+> - **Ausnahme**: Borussia Duesseldorf II in der Jugend 13 hat Schlüsselzahl **10** statt 1, obwohl es in Woche X spielt. Das liegt daran, dass zwei Teams desselben Vereins in derselben Gruppe spielen und daher nicht dieselbe Schlüsselzahl erhalten können. Die Zahl 10 ist im 10er-Raster eine *ähnliche* Schlüsselzahl zu 1.
 
 
 

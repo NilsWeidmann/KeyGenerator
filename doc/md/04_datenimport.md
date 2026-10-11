@@ -35,7 +35,7 @@ Der obere Bereich ("Gruppen") dient dem Import der Gruppen und ihrer Mannschafte
 
 > **Ansicht: Fenster „click-tt Import" nach dem Gruppenimport**
 >
-> Nach dem Import der CSV-Datei erscheinen links die importierten Gruppen und rechts die Mannschaften der jeweils ausgewählten Gruppe; die Rastergröße wird automatisch anhand der Teamanzahl mit dem kleinstmöglichen Wert (mindestens dem Referenzraster A/B) vorbelegt und hier nur angezeigt.
+> Nach dem Import der CSV-Datei erscheinen links die importierten Gruppen und rechts die Mannschaften der jeweils ausgewählten Gruppe; die Rastergröße wird automatisch anhand der Teamanzahl mit dem kleinstmöglichen Wert (mindestens dem Referenzraster A/B) vorbelegt und hier nur angezeigt. Im Beispiel ist zusätzlich bereits die Terminmeldung geladen: Unten links erscheinen die Vereine, unten rechts die Mannschaften des ausgewählten Vereins.
 >
 > ![Fenster „click-tt Import" nach dem Gruppenimport](../png/041-click-tt-import-gruppen.png)
 
@@ -67,9 +67,9 @@ Die linke Tabelle zeigt alle Gruppen mit folgenden Spalten:
 
 **Gruppen anlegen:**
 Tragen Sie in der untersten (leeren) Zeile einen Gruppennamen ein.
-Die neue Gruppe wird mit dem Standard-Referenzraster der Spielwochen A/B angelegt; tragen Sie zuerst die Rastergröße ein, erhält sie den Standardnamen "Neue Gruppe".
+Die neue Gruppe wird mit dem Standard-Referenzraster der Spielwochen A/B angelegt; wählen Sie zuerst die Rastergröße aus, erhält sie den Standardnamen "Neue Gruppe".
 Name und Rastergröße können direkt in der Tabelle bearbeitet werden; Umlaute im Gruppennamen werden automatisch ersetzt.
-Eine ungültige Rastergröße (siehe [5.2 Gruppensicht](05_startbildschirm.md#52-gruppensicht)) wird zurückgesetzt; eine Meldung nennt die für die Gruppe zulässigen Rastergrößen.
+Für die Rastergröße werden nur die für die Gruppe zulässigen Werte zur Auswahl angeboten (siehe [5.2 Gruppensicht](05_startbildschirm.md#52-gruppensicht)).
 
 **Gruppe auswählen:**
 Klicken Sie auf eine Zeile in der Gruppentabelle, um die zugehörigen Mannschaften in der rechten Tabelle anzuzeigen (Gruppenansicht).
@@ -128,7 +128,7 @@ Ein Verein kann nur gelöscht werden, wenn keine seiner Mannschaften noch einer 
 >
 > Für den SV Werder Bremen sind Schlüsselzahlen für alle vier Wochen vorgegeben.
 > Einige Vereine wie TTS Borsum haben Vorgaben nur für `A`/`B`.
-> Andere Vereine wie Borussia Düsseldorf und BV Borussia Dortmund hatten zum Zeitpunkt vor der Generierung noch keine Schlüsselzahlen – diese werden dann vollständig vom Tool ermittelt.
+> Andere Vereine wie Borussia Duesseldorf und BV Borussia Dortmund hatten zum Zeitpunkt vor der Generierung noch keine Schlüsselzahlen – diese werden dann vollständig vom Tool ermittelt.
 > Die Spalte `B` wird jeweils automatisch aus `A` berechnet (und `Y` aus `X`) – bzw. umgekehrt, wenn `B` oder `Y` eingetragen wird.
 
 ### Rechte Seite: Mannschaftstabelle
@@ -149,7 +149,7 @@ Die Mannschaft wird der Gruppe hinzugefügt, sofern noch Platz vorhanden ist (Ra
 
 **Mannschaften umbenennen:**
 Der Teamname kann sowohl in der Gruppen- als auch in der Vereinsansicht direkt in der Mannschaftstabelle bearbeitet werden.
-Dabei muss der Name weiterhin mit dem Vereinsnamen beginnen (z.B. "Borussia Düsseldorf II").
+Dabei muss der Name weiterhin mit dem Vereinsnamen beginnen (z.B. "Borussia Duesseldorf II").
 Ungültige Eingaben werden automatisch zurückgesetzt.
 
 **Mannschaften löschen:**

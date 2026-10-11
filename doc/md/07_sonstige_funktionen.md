@@ -18,7 +18,7 @@
 | Alle Schlüssel löschen | Löscht alle zugewiesenen Mannschafts- und Vereins-Schlüsselzahlen. Diese Aktion kann über **Rückgängig** rückgängig gemacht werden. Siehe Abschnitt 7.7. |
 | Ergebnisse exportieren | Exportiert die generierten Schlüsselzahlen als CSV-Datei mit Gruppen, Mannschaften, Schlüsselzahlen, Wunsch-Schlüsselzahlen, Spielwochen und Zusatz-Vorgaben. Falls die zugewiesene Schlüsselzahl nicht in der Wunschliste enthalten ist (Konflikt), wird dies in der Spalte "Wunsch" sichtbar. |
 | Generator-Tests | Startet automatisierte Tests des Generierungsalgorithmus (für die normale Anwendung nicht notwendig). |
-| Tests aus Datei | Führt Tests aus einer Datei aus (für die normale Anwendung nicht notwendig). |
+| Tests aus Datei | Führt Tests aus, die in Testdateien (`*.csv`) definiert sind (für die normale Anwendung nicht notwendig). Die Testdateien liegen in einem eigenen Ordner, der über einen Ordnerauswahldialog (ausgehend vom eingestellten Verzeichnis) ausgewählt wird; Dateien, die keine gültigen Testdateien sind, werden nach dem Testlauf aufgelistet. |
 | Abbrechen | Schließt das Fenster und kehrt zum Startbildschirm zurück. |
 
 > **Ansicht: Fenster „Sonstiges"**
@@ -79,7 +79,7 @@ Sie kann gespeichert und auf einem anderen Rechner oder in einer anderen Saison 
 **Konfiguration exportieren:**
 1. Klicken Sie auf **Sonstiges** im Startbildschirm.
 2. Klicken Sie auf **Konfiguration exportieren**.
-3. Wählen Sie im Dateidialog den gewünschten Speicherort und Dateinamen. Die Konfiguration wird als JSON-Datei gespeichert.
+3. Wählen Sie im Dateidialog den gewünschten Speicherort und Dateinamen (vorgeschlagen wird `Config.json`). Die Konfiguration wird als JSON-Datei gespeichert.
 Als Voreinstellung der Referenzraster enthält die exportierte Datei die aktuell eingestellten Referenzraster. Um die Voreinstellungen für neue Daten zu ändern, stellen Sie also die gewünschten Referenzraster ein, exportieren die Konfiguration und importieren sie anschließend wieder.
 
 **Konfiguration importieren:**

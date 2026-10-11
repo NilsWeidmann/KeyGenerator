@@ -16,6 +16,8 @@ Im oberen Bereich der Übersicht befinden sich links drei Kennzahlen-Kacheln (An
 - **↷ Wiederherstellen** (oder **Strg+Y**): Rückgängig gemachte Änderung wiederherstellen.
 - **Speichern** (oder **Strg+S**): Lädt die aktuellen Daten als `Data.json` herunter.
 
+Unterhalb der Kacheln und Schaltflächen erinnert ein Hinweis daran, dass Backups nur in diesem Browser gespeichert werden und die Daten regelmäßig über **Speichern** dauerhaft gesichert werden sollten (siehe [7.1 Backup laden](07_sonstige_funktionen.md#71-backup-laden)).
+
 Darunter befindet sich eine Umschaltleiste, mit der zwischen den beiden Ansichten der Datentabelle gewechselt wird:
 
 - **Gruppenansicht**: Zeigt alle Mannschaften einer ausgewählten Gruppe an.
@@ -64,14 +66,14 @@ Um die Zuordnung zu entfernen, wählen Sie den leeren Eintrag (`-`).
 
 > **Beispiel: Vereinsansicht ohne Schlüsselzahlen-Vorgabe**
 >
-> Der folgende Screenshot zeigt alle Mannschaften von Borussia Düsseldorf mit entsprechender farblicher Codierung für die Spielwoche.
+> Der folgende Screenshot zeigt alle Mannschaften von Borussia Duesseldorf mit entsprechender farblicher Codierung für die Spielwoche.
 > Vor der Generierung sind sowohl die Spalte "Schlüssel" als auch die Spalte "Wunsch" leer, da der Verein keine Schlüsselzahlenvorgabe von einer höheren Gliederungsebene hat:
 >
 > ![Vereinsansicht ohne Schlüsselzahlvorgaben](../png/051-vereinssicht-ohne-vorgabe.png)
 
 > **Beispiel: Vereinsansicht mit Schlüsselzahlen-Vorgabe**
 >
-> Der folgende Screenshot zeigt die Mannschaften von SV Werder Bremen. Oberhalb der Tabelle sind die Eingabefelder A, B, X und Y zu sehen, in denen die Vorgabewerte eingestellt sind. Die Zeilen sind entsprechend ihrer Spielwoche farblich hervorgehoben. Die Spalte "Schlüssel" ist auch bei diesem Verein leer, die Spalte "Wunsch" blendet die Schlüsselzahl(en) vor, die bei der entsprechenden Spielwoche benötigt werden.
+> Der folgende Screenshot zeigt die Mannschaften von SV Werder Bremen. Oberhalb der Tabelle sind die Dropdown-Menüs A, B, X und Y zu sehen, in denen die Vorgabewerte eingestellt sind (A = 10, B = 4, X = 8, Y = 3). Die Zeilen sind entsprechend ihrer Spielwoche farblich hervorgehoben. Die Spalte "Schlüssel" ist auch bei diesem Verein leer, die Spalte "Wunsch" blendet die Schlüsselzahl(en) vor, die bei der entsprechenden Spielwoche benötigt werden.
 >
 > ![Vereinsansicht mit vorgegebenen Schlüsselzahlen](../png/051-vereinssicht-mit-vorgabe.png)
 
@@ -81,8 +83,8 @@ Die Gruppenansicht gibt einen Überblick über alle Teams einer Gruppe.
 Wählen Sie dazu in der linken Spalte die gewünschte Gruppe aus der Liste aus.
 Jeder Listeneintrag zeigt den Gruppennamen sowie die Teamanzahl und die Rastergröße.
 
-Oberhalb der Tabelle erscheint das Feld **Raster**, in dem die Rastergröße der Gruppe geändert werden kann (eine komfortablere Alternative bietet die Seite [4. Manuelle Eingabe: Gruppentabelle](04_manuelle_eingabe.md#linke-spalte-gruppentabelle)).
-Die Rastergröße muss mindestens so groß sein wie die Anzahl der Mannschaften in der Gruppe (aufgerundet auf eine gerade Zahl) und darf maximal 14 betragen. Eine ungültige Eingabe wird zurückgesetzt; eine Meldung nennt die zulässigen Rastergrößen.
+Oberhalb der Tabelle erscheint das Feld **Raster**, in dem die Rastergröße der Gruppe ausgewählt werden kann (eine komfortablere Alternative bietet die Seite [4. Manuelle Eingabe: Gruppentabelle](04_manuelle_eingabe.md#linke-spalte-gruppentabelle)).
+Angeboten werden nur zulässige Rastergrößen: gerade Zahlen, die mindestens so groß sind wie die Anzahl der Mannschaften in der Gruppe (aufgerundet auf eine gerade Zahl), bis maximal 14. Für eine Gruppe mit 11 Mannschaften stehen also z.B. nur die Rastergrößen 12 und 14 zur Auswahl; eine kleinere Rastergröße wird erst angeboten, wenn Mannschaften aus der Gruppe entfernt wurden.
 Die maximale Rastergröße gilt nur für die Standard-Konfiguration. Durch das Laden einer anderen Konfiguration (siehe [7.4 Konfiguration exportieren und importieren](07_sonstige_funktionen.md#74-konfiguration-exportieren-und-importieren)) können beliebig große Raster verwendet werden.
 
 ### Tabellenspalten in der Gruppenansicht
@@ -112,16 +114,16 @@ In der Gruppenansicht werden die Zeilen nach dem Zuweisungsstatus eingefärbt:
 Die Gruppenansicht eignet sich besonders zur **Kontrolle nach der Generierung**, da hier auf einen Blick alle Schlüsselzahlen einer Gruppe sichtbar sind.
 Orange eingefärbte Zeilen weisen auf Konflikte hin, die auch im Nachgang über den Link **Konflikte auflösen** in der Seitenleiste (siehe [6.2 Konflikte auflösen](06_generierung.md#62-konflikte-aufloesen)) behoben werden können.
 
-> **Beispiel: Gruppenansicht – Bezirksoberliga Erwachsene vor der Generierung**
+> **Beispiel: Gruppenansicht – Erwachsene Bezirksoberliga vor der Generierung**
 >
-> Der folgende Screenshot zeigt die Bezirksoberliga Erwachsene (Rastergröße 12, 12 Teams) im Zustand *vor* der Generierung.
+> Der folgende Screenshot zeigt die Erwachsene Bezirksoberliga (Rastergröße 12, 12 Teams) im Zustand *vor* der Generierung.
 > Zu diesem Zeitpunkt waren viele Spielwochen bereits zugeordnet, aber die Schlüsselzahlen noch nicht vergeben:
 >
 > ![Gruppenansicht – Übersicht](../png/052-gruppensicht.png)
 >
 > Hier sind drei Farben zu erkennen:
 > - **Blau**: Teams, deren Verein bereits eine vorgegebene Schlüsselzahl hat (z.B. SV Werder Bremen mit A=10). Die Wunsch-Schlüsselzahlen können berechnet werden, aber die Mannschafts-Schlüsselzahl fehlt noch.
-> - **Gelb**: Teams, deren Verein noch keine Schlüsselzahl hat (z.B. Borussia Düsseldorf, BV Borussia Dortmund). Es können weder Wunsch noch Schlüsselzahl angezeigt werden.
+> - **Gelb**: Teams, deren Verein noch keine Schlüsselzahl hat (z.B. Borussia Duesseldorf, BV Borussia Dortmund). Es können weder Wunsch noch Schlüsselzahl angezeigt werden.
 > - **Weiß**: 1. FC Saarbrücken-TT I hat keine Spielwoche (Woche = `-`) und somit auch keine Wunsch-Schlüsselzahl.
 
 ## 5.3 Zusätzliche Einstellungen für einzelne Teams
@@ -155,7 +157,7 @@ Bestätigen Sie Ihre Eingaben mit **Speichern** oder verwerfen Sie sie mit **Abb
 
 > **Ansicht: Dialog „Zusatz"**
 >
-> Der Dialog „Zusatz" mit der Spielwochenauswahl oben und der Tabelle für Heim-/Auswärtsvorgaben je Spieltag darunter. Die Anzahl der Spieltage richtet sich nach der Rastergröße der Gruppe.
+> Der Dialog „Zusatz" für Hertha BSC Berlin I (Erwachsene 3. Bezirksklasse 1) mit der Spielwochenauswahl oben, einem Hinweis zum sparsamen Einsatz von Heim-/Auswärtsvorgaben und der Tabelle für Heim-/Auswärtsvorgaben je Spieltag darunter. Die Anzahl der Spieltage richtet sich nach der Rastergröße der Gruppe (hier 11 Spieltage). Das geöffnete Dropdown-Menü zeigt die Optionen `-`, `Heimspiel`, `Auswärtsspiel` und `Spielfrei`.
 >
 > ![Dialog „Zusatz" – Zusätzliche Einstellungen für ein Team](../png/053-zusatzvorgaben.png)
 

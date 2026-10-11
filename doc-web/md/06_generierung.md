@@ -11,14 +11,16 @@ Nachdem alle Daten eingegeben und alle Wünsche der Vereine berücksichtigt word
 3. Die Anwendung wechselt auf die Seite **Optimierung**, die einen Fortschrittsbalken, den aktuellen Status sowie die laufend aktualisierten Kennzahlen der bisher besten Lösung anzeigt. Angezeigt werden die Anzahl der **Konflikte**, die **Abweichungen bei Heim-/Auswärtsspielen** (die Summe der Spieltage, an denen die Heim-/Auswärtsfolge der Teams mit Konflikt von ihrer Wunsch-Schlüsselzahl abweicht), die vorgezogenen **internen Begegnungen** (x von y, sofern möglich) sowie die **nicht erfüllten Spielfrei-Wünsche** (x von y, sofern vorhanden).
 4. Sie können die Generierung jederzeit über den Button **Abbrechen** vorzeitig beenden. Die Anwendung übernimmt dann die bis dahin beste gefundene Lösung und fährt wie nach einer regulär beendeten Generierung fort (gegebenenfalls mit der Konfliktauflösung). Wurde bis dahin noch keine Lösung gefunden, erscheint die Meldung "Es konnten keine Schlüsselzahlen ermittelt werden!", und der bisherige Stand bleibt erhalten.
 
-Nach Abschluss der Optimierung bietet die Seite **Optimierung** den Button **Zurück zur Übersicht** sowie, falls Konflikte vorliegen, den Button **Konflikte auflösen →** an.
+Nach Abschluss der Optimierung geht es automatisch weiter:
+- Liegen **keine Konflikte** vor, kehrt die Anwendung sofort zur **Übersicht** zurück.
+- Liegen **Konflikte** vor, öffnet sich automatisch die Seite **Konflikte auflösen** (siehe [6.1 Konflikte beheben](#61-konflikte-beheben)). Voraussetzung dafür ist, dass jede Mannschaft eine Schlüsselzahl erhalten hat; andernfalls bleibt die Seite **Optimierung** geöffnet und bietet die Buttons **Konflikte auflösen →** und **Zurück zur Übersicht** an.
 
 **Hinweis:** Vor der Generierung wird eine Plausibilitätsprüfung durchgeführt.
 Wenn widersprüchliche Vorgaben erkannt werden (z.B. inkonsistente Spieltagsvorgaben für Teams desselben Vereins in derselben Spielwoche), erscheint eine Fehlermeldung.
 
 ## 6.1 Konflikte beheben
 
-Nach Abschluss der Optimierung wechselt die Anwendung auf die Seite **Konflikte auflösen**, falls Konflikte aufgetreten sind (was der Normalfall sein sollte).
+Nach Abschluss der Optimierung wechselt die Anwendung automatisch auf die Seite **Konflikte auflösen**, falls Konflikte aufgetreten sind (was der Normalfall sein sollte).
 Da jede Schlüsselzahl in einer Gruppe nur einmal vergeben wird, kann nicht jedes Team immer seine Wunsch-Schlüsselzahl erhalten. Ein Konflikt liegt vor, wenn die zugewiesene Schlüsselzahl eines Teams nicht zu seinen Wunsch-Schlüsselzahlen gehört. Zu einem Konflikt gehören alle Teams der Gruppe, die dieselbe Wunsch-Schlüsselzahl beanspruchen, sowie das Team, das diese Schlüsselzahl derzeit hat.
 
 Am oberen Rand der Seite wird die Anzahl der gefundenen Konflikte angezeigt.
@@ -76,36 +78,36 @@ Nach der Generierung empfiehlt es sich, die Ergebnisse in der **Gruppenansicht**
 Da nun alle Teams eine Schlüsselzahl haben sollten, sind alle Zeilen grün, orange (im Konfliktfall oder wenn eine Mannschaft ohne Spielwoche ihre Heim-/Auswärtsvorgaben nicht erfüllt bekommt; nicht erfüllte Spielfreiwünsche färben nicht orange) oder weiß (bei Mannschaften ohne Spielwoche und ohne Vorgaben) eingefärbt.
 Mithilfe dieser Übersicht können Sie die Schlüsselzahlen in Click-TT oder in ein sonstiges Verwaltungssystem übertragen.
 
-> **Beispiel: Gruppenansicht – Bezirksoberliga Erwachsene nach der Generierung**
+> **Beispiel: Gruppenansicht – Erwachsene Bezirksoberliga nach der Generierung**
 >
 > Nach der Generierung hat jedes Team eine Schlüsselzahl erhalten.
-> Alle Zeilen sind nun **grün** (oder **orange**, falls Konflikte auftreten):
+> Alle Zeilen sind nun **grün** (oder **orange**, falls Konflikte auftreten, bzw. **weiß** bei Mannschaften ohne Spielwoche und ohne Vorgaben):
 >
 > ![Gruppenansicht nach der Generierung](../png/063-gruppensicht-nach-generierung.png)
 >
 > Alle 12 Schlüsselzahlen (1–12) sind genau einmal vergeben – es gibt keine Konflikte.
 > Die Spalte "Wunsch" zeigt die aus der Vereins-Schlüsselzahl abgeleiteten Wunschzahlen.
-> Beim 1. FC Saarbrücken-TT I ist kein Wunsch eingetragen, da der Verein keine vorgegebene Schlüsselzahl und auch keine Spielwoche hatte – die Zahl 4 wurde frei zugewiesen.
+> Beim 1. FC Saarbrücken-TT I ist kein Wunsch eingetragen, da der Verein keine vorgegebene Schlüsselzahl und auch keine Spielwoche hatte – die Zeile ist daher weiß, und die Zahl 7 wurde frei zugewiesen.
 
 > **Beispiel: Gruppenansicht 1. Bezirksliga 3 Erwachsene nach der Generierung**
 >
-> Die 1. Bezirksliga 3 enthält nach der Generierung einen aufgelösten Konflikt: Die orange markierte Zeile kennzeichnet ein Team, bei dem die zugewiesene Schlüsselzahl von der Wunsch-Schlüsselzahl abweicht. Im Vorfeld wurde ein Konflikt zwischen SV Werder Bremen IV und TTS Borsum II dahingehend aufgelöst, dass Bremen die Schlüsselzahl 4, und Borsum die ähnliche Schlüsselzahl 3 zugewiesen wurde (Abschnitt [6.1 Konflikte beheben](#61-konflikte-beheben)).
+> Die 1. Bezirksliga 3 enthält nach der Generierung einen aufgelösten Konflikt: Die orange markierte Zeile kennzeichnet ein Team, bei dem die zugewiesene Schlüsselzahl von der Wunsch-Schlüsselzahl abweicht. Im Vorfeld wurde ein Konflikt zwischen SV Werder Bremen IV und TTS Borsum II dahingehend aufgelöst, dass Bremen die Schlüsselzahl 4, und Borsum die ähnliche Schlüsselzahl 5 zugewiesen wurde (Abschnitt [6.1 Konflikte beheben](#61-konflikte-beheben)).
 >
 > ![Gruppenansicht mit Konflikt (orange markierte Zeilen)](../png/063-gruppensicht-mit-konflikt.png)
 
 > **Beispiel: Vereinsansicht – Vergabe von parallelen und gegenläufigen Schlüsselzahlen**
 >
-> Der folgende Screenshot zeigt die ermittelten Schlüsselzahlen für die Mannschaften von Borussia Düsseldorf.
-> Durch die Generierung wurden die Vereins-Schlüsselzahlen **A=5, B=11, X=5, Y=10** ermittelt:
+> Der folgende Screenshot zeigt die ermittelten Schlüsselzahlen für die Mannschaften von Borussia Duesseldorf.
+> Durch die Generierung wurden die Vereins-Schlüsselzahlen **A=2, B=8, X=5, Y=10** ermittelt:
 >
 > ![Vereinsansicht nach der Generierung](../png/063-vereinssicht-nach-generierung.png)
 >
 > An diesem Beispiel lassen sich mehrere Aspekte ablesen:
-> - Alle Teams in Woche A erhalten Schlüsselzahl **5** (die Vereins-Schlüsselzahl für Spielwoche A).
-> - Alle Teams in Woche B erhalten Schlüsselzahl **11** – die gegenläufige Zahl zu 5 im 12er-Raster.
+> - Alle Teams in Woche A erhalten Schlüsselzahl **2** (die Vereins-Schlüsselzahl für Spielwoche A).
+> - Alle Teams in Woche B erhalten Schlüsselzahl **8** – die gegenläufige Zahl zu 2 im 12er-Raster.
 > - Alle Teams in Woche X erhalten Schlüsselzahl **5** (Vereins-Schlüsselzahl für Spielwoche X im 10er-Raster).
 > - Alle Teams in Woche Y erhalten Schlüsselzahl **10** – die gegenläufige Zahl zu 5 im 10er-Raster.
-> - **Ausnahme**: Borussia Düsseldorf II in der Jugend 13 hat Schlüsselzahl **4** statt 5, obwohl es in Woche X spielt. Das liegt daran, dass zwei Teams desselben Vereins in derselben Gruppe spielen und daher nicht dieselbe Schlüsselzahl erhalten können. Die Zahl 4 ist im 10er-Raster eine *ähnliche* Schlüsselzahl zu 5.
+> - **Ausnahme**: Borussia Duesseldorf I in der Jugend 13 hat Schlüsselzahl **6** statt 5, obwohl es in Woche X spielt. Das liegt daran, dass zwei Teams desselben Vereins in derselben Gruppe spielen und daher nicht dieselbe Schlüsselzahl erhalten können. Die Zahl 6 ist im 10er-Raster eine *ähnliche* Schlüsselzahl zu 5.
 
 Zusätzlich können Sie die Ergebnisse über den Link **Ergebnisse exportieren** in der Seitenleiste als CSV-Datei herunterladen (siehe [7.2 Ergebnisse exportieren](07_sonstige_funktionen.md#72-ergebnisse-exportieren)).
 

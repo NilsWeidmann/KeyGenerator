@@ -9,11 +9,12 @@ In diesem Abschnitt wird vorgestellt, wie die relevanten Dateien für Gruppenein
 ## B.1 Gruppenstruktur als CSV-Datei herunterladen
 
 Melden Sie sich bei Click-TT an und navigieren Sie zum Download-Bereich.
-Wählen Sie im obersten Dropdown-Menü **Tabellen (aktuelle Tabellen - Filter Meisterschaft)** aus.
+Wählen Sie im obersten Dropdown-Menü **Download** den Eintrag **Tabellen (aktuelle Tabellen - Filter Meisterschaft)** aus.
+Wählen Sie darunter die gewünschte **Meisterschaft** (im Beispiel „Bezirk Ostwestfalen-Nord 2025/26") und einen **Zeichensatz** (im Beispiel UTF-8).
 
 ![Click-TT – Gruppenübersicht](../../doc/png/A-download-gruppen.png)
 
-Laden Sie die Gruppenstruktur über den entsprechenden Button **Exportieren** als CSV-Datei herunter (z.B. `Tabellen.csv`).
+Klicken Sie auf **Exportieren**. Auf der folgenden Seite steht die Gruppenstruktur als CSV-Datei über einen Link zum Download bereit (im Beispiel `Tabellen__aktuelle_Tabellen_-_Filter_Meisterschaft__20261011185002.csv`). Laden Sie die Datei über diesen Link herunter; der Link steht nur vorübergehend zur Verfügung. Sie können die Datei anschließend umbenennen (z.B. in `Tabellen.csv`).
 
 ![Click-TT – CSV-Download der Gruppenstruktur](../../doc/png/B1-download-gruppen-csv.png)
 
@@ -35,7 +36,7 @@ Wiederholen Sie diesen Schritt für jede Gruppe Ihrer Gliederung.
 **Variante B**: Öffnen Sie über **Spielbetrieb Meldung** die Terminmeldung eines Vereins und laden Sie diese als PDF herunter (Spalte **Terminwünsche**).
 Wiederholen Sie diesen Schritt für jeden Verein Ihrer Gliederung.
 
-![Click-TT – Terminmeldung Borussia Düsseldorf](../../doc/png/B2-terminmeldung-borussia-düsseldorf.png)
+![Click-TT – Terminmeldung Borussia Duesseldorf](../../doc/png/B2-terminmeldung-borussia-düsseldorf.png)
 
 Die einzelnen PDF-Dateien werden im nächsten Schritt zu einer gemeinsamen PDF zusammengeführt.
 

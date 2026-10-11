@@ -24,12 +24,15 @@ Die folgende Übersicht zeigt alle Seiten der Web-Anwendung und wie diese von de
   - Schaltfläche **Partner** (Vereinsansicht) → Dialog "Partnerschaften" des ausgewählten Vereins
   - Schaltfläche **Generieren** → Backup anlegen → Seite "Optimierung"
   - Dropdown **Backup laden** → Auswahl einer Sicherheitskopie (deaktiviert "Konflikte auflösen")
+  - Schaltfläche **Schlüssel löschen** → Sicherheitsabfrage → alle Mannschafts- und Vereins-Schlüsselzahlen löschen
+  - Schaltflächen **↶ Rückgängig** (**Strg+Z**) / **↷ Wiederherstellen** (**Strg+Y**)
   - Schaltfläche **Speichern** → Download `Data.json`
 - **Optimierung** (`/solving/…`)
   - Fortschrittsbalken mit Status
   - Schaltfläche **Abbrechen** – während der Ausführung
-  - Schaltfläche **Konflikte auflösen →** – nach Abschluss, falls Konflikte vorhanden
-  - Schaltfläche **Zurück zur Übersicht** – nach Abschluss
+  - Nach Abschluss ohne Konflikte → automatisch zurück zur Übersicht
+  - Nach Abschluss mit Konflikten → automatisch Seite "Konflikte auflösen" (sofern jede Mannschaft eine Schlüsselzahl hat)
+  - Schaltflächen **Konflikte auflösen →** und **Zurück zur Übersicht** – nach Abschluss mit Konflikten, falls nicht jede Mannschaft eine Schlüsselzahl hat
 - **Seitenleiste → Konflikte auflösen** → Seite "Konflikte auflösen" (`/conflicts`) – nur nach abgeschlossener Generierung, bis ein Backup geladen oder neue Daten importiert werden
   - Linke Spalte: Liste der Konflikte
   - Rechte Spalte: Betroffene Teams mit Schlüsselzahl-Dropdowns
@@ -40,10 +43,11 @@ Nach dem Laden von Daten bietet die Seitenleiste außerdem folgende Funktionen:
 
 - **Seitenleiste → Ergebnisse exportieren** → Download `Results.csv`
 - **Seitenleiste → Terminmeldung exportieren** → Download `Terminmeldung.csv`
-- **Seitenleiste → Konfiguration exportieren** → Download Konfiguration (JSON)
+- **Seitenleiste → Konfiguration exportieren** → Download `Config.json`
 - **Seitenleiste → Konfiguration importieren** → Dateiauswahl-Dialog
-- **Seitenleiste → CSV exportieren (historisch)** → Download CSV
+- **Seitenleiste → CSV exportieren (historisch)** → Download `Historical.zip`
 - **Seitenleiste → CSV importieren (historisch)** → Dateiauswahl-Dialog
+- **Seitenleiste → Log exportieren** → Download `Log.csv` – sobald mindestens eine Generierung durchgeführt wurde
 
 ---
 

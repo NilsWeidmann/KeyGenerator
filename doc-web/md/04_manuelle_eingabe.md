@@ -30,7 +30,7 @@ Die obere Tabelle in der linken Spalte zeigt alle Gruppen mit folgenden Spalten:
 Klicken Sie auf die Schaltfläche **+ Gruppe**.
 Die neue Gruppe wird mit dem Standard-Referenzraster der Spielwochen A/B und dem Standardnamen "Neue Gruppe" angelegt.
 Name und Rastergröße können direkt in der Tabelle bearbeitet werden; Umlaute im Gruppennamen werden automatisch ersetzt.
-Eine ungültige Rastergröße (siehe [5.2 Gruppenansicht](05_startbildschirm.md#52-gruppenansicht)) wird zurückgesetzt; eine Meldung nennt die für die Gruppe zulässigen Rastergrößen.
+Für die Rastergröße werden nur die für die Gruppe zulässigen Werte zur Auswahl angeboten (siehe [5.2 Gruppenansicht](05_startbildschirm.md#52-gruppenansicht)).
 
 **Gruppe auswählen:**
 Klicken Sie auf eine Zeile in der Gruppentabelle, um die zugehörigen Mannschaften in der rechten Spalte anzuzeigen (Gruppenansicht).
@@ -89,7 +89,7 @@ Ein Verein kann nur gelöscht werden, wenn keine seiner Mannschaften noch einer 
 >
 > Für den SV Werder Bremen sind Schlüsselzahlen für alle vier Wochen vorgegeben.
 > Einige Vereine wie TTS Borsum haben Vorgaben nur für `A`/`B`.
-> Andere Vereine wie Borussia Düsseldorf und BV Borussia Dortmund hatten zum Zeitpunkt vor der Generierung noch keine Schlüsselzahlen – diese werden dann vollständig vom Tool ermittelt.
+> Andere Vereine wie Borussia Duesseldorf und BV Borussia Dortmund hatten zum Zeitpunkt vor der Generierung noch keine Schlüsselzahlen – diese werden dann vollständig vom Tool ermittelt.
 > Die Spalte `B` wird jeweils automatisch aus `A` berechnet (und `Y` aus `X`) – bzw. umgekehrt, wenn `B` oder `Y` eingetragen wird.
 
 ## Rechte Spalte: Mannschaftstabelle
@@ -114,7 +114,7 @@ Die Mannschaftsnummer ist optional; eine Mannschaft ohne Nummer erhält den Name
 
 **Mannschaften umbenennen:**
 Der Teamname kann sowohl in der Gruppen- als auch in der Vereinsansicht direkt in der Mannschaftstabelle bearbeitet werden.
-Dabei muss der Name weiterhin mit dem Vereinsnamen beginnen (z.B. "Borussia Düsseldorf II").
+Dabei muss der Name weiterhin mit dem Vereinsnamen beginnen (z.B. "Borussia Duesseldorf II").
 Ungültige Eingaben werden automatisch zurückgesetzt.
 
 **Mannschaften löschen:**

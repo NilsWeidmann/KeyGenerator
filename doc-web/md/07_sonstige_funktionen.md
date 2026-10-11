@@ -62,7 +62,7 @@ Sie kann gespeichert und auf einem anderen Rechner oder in einer anderen Saison 
 
 **Konfiguration exportieren:**
 1. Klicken Sie in der Seitenleiste auf **Konfiguration exportieren**.
-2. Die Konfigurationsdatei wird als JSON-Datei in den Browser-Downloads-Ordner heruntergeladen.
+2. Die Konfigurationsdatei wird als JSON-Datei `Config.json` in den Browser-Downloads-Ordner heruntergeladen.
 Als Voreinstellung der Referenzraster enthält die exportierte Datei die aktuell eingestellten Referenzraster. Um die Voreinstellungen für neue Daten zu ändern, stellen Sie also die gewünschten Referenzraster ein, exportieren die Konfiguration und importieren sie anschließend wieder.
 
 **Konfiguration importieren:**
@@ -80,7 +80,7 @@ Es besteht aus drei CSV-Dateien: `Staffeln.csv` (Gruppen und Mannschaften mit Sc
 
 **CSV exportieren:**
 1. Klicken Sie in der Seitenleiste auf **CSV exportieren (historisch)**.
-2. Die Dateien werden als eine ZIP-Datei in den Browser-Downloads-Ordner heruntergeladen.
+2. Die Dateien werden als eine ZIP-Datei `Historical.zip` in den Browser-Downloads-Ordner heruntergeladen.
 
 **CSV importieren:**
 1. Klicken Sie in der Seitenleiste auf **CSV importieren (historisch)**.

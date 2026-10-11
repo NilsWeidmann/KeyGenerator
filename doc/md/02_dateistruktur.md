@@ -20,7 +20,7 @@ Folgende Dateien können in die Anwendung importiert bzw. aus ihr exportiert wer
 | `Terminmeldung.csv` | Export | Gemeldeter Spieltag und Ersatzspieltag je Mannschaft. Über **Sonstiges** → **Terminmeldung speichern** (siehe [7.3 Terminmeldung speichern](07_sonstige_funktionen.md#73-terminmeldung-speichern)). |
 | `Config.json` | Import und Export | Konfiguration (Spielpläne, Voreinstellungen der Referenzraster, Rastergrößen, Altersklassen usw.). Über **Sonstiges** → **Konfiguration exportieren** bzw. **Konfiguration importieren** (siehe [7.5 Konfiguration exportieren und importieren](07_sonstige_funktionen.md#75-konfiguration-exportieren-und-importieren)). Eine importierte Konfiguration wird beim nächsten Programmstart wieder verwendet. |
 | `Staffeln.csv`, `Vereine.csv`, `Beziehungen.csv` | Import und Export | Daten im älteren CSV-Format. Über **Sonstiges** → **CSV exportieren (historisch)** bzw. **CSV importieren (historisch)** (siehe [7.6 CSV exportieren und importieren](07_sonstige_funktionen.md#76-csv-exportieren-und-importieren-historisches-format)). |
-| Testdateien (`*.txt`) | Import | Nur für Entwickler: Testinstanzen, die über **Sonstiges** → **Tests aus Datei** aus dem eingestellten Verzeichnis gelesen werden (siehe [7. Sonstige Funktionen](07_sonstige_funktionen.md)). |
+| Testdateien (`*.csv`) | Import | Nur für Entwickler: Testinstanzen in einem eigenen Ordner, der über **Sonstiges** → **Tests aus Datei** ausgewählt wird (siehe [7. Sonstige Funktionen](07_sonstige_funktionen.md)). |
 
 Die Daten werden im JSON-Format gespeichert und geladen.
 Ein älteres CSV-Format wird weiterhin unterstützt (siehe [7.6 CSV exportieren und importieren](07_sonstige_funktionen.md#76-csv-exportieren-und-importieren-historisches-format)).
