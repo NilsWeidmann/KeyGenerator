@@ -10,8 +10,8 @@ Sie ist erst erreichbar, nachdem Daten geladen wurden.
 Im oberen Bereich der Übersicht befinden sich links drei Kennzahlen-Kacheln (Anzahl der Gruppen, Teams und Vereine) und rechts die folgenden Schaltflächen:
 
 - **Generieren**: Startet die automatische Schlüsselzahlgenerierung (siehe [6. Schlüsselzahlen generieren](06_generierung.md)).
-- **Backup laden**: Öffnet ein Dropdown-Menü mit den verfügbaren Sicherheitskopien (siehe [7.1 Backup laden](07_sonstige_funktionen.md#71-backup-laden)).
-- **Schlüssel löschen**: Löscht alle zugewiesenen Mannschafts- und Vereins-Schlüsselzahlen. Diese Aktion kann über **Rückgängig** (**Strg+Z**) rückgängig gemacht und über **Wiederherstellen** (**Strg+Y**) wiederhergestellt werden.
+- **Backup laden**: Öffnet ein Dropdown-Menü mit den Sicherheitskopien der aktuellen Sitzung (siehe [7.1 Backup laden](07_sonstige_funktionen.md#71-backup-laden)).
+- **Schlüssel löschen**: Löscht nach einer Sicherheitsabfrage alle zugewiesenen Mannschafts- und Vereins-Schlüsselzahlen. Diese Aktion kann über **Rückgängig** (**Strg+Z**) rückgängig gemacht und über **Wiederherstellen** (**Strg+Y**) wiederhergestellt werden.
 - **↶ Rückgängig** (oder **Strg+Z**): Letzte Änderung rückgängig machen.
 - **↷ Wiederherstellen** (oder **Strg+Y**): Rückgängig gemachte Änderung wiederherstellen.
 - **Speichern** (oder **Strg+S**): Lädt die aktuellen Daten als `Data.json` herunter.
@@ -40,7 +40,7 @@ Die Werte A und B bzw. X und Y sind jeweils aneinander gekoppelt: Wenn Sie eine 
 | Woche | Zugeordnete Spielwoche (A, B, X, Y oder leer). Bearbeitung: Klicken Sie auf das Dropdown-Menü in der Zelle und wählen Sie die gewünschte Woche. |
 | Team | Name der Mannschaft |
 | Gruppe | Name der Gruppe, in der die Mannschaft spielt |
-| Wunsch | Mögliche Schlüsselzahlen basierend auf der Spielwochenvorgabe des Vereins |
+| Wunsch | Mögliche Schlüsselzahlen, abgeleitet aus der Vereins-Schlüsselzahl für die Spielwoche der Mannschaft und umgerechnet auf das Raster ihrer Gruppe (gibt es mehrere parallele Schlüsselzahlen, werden alle angezeigt); leer, solange der Verein für diese Spielwoche keine Schlüsselzahl hat |
 | Schlüssel | Zugewiesene Schlüsselzahl nach der Generierung |
 | Zusatz | Schaltfläche zum Öffnen des Zusatz-Dialogs (siehe [5.3 Zusätzliche Einstellungen für einzelne Teams](#53-zusaetzliche-einstellungen-fuer-einzelne-teams)) |
 
@@ -163,6 +163,8 @@ Bestätigen Sie Ihre Eingaben mit **Speichern** oder verwerfen Sie sie mit **Abb
 
 Eine **Partnerschaft** legt fest, dass Abhängigkeiten zwischen Spielwochen unterschiedlicher Vereine bestehen.
 Solche Vorgaben entstehen typischerweise durch gemeinsam genutzte Hallenzeiten oder organisatorische Abhängigkeiten zwischen zwei Vereinen.
+Eine Partnerschaft *Verein A in Woche X* = *Verein B in Woche Y* bedeutet, dass Verein A in Woche X dieselbe Schlüsselzahl erhält wie Verein B in Woche Y. Haben die beiden Spielwochen unterschiedliche Referenzraster, erhalten die Vereine stattdessen parallele Schlüsselzahlen (siehe [A.4 Schlüsselzahlen und Spielplan](A_datenmodell.md#a4-schluesselzahlen-und-spielplan)).
+Die Generierung hält Partnerschaften in jedem Fall ein.
 
 Die Partnerschaftsfunktion ist in der **Vereinsansicht** verfügbar.
 Wählen Sie zunächst in der linken Spalte den gewünschten Verein aus.

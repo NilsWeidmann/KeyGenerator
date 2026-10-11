@@ -10,14 +10,14 @@ Der empfohlene Arbeitsablauf bei der Erstbenutzung ist:
 2. **Daten überprüfen und ergänzen**:
    1. Rastergrößen für Gruppen anpassen (siehe [4.2 Manueller Datenimport: Gruppentabelle](04_datenimport.md#linke-seite-gruppentabelle))
    2. Vorgegebene Schlüsselzahlen einstellen (siehe [4.2 Manueller Datenimport: Vereinstabelle](04_datenimport.md#mittlere-seite-vereinstabelle))
-   3. Ggf. Spielwochenzuordnung ändern (siehe [4.2 Manueller Datenimport: Mannschaftstabelle ](04_datenimport.md#rechte-seite-mannschaftstabelle) oder [5.1 Vereinssicht](05_startbildschirm.md#51-vereinssicht))
+   3. Ggf. Spielwochenzuordnung ändern (siehe [4.2 Manueller Datenimport: Mannschaftstabelle](04_datenimport.md#rechte-seite-mannschaftstabelle) oder [5.1 Vereinssicht](05_startbildschirm.md#51-vereinssicht))
    4. Ggf. Heim-/Auswärtsspielvorgaben setzen (siehe [5.3 Zusätzliche Einstellungen für einzelne Teams](05_startbildschirm.md#53-zusaetzliche-einstellungen-fuer-einzelne-teams))
 3. **Schlüsselzahlen generieren** (siehe [6. Schlüsselzahlen generieren](06_generierung.md)).
 4. **Konflikte beheben**, falls nötig (siehe [6.1 Konflikte beheben](06_generierung.md#61-konflikte-beheben)).
 5. **Ergebnisse kontrollieren**: In der Gruppensicht (siehe [5.2 Gruppensicht](05_startbildschirm.md#52-gruppensicht)).
 6. **Ergebnisse speichern und exportieren** (siehe [6.3 Kontrolle und Übergabe](06_generierung.md#63-kontrolle-und-uebergabe)).
 
-Wenn Sie ihre Planung unterbrechen und zu einem späteren Zeitpunkt fortsetzen möchten, können Sie fortlaufend Zwischenstände abspeichern, und die gespeicherte JSON-Datei zu einem späteren Zeitpunkt laden (siehe [4.3 Laden aus Datei](04_datenimport.md#43-laden-aus-datei)).
+Wenn Sie Ihre Planung unterbrechen und zu einem späteren Zeitpunkt fortsetzen möchten, können Sie über den Button **Speichern** (oder **Strg+S**) fortlaufend Zwischenstände als JSON-Datei abspeichern und die gespeicherte JSON-Datei zu einem späteren Zeitpunkt laden (siehe [4.3 Laden aus Datei](04_datenimport.md#43-laden-aus-datei)).
 
 ---
 

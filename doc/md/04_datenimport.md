@@ -31,11 +31,11 @@ Der obere Bereich ("Gruppen") dient dem Import der Gruppen und ihrer Mannschafte
 1. Klicken Sie auf den Button **Durchsuchen** rechts oben.
 2. Wählen Sie eine CSV-Datei aus, die die Gruppeninformationen enthält (z.B. `Tabellen.csv`). Diese muss zuvor aus Click-TT heruntergeladen worden sein (Abschnitt [B.1](B_download_aus_click-tt.md#b1-gruppenstruktur-als-csv-datei-herunterladen)).
 3. Nach dem Import erscheinen links die Gruppen und rechts die Mannschaften der jeweils ausgewählten Gruppe.
-4. Die Rastergrößen der Gruppen werden automatisch anhand der Teamanzahl ermittelt; als Minimum gilt dabei die eingestellte Referenzrastergröße für die Spielwochen A/B. Sie können ggf. manuell angepasst werden (Abschnitt 4.2).
+4. Die Rastergrößen der Gruppen werden automatisch anhand der Teamanzahl ermittelt; als Minimum gilt dabei die eingestellte Referenzrastergröße für die Spielwochen A/B. Sie werden in diesem Fenster nur angezeigt und können ggf. im Fenster „Dateninput" (Abschnitt 4.2) oder auf dem Startbildschirm angepasst werden.
 
 > **Ansicht: Fenster „click-tt Import" nach dem Gruppenimport**
 >
-> Nach dem Import der CSV-Datei erscheinen links die importierten Gruppen und rechts die Mannschaften der jeweils ausgewählten Gruppe; die Rastergröße wird automatisch anhand der Teamanzahl mit dem kleinstmöglichen Wert vorbelegt und kann entsprechend angepasst werden.
+> Nach dem Import der CSV-Datei erscheinen links die importierten Gruppen und rechts die Mannschaften der jeweils ausgewählten Gruppe; die Rastergröße wird automatisch anhand der Teamanzahl mit dem kleinstmöglichen Wert (mindestens dem Referenzraster A/B) vorbelegt und hier nur angezeigt.
 >
 > ![Fenster „click-tt Import" nach dem Gruppenimport](../png/041-click-tt-import-gruppen.png)
 
@@ -45,11 +45,11 @@ Der untere Bereich ("Terminmeldung") dient dem Import der Vereinsinformationen u
 
 1. Klicken Sie auf den Button **Durchsuchen** rechts.
 2. Wählen Sie eine HTML-Datei aus, die die Terminmeldungen enthält. Diese muss zuvor wie in den Abschnitten [B.2](B_download_aus_click-tt.md#b2-terminmeldung-als-pdf-datei-herunterladen) – [B.4](B_download_aus_click-tt.md#b4-terminmeldung-in-eine-html-datei-konvertieren) beschrieben erstellt worden sein. Wir hoffen, dass in naher Zukunft ein direkter Download der Terminmeldung in Click-TT zur Verfügung steht. 
-3. Nach dem Import erscheinen links die Vereine und rechts die Mannschaften des jeweils ausgewählten Vereins. In den Spalten A,B,X und Y können Schlüsselzahlen basierend auf Vorgaben einer höheren Ebene eingetragen werden. Spielfreiwünsche und Heim-/Auswärtswünsche werden aus der Terminmeldung nicht übernommen, da sie dort nur als Freitext-Bemerkungen stehen; tragen Sie sie bei Bedarf im Fenster „Zusatz" als **Spielfrei**, **Heimspiel** bzw. **Auswärtsspiel** ein (siehe [5.3 Zusätzliche Einstellungen für einzelne Teams](05_startbildschirm.md#53-zusaetzliche-einstellungen-fuer-einzelne-teams)). 
+3. Nach dem Import erscheinen links die Vereine und rechts die Mannschaften des jeweils ausgewählten Vereins. Die Spalten A, B, X und Y zeigen die Schlüsselzahlen der Vereine nur an; vorgegebene Schlüsselzahlen einer höheren Ebene tragen Sie im Fenster „Dateninput" ein (Abschnitt 4.2). Spielfreiwünsche und Heim-/Auswärtswünsche werden aus der Terminmeldung nicht übernommen, da sie dort nur als Freitext-Bemerkungen stehen; tragen Sie sie bei Bedarf im Fenster „Zusatz" als **Spielfrei**, **Heimspiel** bzw. **Auswärtsspiel** ein (siehe [5.3 Zusätzliche Einstellungen für einzelne Teams](05_startbildschirm.md#53-zusaetzliche-einstellungen-fuer-einzelne-teams)). 
 
 Klicken Sie abschließend auf **Speichern**, um die Daten in eine JSON-Datei zu exportieren.
 Der Button befindet sich unten rechts im Fenster.
-Alternativ werden Sie beim Schließen des Fensters gefragt, ob Sie die Änderungen speichern möchten – sofern welche vorgenommen wurden.
+Alternativ werden Sie beim Schließen des Fensters gefragt, ob Sie die Änderungen speichern möchten – sofern seit dem letzten Speichern ein Import oder eine Änderung erfolgt ist. Andernfalls schließt das Fenster ohne Rückfrage.
 
 ## 4.2 Manueller Datenimport
 
@@ -67,7 +67,7 @@ Die linke Tabelle zeigt alle Gruppen mit folgenden Spalten:
 
 **Gruppen anlegen:**
 Tragen Sie in der untersten (leeren) Zeile einen Gruppennamen ein.
-Die neue Gruppe wird mit dem Standard-Referenzraster der Spielwochen A/B und dem Standardnamen "Neue Gruppe" angelegt.
+Die neue Gruppe wird mit dem Standard-Referenzraster der Spielwochen A/B angelegt; tragen Sie zuerst die Rastergröße ein, erhält sie den Standardnamen "Neue Gruppe".
 Name und Rastergröße können direkt in der Tabelle bearbeitet werden; Umlaute im Gruppennamen werden automatisch ersetzt.
 Eine ungültige Rastergröße (siehe [5.2 Gruppensicht](05_startbildschirm.md#52-gruppensicht)) wird zurückgesetzt; eine Meldung nennt die für die Gruppe zulässigen Rastergrößen.
 
@@ -93,9 +93,9 @@ Die mittlere Tabelle zeigt alle Vereine mit folgenden Spalten:
 |--------|-----------|
 | Verein | Name des Vereins |
 | A | Schlüsselzahl für Spielwoche A (Referenzraster A/B) |
-| B | Schlüsselzahl für Spielwoche B (automatisch berechnet) |
+| B | Schlüsselzahl für Spielwoche B (gegenläufig zu A) |
 | X | Schlüsselzahl für Spielwoche X (Referenzraster X/Y) |
-| Y | Schlüsselzahl für Spielwoche Y (automatisch berechnet) |
+| Y | Schlüsselzahl für Spielwoche Y (gegenläufig zu X) |
 
 **Vereine anlegen:**
 Tragen Sie in die unterste (leere) Zeile der Spalte "Verein" den Namen eines neuen Vereins ein.
@@ -108,7 +108,7 @@ Die Spalte "Woche" ist in diesem Modus sichtbar und bearbeitbar; der Teamname is
 
 **Vorgegebene Schlüsselzahlen einstellen:**
 Wenn vom Verband oder Bezirk bereits Schlüsselzahlen für bestimmte Vereine vorgegeben sind, tragen Sie diese in der entsprechenden Spalte (A, B, X oder Y) ein.
-Die gegenläufige Schlüsselzahl (also B zu A, Y zu X usw.) wird automatisch berechnet.
+Die gegenläufige Schlüsselzahl des Paars (also B zu A, A zu B, Y zu X bzw. X zu Y) wird automatisch berechnet.
 Es können nur Zahlen eingetragen werden, die für das eingestellte Referenzraster gültig sind.
 
 **Vereine umbenennen:**
@@ -129,26 +129,26 @@ Ein Verein kann nur gelöscht werden, wenn keine seiner Mannschaften noch einer 
 > Für den SV Werder Bremen sind Schlüsselzahlen für alle vier Wochen vorgegeben.
 > Einige Vereine wie TTS Borsum haben Vorgaben nur für `A`/`B`.
 > Andere Vereine wie Borussia Düsseldorf und BV Borussia Dortmund hatten zum Zeitpunkt vor der Generierung noch keine Schlüsselzahlen – diese werden dann vollständig vom Tool ermittelt.
-> Die Spalte `B` wird jeweils automatisch aus `A` berechnet (und `Y` aus `X`).
+> Die Spalte `B` wird jeweils automatisch aus `A` berechnet (und `Y` aus `X`) – bzw. umgekehrt, wenn `B` oder `Y` eingetragen wird.
 
 ### Rechte Seite: Mannschaftstabelle
 
 Die rechte Tabelle zeigt Mannschaftsdaten in zwei alternativen Anzeigemodi:
 
 - **Gruppenansicht**: Wird aktiviert durch Klick auf eine Zeile in der **Gruppentabelle** (links). Zeigt alle Mannschaften der ausgewählten Gruppe. Die Spalte "Woche" ist ausgeblendet. Der Teamname (Spalte "Team") ist direkt bearbeitbar.
-- **Vereinsansicht**: Wird aktiviert durch Klick auf eine Zeile in der **Vereinstabelle** (Mitte). Zeigt alle Mannschaften des ausgewählten Vereins gruppenübergreifend. Die Spalte "Woche" ist sichtbar und bearbeitbar (`A`, `B`, `X`, `Y` oder leer für keine Zuordnung). Der Teamname ist in diesem Modus nicht bearbeitbar.
+- **Vereinsansicht**: Wird aktiviert durch Klick auf eine Zeile in der **Vereinstabelle** (Mitte). Zeigt alle Mannschaften des ausgewählten Vereins gruppenübergreifend. Die Spalte "Woche" ist sichtbar und bearbeitbar (`A`, `B`, `X`, `Y` oder leer für keine Zuordnung). Der Teamname ist auch in diesem Modus direkt bearbeitbar.
 
 Die Spalten der Tabelle entsprechen denen der Hauptansicht (Woche, Team, Gruppe, Wunsch, Schlüssel). Die Spalten Gruppe, Schlüssel und Wunsch sind stets nur zur Anzeige.
 
-Ein **Rechtsklick** auf eine Mannschaft in der Tabelle öffnet den Zusatz-Dialog (siehe [5.3 Zusätzliche Einstellungen für einzelne Teams](05_startbildschirm.md#53-zusaetzliche-einstellungen-fuer-einzelne-teams)), in dem feste Vorgaben für Heim- und Auswärtsspiele in bestimmten Spielwochen eingetragen werden können.
+Ein **Rechtsklick** auf eine Mannschaft in der Tabelle öffnet den Zusatz-Dialog (siehe [5.3 Zusätzliche Einstellungen für einzelne Teams](05_startbildschirm.md#53-zusaetzliche-einstellungen-fuer-einzelne-teams)), in dem für einzelne Spieltage Heimspiel-, Auswärtsspiel- und Spielfrei-Vorgaben eingetragen werden können.
 
 **Mannschaften anlegen:**
 Wählen Sie zunächst in der Gruppentabelle (links) die gewünschte Gruppe aus.
 **Doppelklicken** Sie anschließend in der Vereinstabelle (Mitte) auf den Vereinsnamen.
-Die Mannschaft wird der Gruppe hinzugefügt, sofern noch Platz vorhanden ist (Rastergröße nicht überschritten).
+Die Mannschaft wird der Gruppe hinzugefügt, sofern noch Platz vorhanden ist (Rastergröße nicht überschritten). Sie erhält zunächst den Namen ihres Vereins; eine Mannschaftsnummer können Sie anschließend durch Umbenennen ergänzen.
 
 **Mannschaften umbenennen:**
-Der Teamname kann in der Gruppenansicht direkt in der Mannschaftstabelle bearbeitet werden.
+Der Teamname kann sowohl in der Gruppen- als auch in der Vereinsansicht direkt in der Mannschaftstabelle bearbeitet werden.
 Dabei muss der Name weiterhin mit dem Vereinsnamen beginnen (z.B. "Borussia Düsseldorf II").
 Ungültige Eingaben werden automatisch zurückgesetzt.
 

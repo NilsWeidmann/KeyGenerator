@@ -10,13 +10,19 @@ Die Anwendung ist wie folgt aufgebaut:
 - **Linke Seite (Seitenleiste)**: Navigationsmenü mit Links zu den einzelnen Seiten sowie Export- und Importfunktionen.
 - **Rechte Seite (Hauptbereich)**: Zeigt den Inhalt der aktuell geöffneten Seite.
 
-> **Hinweis:** Beim ersten Öffnen enthält die Seitenleiste nur den Link **Datenimport**. Sobald Daten geladen wurden, erscheinen die Links **Übersicht** und **Manuelle Eingabe** sowie — unterhalb eines Trennstrichs — die Import- und Exportfunktionen. Der Link **Konflikte auflösen** erscheint erst nach dem Abschluss einer Generierung und verschwindet wieder, wenn ein Backup geladen oder ein neuer Datenimport durchgeführt wird.
+> **Hinweis:** Beim ersten Öffnen enthält die Seitenleiste die Links **Datenimport** und **Manuelle Eingabe**. Sobald Daten geladen wurden, erscheinen zusätzlich der Link **Übersicht** sowie — unterhalb eines Trennstrichs — die Import- und Exportfunktionen. Der Link **Konflikte auflösen** erscheint erst nach dem Abschluss einer Generierung und verschwindet wieder, wenn ein Backup geladen oder ein neuer Datenimport durchgeführt wird.
 
 > **Ansicht: Startseite der Web-Anwendung**
 >
-> Die Datenimport-Seite nach dem Öffnen der Anwendung: In der Seitenleiste links ist zunächst nur der Link "Datenimport" sichtbar; im Hauptbereich rechts befinden sich die Schritte zum Laden von Daten sowie die Grundeinstellungen.
+> Die Datenimport-Seite nach dem Öffnen der Anwendung: In der Seitenleiste links sind zunächst die Links "Datenimport" und "Manuelle Eingabe" sichtbar; im Hauptbereich rechts befinden sich die Schritte zum Laden von Daten sowie die Grundeinstellungen.
 >
 > ![Startseite der Web-Anwendung](../png/03-startbildschirm.png)
+
+Daten können auf drei Wegen geladen werden:
+
+1. **Import aus Click-TT** – Import aus Dateien, die aus Click-TT exportiert wurden (Schritte 1 und 2, Abschnitt [3.2](#32-import-aus-click-tt))
+2. **Manuelle Eingabe** – Eingabe von Vereinen, Gruppen und Mannschaften über den gleichnamigen Link in der Seitenleiste (Abschnitt [4. Manuelle Eingabe](04_manuelle_eingabe.md)). Sie ist von Anfang an verfügbar; wurden noch keine Daten geladen, beginnt sie mit einem leeren Datenbestand.
+3. **Laden aus Datei** – Laden eines zuvor gespeicherten Zwischenstands (Schritt 3, Abschnitt [3.3](#33-laden-aus-datei))
 
 ## 3.1 Grundeinstellungen
 
@@ -45,14 +51,18 @@ Die Voreinstellungen für neue Daten (standardmäßig 12 für A/B und 10 für X/
 
 ### Begrenzung der Laufzeit
 
-Da die Ermittlung der Schlüsselzahlen ein komplexes Optimierungsproblem darstellt, wird die Generierung serverseitig ausgeführt.
+Da die Ermittlung der Schlüsselzahlen ein komplexes Optimierungsproblem darstellt, wird die Generierung serverseitig ausgeführt, und ihre Laufzeit ist begrenzt:
+
+- **Maximale Laufzeit**: Geben Sie die Laufzeit in Minuten und Sekunden ein.
+
+Der Standardwert beträgt **2 Minuten 0 Sekunden**, was im Normalfall für eine gute Lösung ausreicht. Der Server akzeptiert höchstens 5 Minuten (300 Sekunden).
 Wenn das Programm vor Ablauf der Zeit die optimale Lösung findet, wird die Suche automatisch vorzeitig beendet.
 Andernfalls wird nach Ablauf der maximalen Laufzeit die beste bis dahin gefundene Lösung verwendet.
 
 ### Interne Duelle möglichst vorziehen
 
-Das Kontrollkästchen **Interne Duelle möglichst vorziehen** steuert, ob der Optimierungsalgorithmus versucht, Begegnungen zwischen zwei Teams desselben Vereins innerhalb derselben Gruppe in die ersten Spielwochen zu legen.
-Die Option ist standardmäßig aktiviert; deaktivieren Sie sie, um keine entsprechende Präferenz zu verwenden.
+Das Kontrollkästchen **Interne Duelle möglichst vorziehen** steuert, ob der Optimierungsalgorithmus versucht, Begegnungen zwischen zwei Teams desselben Vereins innerhalb derselben Gruppe in die ersten Spielwochen zu legen. Die Anzahl dieser Spielwochen ist in der Konfiguration festgelegt (standardmäßig 3).
+Die Option ist standardmäßig aktiviert; deaktivieren Sie sie, um keine entsprechende Präferenz zu verwenden. Die Einstellung bleibt erhalten, wenn Sie die Datenimport-Seite später erneut aufrufen.
 
 ## 3.2 Import aus Click-TT
 
@@ -69,7 +79,7 @@ Dieser Schritt dient dem Import der Gruppen und ihrer Mannschaften.
 3. Nach dem Import erscheint eine grüne Bestätigung mit der Anzahl der geladenen Gruppen und Teams. Die Rastergrößen der Gruppen werden automatisch anhand der Teamanzahl ermittelt; als Minimum gilt dabei die eingestellte Referenzrastergröße für die Spielwochen A/B. Sie können anschließend manuell angepasst werden (Abschnitt [4. Manuelle Eingabe](04_manuelle_eingabe.md)).
 
 Nach erfolgreichem Abschluss von Schritt 1 wird Schritt 2 freigeschaltet.
-Außerdem erweitert sich die Seitenleiste um die Links **Übersicht**, **Manuelle Eingabe** sowie die Export- und Importfunktionen.
+Außerdem erweitert sich die Seitenleiste um den Link **Übersicht** sowie die Export- und Importfunktionen.
 
 ### Schritt 2: Terminmeldung laden (HTML)
 
@@ -80,7 +90,7 @@ Er ist erst verfügbar, nachdem Schritt 1 abgeschlossen wurde.
 2. Wählen Sie eine HTML-Datei aus, die die Terminmeldungen enthält. Diese muss zuvor wie in den Abschnitten [B.2](B_download_aus_click-tt.md#b2-terminmeldung-als-pdf-datei-herunterladen) – [B.4](B_download_aus_click-tt.md#b4-terminmeldung-in-eine-html-datei-konvertieren) beschrieben erstellt worden sein. Wir hoffen, dass in naher Zukunft ein direkter Download der Terminmeldung in Click-TT zur Verfügung steht.
 3. Nach dem Import erscheint eine grüne Bestätigung mit der Anzahl der geladenen Vereine. Spielfreiwünsche und Heim-/Auswärtswünsche werden aus der Terminmeldung nicht übernommen, da sie dort nur als Freitext-Bemerkungen stehen; tragen Sie sie bei Bedarf im Dialog „Zusatz" als **Spielfrei**, **Heimspiel** bzw. **Auswärtsspiel** ein (siehe [5.3 Zusätzliche Einstellungen für einzelne Teams](05_startbildschirm.md#53-zusaetzliche-einstellungen-fuer-einzelne-teams)).
 
-Nach erfolgreichem Import beider Dateien wird die Schaltfläche **Zur Übersicht →** am unteren Rand der Seite aktiv; alternativ können Sie auch über den Link **Übersicht** in der Seitenleiste zur zentralen Arbeitsfläche wechseln.
+Schritt 2 ist optional: Bereits nach erfolgreichem Abschluss von Schritt 1 (oder nach dem Laden einer JSON-Datei mit Gruppen in Schritt 3) wird die Schaltfläche **Zur Übersicht →** am unteren Rand der Seite aktiv; alternativ können Sie auch über den Link **Übersicht** in der Seitenleiste zur zentralen Arbeitsfläche wechseln.
 
 ## 3.3 Laden aus Datei
 

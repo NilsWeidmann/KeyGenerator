@@ -19,7 +19,7 @@ Die Spielwoche kann bearbeitet werden, alle anderen Spalten sind nur zur Anzeige
 | Woche | Zugeordnete Spielwoche (A, B, X, Y oder leer). Bearbeitung: Klicken Sie in die Zelle und geben Sie die gewünschte Woche ein. |
 | Team | Name der Mannschaft |
 | Gruppe | Name der Gruppe, in der die Mannschaft spielt |
-| Wunsch | Mögliche Schlüsselzahlen basierend auf der Spielwochenvorgabe des Vereins |
+| Wunsch | Mögliche Schlüsselzahlen, abgeleitet aus der Vereins-Schlüsselzahl für die Spielwoche der Mannschaft und umgerechnet auf das Raster ihrer Gruppe (gibt es mehrere parallele Schlüsselzahlen, werden alle angezeigt); leer, solange der Verein für diese Spielwoche keine Schlüsselzahl hat |
 | Schlüssel | Zugewiesene Schlüsselzahl nach der Generierung |
 
 ### Farbcodierung in der Vereinssicht
@@ -36,7 +36,7 @@ Die Zeilen werden je nach Spielwoche farblich hervorgehoben:
 
 ### Schlüsselzahlen auf Vereinsebene
 
-Oberhalb der Tabelle befinden sich vier Dropdown-Menüs (`A`, `B`, `X`, `Y`).
+Oberhalb der Tabelle befinden sich vier Dropdown-Menüs (`A`, `B`, `X`, `Y`) mit `-` (keine Schlüsselzahl) und den Schlüsselzahlen 1 bis zum Referenzraster der jeweiligen Spielwochen.
 Hier können Sie die Schlüsselzahlen auf Vereinsebene einstellen (deutlich komfortabler geht dies über das Fenster zur manuellen Dateneingabe, Abschnitt [4.2 Manueller Datenimport](04_datenimport.md#mittlere-seite-vereinstabelle)).
 Die Werte A und B bzw. X und Y sind jeweils aneinander gekoppelt: Wenn Sie eine Schlüsselzahl für A eingeben, wird die entgegengesetzte Schlüsselzahl für B automatisch berechnet (und umgekehrt).
 
@@ -68,6 +68,7 @@ Wählen Sie dazu im Dropdown-Menü "Gruppen" die gewünschte Gruppe aus.
 
 Neben dem Dropdown-Menü erscheint das Feld **Raster**, in dem die Rastergröße der Gruppe angezeigt und geändert werden kann (eine komfortablere Alternative bietet dafür die manuelle Dateneingabe, Abschnitt [4.2 Manueller Datenimport](04_datenimport.md#linke-seite-gruppentabelle)).
 Die Rastergröße muss mindestens so groß sein wie die Anzahl der Mannschaften in der Gruppe (aufgerundet auf eine gerade Zahl) und darf maximal 14 betragen.
+Die maximale Rastergröße gilt nur für die Standard-Konfiguration. Durch das Laden einer anderen Konfiguration (siehe [7.5 Konfiguration exportieren und importieren](07_sonstige_funktionen.md#75-konfiguration-exportieren-und-importieren)) können beliebig große Raster verwendet werden.
 
 ### Tabellenspalten in der Gruppensicht
 
@@ -145,6 +146,8 @@ Bestätigen Sie Ihre Eingaben mit **OK** oder verwerfen Sie sie mit **Abbrechen*
 
 Eine **Partnerschaft** legt fest, dass Abhängigkeiten zwischen Spielwochen unterschiedlicher Vereine bestehen.
 Solche Vorgaben entstehen typischerweise durch gemeinsam genutzte Hallenzeiten oder organisatorische Abhängigkeiten zwischen zwei Vereinen.
+Eine Partnerschaft *Verein A in Woche X* = *Verein B in Woche Y* bedeutet, dass Verein A in Woche X dieselbe Schlüsselzahl erhält wie Verein B in Woche Y. Haben die beiden Spielwochen unterschiedliche Referenzraster, erhalten die Vereine stattdessen parallele Schlüsselzahlen (siehe [A.4 Schlüsselzahlen und Spielplan](A_datenmodell.md#a4-schluesselzahlen-und-spielplan)).
+Die Generierung hält Partnerschaften in jedem Fall ein.
 
 Die Partnerschaftsfunktion ist in der **Vereinssicht** verfügbar.
 Wählen Sie zunächst im Dropdown-Menü „Vereine" den gewünschten Verein aus.

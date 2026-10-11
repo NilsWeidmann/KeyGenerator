@@ -9,11 +9,11 @@ In diesem Abschnitt wird vorgestellt, wie die relevanten Dateien für Gruppenein
 ## B.1 Gruppenstruktur als CSV-Datei herunterladen
 
 Melden Sie sich bei Click-TT an und navigieren Sie zum Download-Bereich.
-Wählen Sie im obersten Dropdown-Menü "Tabellen (aktuelle Tabellen - Filter Meisterschaft) aus. 
+Wählen Sie im obersten Dropdown-Menü **Tabellen (aktuelle Tabellen - Filter Meisterschaft)** aus. 
 
 ![Click-TT – Gruppenübersicht](../png/A-download-gruppen.png)
 
-Laden Sie die Gruppenstruktur über den entsprechenden Button "Exportieren" als CSV-Datei herunter (z.B. `Tabellen.csv`).
+Laden Sie die Gruppenstruktur über den entsprechenden Button **Exportieren** als CSV-Datei herunter (z.B. `Tabellen.csv`).
 
 ![Click-TT – CSV-Download der Gruppenstruktur](../png/B1-download-gruppen-csv.png)
 
@@ -26,13 +26,13 @@ Der Download der Terminmeldung im PDF-Format erfordert zum jetzigen Zeitpunkt ei
 Wir hoffen, dass in naher Zukunft ein Download der Terminmeldung als CSV-Datei (wie für die Gruppeneinteilung, siehe Abschnitt B.1) zur Verfügung steht.
 Die Terminmeldung kann auf zwei verschiedenen Wegen heruntergeladen werden:
 
-**Variante A**: Navigieren Sie in Click-TT über "Spielbetrieb Organisation" zu einer Gruppe ihrer Gliederung.
-Laden Sie auf der rechten Seite unter "Downloads" die oberste PDF-Datei (Terminmeldungen (pdf)) herunter.
+**Variante A**: Navigieren Sie in Click-TT über **Spielbetrieb Organisation** zu einer Gruppe Ihrer Gliederung.
+Laden Sie auf der rechten Seite unter **Downloads** die oberste PDF-Datei (**Terminmeldungen (pdf)**) herunter.
 Wiederholen Sie diesen Schritt für jede Gruppe Ihrer Gliederung.   
 
 ![Click-TT – Terminmeldungen der Bezirksoberliga](../png/B2-terminmeldung-bezirksoberliga.png)
 
-**Variante B**: Öffnen Sie über "Spielbetrieb Meldung" die Terminmeldung eines Vereins und laden Sie diese als PDF herunter (Spalte Terminwünsche). 
+**Variante B**: Öffnen Sie über **Spielbetrieb Meldung** die Terminmeldung eines Vereins und laden Sie diese als PDF herunter (Spalte **Terminwünsche**). 
 Wiederholen Sie diesen Schritt für jeden Verein Ihrer Gliederung.
 
 ![Click-TT – Terminmeldung Borussia Düsseldorf](../png/B2-terminmeldung-borussia-düsseldorf.png)
@@ -65,7 +65,7 @@ Sie können dieses Dokument zunächst umbenennen (z.B. in "Terminmeldung.pdf"), 
 
 Öffnen Sie das Online-Werkzeug [PDF24 – PDF in HTML](https://tools.pdf24.org/de/pdf-in-html) und laden Sie die im vorherigen Schritt erstellte PDF-Datei hoch.
 
-**Wichtig**: Als Modus muss im Dropdown-Menü "Nur Text" ausgewählt werden, damit der KeyGenerator die HTML-Datei anschließend korrekt einlesen kann.
+**Wichtig**: Als Modus muss im Dropdown-Menü **Nur Text** ausgewählt werden, damit der KeyGenerator die HTML-Datei anschließend korrekt einlesen kann.
 
 Klicken Sie anschließend auf "Umwandeln".
 

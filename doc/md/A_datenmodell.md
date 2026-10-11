@@ -10,34 +10,37 @@ Zum besseren Verständnis der Anwendung wird hier das zugrundeliegende Datenmode
 
 Zu einem Verein werden folgende Daten gespeichert:
 - **Name**: Vereinsname (Umlaute werden automatisch ersetzt).
-- **Schlüsselzahlen (A, B, X, Y)**: Zugeordnete Schlüsselzahlen auf Vereinsebene.
+- **Schlüsselzahlen (A, B, X, Y)**: Zugeordnete Schlüsselzahlen auf Vereinsebene (0 bzw. leer = nicht zugeordnet). A und X liegen im Bereich des Referenzrasters ihres Spielwochenpaares, B und Y ergeben sich daraus als gegenläufige Schlüsselzahlen (siehe A.4).
 - **Mannschaften**: Liste aller Mannschaften des Vereins über alle Gruppen hinweg.
+- **Partnerschaften**: Beliebig viele Partnerschaften mit anderen Vereinen, jeweils bestehend aus eigener Spielwoche, Partnerverein und Spielwoche des Partnervereins (siehe [5.4 Partnerschaften](05_startbildschirm.md#54-partnerschaften)).
 
 ## A.2 Gruppe
 
 Zu einer Gruppe werden folgende Daten gespeichert:
 - **Name**: Bezeichnung der Gruppe (z.B. "Bezirksoberliga Erwachsene").
-- **Rastergröße**: Die Rastergröße (6, 8, 10, 12 oder 14), die bestimmt, wie viele Schlüsselzahlen in dieser Gruppe vergeben werden.
+- **Rastergröße**: Die Rastergröße (in der Standardkonfiguration 6, 8, 10, 12 oder 14), die bestimmt, wie viele Schlüsselzahlen in dieser Gruppe vergeben werden.
 - **Mannschaften**: Die in dieser Gruppe spielenden Teams (maximal so viele wie die Rastergröße).
 
 ## A.3 Mannschaft
 
 Eine Mannschaft gehört zu genau einem Verein und genau einer Gruppe:
-- **Name**: Vollständiger Name (Vereinsname + Mannschaftsnummer).
+- **Name**: Vollständiger Name (Vereinsname + Mannschaftsnummer, meist als römische Zahl, z.B. "Borussia Duesseldorf II").
 - **Spielwoche**: A, B, X, Y oder `-` (nicht zugeordnet).
 - **Schlüsselzahl**: Die zugewiesene Schlüsselzahl (0 = nicht zugewiesen).
-- **Spieltage**: Liste mit Vorgaben für Heim- und Auswärtsspiele je Spieltag.
+- **Spieltage**: Liste mit Vorgaben je Spieltag: Heimspiel, Auswärtsspiel oder keine Vorgabe. Außerdem werden hier die Spielfreiwünsche des Teams hinterlegt, die im Fenster „Zusatz" eingetragen werden (siehe [5.3 Zusätzliche Einstellungen für einzelne Teams](05_startbildschirm.md#53-zusaetzliche-einstellungen-fuer-einzelne-teams)).
 - **Altersklasse**: Zugehörige Altersklasse (z.B. Erwachsene, Jugend 19, Senioren 40 usw.).
+- **Terminmeldung**: Gemeldeter Spieltag (Wochentag und Uhrzeit) und Ersatzspieltag aus der Terminmeldung.
 
 ## A.4 Schlüsselzahlen und Spielplan
 
 Die Schlüsselzahl eines Teams bestimmt dessen Spielplan, d.h. an welchen Spieltagen Heim- und Auswärtsspiele stattfinden.
-Die Zuordnung zwischen Schlüsselzahlen und Spielplänen sowie die gültigen Rastergrößen und die Voreinstellungen der Referenzraster sind in einer voreingestellten Konfiguration hinterlegt, können aber angepasst werden (siehe [7.5 Konfiguration exportieren und importieren](07_sonstige_funktionen.md#75-konfiguration-exportieren-und-importieren)).
+Die Zuordnung zwischen Schlüsselzahlen und Spielplänen sowie die gültigen Rastergrößen und die Voreinstellungen der Referenzraster sind in einer voreingestellten Konfiguration hinterlegt, können aber angepasst werden (siehe [7.5 Konfiguration exportieren und importieren](07_sonstige_funktionen.md#75-konfiguration-exportieren-und-importieren)). Die eingestellten Referenzraster werden zusammen mit den Daten gespeichert.
+Jede Schlüsselzahl liegt zwischen 1 und der Rastergröße ihrer Gruppe und darf in einer Gruppe höchstens einmal vergeben werden; das gilt auch für zwei Teams desselben Vereins mit derselben Spielwoche.
 
 Zentrale Konzepte:
-- **Gegenläufige Schlüsselzahlen**: Zwei Schlüsselzahlen Z1 und Z2 sind gegenläufig, wenn für jede Spielwoche gilt: Z1 hat genau dann ein Heimspiel, wenn Z2 ein Auswärtsspiel hat, und umgekehrt. A und B bzw. X und Y eines Vereins erhalten immer gegenläufige Schlüsselzahlen.
-- **Parallele Schlüsselzahlen**: Bei unterschiedlichen Rastergrößen (z.B. Referenzraster vs. Gruppenraster) werden zwei Schlüsselzahlen Z1 und Z2 als parallel zueinander bezeichnet, wenn in keiner Spielwoche Z1 ein Heimspiel und Z2 ein Auswärtsspiel hat, oder umgekehrt.
-- **Ähnliche Schlüsselzahlen**: Schlüsselzahlen, deren Spielpläne sich nur an maximal zwei Spieltagen bzgl. ihres Musters für Heim- und Auswärtsspiele unterscheiden. Diese werden bei der Konfliktauflösung als Alternative angeboten.
+- **Gegenläufige Schlüsselzahlen**: Zwei Schlüsselzahlen Z1 und Z2 sind gegenläufig, wenn an jedem Spieltag gilt: Z1 hat genau dann ein Heimspiel, wenn Z2 ein Auswärtsspiel hat, und umgekehrt. A und B bzw. X und Y eines Vereins erhalten immer gegenläufige Schlüsselzahlen.
+- **Parallele Schlüsselzahlen**: Bei unterschiedlichen Rastergrößen (z.B. Referenzraster vs. Gruppenraster) werden zwei Schlüsselzahlen Z1 und Z2 als parallel zueinander bezeichnet, wenn an keinem Spieltag Z1 ein Heimspiel und Z2 ein Auswärtsspiel hat, oder umgekehrt. Über parallele Schlüsselzahlen wird eine Vereins-Schlüsselzahl aus dem Referenzraster auf eine Gruppe mit anderer Rastergröße übertragen. Diese Zuordnung ist nicht immer eindeutig; gültig ist dann jede parallele Schlüsselzahl (z.B. vom 10er- ins 12er-Raster: 5 → 5 oder 6, 10 → 11 oder 12).
+- **Ähnliche Schlüsselzahlen**: Schlüsselzahlen derselben Rastergröße, deren Spielpläne sich bzgl. ihres Musters für Heim- und Auswärtsspiele nur an wenigen Spieltagen unterscheiden (höchstens an so vielen, wie in der Konfiguration festgelegt, standardmäßig zwei). Mit den voreingestellten Spielplänen sind das zu einer Schlüsselzahl k die Zahlen k−1, k und k+1, wobei 1 und die Rastergröße als benachbart gelten (z.B. im 12er-Raster: 12, 1 und 2 zu 1). Ähnliche Schlüsselzahlen werden bei der Konfliktauflösung als Alternative angeboten und vergeben, wenn zwei Teams eines Vereins mit derselben Spielwoche in derselben Gruppe spielen.
 
 > **Beispiel: Gegenläufige und parallele Schlüsselzahlen**
 >

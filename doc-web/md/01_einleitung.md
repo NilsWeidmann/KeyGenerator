@@ -13,12 +13,12 @@ Die Anwendung löst ein komplexes Zuordnungsproblem unter Berücksichtigung zahl
 - Einzelne Spieltage können als Heim- oder Auswärtsspiel vorgegeben werden.
 
 Diese Nebenbedingungen werden von den Vereinen einer Gliederung im Vorfeld formuliert, und durch das Tool in ein Optimierungsproblem übersetzt.
-Nach der Ermittlung einer optimalen Lösung wird der/dem Spielplaner(in) eine Liste von Interessenskonflikten präsentiert, die im letzten Schritt manuell aufgelöst werden können, um einen fairen Ausgleich zwischen den betroffenen Vereinen herzustellen.
+Nach der Ermittlung einer optimalen Lösung (bzw. der besten innerhalb der maximalen Laufzeit gefundenen Lösung) wird der/dem Spielplaner(in) eine Liste von Interessenskonflikten präsentiert, die im letzten Schritt manuell aufgelöst werden können, um einen fairen Ausgleich zwischen den betroffenen Vereinen herzustellen.
 
 ## 1.1 Durchgängiges Beispiel
 
 Um die Konzepte dieser Dokumentation anschaulich zu machen, verwenden wir ein durchgängiges fiktives Beispiel mit Vereinsnamen der 1., 2. und 3. Tischtennis-Bundesliga sowie der Regionalliga (Damen + Erwachsene) aus der Saison 2025/26. Die Ligastruktur ist dagegen der von Bezirksligen nachempfunden – so ist klar erkennbar, dass es sich um ein fiktives Beispiel handelt.
-Das Beispiel beinhaltet insgesamt 49 Gruppen mit je 8-12 Mannschaften aus über 100 Vereinen.
+Das Beispiel beinhaltet 49 Gruppen mit je 5–12 Mannschaften, insgesamt 492 Mannschaften aus 106 Vereinen.
 
 In der Dokumentation sind Abschnitte, die sich auf dieses Beispiel beziehen, mit dem Vermerk *"Beispiel"* gekennzeichnet.
 Das Beispiel kann <a href="../../data/Example.json" download>hier</a> heruntergeladen und in den KeyGenerator importiert werden (siehe [3.3 Laden aus Datei](03_datenimport.md#33-laden-aus-datei)).

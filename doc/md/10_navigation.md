@@ -16,19 +16,21 @@ Die folgende Übersicht zeigt alle Fenster der Anwendung und wie diese vom Start
 - **[Aus Datei]** → Dateiauswahldialog
 - **[Generieren]** → Bitte Warten
   - Bei Konflikten → Alternativen
-- **[Speichern]** → Dateiauswahldialog
+- **[Speichern]** → Dateiauswahldialog (nur beim ersten Speichern)
 - **[Sonstiges]** → Sonstiges
   - Backup laden
   - Ergebnisse exportieren
   - Terminmeldung speichern
-  - Konflikte neu auflösen
+  - Konflikte neu auflösen → Alternativen
   - Generator-Tests / Tests aus Datei
   - Konfiguration exportieren/importieren
   - CSV exportieren/importieren (historisch)
+  - Alle Schlüssel löschen
   - Abbrechen
 - **[Vereinssicht]** → Liste mit Teams des Vereins
+  - **[Partner]** → Partnerschaften des ausgewählten Vereins
 - **[Gruppensicht]** → Liste mit Teams der Gruppe
-- **[Rechtsklick auf Team]** → Zusatz (Spielwochen-/Spieltagseinstellung)
+- **[Rechtsklick auf Team]** (im Startbildschirm und im Dateninput) → Zusatz (Spielwochen-/Spieltagseinstellung)
 
 ---
 

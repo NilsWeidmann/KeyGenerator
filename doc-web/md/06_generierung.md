@@ -9,7 +9,9 @@ Nachdem alle Daten eingegeben und alle Wünsche der Vereine berücksichtigt word
 1. Klicken Sie in der [Übersicht](05_startbildschirm.md) auf den Button **Generieren**.
 2. Vor der Generierung wird automatisch eine Sicherheitskopie des aktuellen Standes angelegt, die Sie bei Bedarf später wiederherstellen können (siehe [7.1 Backup laden](07_sonstige_funktionen.md#71-backup-laden)).
 3. Die Anwendung wechselt auf die Seite **Optimierung**, die einen Fortschrittsbalken, den aktuellen Status sowie die laufend aktualisierten Kennzahlen der bisher besten Lösung anzeigt. Angezeigt werden die Anzahl der **Konflikte**, die **Abweichungen bei Heim-/Auswärtsspielen** (die Summe der Spieltage, an denen die Heim-/Auswärtsfolge der Teams mit Konflikt von ihrer Wunsch-Schlüsselzahl abweicht), die vorgezogenen **internen Begegnungen** (x von y, sofern möglich) sowie die **nicht erfüllten Spielfrei-Wünsche** (x von y, sofern vorhanden).
-4. Sie können die Generierung jederzeit über den Button **Abbrechen** vorzeitig beenden.
+4. Sie können die Generierung jederzeit über den Button **Abbrechen** vorzeitig beenden. Die Anwendung übernimmt dann die bis dahin beste gefundene Lösung und fährt wie nach einer regulär beendeten Generierung fort (gegebenenfalls mit der Konfliktauflösung). Wurde bis dahin noch keine Lösung gefunden, erscheint die Meldung "Es konnten keine Schlüsselzahlen ermittelt werden!", und der bisherige Stand bleibt erhalten.
+
+Nach Abschluss der Optimierung bietet die Seite **Optimierung** den Button **Zurück zur Übersicht** sowie, falls Konflikte vorliegen, den Button **Konflikte auflösen →** an.
 
 **Hinweis:** Vor der Generierung wird eine Plausibilitätsprüfung durchgeführt.
 Wenn widersprüchliche Vorgaben erkannt werden (z.B. inkonsistente Spieltagsvorgaben für Teams desselben Vereins in derselben Spielwoche), erscheint eine Fehlermeldung.
@@ -51,7 +53,7 @@ Die verbliebenen Konflikte können zu einem späteren Zeitpunkt über den Link *
 
 Nach dem Abschluss einer Generierung erscheint in der Seitenleiste der Link **Konflikte auflösen**.
 Über diesen Link gelangen Sie jederzeit zurück auf die Seite zur Konfliktauflösung, um Konflikte erneut zu bearbeiten.
-Dabei werden zusätzlich Konflikte erkannt, die sich aus Spielplan-Einschränkungen ergeben (Heim-/Auswärtsspielvorgaben sowie Spielfreiwünsche); bestehende Schlüsselzahlzuweisungen bleiben erhalten.
+Dabei werden zusätzlich Konflikte erkannt, die sich aus Spielplan-Einschränkungen ergeben (Heim-/Auswärtsspielvorgaben sowie Spielfreiwünsche); bestehende Schlüsselzahlzuweisungen bleiben erhalten. Die Konflikte werden stets aus dem aktuellen Datenstand ermittelt.
 
 Der Link bleibt sichtbar, bis ein Backup geladen oder ein neuer Datenimport durchgeführt wird.
 
@@ -61,7 +63,7 @@ Nachdem alle Konflikte behoben wurden, wird die Zuweisung der Schlüsselzahlen a
 In diesem Schritt werden die noch freien Schlüsselzahlen an die verbleibenden Mannschaften ohne Spielwochenvorgaben zugewiesen.
 Anschließend kehrt die Anwendung zur Übersicht zurück.
 
-Falls die Generierung nicht erfolgreich war, kann dies folgende Ursachen haben:
+Falls die Generierung nicht erfolgreich war, erscheint die Meldung "Es konnten keine Schlüsselzahlen ermittelt werden!". Dies kann folgende Ursachen haben:
 - Widersprüchliche Vorgaben (z.B. unvereinbare Heim-/Auswärtsspielvorgaben).
 - Nicht ausreichende Laufzeit – versuchen Sie es erneut.
 - Zu viele feste Vorgaben, die eine Lösung unmöglich machen.

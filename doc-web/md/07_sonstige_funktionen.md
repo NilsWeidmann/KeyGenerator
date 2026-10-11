@@ -24,7 +24,7 @@ Falls Sie nach der Generierung einen Fehler bemerken, können Sie den vorherigen
 2. Wählen Sie die gewünschte Sicherheitskopie anhand des Zeitstempels aus.
 3. Der geladene Zustand wird sofort wiederhergestellt.
 
-Das Laden eines Backups deaktiviert außerdem den Link **Konflikte auflösen** in der Seitenleiste (siehe [6.2 Konflikte auflösen](06_generierung.md#62-konflikte-aufloesen)).
+Das Laden eines Backups blendet außerdem den Link **Konflikte auflösen** in der Seitenleiste aus (siehe [6.2 Konflikte auflösen](06_generierung.md#62-konflikte-aufloesen)).
 
 > **Ansicht: Dropdown-Menü „Backup laden"**
 >
@@ -41,7 +41,7 @@ Nach der Generierung können Sie die Ergebnisse als CSV-Datei herunterladen, um 
 1. Klicken Sie in der Seitenleiste auf **Ergebnisse exportieren**.
 2. Die Datei wird direkt in den Browser-Downloads-Ordner heruntergeladen.
 
-Die exportierte CSV-Datei enthält je Mannschaft: Gruppe, Mannschaftsname, zugewiesene Schlüsselzahl, Wunsch-Schlüsselzahlen, Spielwochen sowie Zusatzvorgaben je Spieltag. Die Spalte „Zusatz-Vorgaben" ist nur bei Mannschaften gefüllt, die an mindestens einem Spieltag eine Heimspiel-, Auswärtsspiel- oder Spielfrei-Vorgabe haben.
+In der exportierten CSV-Datei beginnt jede Gruppe mit einer Kopfzeile (Gruppenname und Rastergröße). Darauf folgt je Mannschaft eine Zeile mit den Spalten `Gruppe/Team;Schluessel;Wunsch;Spielwoche;Zusatz-Vorgaben`, also Mannschaftsname, zugewiesene Schlüsselzahl, Wunsch-Schlüsselzahlen, Spielwoche sowie Zusatzvorgaben je Spieltag. Die Spalte „Zusatz-Vorgaben" ist nur bei Mannschaften gefüllt, die an mindestens einem Spieltag eine Heimspiel-, Auswärtsspiel- oder Spielfrei-Vorgabe haben.
 Falls die zugewiesene Schlüsselzahl nicht in der Wunschliste enthalten ist (Konflikt), wird dies in der Spalte "Wunsch" kenntlich gemacht.
 
 ## 7.3 Terminmeldung exportieren
@@ -57,7 +57,7 @@ Mit der Schlüsselzahlen-Generierung im engeren Sinne hat diese Zusatzfunktion n
 
 ## 7.4 Konfiguration exportieren und importieren
 
-Die Konfiguration legt fest, welche Spielpläne (Heim-/Auswärtsspieltage je Raster), Voreinstellungen der Referenzraster für neue Daten, minimale und maximale Rastergrößen sowie Altersklassen unterstützt werden. Sie enthält außerdem die Anzahl der Spielwochen, in denen interne Begegnungen bevorzugt werden sollen (`internalWeeks`, Standard: 3), sowie die maximale Schrittweite, innerhalb derer eine Schlüsselzahl noch als „ähnlich" gilt (`maxDeviation`, Standard: 2).
+Die Konfiguration legt fest, welche Spielpläne (Heim-/Auswärtsspieltage je Raster), Voreinstellungen der Referenzraster für neue Daten, minimale und maximale Rastergrößen sowie Altersklassen unterstützt werden. Sie enthält außerdem die Anzahl der Spielwochen, in denen interne Begegnungen bevorzugt werden sollen (`internalWeeks`, Standard: 3), sowie die maximale Anzahl an Spieltagen, an denen sich die Heim-/Auswärtsfolgen zweier Schlüsselzahlen unterscheiden dürfen, damit diese noch als „ähnlich" gelten (`maxDeviation`, Standard: 2).
 Sie kann gespeichert und auf einem anderen Rechner oder in einer anderen Saison wiederverwendet werden.
 
 **Konfiguration exportieren:**
@@ -69,21 +69,22 @@ Als Voreinstellung der Referenzraster enthält die exportierte Datei die aktuell
 1. Klicken Sie in der Seitenleiste auf **Konfiguration importieren**.
 2. Wählen Sie im Dateiauswahl-Dialog die gewünschte JSON-Konfigurationsdatei aus.
 
-Beim Import werden alle bestehenden Einstellungen (Spielpläne, Voreinstellungen der Referenzraster, Rastergrößen, Altersklassen) vollständig durch die Werte aus der importierten Datei ersetzt.
+Beim Import werden alle bestehenden Einstellungen (Spielpläne, Voreinstellungen der Referenzraster, Rastergrößen, Altersklassen, interne Spielwochen, max. Abweichung) vollständig durch die Werte aus der importierten Datei ersetzt.
 Die Referenzraster bereits geladener Daten bleiben dabei erhalten. Nur wenn die neue Konfiguration für eines davon keinen Spielplan enthält, gilt ihre Voreinstellung; Schlüsselzahlen-Paare außerhalb des neuen Bereichs werden dann zurückgesetzt, und ein Hinweis nennt die betroffenen Vereine.
-Falls die Datei ungültige Werte enthält, erscheint eine Fehlermeldung mit einer Auflistung der konkreten Verstöße (siehe auch [9. Fehlerbehebung](09_fehlerbehebung.md)).
+Falls die Datei ungültige Werte enthält, erscheint eine Fehlermeldung mit einer Auflistung der konkreten Verstöße (siehe auch [9. Fehlerbehebung](09_fehlerbehebung.md)), und die Konfiguration wird nicht übernommen.
 
 ## 7.5 CSV exportieren und importieren (historisches Format)
 
 Für den Austausch mit älteren Versionen des Programms steht ein CSV-basiertes Datenformat zur Verfügung.
+Es besteht aus drei CSV-Dateien: `Staffeln.csv` (Gruppen und Mannschaften mit Schlüsselzahlen), `Vereine.csv` (Vereins-Schlüsselzahlen und Partnerschaften) und `Beziehungen.csv` (Spielwochen und Spieltagsvorgaben je Mannschaft).
 
 **CSV exportieren:**
 1. Klicken Sie in der Seitenleiste auf **CSV exportieren (historisch)**.
-2. Die Dateien werden in den Browser-Downloads-Ordner heruntergeladen.
+2. Die Dateien werden als eine ZIP-Datei in den Browser-Downloads-Ordner heruntergeladen.
 
 **CSV importieren:**
 1. Klicken Sie in der Seitenleiste auf **CSV importieren (historisch)**.
-2. Wählen Sie im Dateiauswahl-Dialog die gewünschte CSV- oder ZIP-Datei aus.
+2. Wählen Sie im Dateiauswahl-Dialog die gewünschte ZIP-Datei aus.
 
 Beachten Sie, dass dieses Format nur für die Kompatibilität mit älteren Programmversionen vorgesehen ist.
 Es enthält keine Referenzraster; beim Import gelten die Voreinstellungen der Konfiguration.

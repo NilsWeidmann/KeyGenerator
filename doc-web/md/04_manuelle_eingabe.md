@@ -5,7 +5,7 @@
 # 4. Manuelle Eingabe
 
 Die Seite **Manuelle Eingabe** ermöglicht die manuelle Eingabe und Bearbeitung von Gruppen, Vereinen und Mannschaften.
-Sie ist über den gleichnamigen Link in der Seitenleiste erreichbar.
+Sie ist jederzeit über den gleichnamigen Link in der Seitenleiste erreichbar – auch bevor Daten importiert wurden. In diesem Fall beginnt sie mit einem leeren Datenbestand.
 
 Am oberen Rand der Seite befinden sich drei Schaltflächen: **↶ Rückgängig** (oder **Strg+Z**), **↷ Wiederherstellen** (oder **Strg+Y**) und **Speichern** (blau, oder **Strg+S**). Die Schaltfläche **Speichern** sichert den aktuellen Bearbeitungsstand, ohne die Seite zu verlassen.
 
@@ -53,9 +53,9 @@ Die untere Tabelle in der linken Spalte zeigt alle Vereine mit folgenden Spalten
 |--------|-----------|
 | Verein | Name des Vereins |
 | A | Schlüsselzahl für Spielwoche A (Referenzraster A/B) |
-| B | Schlüsselzahl für Spielwoche B (automatisch berechnet) |
+| B | Schlüsselzahl für Spielwoche B (gegenläufig zu A) |
 | X | Schlüsselzahl für Spielwoche X (Referenzraster X/Y) |
-| Y | Schlüsselzahl für Spielwoche Y (automatisch berechnet) |
+| Y | Schlüsselzahl für Spielwoche Y (gegenläufig zu X) |
 
 **Vereine anlegen:**
 Klicken Sie auf die Schaltfläche **+ Verein**.
@@ -69,7 +69,7 @@ In dieser Ansicht ist auch die Spielwochenzuordnung der Mannschaften sichtbar un
 
 **Vorgegebene Schlüsselzahlen einstellen:**
 Wenn vom Verband oder Bezirk bereits Schlüsselzahlen für bestimmte Vereine vorgegeben sind, tragen Sie diese in der entsprechenden Spalte (A, B, X oder Y) ein.
-Die gegenläufige Schlüsselzahl (also B zu A, Y zu X usw.) wird automatisch berechnet.
+Die gegenläufige Schlüsselzahl des Paars (also B zu A, A zu B, Y zu X bzw. X zu Y) wird automatisch berechnet.
 Es können nur Zahlen eingetragen werden, die für das eingestellte Referenzraster gültig sind.
 
 **Vereine umbenennen:**
@@ -90,7 +90,7 @@ Ein Verein kann nur gelöscht werden, wenn keine seiner Mannschaften noch einer 
 > Für den SV Werder Bremen sind Schlüsselzahlen für alle vier Wochen vorgegeben.
 > Einige Vereine wie TTS Borsum haben Vorgaben nur für `A`/`B`.
 > Andere Vereine wie Borussia Düsseldorf und BV Borussia Dortmund hatten zum Zeitpunkt vor der Generierung noch keine Schlüsselzahlen – diese werden dann vollständig vom Tool ermittelt.
-> Die Spalte `B` wird jeweils automatisch aus `A` berechnet (und `Y` aus `X`).
+> Die Spalte `B` wird jeweils automatisch aus `A` berechnet (und `Y` aus `X`) – bzw. umgekehrt, wenn `B` oder `Y` eingetragen wird.
 
 ## Rechte Spalte: Mannschaftstabelle
 
@@ -100,7 +100,9 @@ Sie zeigt Mannschaftsdaten in zwei alternativen Anzeigemodi:
 - **Gruppenansicht**: Wird aktiviert durch Klick auf eine Zeile in der **Gruppentabelle** (links oben). Zeigt alle Mannschaften der ausgewählten Gruppe. Die Spalte "Woche" ist ausgeblendet.
 - **Vereinsansicht**: Wird aktiviert durch Klick auf eine Zeile in der **Vereinstabelle** (links unten). Zeigt alle Mannschaften des ausgewählten Vereins gruppenübergreifend. Die Spalte "Woche" ist sichtbar und bearbeitbar (`A`, `B`, `X`, `Y` oder leer für keine Zuordnung).
 
-Ein Klick auf das Bearbeiten-Symbol (Stift) in der Spalte **Zusatz** öffnet den Zusatz-Dialog (siehe [5.3 Zusätzliche Einstellungen für einzelne Teams](05_startbildschirm.md#53-zusätzliche-einstellungen-für-einzelne-teams)), in dem feste Vorgaben für Heim- und Auswärtsspiele in bestimmten Spielwochen eingetragen werden können.
+Die Spalten der Tabelle entsprechen denen der Übersicht (Woche, Team, Gruppe, Wunsch, Schlüssel, Zusatz); ganz rechts folgt eine Spalte mit dem Lösch-Symbol. Die Spalten Gruppe, Wunsch und Schlüssel sind stets nur zur Anzeige.
+
+Ein Klick auf das Bearbeiten-Symbol (Stift) in der Spalte **Zusatz** öffnet den Zusatz-Dialog (siehe [5.3 Zusätzliche Einstellungen für einzelne Teams](05_startbildschirm.md#53-zusaetzliche-einstellungen-fuer-einzelne-teams)), in dem für einzelne Spieltage Heimspiel-, Auswärtsspiel- und Spielfrei-Vorgaben eingetragen werden können.
 
 **Mannschaften anlegen:**
 Wählen Sie zunächst in der Gruppentabelle (links oben) die gewünschte Gruppe aus.
@@ -108,6 +110,12 @@ In der oberen rechten Ecke der rechten Spalte erscheint dann die Schaltfläche *
 Klicken Sie darauf, um die Daten für eine neue Mannschaft einzugeben.
 Wählen Sie dort den Verein aus und tragen Sie ggf. die Mannschaftsnummer ein.
 Klicken Sie auf **Hinzufügen**, um die Mannschaft der Gruppe hinzuzufügen, sofern noch Platz vorhanden ist (Rastergröße nicht überschritten).
+Die Mannschaftsnummer ist optional; eine Mannschaft ohne Nummer erhält den Namen ihres Vereins.
+
+**Mannschaften umbenennen:**
+Der Teamname kann sowohl in der Gruppen- als auch in der Vereinsansicht direkt in der Mannschaftstabelle bearbeitet werden.
+Dabei muss der Name weiterhin mit dem Vereinsnamen beginnen (z.B. "Borussia Düsseldorf II").
+Ungültige Eingaben werden automatisch zurückgesetzt.
 
 **Mannschaften löschen:**
 Klicken Sie auf das Lösch-Symbol (Papierkorb) in der letzten Spalte der entsprechenden Zeile.

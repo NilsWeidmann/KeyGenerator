@@ -11,7 +11,7 @@ Das Kontrollkästchen **Interne Begegnungen möglichst vorziehen** (unterhalb de
 1. Klicken Sie im Startbildschirm auf den Button **Generieren**.
 2. Es erscheint das Fenster "Bitte Warten" mit einem Fortschrittsbalken, der verbleibenden Zeit sowie den laufend aktualisierten Kennzahlen der bisher besten Lösung. Angezeigt werden die Anzahl der **Konflikte**, die **Abweichungen bei Heim-/Auswärtsspielen** (die Summe der Spieltage, an denen die Heim-/Auswärtsfolge der Teams mit Konflikt von ihrer Wunsch-Schlüsselzahl abweicht), die vorgezogenen **internen Begegnungen** (x von y, sofern möglich) sowie die **nicht erfüllten Spielfrei-Wünsche** (x von y, sofern vorhanden).
 3. Vor der Generierung wird automatisch eine Sicherheitskopie des aktuellen Standes angelegt, die Sie bei Bedarf später wiederherstellen können (siehe [7.1 Backup laden](07_sonstige_funktionen.md#71-backup-laden)).
-4. Sie können die Generierung jederzeit über den Button **Abbrechen** vorzeitig beenden.
+4. Sie können die Generierung jederzeit über den Button **Abbrechen** vorzeitig beenden. Die Anwendung übernimmt dann die bis dahin beste gefundene Lösung und fährt wie nach einer regulär beendeten Generierung fort (gegebenenfalls mit der Konfliktauflösung). Wurde bis dahin noch keine Lösung gefunden, erscheint die Meldung "Es konnten keine Schlüsselzahlen ermittelt werden!", und der bisherige Stand bleibt erhalten.
 
 **Hinweis:** Vor der Generierung wird eine Plausibilitätsprüfung durchgeführt.
 Wenn widersprüchliche Vorgaben erkannt werden (z.B. inkonsistente Spieltagsvorgaben für Teams desselben Vereins in derselben Spielwoche), erscheint eine Fehlermeldung.
@@ -51,7 +51,7 @@ Nachdem alle Konflikte behoben wurden, wird die Zuweisung der Schlüsselzahlen a
 In diesem Schritt werden die noch freien Schlüsselzahlen an die verbleibenden Mannschaften ohne Spielwochenvorgaben zugewiesen.
 Anschließend erscheint eine Erfolgsmeldung ("Die Schlüsselzahlen wurden erfolgreich generiert!").
 
-Falls die Generierung nicht erfolgreich war, kann dies folgende Ursachen haben:
+Falls die Generierung nicht erfolgreich war, erscheint die Meldung "Es konnten keine Schlüsselzahlen ermittelt werden!". Dies kann folgende Ursachen haben:
 - Widersprüchliche Vorgaben (z.B. unvereinbare Heim-/Auswärtsspielvorgaben).
 - Nicht ausreichende Laufzeit – erhöhen Sie die maximale Laufzeit und versuchen Sie es erneut.
 - Zu viele feste Vorgaben, die eine Lösung unmöglich machen.
