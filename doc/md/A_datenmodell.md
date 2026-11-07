@@ -34,7 +34,7 @@ Eine Mannschaft gehört zu genau einem Verein und genau einer Gruppe:
 ## A.4 Schlüsselzahlen und Spielplan
 
 Die Schlüsselzahl eines Teams bestimmt dessen Spielplan, d.h. an welchen Spieltagen Heim- und Auswärtsspiele stattfinden.
-Die Zuordnung zwischen Schlüsselzahlen und Spielplänen sowie die gültigen Rastergrößen und die Voreinstellungen der Referenzraster sind in einer voreingestellten Konfiguration hinterlegt, können aber angepasst werden (siehe [7.5 Konfiguration exportieren und importieren](07_sonstige_funktionen.md#75-konfiguration-exportieren-und-importieren)). Die eingestellten Referenzraster werden zusammen mit den Daten gespeichert.
+Die Zuordnung zwischen Schlüsselzahlen und Spielplänen sowie die gültigen Rastergrößen und die Voreinstellungen der Referenzraster sind in einer voreingestellten Konfiguration hinterlegt, können aber angepasst werden (siehe [7.5 Konfiguration bearbeiten](07_sonstige_funktionen.md#75-konfiguration-bearbeiten)). Die eingestellten Referenzraster werden zusammen mit den Daten gespeichert.
 Jede Schlüsselzahl liegt zwischen 1 und der Rastergröße ihrer Gruppe und darf in einer Gruppe höchstens einmal vergeben werden; das gilt auch für zwei Teams desselben Vereins mit derselben Spielwoche.
 
 Zentrale Konzepte:

@@ -23,7 +23,7 @@ Die folgende Übersicht zeigt alle Fenster der Anwendung und wie diese vom Start
   - Terminmeldung speichern
   - Konflikte neu auflösen → Alternativen
   - Generator-Tests / Tests aus Datei
-  - Konfiguration exportieren/importieren
+  - Konfiguration bearbeiten → Konfiguration (Allgemein, Altersklassen, Spielplan je Raster, Plausibilitätsprüfung; Importieren, Exportieren, Standard laden, Prüfen, Übernehmen, Abbrechen)
   - CSV exportieren/importieren (historisch)
   - Alle Schlüssel löschen
   - Abbrechen

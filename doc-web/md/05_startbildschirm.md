@@ -85,7 +85,7 @@ Jeder Listeneintrag zeigt den Gruppennamen sowie die Teamanzahl und die Rastergr
 
 Oberhalb der Tabelle erscheint das Feld **Raster**, in dem die Rastergröße der Gruppe ausgewählt werden kann (eine komfortablere Alternative bietet die Seite [4. Manuelle Eingabe: Gruppentabelle](04_manuelle_eingabe.md#linke-spalte-gruppentabelle)).
 Angeboten werden nur zulässige Rastergrößen: gerade Zahlen, die mindestens so groß sind wie die Anzahl der Mannschaften in der Gruppe (aufgerundet auf eine gerade Zahl), bis maximal 14. Für eine Gruppe mit 11 Mannschaften stehen also z.B. nur die Rastergrößen 12 und 14 zur Auswahl; eine kleinere Rastergröße wird erst angeboten, wenn Mannschaften aus der Gruppe entfernt wurden.
-Die maximale Rastergröße gilt nur für die Standard-Konfiguration. Durch das Laden einer anderen Konfiguration (siehe [7.4 Konfiguration exportieren und importieren](07_sonstige_funktionen.md#74-konfiguration-exportieren-und-importieren)) können beliebig große Raster verwendet werden.
+Die maximale Rastergröße gilt nur für die Standard-Konfiguration. Durch das Bearbeiten oder Laden einer anderen Konfiguration (siehe [7.4 Konfiguration bearbeiten](07_sonstige_funktionen.md#74-konfiguration-bearbeiten)) können beliebig große Raster verwendet werden.
 
 ### Tabellenspalten in der Gruppenansicht
 

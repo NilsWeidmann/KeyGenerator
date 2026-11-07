@@ -48,7 +48,7 @@ Im unteren linken Bereich des Startbildschirms befinden sich zwei Dropdown-Menü
 - **Referenzraster für Woche X/Y**: Legt die Rastergröße für die Spielwochen X und Y fest.
 
 Die möglichen Rastergrößen sind **6, 8, 10, 12** und **14**.
-Die Voreinstellungen werden beim Programmstart automatisch aus der Konfigurationsdatei geladen: zunächst aus der mitgelieferten Standardkonfiguration (12 für A/B und 10 für X/Y), nach einem Import über **Sonstiges** → **Konfiguration importieren** aus der zuletzt importierten Konfiguration (siehe [7.5 Konfiguration exportieren und importieren](07_sonstige_funktionen.md#75-konfiguration-exportieren-und-importieren)).
+Die Voreinstellungen werden beim Programmstart automatisch aus der Konfigurationsdatei geladen: zunächst aus der mitgelieferten Standardkonfiguration (12 für A/B und 10 für X/Y), nach dem Übernehmen einer Konfiguration über **Sonstiges** → **Konfiguration bearbeiten** aus der zuletzt übernommenen Konfiguration (siehe [7.5 Konfiguration bearbeiten](07_sonstige_funktionen.md#75-konfiguration-bearbeiten)).
 Diese Referenzraster bestimmen, welche Schlüsselzahlen für die jeweiligen Spielwochen auf Vereinsebene maximal vergeben werden können.
 
 **Wichtig:** Alle drei Buttons für den Datenimport (**Manuell**, **Aus Click-TT**, **Aus Datei**) werden erst aktiviert, sobald beide Referenzraster ausgewählt sind.
@@ -56,7 +56,7 @@ Da die Standardwerte aus der Konfiguration vorbelegt werden, sind die Buttons be
 
 Wenn Sie die Referenzraster nachträglich ändern, werden die Schlüsselzahlen der betroffenen Spielwochen (A/B bzw. X/Y) bei allen Vereinen automatisch auf 0 zurückgesetzt – auch solche, die im neuen Bereich liegen. Denn die beiden Schlüsselzahlen eines Paars sind gegenläufig, und welche Schlüsselzahlen gegenläufig sind, hängt vom Raster ab: 10/4 ist z.B. im 12er-Raster ein gegenläufiges Paar, im 10er-Raster aber nicht. Eine Meldung nennt die betroffenen Vereine.
 
-Die Referenzraster gehören zu den Daten, denn die Schlüsselzahlen der Vereine beziehen sich auf sie: Beim Speichern werden sie in `Data.json` mitgespeichert, und beim Laden einer Datei (**Aus Datei**) werden die dort gespeicherten Referenzraster eingestellt. Die Werte aus der Konfiguration sind nur Voreinstellungen für neue Daten und für Dateien älterer Programmversionen, die noch keine Referenzraster enthalten. Um sie zu ändern, exportieren Sie die Konfiguration mit den gewünschten Referenzrastern und importieren sie wieder (siehe [7.5 Konfiguration exportieren und importieren](07_sonstige_funktionen.md#75-konfiguration-exportieren-und-importieren)).
+Die Referenzraster gehören zu den Daten, denn die Schlüsselzahlen der Vereine beziehen sich auf sie: Beim Speichern werden sie in `Data.json` mitgespeichert, und beim Laden einer Datei (**Aus Datei**) werden die dort gespeicherten Referenzraster eingestellt. Die Werte aus der Konfiguration sind nur Voreinstellungen für neue Daten und für Dateien älterer Programmversionen, die noch keine Referenzraster enthalten. Um sie zu ändern, tragen Sie unter **Sonstiges** → **Konfiguration bearbeiten** die gewünschten Referenzraster ein und klicken auf **Übernehmen** (siehe [7.5 Konfiguration bearbeiten](07_sonstige_funktionen.md#75-konfiguration-bearbeiten)).
 
 > **Beispiel: Referenzraster**
 >

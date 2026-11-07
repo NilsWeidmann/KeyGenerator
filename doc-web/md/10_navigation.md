@@ -43,8 +43,9 @@ Nach dem Laden von Daten bietet die Seitenleiste außerdem folgende Funktionen:
 
 - **Seitenleiste → Ergebnisse exportieren** → Download `Results.csv`
 - **Seitenleiste → Terminmeldung exportieren** → Download `Terminmeldung.csv`
-- **Seitenleiste → Konfiguration exportieren** → Download `Config.json`
-- **Seitenleiste → Konfiguration importieren** → Dateiauswahl-Dialog
+- **Seitenleiste → Konfiguration** → Seite "Konfiguration" (`/configuration`)
+  - Allgemein, Altersklassen, Spielplan je Raster, Plausibilitätsprüfung
+  - Schaltflächen **Importieren** (Dateiauswahl-Dialog), **Exportieren** (Download `Config.json`), **Standard laden**, **Änderungen verwerfen**, **Prüfen**, **Übernehmen**
 - **Seitenleiste → CSV exportieren (historisch)** → Download `Historical.zip`
 - **Seitenleiste → CSV importieren (historisch)** → Dateiauswahl-Dialog
 - **Seitenleiste → Log exportieren** → Download `Log.csv` – sobald mindestens eine Generierung durchgeführt wurde
