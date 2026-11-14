@@ -13,6 +13,12 @@ Das Kontrollkästchen **Interne Duelle möglichst vorziehen bis Spielwoche:** (u
 3. Vor der Generierung wird automatisch eine Sicherheitskopie des aktuellen Standes angelegt, die Sie bei Bedarf später wiederherstellen können (siehe [7.1 Backup laden](07_sonstige_funktionen.md#71-backup-laden)).
 4. Sie können die Generierung jederzeit über den Button **Abbrechen** vorzeitig beenden. Die Anwendung übernimmt dann die bis dahin beste gefundene Lösung und fährt wie nach einer regulär beendeten Generierung fort (gegebenenfalls mit der Konfliktauflösung). Wurde bis dahin noch keine Lösung gefunden, erscheint die Meldung "Es konnten keine Schlüsselzahlen ermittelt werden!", und der bisherige Stand bleibt erhalten.
 
+> **Ansicht: Fenster „Bitte Warten"**
+>
+> Das Fenster „Bitte Warten" während einer Generierung: verbleibende Zeit, Fortschrittsbalken und die Kennzahlen der bisher besten Lösung.
+>
+> ![Fenster „Bitte Warten" während der Generierung](../png/062-bitte-warten.png)
+
 **Hinweis:** Vor der Generierung wird eine Plausibilitätsprüfung durchgeführt.
 Wenn widersprüchliche Vorgaben erkannt werden (z.B. inkonsistente Spieltagsvorgaben für Teams desselben Vereins in derselben Spielwoche), erscheint eine Fehlermeldung.
 
@@ -30,7 +36,7 @@ Das Fenster zeigt folgende Informationen:
   - **Wunsch**: Die eigentlich gewünschten Schlüsselzahlen der Mannschaft.
   - **Schlüssel**: Dropdown-Menü, über das Sie der Mannschaft eine andere Schlüsselzahl zuweisen können.
 
-Zur Auswahl stehen die ursprünglich gewünschte Schlüsselzahl sowie bis zu zwei ähnliche Schlüsselzahlen, die noch frei sind und zu den Heim-/Auswärtsvorgaben der Mannschaft passen. Die aktuell zugewiesene Schlüsselzahl bleibt ebenfalls auswählbar.
+Zur Auswahl stehen die ursprünglich gewünschte Schlüsselzahl sowie bis zu zwei ähnliche Schlüsselzahlen, die noch frei sind und zu den Heim-/Auswärtsvorgaben der Mannschaft passen. Die aktuell zugewiesene Schlüsselzahl bleibt ebenfalls auswählbar. Angeboten werden nur die gewünschte und dazu ähnliche Schlüsselzahlen, damit jede Mannschaft wie bei der Generierung eine gewünschte oder ähnliche Schlüsselzahl behält. Nach einer Generierung sind darunter immer mindestens so viele Schlüsselzahlen, wie Mannschaften am Konflikt beteiligt sind, sodass jede Mannschaft eine eigene Schlüsselzahl erhalten kann; reichen die zwei ähnlichen Schlüsselzahlen dafür nicht aus, werden weitere freie ähnliche Schlüsselzahlen angeboten.
 
 **Vorschlag:** Über den Button **Vorschlag** können Sie einen automatischen Lösungsvorschlag generieren lassen, der alle Konflikte nach einem festen Verfahren auflöst (bei gleichen Daten ergibt sich stets derselbe Vorschlag). Vorher erscheint ein Warnhinweis: Dies sollten Sie im Interesse der betroffenen Vereine nur zu Testzwecken tun, und nicht zur Ermittlung der finalen Schlüsselzahlen!
 
@@ -41,7 +47,7 @@ Zur Auswahl stehen die ursprünglich gewünschte Schlüsselzahl sowie bis zu zwe
 > ![Fenster „Alternativen" – Konflikte beheben](../png/061-konflikte-auflösen.png)
 
 Klicken Sie auf **OK**, nachdem Sie jeden Konflikt gelöst haben.
-Falls eine Schlüsselzahl in einer Gruppe noch mehrfach vergeben ist (auch an eine Mannschaft außerhalb des Konflikts) oder für eine Mannschaft keine Schlüsselzahl vergeben wurde, erscheint eine entsprechende Fehlermeldung.
+Falls eine Schlüsselzahl in einer Gruppe noch mehrfach vergeben ist (auch an eine Mannschaft außerhalb des Konflikts), für eine Mannschaft keine Schlüsselzahl vergeben wurde oder eine Mannschaft eine Schlüsselzahl hat, die weder die gewünschte noch eine ähnliche ist, erscheint eine entsprechende Fehlermeldung, und das Fenster bleibt geöffnet, damit Sie die Konflikte in einem weiteren Durchgang lösen können.
 Sie können die Konfliktauflösung beenden, indem Sie auf den Button **Abbrechen** klicken oder das Fenster schließen und die Sicherheitsabfrage bestätigen.
 Die verbliebenen Konflikte können zu einem späteren Zeitpunkt über **Sonstiges** → **Konflikte neu auflösen** (siehe [7.4 Konflikte neu auflösen](07_sonstige_funktionen.md#74-konflikte-neu-aufloesen)) aufgelöst werden.
 
@@ -73,11 +79,11 @@ Mithilfe dieser Übersicht können Sie die Schlüsselzahlen in Click-TT oder in 
 >
 > Alle 12 Schlüsselzahlen (1–12) sind genau einmal vergeben – es gibt keine Konflikte.
 > Die Spalte "Wunsch" zeigt die aus der Vereins-Schlüsselzahl abgeleiteten Wunschzahlen.
-> Beim 1. FC Saarbrücken-TT I ist kein Wunsch eingetragen, da der Verein keine vorgegebene Schlüsselzahl und auch keine Spielwoche hatte – die Zeile ist daher weiß, und die Zahl 4 wurde frei zugewiesen.
+> Beim 1. FC Saarbrücken-TT I ist kein Wunsch eingetragen, da der Verein keine vorgegebene Schlüsselzahl und auch keine Spielwoche hatte – die Zeile ist daher weiß, und die Zahl 6 wurde frei zugewiesen.
 
 > **Beispiel: Gruppensicht 1. Bezirksliga 3 Erwachsene nach der Generierung**
 >
-> Die 1. Bezirksliga 3 enthält nach der Generierung einen aufgelösten Konflikt: Die orange markierte Zeile kennzeichnet ein Team, bei dem die zugewiesene Schlüsselzahl von der Wunsch-Schlüsselzahl abweicht. Im Vorfeld wurde ein Konflikt zwischen SV Werder Bremen IV und TTS Borsum II dahingehend aufgelöst, dass Bremen die Schlüsselzahl 4, und Borsum die ähnliche Schlüsselzahl 5 zugewiesen wurde (Abschnitt 6.1 Konflikte beheben).
+> Die 1. Bezirksliga 3 enthält nach der Generierung einen aufgelösten Konflikt: Die orange markierte Zeile kennzeichnet ein Team, bei dem die zugewiesene Schlüsselzahl von der Wunsch-Schlüsselzahl abweicht. Im Vorfeld wurde ein Konflikt zwischen SV Werder Bremen IV und TTS Borsum II dahingehend aufgelöst, dass Bremen die Schlüsselzahl 4, und Borsum die ähnliche Schlüsselzahl 3 zugewiesen wurde (Abschnitt 6.1 Konflikte beheben).
 >
 > ![Gruppensicht mit Konflikt (orange markierte Zeilen)](../png/063-gruppensicht-mit-konflikt.png)
 
@@ -93,7 +99,7 @@ Mithilfe dieser Übersicht können Sie die Schlüsselzahlen in Click-TT oder in 
 > - Alle Teams in Woche B erhalten Schlüsselzahl **1** – die gegenläufige Zahl zu 7 im 12er-Raster.
 > - Alle Teams in Woche X erhalten Schlüsselzahl **1** (Vereins-Schlüsselzahl für Spielwoche X im 10er-Raster).
 > - Alle Teams in Woche Y erhalten Schlüsselzahl **6** – die gegenläufige Zahl zu 1 im 10er-Raster.
-> - **Ausnahme**: Borussia Duesseldorf II in der Jugend 13 hat Schlüsselzahl **10** statt 1, obwohl es in Woche X spielt. Das liegt daran, dass zwei Teams desselben Vereins in derselben Gruppe spielen und daher nicht dieselbe Schlüsselzahl erhalten können. Die Zahl 10 ist im 10er-Raster eine *ähnliche* Schlüsselzahl zu 1.
+> - **Ausnahme**: Borussia Duesseldorf I in der Jugend 13 hat Schlüsselzahl **10** statt 1, obwohl es in Woche X spielt. Das liegt daran, dass zwei Teams desselben Vereins in derselben Gruppe spielen und daher nicht dieselbe Schlüsselzahl erhalten können. Die Zahl 10 ist im 10er-Raster eine *ähnliche* Schlüsselzahl zu 1.
 
 
 

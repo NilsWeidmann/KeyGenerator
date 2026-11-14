@@ -15,7 +15,7 @@ Die Seite ist in zwei nebeneinander angeordnete Bereiche unterteilt: eine linke 
 >
 > Die Seite "Manuelle Eingabe" im Ausgangszustand: Links oben die noch leere Gruppentabelle, links unten die noch leere Vereinstabelle. Die rechte Spalte mit der Mannschaftstabelle erscheint erst, wenn eine Gruppe oder ein Verein ausgewählt wird.
 >
-> ![Seite „Manuelle Eingabe" – leere Seite](../png/041-click-tt-import-leer.png)
+> ![Seite „Manuelle Eingabe" – leere Seite](../png/042-manuell-leer.png)
 
 ## Linke Spalte: Gruppentabelle
 

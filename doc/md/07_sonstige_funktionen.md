@@ -87,6 +87,12 @@ Sie kann im Programm bearbeitet, als Datei gespeichert und auf einem anderen Rec
 
 Mit **Standard laden** wird die mitgelieferte Standardkonfiguration in das Fenster geladen; übernommen wird sie erst mit **Übernehmen**.
 
+> **Ansicht: Fenster „Konfiguration"**
+>
+> Das Fenster „Konfiguration" mit einer noch nicht übernommenen, fehlerhaften Änderung im Spielplan für Raster 12: Die Zeile **Heim : Auswärts** ist am ersten Spieltag rot hinterlegt, und unter **Plausibilitätsprüfung** sind die gefundenen Probleme aufgelistet.
+>
+> ![Fenster „Konfiguration" mit Plausibilitätsprüfung](../png/075-konfiguration.png)
+
 **Plausibilitätsprüfung:** Beim Importieren, Prüfen, Übernehmen und Exportieren wird die Konfiguration geprüft. Neben Formfehlern (z.B. leere Altersklassen oder widersprüchliche Rastergrößen) wird geprüft, dass
 - jede gerade Rastergröße von der minimalen bis zur maximalen Rastergröße einen vollständigen Spielplan hat, also eine Zeile für jede Schlüsselzahl; die minimale Rastergröße muss gerade sein,
 - jede Schlüsselzahl an jedem Spieltag ihres Rasters ein Heim- oder Auswärtsspiel hat (bei Raster n sind das n − 1 Spieltage),
