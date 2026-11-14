@@ -11,6 +11,12 @@ Nachdem alle Daten eingegeben und alle Wünsche der Vereine berücksichtigt word
 3. Die Anwendung wechselt auf die Seite **Optimierung**, die einen Fortschrittsbalken, den aktuellen Status sowie die laufend aktualisierten Kennzahlen der bisher besten Lösung anzeigt. Angezeigt werden die Anzahl der **Konflikte**, die **Abweichungen bei Heim-/Auswärtsspielen** (die Summe der Spieltage, an denen die Heim-/Auswärtsfolge der Teams mit Konflikt von ihrer Wunsch-Schlüsselzahl abweicht), die vorgezogenen **internen Begegnungen** (x von y, sofern möglich) sowie die **nicht erfüllten Spielfrei-Wünsche** (x von y, sofern vorhanden).
 4. Sie können die Generierung jederzeit über den Button **Abbrechen** vorzeitig beenden. Die Anwendung übernimmt dann die bis dahin beste gefundene Lösung und fährt wie nach einer regulär beendeten Generierung fort (gegebenenfalls mit der Konfliktauflösung). Wurde bis dahin noch keine Lösung gefunden, erscheint die Meldung "Es konnten keine Schlüsselzahlen ermittelt werden!", und der bisherige Stand bleibt erhalten.
 
+> **Ansicht: Seite „Optimierung"**
+>
+> Die Seite „Optimierung" während einer Generierung: Fortschrittsbalken, Status **Läuft** und die Kennzahlen der bisher besten Lösung.
+>
+> ![Seite „Optimierung" während der Generierung](../png/062-optimierung.png)
+
 Nach Abschluss der Optimierung geht es automatisch weiter:
 - Liegen **keine Konflikte** vor, kehrt die Anwendung sofort zur **Übersicht** zurück.
 - Liegen **Konflikte** vor, öffnet sich automatisch die Seite **Konflikte auflösen** (siehe [6.1 Konflikte beheben](#61-konflikte-beheben)). Voraussetzung dafür ist, dass jede Mannschaft eine Schlüsselzahl erhalten hat; andernfalls bleibt die Seite **Optimierung** geöffnet und bietet die Buttons **Konflikte auflösen →** und **Zurück zur Übersicht** an.
@@ -107,7 +113,7 @@ Mithilfe dieser Übersicht können Sie die Schlüsselzahlen in Click-TT oder in 
 > - Alle Teams in Woche B erhalten Schlüsselzahl **8** – die gegenläufige Zahl zu 2 im 12er-Raster.
 > - Alle Teams in Woche X erhalten Schlüsselzahl **5** (Vereins-Schlüsselzahl für Spielwoche X im 10er-Raster).
 > - Alle Teams in Woche Y erhalten Schlüsselzahl **10** – die gegenläufige Zahl zu 5 im 10er-Raster.
-> - **Ausnahme**: Borussia Duesseldorf I in der Jugend 13 hat Schlüsselzahl **6** statt 5, obwohl es in Woche X spielt. Das liegt daran, dass zwei Teams desselben Vereins in derselben Gruppe spielen und daher nicht dieselbe Schlüsselzahl erhalten können. Die Zahl 6 ist im 10er-Raster eine *ähnliche* Schlüsselzahl zu 5.
+> - **Ausnahme**: Borussia Duesseldorf II in der Jugend 13 hat Schlüsselzahl **6** statt 5, obwohl es in Woche X spielt. Das liegt daran, dass zwei Teams desselben Vereins in derselben Gruppe spielen und daher nicht dieselbe Schlüsselzahl erhalten können. Die Zahl 6 ist im 10er-Raster eine *ähnliche* Schlüsselzahl zu 5.
 
 Zusätzlich können Sie die Ergebnisse über den Link **Ergebnisse exportieren** in der Seitenleiste als CSV-Datei herunterladen (siehe [7.2 Ergebnisse exportieren](07_sonstige_funktionen.md#72-ergebnisse-exportieren)).
 

@@ -25,7 +25,7 @@ Die drei Hauptbuttons sind:
 
 > **Ansicht: Startbildschirm**
 >
-> Der Startbildschirm nach dem Programmstart: Links befinden sich die Datenimport-Buttons, die Referenzraster-Dropdowns, das Kontrollkästchen „Interne Begegnungen möglichst vorziehen", die Laufzeitbegrenzung sowie die Rückgängig/Wiederherstellen-Buttons; rechts ist die noch leere Datentabelle zu sehen.
+> Der Startbildschirm nach dem Programmstart: Links befinden sich die Datenimport-Buttons, die Referenzraster-Dropdowns, das Kontrollkästchen „Interne Duelle möglichst vorziehen bis Spielwoche:" mit der Auswahlliste der Spielwochen, die Laufzeitbegrenzung sowie die Rückgängig/Wiederherstellen-Buttons; rechts ist die noch leere Datentabelle zu sehen.
 >
 > ![Startbildschirm – Übersicht](../png/03-startbildschirm.png)
 
@@ -47,7 +47,7 @@ Im unteren linken Bereich des Startbildschirms befinden sich zwei Dropdown-Menü
 - **Referenzraster für Woche A/B**: Legt die Rastergröße für die Spielwochen A und B fest.
 - **Referenzraster für Woche X/Y**: Legt die Rastergröße für die Spielwochen X und Y fest.
 
-Die möglichen Rastergrößen sind **6, 8, 10, 12** und **14**.
+Zur Auswahl stehen die geraden Rastergrößen von der minimalen bis zur maximalen Rastergröße der Konfiguration, in der Standardkonfiguration also **6, 8, 10, 12** und **14** (siehe [7.5 Konfiguration bearbeiten](07_sonstige_funktionen.md#75-konfiguration-bearbeiten)).
 Die Voreinstellungen werden beim Programmstart automatisch aus der Konfigurationsdatei geladen: zunächst aus der mitgelieferten Standardkonfiguration (12 für A/B und 10 für X/Y), nach dem Übernehmen einer Konfiguration über **Sonstiges** → **Konfiguration bearbeiten** aus der zuletzt übernommenen Konfiguration (siehe [7.5 Konfiguration bearbeiten](07_sonstige_funktionen.md#75-konfiguration-bearbeiten)).
 Diese Referenzraster bestimmen, welche Schlüsselzahlen für die jeweiligen Spielwochen auf Vereinsebene maximal vergeben werden können.
 

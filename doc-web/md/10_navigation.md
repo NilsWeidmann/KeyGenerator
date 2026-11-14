@@ -7,7 +7,7 @@
 Die folgende Übersicht zeigt alle Seiten der Web-Anwendung und wie diese von der Seitenleiste bzw. von anderen Seiten aus erreichbar sind:
 
 - **Seitenleiste → Datenimport** → Datenimport-Seite (`/`)
-  - Grundeinstellungen: Referenzraster A/B und X/Y, **Maximale Laufzeit**, **Interne Duelle möglichst vorziehen**
+  - Grundeinstellungen: Referenzraster A/B und X/Y, **Maximale Laufzeit**, **Interne Duelle möglichst vorziehen bis Spielwoche:** mit Auswahlliste der Spielwoche
   - Schritt 1: Gruppeneinteilung laden (CSV-Datei)
   - Schritt 2: Terminmeldung laden (HTML-Datei) – verfügbar nach Schritt 1
   - Schritt 3: Zwischenstand aus Datei laden (JSON-Datei) – unabhängig von Schritt 1
@@ -49,6 +49,10 @@ Nach dem Laden von Daten bietet die Seitenleiste außerdem folgende Funktionen:
 - **Seitenleiste → CSV exportieren (historisch)** → Download `Historical.zip`
 - **Seitenleiste → CSV importieren (historisch)** → Dateiauswahl-Dialog
 - **Seitenleiste → Log exportieren** → Download `Log.csv` – sobald mindestens eine Generierung durchgeführt wurde
+- **Seitenleiste → Entwickler-Tests** → Seite "Entwickler-Tests" (`/developer-tests`)
+  - Eingabefeld **Laufzeit je Instanz (Sekunden)**
+  - Schaltflächen **Generator-Tests**, **Tests aus Datei** (Dateiauswahl-Dialog) und **Abbrechen** (während eines Testlaufs)
+  - Ergebnistabelle je Testinstanz
 
 ---
 

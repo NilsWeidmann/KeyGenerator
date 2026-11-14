@@ -52,7 +52,7 @@ Zentrale Konzepte:
 >
 > **Parallele Schlüsselzahlen:** Borussia Duesseldorf I spielt in der Bezirksoberliga (Rastergröße 12) mit Vereins-Schlüsselzahl A=2 und erhält die Mannschafts-Schlüsselzahl 2. Die Damen-Mannschaft spielt dagegen in einer Gruppe mit Rastergröße 10. Auch sie ist in Woche A und erhält ebenfalls Schlüsselzahl 2 – in diesem Fall ist die parallele Schlüsselzahl im 10er-Raster zufällig identisch. Wäre die Damen-Mannschaft der Woche B zugeordnet, würde sie die Schlüsselzahl 7 bekommen, da die Zahl 7 im 10er-Raster parallel zur Zahl 8 im 12er-Raster ist.
 >
-> **Ähnliche Schlüsselzahlen:** In der Jugend 13 2. Bezirksliga 3 spielen zwei Teams des Vereins in derselben Gruppe (Rastergröße 10), und sind beide der Spielwoche X zugeordnet. Das eine Team (Borussia Duesseldorf II) erhält die Schlüsselzahl 5, das andere Team (Borussia Duesseldorf I) kann aber nicht ebenfalls Schlüsselzahl 5 erhalten und bekommt stattdessen die *ähnliche* Schlüsselzahl 6, die einen ähnlichen, aber nicht identischen Spielplan ergibt.
+> **Ähnliche Schlüsselzahlen:** In der Jugend 13 2. Bezirksliga 3 spielen zwei Teams des Vereins in derselben Gruppe (Rastergröße 10), und sind beide der Spielwoche X zugeordnet. Das eine Team (Borussia Duesseldorf I) erhält die Schlüsselzahl 5, das andere Team (Borussia Duesseldorf II) kann aber nicht ebenfalls Schlüsselzahl 5 erhalten und bekommt stattdessen die *ähnliche* Schlüsselzahl 6, die einen ähnlichen, aber nicht identischen Spielplan ergibt.
 
 ## A.5 Spielwochen
 

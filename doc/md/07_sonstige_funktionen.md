@@ -77,13 +77,13 @@ Sie kann im Programm bearbeitet, als Datei gespeichert und auf einem anderen Rec
 
 **Konfiguration bearbeiten:**
 1. Klicken Sie auf **Sonstiges** im Startbildschirm.
-2. Klicken Sie auf **Konfiguration bearbeiten**. Es öffnet sich das Fenster **Konfiguration** mit der aktuell gültigen Konfiguration. Als Voreinstellung der Referenzraster zeigt es die aktuell eingestellten Referenzraster.
+2. Klicken Sie auf **Konfiguration bearbeiten**. Es öffnet sich das Fenster **Konfiguration** mit der aktuell gültigen Konfiguration. Als Voreinstellung der Referenzraster zeigt es die aktuell eingestellten Referenzraster. Unter **Plausibilitätsprüfung** steht sofort das Prüfergebnis dieser Konfiguration.
 3. Passen Sie die Einstellungen an:
-   - **Allgemein**: Min. Rastergröße, Max. Rastergröße, Referenzraster Woche A/B und Woche X/Y (Voreinstellung für neue Daten), Wochen für interne Duelle und Max. Abweichung (ähnlich). Rastergrößen werden aus Auswahllisten gewählt, die nur gerade Werte anbieten: die minimale und maximale Rastergröße von 2 bis 40, die Referenzraster von der minimalen bis zur maximalen Rastergröße.
+   - **Allgemein**: Min. Rastergröße, Max. Rastergröße, Referenzraster Woche A/B und Woche X/Y (Voreinstellung für neue Daten), Wochen für interne Duelle und Max. Abweichung (ähnlich). Rastergrößen werden aus Auswahllisten gewählt, die nur gerade Werte anbieten: die minimale und maximale Rastergröße von 2 bis 40, die Referenzraster von der minimalen bis zur maximalen Rastergröße. Steht in einer importierten Datei ein Wert, der nicht angeboten wird, wird er zusätzlich angezeigt, bis Sie einen gültigen Wert wählen. Die Wochen für interne Duelle dürfen höchstens so groß sein wie die Anzahl der Spieltage des kleinsten Rasters (minimale Rastergröße − 1); 0 bedeutet, dass interne Duelle nicht vorgezogen werden. Denselben Wert stellen Sie auch im Hauptfenster über **Interne Duelle möglichst vorziehen bis Spielwoche:** ein (siehe [6. Schlüsselzahlen generieren](06_generierung.md)).
    - **Altersklassen**: eine Altersklasse pro Zeile.
-   - **Spielplan für Raster**: Wählen Sie die Rastergröße aus. Die Tabelle enthält eine Zeile je Schlüsselzahl und eine Spalte je Spieltag. Jede Zelle enthält `H` (Heimspiel) oder `A` (Auswärtsspiel) und die Schlüsselzahl des Gegners, z.B. `H6`. Die Zeile **Heim : Auswärts** zeigt je Spieltag die Anzahl der Heim- und Auswärtsspiele; ungleiche Werte sind rot hinterlegt. Zur Auswahl stehen alle geraden Rastergrößen von der minimalen bis zur maximalen Rastergröße. Wird die maximale Rastergröße erhöht, erscheint das neue Raster mit einem leeren Spielplan.
+   - **Spielplan für Raster**: Wählen Sie die Rastergröße aus. Die Tabelle enthält eine Zeile je Schlüsselzahl und eine Spalte je Spieltag. Jede Zelle enthält `H` (Heimspiel) oder `A` (Auswärtsspiel) und die Schlüsselzahl des Gegners, z.B. `H6`. Zellen mit Heimspiel sind grün, Zellen mit Auswärtsspiel blau und ungültige Einträge rot hinterlegt. Die Zeile **Heim : Auswärts** zeigt je Spieltag die Anzahl der Heim- und Auswärtsspiele; sie ist rot hinterlegt, wenn die Anzahlen ungleich sind oder an diesem Spieltag nicht jede Schlüsselzahl ein Spiel hat. Zur Auswahl stehen alle geraden Rastergrößen von der minimalen bis zur maximalen Rastergröße sowie jede weitere Rastergröße bis zur maximalen, für die ein Spielplan vorhanden ist (z.B. aus einer importierten Datei). Wird die maximale Rastergröße erhöht, erscheint das neue Raster mit einem leeren Spielplan.
 4. Klicken Sie auf **Prüfen**, um die Konfiguration zu prüfen (siehe unten).
-5. Klicken Sie auf **Übernehmen**. Die Konfiguration wird nur übernommen, wenn sie gültig ist. **Abbrechen** schließt das Fenster, ohne etwas zu ändern.
+5. Klicken Sie auf **Übernehmen**. Ist die Konfiguration gültig, wird sie übernommen und das Fenster geschlossen. Ist sie ungültig, erscheint ein Hinweis, die Probleme werden unter **Plausibilitätsprüfung** aufgelistet, und das Fenster bleibt geöffnet. **Abbrechen** schließt das Fenster, ohne etwas zu ändern.
 
 Mit **Standard laden** wird die mitgelieferte Standardkonfiguration in das Fenster geladen; übernommen wird sie erst mit **Übernehmen**.
 
@@ -91,7 +91,8 @@ Mit **Standard laden** wird die mitgelieferte Standardkonfiguration in das Fenst
 - jede gerade Rastergröße von der minimalen bis zur maximalen Rastergröße einen vollständigen Spielplan hat, also eine Zeile für jede Schlüsselzahl; die minimale Rastergröße muss gerade sein,
 - jede Schlüsselzahl an jedem Spieltag ihres Rasters ein Heim- oder Auswärtsspiel hat (bei Raster n sind das n − 1 Spieltage),
 - an jedem Spieltag gleich viele Heim- wie Auswärtsspiele stattfinden,
-- die Gegner zueinander passen: Spielt Schlüsselzahl 1 an einem Spieltag gegen 6, muss 6 an diesem Spieltag gegen 1 spielen, und eine der beiden hat ein Heim-, die andere ein Auswärtsspiel. Zwei Schlüsselzahlen treffen nur einmal aufeinander.
+- die Gegner zueinander passen: Spielt Schlüsselzahl 1 an einem Spieltag gegen 6, muss 6 an diesem Spieltag gegen 1 spielen, und eine der beiden hat ein Heim-, die andere ein Auswärtsspiel. Zwei Schlüsselzahlen treffen nur einmal aufeinander,
+- die Wochen für interne Duelle die Anzahl der Spieltage des kleinsten Rasters (minimale Rastergröße − 1) nicht überschreiten.
 
 Alle gefundenen Probleme werden unter **Plausibilitätsprüfung** aufgelistet, z.B. „Raster 10, Spieltag 1: 4 Heim- und 6 Auswärtsspiele. Es müssen gleich viele sein.“ (siehe auch [9. Fehlerbehebung](09_fehlerbehebung.md)). Eine ungültige Konfiguration wird weder übernommen noch exportiert.
 

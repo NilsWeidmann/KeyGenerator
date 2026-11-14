@@ -35,7 +35,7 @@ Die Referenzrastergrößen legen fest, welche Schlüsselzahlen auf Vereinsebene 
 - **Referenzraster für Woche A/B**: Bestimmt die Rastergröße für die Spielwochen A und B.
 - **Referenzraster für Woche X/Y**: Bestimmt die Rastergröße für die Spielwochen X und Y.
 
-Die möglichen Rastergrößen sind **6, 8, 10, 12** und **14**.
+Zur Auswahl stehen die geraden Rastergrößen von der minimalen bis zur maximalen Rastergröße der Konfiguration, in der Standardkonfiguration also **6, 8, 10, 12** und **14** (siehe [7.4 Konfiguration bearbeiten](07_sonstige_funktionen.md#74-konfiguration-bearbeiten)).
 Wenn Sie die Referenzraster nachträglich ändern, werden die Schlüsselzahlen der betroffenen Spielwochen (A/B bzw. X/Y) bei allen Vereinen automatisch auf 0 zurückgesetzt – auch solche, die im neuen Bereich liegen. Denn die beiden Schlüsselzahlen eines Paars sind gegenläufig, und welche Schlüsselzahlen gegenläufig sind, hängt vom Raster ab: 10/4 ist z.B. im 12er-Raster ein gegenläufiges Paar, im 10er-Raster aber nicht. Ein Hinweis nennt die betroffenen Vereine.
 Die Referenzraster gehören zu den Daten, denn die Schlüsselzahlen der Vereine beziehen sich auf sie: Beim Speichern werden sie in `Data.json` mitgespeichert, und beim Laden eines Zwischenstands (Schritt 3) werden die dort gespeicherten Referenzraster eingestellt. Wählen Sie die Referenzraster vor dem Laden der Gruppeneinteilung (Schritt 1), gelten sie für die neu geladenen Daten.
 
@@ -61,7 +61,7 @@ Andernfalls wird nach Ablauf der maximalen Laufzeit die beste bis dahin gefunden
 
 ### Interne Duelle möglichst vorziehen
 
-Das Kontrollkästchen **Interne Duelle möglichst vorziehen** steuert, ob der Optimierungsalgorithmus versucht, Begegnungen zwischen zwei Teams desselben Vereins innerhalb derselben Gruppe in die ersten Spielwochen zu legen. Die Anzahl dieser Spielwochen ist in der Konfiguration festgelegt (standardmäßig 3).
+Das Kontrollkästchen **Interne Duelle möglichst vorziehen bis Spielwoche:** steuert, ob der Optimierungsalgorithmus versucht, Begegnungen zwischen zwei Teams desselben Vereins innerhalb derselben Gruppe in die ersten Spielwochen zu legen. Die Option ist standardmäßig aktiviert. In der Auswahlliste rechts daneben wählen Sie, bis zu welcher Spielwoche das geschehen soll (standardmäßig 3). Angeboten werden die Spielwochen 1 bis zur Anzahl der Spieltage des kleinsten Rasters, in der Standardkonfiguration also 1 bis 5. Ist das Kontrollkästchen nicht aktiviert, ist die Auswahlliste leer und gesperrt, und interne Duelle werden nicht vorgezogen; beim erneuten Aktivieren wird die zuletzt gewählte Spielwoche wieder eingestellt. Die Einstellung wird in der Konfiguration gespeichert (Wochen für interne Duelle, siehe [7.4 Konfiguration bearbeiten](07_sonstige_funktionen.md#74-konfiguration-bearbeiten)) und erscheint daher auch auf der Seite **Konfiguration**.
 Die Option ist standardmäßig aktiviert; deaktivieren Sie sie, um keine entsprechende Präferenz zu verwenden. Die Einstellung bleibt erhalten, wenn Sie die Datenimport-Seite später erneut aufrufen.
 
 ## 3.2 Import aus Click-TT
